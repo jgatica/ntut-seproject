@@ -10,7 +10,7 @@ public class ComputeDBMgr {
 	 * @return
 	 */
 	static public ArrayList<String> listOption(){
-		
+		//
 		// ---------------------------------------
 		// 裡面處理sql語法，向資料庫撈到資料後已規定的回傳值型式回傳
 		// ---------------------------------------
