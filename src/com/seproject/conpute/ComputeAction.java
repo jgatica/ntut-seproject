@@ -12,6 +12,8 @@ import org.apache.struts.action.ActionForm;
 import org.apache.struts.action.ActionForward;
 import org.apache.struts.action.ActionMapping;
 
+import com.seproject.meber.MemberDBMgr;
+import com.seproject.meber.MemberDataStructure;
 import com.seproject.util.JSONWriter;
 
 public class ComputeAction extends Action {
@@ -89,7 +91,7 @@ public class ComputeAction extends Action {
 			ComputeForm computeForm, HttpServletRequest request,
 			HttpServletResponse response, HttpSession session) throws IOException {
 		
-		ArrayList<String> opsArrayList = ComputeDBMgr.listOption();
+		ArrayList<MemberDataStructure> opsArrayList = MemberDBMgr.listOption();
 		JSONWriter.sendJSONRequest(response.getOutputStream(), opsArrayList);
 		
 		return null;
