@@ -109,7 +109,7 @@
 			
 			<!-- Navigation -->
 			<ul id="nav" class="sf-menu">
-				<li><a href="/index.jsp">首 頁</a></li>
+				<li><a href="/index.jsp">首     頁</a></li>
                 <li><a href="/teamMember.jsp">成員名單</a><li>
 				<li><a href="features.html">頁面元素</a>
 					<ul>
