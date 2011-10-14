@@ -81,7 +81,32 @@
 		<!-- SKIN -->
 		<link rel="stylesheet" href="skins/plastic/style.css" type="text/css" media="screen" />
 
-		<!-- InstanceBeginEditable name="Head" -->Head<!-- InstanceEndEditable -->
+		<!-- InstanceBeginEditable name="Head" -->
+        
+        
+        
+		<script language="javascript" type="text/javascript">
+			$(document).ready(function(){
+				var op =  2;
+				$.getJSON('/ComputeAction.do',  { op: op }, function(data) {
+					console.log(data);
+					var content = "";
+					for(var i = 0; i < data.length; i++){
+						content += "<tr>";
+						content += "<td>" + i + "</td>";
+						content += "<td>" + data[i].name + "</td>";
+						content += "<td>" + data[i].blame + "</td>";
+						content += "<td>" + data[i].mail + "</td>";	
+						content += "</tr>";
+					}
+					$("#memberList").append(content);			
+				});	
+			});       
+
+   		</script>
+
+        
+		<!-- InstanceEndEditable -->
 
 </head>
 	
@@ -109,7 +134,7 @@
 			
 			<!-- Navigation -->
 			<ul id="nav" class="sf-menu">
-				<li><a href="/index.jsp">首 頁</a></li>
+				<li><a href="/index.jsp">首     頁</a></li>
                 <li><a href="/teamMember.jsp">成員名單</a><li>
 				<li><a href="features.html">頁面元素</a>
 					<ul>
@@ -150,7 +175,8 @@
                 <!-- Breadcrumb-->
                 <div id="breadcrumbs">
 					<!-- InstanceBeginEditable name="Guide" -->
-                    Guide
+                    <a title="Home" href="index.jsp">首頁</a>
+                    成員列表
 					<!-- InstanceEndEditable -->
               </div>
 				<!-- ENDS Breadcrumb-->	
@@ -177,42 +203,18 @@
 				<div id="page-content">
                     <h4 class="line-divider">組員名單</h4>
                     <table>				
-						<tbody>
+						<tbody id="memberList">
 							<tr>
 								<th>編號</th>
 								<th>姓名</th>
 								<th>負責事項</th>
 								<th>信箱</th>
 							</tr>
-							<tr>
-								<td>001</td>
-                                <td>陳奕豪</td>
-                                <td>待確認</td>
-                                <td>@gmail.com</td>
-							</tr>
-							<tr>
-								<td>002</td>
-                                <td>陳至圓</td>
-                                <td>待確認</td>
-                                <td>@gmail.com</td>
-							</tr>
-							<tr>
-								<td>003</td>
-                                <td>楊先絜</td>
-                                <td>待確認</td>
-                                <td>@gmail.com</td>
-							</tr>
-							<tr>
-								<td>004</td>
-                                <td>郭奕成</td>
-                                <td>待確認</td>
-                                <td>@gmail.com</td>
-							</tr>
-							<tr>
-								<td>005</td>
-                                <td>黃臣逸</td>
-                                <td>待確認</td>
-                                <td>@gmail.com</td>
+                            
+                            
+                            
+                            
+                            
 						</tbody>
 					</table>
                 </div>

@@ -92,7 +92,7 @@
 						alert(data);					
 					});
 				});		
-			});    
+			});       
    		</script>
 		<!-- InstanceEndEditable -->
 
@@ -122,7 +122,7 @@
 			
 			<!-- Navigation -->
 			<ul id="nav" class="sf-menu">
-				<li><a href="/index.jsp">首 頁</a></li>
+				<li><a href="/index.jsp">首     頁</a></li>
                 <li><a href="/teamMember.jsp">成員名單</a><li>
 				<li><a href="features.html">頁面元素</a>
 					<ul>
@@ -163,9 +163,7 @@
                 <!-- Breadcrumb-->
                 <div id="breadcrumbs">
 					<!-- InstanceBeginEditable name="Guide" -->
-                    <a title="Home" href="index.html">Home</a>
-                    <a title="Home" href="features.html">Features</a>
-                    Appearance
+                    <a title="Home" href="index.html">首頁</a>
 					<!-- InstanceEndEditable -->
               </div>
 				<!-- ENDS Breadcrumb-->	
@@ -197,7 +195,6 @@
 					<div class="toggle-container" style="display: block; ">
 					    <div class="block">
 						<p>
-                        
                             <form action="ComputeAction.do" method="post">
                                 
                                 參數一 <input id="arg1" type="text" name="arg1" value="">
@@ -210,7 +207,7 @@
                         </p>
 					    </div>
 					</div>
-										<h6 class="toggle-trigger active"><a href="#">Toogle this box</a></h6>
+					<h6 class="toggle-trigger active"><a href="#">Toogle this box</a></h6>
 					<div class="toggle-container" style="display: block; ">
 					    <div class="block">
 						<p>
