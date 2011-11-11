@@ -274,6 +274,17 @@ td, th{
 	-webkit-border-radius: 5px;
 }
 
+.orange-no-box{
+	border: 1px solid;
+	margin: 10px 0px;
+	padding:15px 10px 15px 10px;
+	background-repeat: no-repeat;
+	background-position: 10px center;
+	border-radius: 5px;
+	-moz-border-radius: 5px;
+	-webkit-border-radius: 5px;
+}
+
 .info-add{
 	color: #4F8A10;
 	background-color: #DFF2BF;
@@ -387,7 +398,10 @@ td, th{
 	background-color: #FEEFB3;
 	background-image: url('../img/knobs-icons/Knob Orange.png');
 }
-
+.orange-no-box{
+	color: #9F6000;
+	background-color: #FEEFB3;
+}
 .pause-box{
 	color: #ffffff;
 	background-color: #57737f;

@@ -81,32 +81,7 @@
 		<!-- SKIN -->
 		<link rel="stylesheet" href="skins/plastic/style.css" type="text/css" media="screen" />
 
-		<!-- InstanceBeginEditable name="Head" -->
-        
-        
-        
-		<script language="javascript" type="text/javascript">
-			$(document).ready(function(){
-				var op =  2;
-				$.getJSON('/ComputeAction.do',  { op: op }, function(data) {
-					console.log(data);
-					var content = "";
-					for(var i = 0; i < data.length; i++){
-						content += "<tr>";
-						content += "<td>" + i + "</td>";
-						content += "<td>" + data[i].name + "</td>";
-						content += "<td>" + data[i].blame + "</td>";
-						content += "<td>" + data[i].mail + "</td>";	
-						content += "</tr>";
-					}
-					$("#memberList").append(content);			
-				});	
-			});       
-
-   		</script>
-
-        
-		<!-- InstanceEndEditable -->
+		<!-- InstanceBeginEditable name="Head" -->Head<!-- InstanceEndEditable -->
 
 </head>
 	
@@ -188,8 +163,7 @@
                 <!-- Breadcrumb-->
                 <div id="breadcrumbs">
 					<!-- InstanceBeginEditable name="Guide" -->
-                    <a title="Home" href="index.jsp">首頁</a>
-                    成員列表
+                    Guide
 					<!-- InstanceEndEditable -->
               </div>
 				<!-- ENDS Breadcrumb-->	
@@ -203,35 +177,32 @@
 			<!-- MAIN -->
 			<div id="main">
 				<!-- InstanceBeginEditable name="Main" -->
-			<div id="content">
-				
-				<!-- title -->
-				<div id="page-title">
-					<span class="title">功能測試頁面</span>
-					<span class="subtitle">呼叫某OP使用對話框檢視結果.</span>
-				</div>
-				<!-- ENDS title -->
-				
-				<!-- page-content -->
+                <div id="content">
 				<div id="page-content">
-                    <h4 class="line-divider">組員名單</h4>
-                    <table>				
-						<tbody id="memberList">
-							<tr>
-								<th>編號</th>
-								<th>姓名</th>
-								<th>負責事項</th>
-								<th>信箱</th>
-							</tr>
-                            
-                            
-                            
-                            
-                            
-						</tbody>
-					</table>
+				
+					<!-- TABS -->
+					<!-- the tabs -->
+					<ul class="tabs">
+						<li><a href="#" class="current">COCOMO圖表</a></li>
+						<li><a href="#" class="">甘特圖</a></li>						
+					</ul>
+					
+					<!-- tab "panes" -->
+					<div class="panes">					
+						<!-- COCOMO content  -->
+						<div class="three-fourth" style="display: block; ">
+							<h6 class="information-box">COCOMO圖表</h6>
+							<img src="http://www.c-sharpcorner.com/UploadFile/nipuntomar/6502/Images/COCOMO4.gif" />
+                            <br />                            
+                        </div>
+						<div class="three-fourth" style="display: block; ">
+							<h6 class="information-box">甘特圖</h6>
+							<img src="http://wiki.ubuntu-tw.org/images/2/26/%E7%94%98%E7%89%B9%E5%9C%96.jpg" />
+                            <br />
+                        </div>
+	                </div>
                 </div>
-           </div>
+                </div>
                 <!-- InstanceEndEditable -->
             </div>
 			<!-- ENDS MAIN -->

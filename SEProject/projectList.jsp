@@ -81,32 +81,7 @@
 		<!-- SKIN -->
 		<link rel="stylesheet" href="skins/plastic/style.css" type="text/css" media="screen" />
 
-		<!-- InstanceBeginEditable name="Head" -->
-        
-        
-        
-		<script language="javascript" type="text/javascript">
-			$(document).ready(function(){
-				var op =  2;
-				$.getJSON('/ComputeAction.do',  { op: op }, function(data) {
-					console.log(data);
-					var content = "";
-					for(var i = 0; i < data.length; i++){
-						content += "<tr>";
-						content += "<td>" + i + "</td>";
-						content += "<td>" + data[i].name + "</td>";
-						content += "<td>" + data[i].blame + "</td>";
-						content += "<td>" + data[i].mail + "</td>";	
-						content += "</tr>";
-					}
-					$("#memberList").append(content);			
-				});	
-			});       
-
-   		</script>
-
-        
-		<!-- InstanceEndEditable -->
+		<!-- InstanceBeginEditable name="Head" -->Head<!-- InstanceEndEditable -->
 
 </head>
 	
@@ -188,8 +163,7 @@
                 <!-- Breadcrumb-->
                 <div id="breadcrumbs">
 					<!-- InstanceBeginEditable name="Guide" -->
-                    <a title="Home" href="index.jsp">首頁</a>
-                    成員列表
+                    Guide
 					<!-- InstanceEndEditable -->
               </div>
 				<!-- ENDS Breadcrumb-->	
@@ -203,35 +177,36 @@
 			<!-- MAIN -->
 			<div id="main">
 				<!-- InstanceBeginEditable name="Main" -->
-			<div id="content">
-				
-				<!-- title -->
-				<div id="page-title">
-					<span class="title">功能測試頁面</span>
-					<span class="subtitle">呼叫某OP使用對話框檢視結果.</span>
-				</div>
-				<!-- ENDS title -->
-				
-				<!-- page-content -->
-				<div id="page-content">
-                    <h4 class="line-divider">組員名單</h4>
-                    <table>				
-						<tbody id="memberList">
-							<tr>
-								<th>編號</th>
-								<th>姓名</th>
-								<th>負責事項</th>
-								<th>信箱</th>
-							</tr>
-                            
-                            
-                            
-                            
-                            
-						</tbody>
-					</table>
-                </div>
-           </div>
+                <div id="content">
+                    <div id="page-content">
+                    	<p></p>
+                        <h4 class="line-divider">專案列表</h4>
+                        <table>				
+                                <tbody>
+                                    <tr>
+                                        <th>專案名稱</th>
+                                        <th>專案描述</th>                                      
+                                    </tr>
+                                    <tr>
+                                        <td width="20%"><a href="/projectDetail.jsp">軟體工程專案</a></td>
+                                        <td>軟體工程專案，在禮拜三要DEMO，要趕工囉</td>   
+                                    </tr>
+                                    <tr>
+                                        <td width="20%"><a href="/projectDetail.jsp">軟體工程專案</a></td>
+                                        <td>軟體工程專案，在禮拜三要DEMO，要趕工囉</td>   
+                                    </tr>
+                                    <tr>
+                                        <td width="20%"><a href="/projectDetail.jsp">軟體工程專案</a></td>
+                                        <td>軟體工程專案，在禮拜三要DEMO，要趕工囉</td>   
+                                    </tr>
+                                    <tr>
+                                        <td width="20%"><a href="/projectDetail.jsp">軟體工程專案</a></td>
+                                        <td>軟體工程專案，在禮拜三要DEMO，要趕工囉</td>   
+                                    </tr>                                                                                                                                                                                    
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
                 <!-- InstanceEndEditable -->
             </div>
 			<!-- ENDS MAIN -->
