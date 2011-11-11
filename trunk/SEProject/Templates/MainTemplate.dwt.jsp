@@ -3,7 +3,7 @@
 <html xmlns="http://www.w3.org/1999/xhtml">
 	<head>
 		<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
-		<title>Shinra</title>
+		<title>Project Planing Estimatation Tool</title>
 		
 		<!-- CSS -->
 		<link rel="stylesheet" href="css/style.css" type="text/css" media="screen" />
@@ -91,10 +91,12 @@
 		<!-- WRAPPER -->
 	  <div id="wrapper">
 			
-			<!-- HEADER -->
+			<!-- HEADER 
+            
+            -->
 			<div id="header">
 <a href="index.html"><img id="logo" src="img/logo.png" alt="Nova" /></a>
-			<!-- Social -->
+			<!-- Social 
 			<div id="social-holder">
 				<ul class="social">
 					<li><a href="http://www.facebook.com" class="poshytip facebook" title="Become a fan"></a></li>
@@ -105,12 +107,22 @@
 					<li><a href="http://www.youtube.com" class="poshytip youtube" title="View our videos"></a></li>
 				</ul>
 			</div>
+            -->
 			<!-- ENDS Social -->
 			
 			<!-- Navigation -->
 			<ul id="nav" class="sf-menu">
 				<li><a href="/index.jsp">首     頁</a></li>
                 <li><a href="/teamMember.jsp">成員名單</a><li>
+                <li><a href="projectList.jsp">專案管理</a>
+					<ul>
+						<li><a href="addProject.jsp"><span> 專案新增</span></a></li>
+                        <li><a href="projectList.jsp"><span> 專案列表</span></a></li>
+                    </ul>
+				</li>
+                <li><a href="/PES.jsp">專案估算</a><li>  
+				<li><a href="/projectDiagram.jsp">歷史報表</a><li>  
+                <!--                            
 				<li><a href="features.html">頁面元素</a>
 					<ul>
 						<li><a href="features-appearance.html"><span> 外表</span></a></li>
@@ -133,6 +145,7 @@
 					</ul>
 				</li>
 				<li><a href="contact.html">聯絡我們</a></li>
+                -->
 			</ul>
 			<!-- Navigation -->	
 			
