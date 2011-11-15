@@ -82,18 +82,86 @@
 		<link rel="stylesheet" href="skins/plastic/style.css" type="text/css" media="screen" />
 
 		<!-- InstanceBeginEditable name="Head" -->
-        <script language="javascript" type="text/javascript">
-			$(document).ready(function(){
-				$("#compute").click(function(){
-					var op =  $('#op').val();
-					var arg1 = $("#arg1").val();
-					var arg2 = $('#arg2').val();
-					$.getJSON('/ComputeAction.do',  { op: op, arg1: arg1, arg2: arg2  }, function(data) {
-						alert(data);					
-					});
-				});		
-			});       
-   		</script>
+		<script type="text/javascript" src="/js/highcharts/highcharts.js"></script>
+		
+		<!-- 1a) Optional: add a theme file -->
+		<!--
+			<script type="text/javascript" src="../js/themes/gray.js"></script>
+		-->
+		
+		<!-- 1b) Optional: the exporting module -->
+		<script type="text/javascript" src="/js/highcharts/modules/exporting.js"></script>
+		
+		
+		<!-- 2. Add the JavaScript to initialize the chart on document ready -->
+		<script type="text/javascript">
+		
+			var chart;
+			$(document).ready(function() {
+				chart = new Highcharts.Chart({
+					chart: {
+						renderTo: 'container',
+						defaultSeriesType: 'line',
+						marginRight: 130,
+						marginBottom: 25
+					},
+					title: {
+						text: 'Monthly Average Temperature',
+						x: -20 //center
+					},
+					subtitle: {
+						text: 'Source: WorldClimate.com',
+						x: -20
+					},
+					xAxis: {
+						categories: ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 
+							'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec']
+					},
+					yAxis: {
+						title: {
+							text: 'Temperature (°C)'
+						},
+						plotLines: [{
+							value: 0,
+							width: 1,
+							color: '#808080'
+						}]
+					},
+					tooltip: {
+						formatter: function() {
+				                return '<b>'+ this.series.name +'</b><br/>'+
+								this.x +': '+ this.y +'°C';
+						}
+					},
+					legend: {
+						layout: 'vertical',
+						align: 'right',
+						verticalAlign: 'top',
+						x: -10,
+						y: 100,
+						borderWidth: 0
+					},
+					series: [{
+						name: 'Tokyo',
+						data: [7.0, 6.9, 9.5, 14.5, 18.2, 21.5, 25.2, 26.5, 23.3, 18.3, 13.9, 9.6]
+					}, {
+						name: 'New York',
+						data: [-0.2, 0.8, 5.7, 11.3, 17.0, 22.0, 24.8, 24.1, 20.1, 14.1, 8.6, 2.5]
+					}, {
+						name: 'Berlin',
+						data: [-0.9, 0.6, 3.5, 8.4, 13.5, 17.0, 18.6, 17.9, 14.3, 9.0, 3.9, 1.0]
+					}, {
+						name: 'London',
+						data: [3.9, 4.2, 5.7, 8.5, 11.9, 15.2, 17.0, 16.6, 14.2, 10.3, 6.6, 4.8]
+					}]
+				});
+				
+				
+			});
+				
+		</script>        
+		
+		
 		<!-- InstanceEndEditable -->
 
 </head>
@@ -176,7 +244,7 @@
                 <!-- Breadcrumb-->
                 <div id="breadcrumbs">
 					<!-- InstanceBeginEditable name="Guide" -->
-                    <a title="Home" href="index.html">首頁</a>
+                    Guide
 					<!-- InstanceEndEditable -->
               </div>
 				<!-- ENDS Breadcrumb-->	
@@ -190,62 +258,24 @@
 			<!-- MAIN -->
 			<div id="main">
 				<!-- InstanceBeginEditable name="Main" -->
-
-		<div id="content">
-				
-				<!-- title -->
-				<div id="page-title">
-					<span class="title">功能測試頁面</span>
-					<span class="subtitle">呼叫某OP使用對話框檢視結果.</span>
-				</div>
-				<!-- ENDS title -->
-				
-				<!-- page-content -->
-				<div id="page-content">
-					
-					<!-- toggle -->
-					<h6 class="toggle-trigger active"><a href="#">OP操作0~2</a></h6>
-					<div class="toggle-container" style="display: block; ">
-					    <div class="block">
-						<p>
-                            <form action="ComputeAction.do" method="post">
-                                
-                                參數一 <input id="arg1" type="text" name="arg1" value="">
-                                參數二 <input id="arg2" type="text" name="arg2" value="">
-                                OP : <input id="op" type="text" name="op"/>
-                                <a id="compute" class="link-button">計算</a>
-                                
-                            </form>
-                        
-                        </p>
-					    </div>
-					</div>
-					<h6 class="toggle-trigger active"><a href="#">Toogle this box</a></h6>
-					<div class="toggle-container" style="display: block; ">
-					    <div class="block">
-						<p>
-                        	<p class="green-box">OP操作3~5</p>
-                            <form action="ComputeAction.do" method="post">
-                                
-                                參數一 <input id="arg1" type="text" name="arg1" value="">
-                                參數二 <input id="arg2" type="text" name="arg2" value="">
-                                OP : <input id="op" type="text" name="op"/>
-                                <a id="compute" class="link-button">計算</a>
-                                
-                            </form>
-                        
-                        </p>
-					    </div>
-					</div>
-
-					<!-- ENDS toggle -->
-					
-					
-
-				</div>
-				<!-- ENDS page-content -->
-
-			</div>
+                
+    <div id="content">
+    
+        <!-- title -->
+        <div id="page-title">
+            <span class="title">報表系統</span>
+            <span class="subtitle">簡單的報表測試.</span>
+        </div>
+        <!-- ENDS title -->
+        
+        <!-- page-content -->
+        <div id="page-content">
+        	<div id="container" style="width: 800px; height: 400px; margin: 0 auto"></div>
+        
+        </div>
+    </div>
+                
+                
                 
                 <!-- InstanceEndEditable -->
             </div>

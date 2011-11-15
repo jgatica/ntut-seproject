@@ -121,7 +121,7 @@
                     </ul>
 				</li>
                 <li><a href="/PES.jsp">專案估算</a><li>  
-				<li><a href="/projectDiagram.jsp">歷史報表</a><li>  
+				<li><a href="/charts.jsp">歷史報表</a><li>  
                 <!--                            
 				<li><a href="features.html">頁面元素</a>
 					<ul>
