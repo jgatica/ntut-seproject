@@ -25,6 +25,11 @@
 		<script type="text/javascript" src="js/quicksand.js"></script>
 		<script type="text/javascript" src="js/jquery.cycle.all.js"></script>
 		<script type="text/javascript" src="js/custom.js"></script>
+        <!--ColorBox-->
+        <script src="/js/colorbox/jquery.colorbox.js"></script>
+        <link media="screen" rel="stylesheet" href="/js/colorbox/colorbox.css" />
+        
+        
 		<!--[if IE]>
 			<script src="http://html5shim.googlecode.com/svn/trunk/html5.js"></script>
 		<![endif]-->
@@ -203,6 +208,8 @@
 				</li>
                 <li><a href="/PES.jsp">專案估算</a><li>  
 				<li><a href="/charts.jsp">歷史報表</a><li>  
+                <li><a href="/tinymce.jsp">TinyMce測試</a><li>  
+                <li><a href="/colorbox.jsp">Color測試</a><li>  
                 <!--                            
 				<li><a href="features.html">頁面元素</a>
 					<ul>
