@@ -65,9 +65,13 @@ public class MemberDBMgr {
 	
 	// 在使用前可以在main測試
 	public static void main(String[] args) {
+//		
+//		ArrayList<MemberDataStructure> opsArrayList = listOption();
+//		System.out.println(opsArrayList);
 		
-		ArrayList<MemberDataStructure> opsArrayList = listOption();
-		System.out.println(opsArrayList);
+		
+		
+		
 		
 	}
 }
