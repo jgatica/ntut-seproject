@@ -210,6 +210,7 @@
 				<li><a href="/charts.jsp">歷史報表</a><li>  
                 <li><a href="/tinymce.jsp">TinyMce測試</a><li>  
                 <li><a href="/colorbox.jsp">Color測試</a><li>  
+                <li><a href="/js/jqueryui/index.html">jQueryUI新增測試</a><li>  
                 <!--                            
 				<li><a href="features.html">頁面元素</a>
 					<ul>
