@@ -2,13 +2,21 @@
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml"><!-- InstanceBegin template="/Templates/TeamMain.dwt.jsp" codeOutsideHTMLIsLocked="false" -->
 <head>
+<%
+	boolean goIndex = false;
+	boolean isLogin = false;
+	
+	isLogin = (session.getAttribute("isLogin")!=null);
+	
+	if(!isLogin) 
+		goIndex = true;
+	
+%>
+
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
 <title>Project+ - 最佳的專案追蹤與估算解決方案</title>
 <meta name="keywords" content="magic color, colorful theme, free CSS templates, CSS, HTML" />
-<meta name="description" content="Magic Color Theme, Colorful Template, free website template by templatemo.com" />
-
-
-
+<meta name="description" content="Magic Color Theme, Colorful Template, free website template by templatemo.com" /> 
 
 <link href="/css/templatemo_style.css" rel="stylesheet" type="text/css" />
 <link href="/css/bluetable.css" rel="stylesheet" type="text/css" />
@@ -28,15 +36,15 @@
 <script type="text/javascript">
 var i = 0;
 	$(document).ready(function(){
-		
 
-		
+		<%if(goIndex){%>
+			window.location = "/login.jsp";
+		<%}%>
+
 		$(".ajax").colorbox(); 
 		$(".iframe").colorbox({iframe:true, width:"100%", height:"100%"}); 
 		$( "button" ).button();
-		
-		
-		
+
 		// 測試
 		$(".top").click(function(){
 			var last = 5;
@@ -61,80 +69,85 @@ var i = 0;
 		
 		// 點團隊s按鈕
 		$( "#teams_btn" ).focusout(function(e) {
-			$( "#teams_btn" ).trigger('click');
+			$( "#teams_btn" ).removeClass("menu_li_toogle");
+			$( "#div-float-teams" ).slideUp(250);
 		});
 		
 		$( "#teams_btn" ).toggle(
 			function () { 
 				$( this ).addClass("menu_li_toogle");
-				$( "#div-float-teams" ).slideToggle(250);
+				$( "#div-float-teams" ).slideDown(250);
 			},		
 			function () {
 				$( this ).removeClass("menu_li_toogle");
-				$( "#div-float-teams" ).slideToggle(250);
+				$( "#div-float-teams" ).slideUp(250);
 			}
 		);
 		// 點帳號按鈕
 		$( "#account_btn" ).focusout(function(e) {
-			$( "#account_btn" ).trigger('click');
+			$( "#account_btn" ).removeClass("menu_li_toogle");
+			$( "#div-float-account" ).slideUp(250);
 		});
 				
 		$( "#account_btn" ).toggle(
 			function () { 
 				$( this ).addClass("menu_li_toogle");
-				$( "#div-float-account" ).slideToggle(250);
+				$( "#div-float-account" ).slideDown(250);
 			},		
 			function () {
 				$( this ).removeClass("menu_li_toogle");
-				$( "#div-float-account" ).slideToggle(250);
+				$( "#div-float-account" ).slideUp(250);
 			}
 		);
 		
 		// 點團隊按鈕
 		$( "#team_btn" ).focusout(function(e) {
-			$( "#team_btn" ).trigger('click');
+			$( "#team_btn" ).removeClass("menu_li_toogle");
+			$( "#div-float-team" ).slideUp(250);
 		});
 				
 		$( "#team_btn" ).toggle(
 			function () { 
 				$( this ).addClass("menu_li_toogle");
-				$( "#div-float-team" ).slideToggle(250);
+				$( "#div-float-team" ).slideDown(250);
 			},		
 			function () {
 				$( this ).removeClass("menu_li_toogle");
-				$( "#div-float-team" ).slideToggle(250);
+				$( "#div-float-team" ).slideUp(250);
 			}
 		);
 		
 		// 點信箱按鈕
 		$( "#mail_btn" ).focusout(function(e) {
-			$( "#mail_btn" ).trigger('click');
+			$( "#mail_btn" ).removeClass("menu_li_toogle");
+			$( "#div-float-mail" ).slideUp(250);
 		});		
 		
 		$( "#mail_btn" ).toggle(
 			function () { 
 				$( this ).addClass("menu_li_toogle");
-				$( "#div-float-mail" ).slideToggle(250);
+				$( "#div-float-mail" ).slideDown(250);
 			},		
 			function () {
 				$( this ).removeClass("menu_li_toogle");
-				$( "#div-float-mail" ).slideToggle(250);
+				$( "#div-float-mail" ).slideUp(250);
 			}
 		);
 		
 		// 點訊息按鈕
 		$( "#message_btn" ).focusout(function(e) {
-			$( "#message_btn" ).trigger('click');
+			$( "#message_btn" ).removeClass("menu_li_toogle");
+			$( "#div-float-message" ).slideUp(250);
 		});	
 				
 		$( "#message_btn" ).toggle(
 			function () { 
 				$( this ).addClass("menu_li_toogle");
-				$( "#div-float-message" ).slideToggle(250);
+				$( "#div-float-message" ).slideDown(250);
 			},		
 			function () {
 				$( this ).removeClass("menu_li_toogle");
-				$( "#div-float-message" ).slideToggle(250);
+				$( "#div-float-message" ).slideUp(250);
 			}
 		);						
 
@@ -290,14 +303,13 @@ var i = 0;
                       <img src="/images/profile_task.png" alt="Image" width="24" height="24">
                     <h2>使用說明</h2>
                   </div>  
-                  <div class="col_allw170 frontpage_box hoverdiv">
-					<a href="/login.jsp">
-                      <img src="/images/logout.png" alt="Image" width="24" height="24">
-                      <h2>登出</h2>
-					</a>
-                  </div>                    	
-</div>	
 
+				<div class="col_allw170 frontpage_box hoverdiv">	
+                      <img src="/images/logout.png" alt="Image" width="24" height="24">
+                      <h2>登出</h2> 
+                  	
+				</div>
+</div>
 			
 				<li>
 					<a id="teams_btn" class="float_r" href="/member/basic.jsp"><img class="top" src="/images/top_account.png" />
