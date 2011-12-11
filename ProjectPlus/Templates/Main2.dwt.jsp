@@ -29,6 +29,7 @@
 var i = 0;
 	$(document).ready(function(){
 		
+
 		
 		$(".ajax").colorbox(); 
 		$(".iframe").colorbox({iframe:true, width:"100%", height:"100%"}); 
@@ -59,6 +60,9 @@ var i = 0;
 		});
 		
 		// 點團隊s按鈕
+		$( "#teams_btn" ).focusout(function(e) {
+			$( "#teams_btn" ).trigger('click');
+		});
 		
 		$( "#teams_btn" ).toggle(
 			function () { 
@@ -71,6 +75,10 @@ var i = 0;
 			}
 		);
 		// 點帳號按鈕
+		$( "#account_btn" ).focusout(function(e) {
+			$( "#account_btn" ).trigger('click');
+		});
+				
 		$( "#account_btn" ).toggle(
 			function () { 
 				$( this ).addClass("menu_li_toogle");
@@ -83,6 +91,10 @@ var i = 0;
 		);
 		
 		// 點團隊按鈕
+		$( "#team_btn" ).focusout(function(e) {
+			$( "#team_btn" ).trigger('click');
+		});
+				
 		$( "#team_btn" ).toggle(
 			function () { 
 				$( this ).addClass("menu_li_toogle");
@@ -95,6 +107,10 @@ var i = 0;
 		);
 		
 		// 點信箱按鈕
+		$( "#mail_btn" ).focusout(function(e) {
+			$( "#mail_btn" ).trigger('click');
+		});		
+		
 		$( "#mail_btn" ).toggle(
 			function () { 
 				$( this ).addClass("menu_li_toogle");
@@ -107,6 +123,10 @@ var i = 0;
 		);
 		
 		// 點訊息按鈕
+		$( "#message_btn" ).focusout(function(e) {
+			$( "#message_btn" ).trigger('click');
+		});	
+				
 		$( "#message_btn" ).toggle(
 			function () { 
 				$( this ).addClass("menu_li_toogle");
@@ -287,8 +307,10 @@ var i = 0;
                     <h2>使用說明</h2>
                   </div>  
                   <div class="col_allw170 frontpage_box hoverdiv">
+					<a href="/login.jsp">
                       <img src="/images/logout.png" alt="Image" width="24" height="24">
-                    <h2>登出</h2>
+                      <h2>登出</h2>
+					</a>
                   </div>                    	
 </div>	
 
