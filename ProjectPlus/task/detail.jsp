@@ -44,18 +44,18 @@ var i = 0;
 			$("#tip_group_count").html(i++);
 			$("#tip_group_count").fadeIn(300);
 			$("#tip_group").slideDown(300);
-			/*
+			
 			$("#tip_mail_count").hide();
 			$("#tip_mail").hide();			
-			$("#tip_mail_count").html(i++);
+			$("#tip_mail_count").html(i);
 			$("#tip_mail_count").fadeIn(300);
 			$("#tip_mail").slideDown(300);
 
 			$("#tip_message_count").hide();
 			$("#tip_message").hide();			
-			$("#tip_message_count").html(i++);
+			$("#tip_message_count").html(i);
 			$("#tip_message_count").fadeIn(300);
-			$("#tip_message").slideDown(300);*/
+			$("#tip_message").slideDown(300);
 		});
 		
 		// 點帳號按鈕
@@ -160,14 +160,13 @@ var i = 0;
 				</li>
                 <li>
                 	<a  id="team_btn" href="#" class="float_l">
-                		<img id="tip_group" class="tip" src="/images/exclamation.png" />
                         <p id="tip_group_count" class="tip">15</p>
                         <img class="top" src="/images/title_group.png" />
                     </a>				
                 </li>
 				
 <div id="div-float-team">
-					<div style="margin-left:20px;margin-top:10px;"><fat-font>組員加入</fat-font></div>
+					<div style="margin-left:20px;margin-top:10px;"><name>組員加入</name></div>
 					<div class="divider10"></div> 
                   <div class="col_allw370 frontpage_box hoverdiv">
                       <img src="/images/profileimg.jpg" alt="Image" width="32" height="32">
@@ -195,13 +194,12 @@ var i = 0;
 				
                 <li>
                 	<a  id="mail_btn" href="#" class="float_l">
-                		<img id="tip_mail" class="tip" src="/images/exclamation.png" />
                         <p id="tip_mail_count" class="tip">15</p>       
                     	<img class="top" src="/images/title_mail.png" />
                     </a>					
                 </li>				
 <div id="div-float-mail">
-					<div style="margin-left:20px;margin-top:10px;"><fat-font>站內信通知</fat-font></div>
+					<div style="margin-left:20px;margin-top:10px;"><name>站內信通知</name></div>
 					<div class="divider10"></div> 
 					<div class="col_allw370 frontpage_box hoverdiv">
                     	<img src="/images/profileimg.jpg" alt="Image" width="32" height="32">
@@ -211,13 +209,12 @@ var i = 0;
 </div>						
 				<li>
                 	<a  id="message_btn" href="#" class="float_l">
-                		<img id="tip_message" class="tip" src="/images/exclamation.png" />
                         <p id="tip_message_count" class="tip">15</p>       
                     	<img class="top" src="/images/title_message.png" />
                     </a>
                 </li>
 <div id="div-float-message">
-					<div style="margin-left:20px;margin-top:10px;"><fat-font>訊息通知</fat-font></div>
+					<div style="margin-left:20px;margin-top:10px;"><name>訊息通知</name></div>
 					<div class="divider10"></div> 
 					<div class="col_allw370 frontpage_box hoverdiv">
                     	<img src="/images/profileimg.jpg" alt="Image" width="32" height="32">

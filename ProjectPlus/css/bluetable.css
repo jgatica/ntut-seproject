@@ -67,6 +67,6 @@ tfoot td { background:#444;
 .odd { background:#fff;
 }
 tbody tr:hover { background:#99BCBF;
- border:1px solid #03476F;
+ /*border:1px solid #03476F;*/
  color:#000000;
 }
