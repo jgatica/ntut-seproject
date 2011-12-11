@@ -385,53 +385,12 @@ function loginFacebook(){
     
 				<div id="dropBox" class="toggler col_w700 lp_box float_l margin_20rl">		
 				<div class="subTopDiv" >
-					<h2 class="uiHeaderTitle">Project+<img class="arrow_right" src="/images/arrow_right.png" />最佳專案追蹤估算系統</h2>
+					<h2 class="uiHeaderTitle"><img src="/images/newsbox.png" alt="Image" width="24" height="24">最新動態消息</h2>
 				</div>	
 				<!--<img src="/images/subTitle.jpg" alt="Image" width="690" height="29" />-->
 
 
-					<ul class="lp_frontpage">
-						<li><a href="#"><img width="200" height="100" src="images/templatemo_image_01.jpg" alt="Image 01" /></a></li>
-						<li><a href="#"><img width="200" height="100" src="images/templatemo_image_02.jpg" alt="Image 02" /></a></li>
-						<li><a href="#"><img width="200" height="100" src="images/templatemo_image_03.jpg" alt="Image 03" /></a></li>
-						<li><a href="#"><img width="200" height="100" src="images/templatemo_image_04.jpg" alt="Image 04" /></a></li>
-					</ul>   
-
-					<div class="subBottomDiv" ></div>
-				
-                </div>
-      			<div id="slide_left" class="col_p35 lp_box float_r">
-					<div class="subTopDiv" >
-						<h2 class="uiHeaderTitle">登入Project+</h2>
-					</div>					
-					
-<div id="cp_contact_form">
-            <!--<form action="#" method="post" name="contact" id="contact">-->
-              <label for="author3">帳號:</label>
-              <input type="text" id="author3" name="author" class="input_field" />
-              <div class="cleaner h10"></div>
-              <label for="email">密碼:</label>
-              <input type="password" class="input_field" name="email" id="email" />
-              
-              <div class="cleaner h10"></div>
-			
-            <button><name>註冊</name></button>
-			<button class="float_r"><team>登入</team></button>  
-			<button id="facebook" class="float_r"><name>Facebook帳號登入</name></button>
-			
-            <!--</form>-->
-      </div>
-
-						                 
-                                                         
-					<div class="subBottomDiv" ></div>            
-            	</div>  	
-				
-      			<div id="slide_left" class="col_p35 lp_box float_r">
-					<div class="subTopDiv" >
-						<h2 class="uiHeaderTitle">最新動態</h2>
-					</div>					
-					<div class="col_allw170 frontpage_box hoverdiv">
+<div class="col_allw170 frontpage_box hoverdiv">
                       <a href="/member/basic.jsp">
 					  <img src="/images/user.png" alt="Image" width="24" height="24">
                       <h2><name>陳奕豪</name>在<team>軟體工程</team>新增一筆留言。</h2>
@@ -458,6 +417,45 @@ function loginFacebook(){
 					<div class="col_allw170 frontpage_box hoverdiv">
                       <a href="/member/basic.jsp">
 					  <img src="/images/user.png" alt="Image" width="24" height="24">
+                      <h2><name>陳奕豪</name>在<team>軟體工程</team>新增一筆留言。</h2>
+					  </a>
+                    </div> 				
+
+					<div class="subBottomDiv" ></div>
+				
+                </div>
+				<div id="slide_left" class="col_p35 lp_box float_r">
+						<div class="subTopDiv" >
+						<h2 class="uiHeaderTitle"><img src="/images/task.png" alt="Image" width="24" height="24">尚未達成工作</h2>
+					</div>					
+					<div class="col_allw170 frontpage_box hoverdiv">
+                      <a href="/member/basic.jsp">
+					  <img src="/images/pin.png" alt="Image" width="24" height="24">
+                      <h2>修改<team>軟體工程</team>
+                      列表讀取Bug</h2>
+					  </a>
+                    </div>   
+					<div class="col_allw170 frontpage_box hoverdiv">
+                      <a href="/member/basic.jsp">
+					  <img src="/images/pin.png" alt="Image" width="24" height="24">
+                      <h2>修改<team>軟體工程</team>美術畫面</h2>
+					  </a>
+                    </div> 
+					<div class="col_allw170 frontpage_box hoverdiv">
+                      <a href="/member/basic.jsp">
+					  <img src="/images/pin.png" alt="Image" width="24" height="24">
+                      <h2><name>陳奕豪</name>在<team>軟體工程</team>新增一筆留言。「趕快把美術弄完吧!!!」</h2>
+					  </a>
+                    </div> 
+					<div class="col_allw170 frontpage_box hoverdiv">
+                      <a href="/member/basic.jsp">
+					  <img src="/images/pin.png" alt="Image" width="24" height="24">
+                      <h2><name>陳奕豪</name>在<team>軟體工程</team>新增一筆留言。</h2>
+					  </a>
+                    </div> 
+					<div class="col_allw170 frontpage_box hoverdiv">
+                      <a href="/member/basic.jsp">
+					  <img src="/images/pin.png" alt="Image" width="24" height="24">
                       <h2><name>陳奕豪</name>在<team>軟體工程</team>新增一筆留言。</h2>
 					  </a>
                     </div> 																				                 
