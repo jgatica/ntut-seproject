@@ -660,11 +660,7 @@ em { color: #359548 }
 
 
 
-#cp_contact_form form { 
-
-}
-
-#cp_contact_form form .input_field:hover { 
+#cp_contact_form .input_field:hover { 
 	border: 1px solid #0066CC;
 	cursor:pointer;
 	border-radius:10px;
@@ -672,7 +668,7 @@ em { color: #359548 }
 	-webkit-border-radius:10px;		
 }
 
-#cp_contact_form form .input_field { 
+#cp_contact_form .input_field { 
 	width: 95%; 
 	font-family: Verdana,Geneva,sans-serif;
     font-size: 12px;
@@ -686,7 +682,7 @@ em { color: #359548 }
 	-webkit-border-radius:10px;		
 }
 
-#cp_contact_form form .input_field_error { 
+#cp_contact_form .input_field_error { 
 	width: 100%; 
 	font-family: Verdana,Geneva,sans-serif;
     font-size: 12px;
@@ -697,7 +693,7 @@ em { color: #359548 }
 	margin-top: 5px;
 }
 
-#cp_contact_form form label { 
+#cp_contact_form label { 
 	display:inline;
 	width: 100%; 
 	margin-right: 10px; 
@@ -705,7 +701,7 @@ em { color: #359548 }
 	color: #000; 
 }
 
-#cp_contact_form form textarea { 
+#cp_contact_form textarea { 
 	width: 80%; 
 	height: 100px; 
 	padding: 5px; 
@@ -717,7 +713,7 @@ em { color: #359548 }
 	margin-top: 5px;
 }
 
-#cp_contact_form form .submit_btn {
+#cp_contact_form .submit_btn {
 	padding: 5px 14px;
 	background: #fff;
 	border: 1px solid #ccc;

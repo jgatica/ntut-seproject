@@ -125,35 +125,72 @@ var i = 0;
 </script>
 
 <!-- InstanceBeginEditable name="Head" -->
-
+<script src="http://connect.facebook.net/en_US/all.js"></script>
 <script language="javascript" type="text/javascript">
 	$(document).ready(function(){
+		FB.init({
+			appId  : '187257524702118',
+			status : true, // check login status
+			cookie : false, // enable cookies to allow the server to access the session
+			xfbml  : true,  // parse XFBML
+			channelUrl : 'http://localhost:8080/'
+		});
+		$('#facebook').click(loginFacebook);
 
-		var op = 5;
-		var start = 0;  // 自第0筆
-		var length = 3; // 取3筆
-		$.getJSON('/ArticleAction.do',  { op:op, start: start, length: length }, function(data) {
-			//console.log(data);
-			var content = "";
-			for(var i = 0; i < data.length; i++){
-				
-				content += "<div class='lbe_box'>";
-				content += "<div class='lbe_date'>";
-				content += new Date(data[i].edittime);
-				content += "<span>" + data[i].author + "</span>";
-				content += "</div>";
-				content += "<div class='lbe_content'>";
-				content += "<h3><a href='#'>" + data[i].title + "</a></h3>";
-				content +="<p>" + data[i].content + "</p>";
-				content += "</div>";
-				content += "<div class='cleaner'></div>"
-				content += "</div>";
-				
-			}
-			$("#news_box").append(content);		
-        });
 		
-	});    	
+	});   
+
+var responseLogin;
+var responseLogout;
+var responseStatusChange;
+var responseSessionChange;
+
+function loginQQ(){
+  location.href = "/qqlogin/" + "?type=1";
+}
+
+// 驗證登入
+FB.Event.subscribe('auth.login', function(resp) {
+  responseLogin = resp;
+});
+
+FB.Event.subscribe('auth.logout', function(resp) {
+  responseLogin = resp;
+});
+
+FB.Event.subscribe('auth.statusChange', function(resp) {
+  //responseStatusChange = resp;
+});
+			
+FB.Event.subscribe('auth.sessionChange', function(resp) {
+  responseSessionChange = resp;
+});
+
+function checkToken(){
+  var fm = document.FBLoginForm;
+  
+  if (!responseLogin.session){
+	return;
+  }
+  fm.uid.value = responseLogin.session.uid;
+  fm.accesstoken.value = responseLogin.session.access_token;
+  $('#mainregion').hide();
+  $('#progressregion').show();
+  fm.submit();
+}
+
+//FaceBook登入
+function loginFacebook(){
+
+  FB.login(function(resp){
+    if (resp.session) {
+	  checkToken();
+    } else {
+	
+    }
+  }, {perms:'email,read_stream,publish_stream,offline_access'});
+}
+
 
 </script>
 
@@ -365,7 +402,7 @@ var i = 0;
 					</div>					
 					
 <div id="cp_contact_form">
-            <form action="#" method="post" name="contact" id="contact">
+            <!--<form action="#" method="post" name="contact" id="contact">-->
               <label for="author3">帳號:</label>
               <input type="text" id="author3" name="author" class="input_field" />
               <div class="cleaner h10"></div>
@@ -375,9 +412,10 @@ var i = 0;
               <div class="cleaner h10"></div>
 			
             <button><name>註冊</name></button>
-			<button><name>使用Facebook帳號登入</name></button>
-			<button class="float_r"><name>登入</name></button>  
-            </form>
+			<button class="float_r"><team>登入</team></button>  
+			<button id="facebook" class="float_r"><name>Facebook帳號登入</name></button>
+			
+            <!--</form>-->
       </div>
 
 						                 
@@ -426,6 +464,16 @@ var i = 0;
                 <div class="cleaner"></div>
             </div>
         </div> 
+		
+		
+<div id="fb-root"></div>
+<form name="hiddenForm" method="post"> 
+  <input type="hidden" name="token">
+</form>
+<form name="FBLoginForm" id="FBLoginForm" method="post" action="http://localhost:8080/">
+  <input type="hidden" name="uid"/>
+  <input type="hidden" name="accesstoken"/>
+</form>		
             <!--
             <div class="testimonial"><span class="close"></span>
                 <p>Donec dolor lectus, rutrum id facilisis eu, condimentum ut enim. Sed quis dapi bus nisi. Mauris at tortor tortor, sit amet porttitor velit. Cras viverra interdum ligula, quis cursus nulla sollicitudin vitae. Sed adipiscing sem ac erat pharetra ac eleifend tellus eleifend. Morbi tempus pharetra gravida.</p>
