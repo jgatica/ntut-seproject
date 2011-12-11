@@ -58,6 +58,18 @@ var i = 0;
 			$("#tip_message").slideDown(300);
 		});
 		
+		// 點團隊s按鈕
+		
+		$( "#teams_btn" ).toggle(
+			function () { 
+				$( this ).addClass("menu_li_toogle");
+				$( "#div-float-teams" ).slideToggle(250);
+			},		
+			function () {
+				$( this ).removeClass("menu_li_toogle");
+				$( "#div-float-teams" ).slideToggle(250);
+			}
+		);
 		// 點帳號按鈕
 		$( "#account_btn" ).toggle(
 			function () { 
@@ -228,22 +240,22 @@ var i = 0;
 					<div style="margin-left:20px;margin-top:10px;"><name>組員加入</name></div>
 					<div class="divider10"></div> 
                   <div class="col_allw370 frontpage_box hoverdiv">
-                      <img src="/images/profileimg.jpg" alt="Image" width="32" height="32">
+                      <img src="/images/2.jpg" alt="Image" width="32" height="32">
                       <p><name>陳至圓</name>想要加入<team>軟體工程</team>專案團隊  <button>確定</button> <button>取消</button>
 					  </p>   
                   </div>  
                   <div class="col_allw370 frontpage_box hoverdiv">
-                      <img src="/images/profileimg.jpg" alt="Image" width="32" height="32">
+                      <img src="/images/3.jpg" alt="Image" width="32" height="32">
                       <p><name>楊先絜</name>想要加入<team>軟體工程</team>專案團隊  <button>確定</button> <button>取消</button>
 					  </p>   
                   </div>  				     
                   <div class="col_allw370 frontpage_box hoverdiv">
-                      <img src="/images/profileimg.jpg" alt="Image" width="32" height="32">
+                      <img src="/images/1.jpg" alt="Image" width="32" height="32">
                       <p><name>陳奕豪</name>想要加入<team>軟體工程</team>專案團隊  <button>確定</button> <button>取消</button>
 					  </p>   
                   </div>  
                   <div class="col_allw370 frontpage_box hoverdiv">
-                      <img src="/images/profileimg.jpg" alt="Image" width="32" height="32">
+                      <img src="/images/4.jpg" alt="Image" width="32" height="32">
                       <p><name>郭奕成</name>想要加入<team>軟體工程</team>專案團隊  <button>確定</button> <button>取消</button>
 					  </p>   
                   </div>  				  
@@ -261,7 +273,7 @@ var i = 0;
 					<div style="margin-left:20px;margin-top:10px;"><name>站內信通知</name></div>
 					<div class="divider10"></div> 
 					<div class="col_allw370 frontpage_box hoverdiv">
-                    	<img src="/images/profileimg.jpg" alt="Image" width="32" height="32">
+                    	<img src="/images/1.jpg" alt="Image" width="32" height="32">
                         <p><name>陳奕豪</name>寄了一封<mail>我想加入</mail>信件給你。</p>
   	                </div>    
             	
@@ -276,12 +288,12 @@ var i = 0;
 					<div style="margin-left:20px;margin-top:10px;"><name>訊息通知</name></div>
 					<div class="divider10"></div> 
 					<div class="col_allw370 frontpage_box hoverdiv">
-                    	<img src="/images/profileimg.jpg" alt="Image" width="32" height="32">
+                    	<img src="/images/1.jpg" alt="Image" width="32" height="32">
                         <p><name>陳奕豪</name>在<team>軟體工程</team>新增一筆留言。</p>
   	                </div>    
 					<div class="col_allw370 frontpage_box hoverdiv">
-                    	<img src="/images/profileimg.jpg" alt="Image" width="32" height="32">
-                        <p><name>陳奕豪</name>修改了<team>軟體工程</team>的內容。</p>
+                    	<img src="/images/2.jpg" alt="Image" width="32" height="32">
+                        <p><name>陳至圓</name>修改了<team>軟體工程</team>的內容。</p>
   	                </div>      					                   
 				              	
 </div>	
@@ -299,21 +311,16 @@ var i = 0;
 
 				
 				</li>
-				<li><a class="float_r" href="/member/basic.jsp"><img class="top" src="/images/top_profile.png" />
-				<label>個人</label></a></li>								
-				<li><a class="float_r" href="/project/detail.jsp"><img class="top" src="/images/top_profile.png" />
-				<label>專案</label></a></li>
-				<li><a class="float_r" href="/index.jsp"><img class="top" src="/images/top_home.png" /><label>首頁</label></a></li>
-				
 <div id="div-float-account">
 					<div style="margin-left:20px;margin-top:10px;">帳號設定</div>
-					<div class="divider10"></div>
+					<div class="divider10"></div> <!--分隔線-->
                     <div class="col_allw170 frontpage_box hoverdiv">
                       <img src="/images/profile_img.png" alt="Image" width="24" height="24">
                       <h2>帳號設定</h2>                        
                     </div>
                     <div class="col_allw170 frontpage_box hoverdiv">
-                    		<h2>隱<img src="/images/profile_phone.png" alt="Image" width="24" height="24" />私設定</h2>
+						<img src="/images/profile_phone.png" alt="Image" width="24" height="24" />
+						<h2>目前工作</h2>
                     </div>     
                   <div class="col_allw170 frontpage_box hoverdiv">
                       <img src="/images/profile_task.png" alt="Image" width="24" height="24">
@@ -323,7 +330,42 @@ var i = 0;
                       <img src="/images/profile_mail.png" alt="Image" width="24" height="24">
                     <h2>登出</h2>
                   </div>                    	
-</div>							
+</div>	
+
+			
+				<li>
+					<a id="teams_btn" class="float_r" href="/member/basic.jsp"><img class="top" src="/images/top_profile.png" />
+					<label>團隊 ▼ </label></a>
+				</li>	
+<div id="div-float-teams">
+					<div style="margin-left:20px;margin-top:10px;">我的團隊</div>
+					<div class="divider10"></div> <!--分隔線-->
+                    <div class="col_allw170 frontpage_box hoverdiv">
+					  <a href="/project/detail.jsp?id=123">
+                      	<img src="/images/profile_img.png" alt="Image" width="24" height="24">
+                      	<h2>軟體工程</h2>                        
+					  </a>
+                    </div>
+                    <div class="col_allw170 frontpage_box hoverdiv">
+                      <img src="/images/android-icon.png" alt="Image" width="24" height="24">
+                      <h2>Android開發社</h2>                        
+                    </div>
+                    <div class="col_allw170 frontpage_box hoverdiv">
+                      <img src="/images/jquery-icon.gif" alt="Image" width="24" height="24">
+                      <h2>jQuery研究社</h2>                        
+                    </div>
+                    <div class="col_allw170 frontpage_box hoverdiv">
+                      <img src="/images/c++-icon.png" alt="Image" width="24" height="24">
+                      <h2>C++專研區</h2>                        
+                    </div>										                 	
+</div>	
+				<li>
+					<a class="float_r" href="/index.jsp"><img class="top" src="/images/top_profile.png" />
+					<label>首頁</label></a>
+				</li>										
+				
+				
+						
             </ul>    	
         </div> 
 
