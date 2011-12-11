@@ -23,7 +23,7 @@ img { border: none; }
 
 h1, h2, h3, h4, h5, h6 { color: #000; font-weight: normal }
 h1 { font-size: 34px; margin: 0 0 30px 0; padding: 5px 0; }
-h2 { font-size: 26px; margin: 0 0 20px 0; padding: 0; }
+h2 { font-size: 26px; margin: 0 0 0 0; padding: 0; }
 h3 { font-size: 21px; margin: 0 0 15px; padding: 0; }
 h4 { font-size: 18px; margin: 0 0 15px; padding: 0; }
 h5 { font-size: 16px; margin: 0 0 10px; padding: 0; }
@@ -204,6 +204,8 @@ em { color: #359548 }
 }
 
 #templatemo_menu ul li a {
+	
+	position:relative;
 	/*float: left;*/
 	/*display: block;*/
 	min-width: 28px;
@@ -221,8 +223,15 @@ em { color: #359548 }
 }
 
 #templatemo_menu ul li a p.tip {
+	position:absolute;
+	background:#FF2F2F;
 	padding-top:2px;
 	text-align:center;
+	top: 0px;
+	right:0px;
+	border-radius: 3px;
+	-moz-border-radius: 3px;
+	-webkit-border-radius: 3px;			
 }
 
 #templatemo_menu ul li a .tip {
@@ -230,8 +239,8 @@ em { color: #359548 }
 	
 	display:none;
 	position:absolute;
-	padding-left:17px;
-	top: 0px;
+	margin-left:12px;
+	top: -3px;
 	width: 15px;
 	height: 15px;	
 	color:#FFFFFF;
@@ -362,6 +371,12 @@ em { color: #359548 }
 
 .margin_20rl {
 	margin: 0px 10px 0px 10px;
+}
+
+.frontpage_box a{
+	display: block;
+	padding-top: 3px;
+	padding-bottom: 3px;	
 }
 
 .frontpage_box h2 { 
@@ -797,7 +812,7 @@ img.arrow_right{
 
 .subTopDiv {
 	clear: both;
-	height: 35px;
+	min-height: 15px;
 	background: url(../images/sub.jpg) repeat-x top;
 
 	border-top-left-radius:10px;
