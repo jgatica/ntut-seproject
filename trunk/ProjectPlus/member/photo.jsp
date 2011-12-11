@@ -272,12 +272,16 @@ var i = 0;
 					<div style="margin-left:20px;margin-top:10px;">個人功能</div>
 					<div class="divider10"></div> <!--分隔線-->
                     <div class="col_allw170 frontpage_box hoverdiv">
+						<a href="/member/task.jsp?id=123">
 						<img src="/images/task.png" alt="Image" width="24" height="24" />
 						<h2>目前工作</h2>
+						</a>
                     </div>   
                     <div class="col_allw170 frontpage_box hoverdiv">
-                      <img src="/images/mail.png" alt="Image" width="24" height="24">
-                      <h2>我的信箱</h2>                        
+						<a href="/member/mail.jsp?id=123">
+                        <img src="/images/mail.png" alt="Image" width="24" height="24">
+                        <h2>我的信箱</h2>                        
+						</a>
                     </div>					  
                   <div class="col_allw170 frontpage_box hoverdiv">
                       <img src="/images/profile_task.png" alt="Image" width="24" height="24">
