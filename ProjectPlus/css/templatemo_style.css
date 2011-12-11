@@ -390,13 +390,54 @@ em { color: #359548 }
 
 .frontpage_box img { 
 	float: left; 
+	padding-left: 10px;
+	padding-right: 15px; 
+}
+
+.perple_box input_field {
+	font-size:10px;
+	float:right;
+	padding:2px 5px 2px 5px;
+	margin: 3px 5px 3px 5px;
+}
+
+.perple_box button {	
+	font-size:10px;
+	float:right;
+	padding:2px 5px 2px 5px;
+	margin: 3px 5px 3px 5px;
+}
+
+.perple_box a{
+	color: #000; 
+	text-decoration:none;
+	/*display: block;*/
+	padding-top: 3px;
+	padding-bottom: 3px;	
+}
+
+.perple_box a:hover {
+	color:#039;
+}
+
+.perple_box h2 { 
+	font-size: 15px; 
+	padding-right: 10px;
+	padding: 0; 
+	padding-bottom: 13px;
+	padding-top: 13px;
+	color: #000; 	
+	margin-right: 20px;
+	
+}
+
+.perple_box img { 
+	float: left; 
 	margin-left: 10px;
 	margin-right: 15px; 
 }
 
-.frontpage_box a.more { 
-	margin-top: 15px; 
-}
+
 
 .lp_box .current {
 	
@@ -775,7 +816,7 @@ em { color: #359548 }
 div.divider {
 	/*background: url(../images/templatemo_menu_divider.png) right center no-repeat*/
 	min-height: 10px;
-	margin:10px 10px 0px 10px;
+	margin:15px 10px 0px 10px;
 
 	display:block;
 	background:url(../images/templatemo_hr_divider.png) repeat-x;
@@ -836,6 +877,39 @@ img.arrow_right{
 	border-bottom-right-radius:10px;
 	-moz-border-bottom-right-radius:10px;
 	-webkit-border-bottom-right-radius:10px;		
+}
+
+/*團隊*/
+#div-float-teams {
+	display: none;
+	text-align:left;
+	font-size:12px;
+	color:#039;
+	padding: 5px 3px 5px 3px;
+	z-index: 99; 
+	
+	
+	
+	position:absolute;
+	top:35px;
+	right:86px;
+	width:170px;
+	
+	background:#FFF;
+	border:1px solid;
+	
+	border-top-color:#000;
+	border-left-color:#000;
+	border-right-color:#000;
+	border-bottom-color:#000;
+	
+	border-bottom-left-radius:5px;
+	-moz-border-bottom-left-radius:5px;
+	-webkit-border-bottom-left-radius:5px;		
+	
+	border-bottom-right-radius:5px;
+	-moz-border-bottom-right-radius:5px;
+	-webkit-border-bottom-right-radius:5px;			
 }
 
 /*帳號懸浮視窗*/
@@ -980,4 +1054,24 @@ mail {
 
 fat-font {
 	font-weight:bold;
+}
+
+.name-hover-div {
+	margin: 5px 0px 5px 0px;
+}
+
+.name-hover:hover {
+	cursor:pointer;
+	background:#A6D2FF;
+	border-radius: 3px;
+	-moz-border-radius: 3px;
+	-webkit-border-radius: 3px;	
+}
+
+.name-hover {
+	
+	padding: 3px;
+	border-radius: 3px;
+	-moz-border-radius: 3px;
+	-webkit-border-radius: 3px;
 }
