@@ -305,62 +305,68 @@ var i = 0;
                 </li>
 				<li>
 
-				<a  id="account_btn" class="float_r" href="#"><img class="top" src="/images/top_account.png" /><label>帳號 ▼ </label></a>
+				<a  id="account_btn" class="float_r" href="#"><img class="top" src="/images/top_profile.png" /><label>個人 ▼ </label></a>
 				<!--<div id="circles" style="text-align:left; background-color:rgba(199, 199, 199, 0.7); width:120px; overflow:auto; position:absolute; padding:50px; max-height:60px;">
         		</div>-->
 
 				
 				</li>
 <div id="div-float-account">
-					<div style="margin-left:20px;margin-top:10px;">帳號設定</div>
+					<div style="margin-left:20px;margin-top:10px;">個人功能</div>
 					<div class="divider10"></div> <!--分隔線-->
                     <div class="col_allw170 frontpage_box hoverdiv">
-                      <img src="/images/profile_img.png" alt="Image" width="24" height="24">
-                      <h2>帳號設定</h2>                        
-                    </div>
-                    <div class="col_allw170 frontpage_box hoverdiv">
-						<img src="/images/profile_phone.png" alt="Image" width="24" height="24" />
+						<img src="/images/task.png" alt="Image" width="24" height="24" />
 						<h2>目前工作</h2>
-                    </div>     
+                    </div>   
+                    <div class="col_allw170 frontpage_box hoverdiv">
+                      <img src="/images/mail.png" alt="Image" width="24" height="24">
+                      <h2>我的信箱</h2>                        
+                    </div>					  
                   <div class="col_allw170 frontpage_box hoverdiv">
                       <img src="/images/profile_task.png" alt="Image" width="24" height="24">
                     <h2>使用說明</h2>
                   </div>  
                   <div class="col_allw170 frontpage_box hoverdiv">
-                      <img src="/images/profile_mail.png" alt="Image" width="24" height="24">
+                      <img src="/images/logout.png" alt="Image" width="24" height="24">
                     <h2>登出</h2>
                   </div>                    	
 </div>	
 
 			
 				<li>
-					<a id="teams_btn" class="float_r" href="/member/basic.jsp"><img class="top" src="/images/top_profile.png" />
+					<a id="teams_btn" class="float_r" href="/member/basic.jsp"><img class="top" src="/images/top_account.png" />
 					<label>團隊 ▼ </label></a>
 				</li>	
 <div id="div-float-teams">
 					<div style="margin-left:20px;margin-top:10px;">我的團隊</div>
 					<div class="divider10"></div> <!--分隔線-->
                     <div class="col_allw170 frontpage_box hoverdiv">
-					  <a href="/project/detail.jsp?id=123">
+					  <a href="/team/detail.jsp?id=123">
                       	<img src="/images/profile_img.png" alt="Image" width="24" height="24">
                       	<h2>軟體工程</h2>                        
 					  </a>
                     </div>
                     <div class="col_allw170 frontpage_box hoverdiv">
-                      <img src="/images/android-icon.png" alt="Image" width="24" height="24">
-                      <h2>Android開發社</h2>                        
+						<a href="/team/detail.jsp?id=123">
+						<img src="/images/android-icon.png" alt="Image" width="24" height="24">
+						<h2>Android開發社</h2>   
+						</a>                     
                     </div>
                     <div class="col_allw170 frontpage_box hoverdiv">
-                      <img src="/images/jquery-icon.gif" alt="Image" width="24" height="24">
-                      <h2>jQuery研究社</h2>                        
+						<a href="/team/detail.jsp?id=123">
+						<img src="/images/jquery-icon.gif" alt="Image" width="24" height="24">
+						<h2>jQuery研究社</h2>                        
+						</a>
                     </div>
                     <div class="col_allw170 frontpage_box hoverdiv">
-                      <img src="/images/c++-icon.png" alt="Image" width="24" height="24">
-                      <h2>C++專研區</h2>                        
+						<a href="/team/detail.jsp?id=123">
+						<img src="/images/c++-icon.png" alt="Image" width="24" height="24">
+						<h2>C++專研區</h2>                        
+						</a>
                     </div>										                 	
 </div>	
 				<li>
-					<a class="float_r" href="/index.jsp"><img class="top" src="/images/top_profile.png" />
+					<a class="float_r" href="/index.jsp"><img class="top" src="/images/top_home.png" />
 					<label>首頁</label></a>
 				</li>										
 				
@@ -456,7 +462,7 @@ var i = 0;
     	
 		<a href="index.html">首頁</a> | <a href="about.html">關於我們</a> | <a href="blog.html">文章列表</a> | <a href="gallery.html">Gallery</a> | <a href="contact.html" class="last">Contact</a> <br /><br />
         
-        Copyright © 2048 ITHub | IT / Developer Center<a href="http://www.templatemo.com" target="_parent"></a>
+        Copyright © 2011 Project+ | 最佳的專案追蹤與估算工具
     
   </div> <!-- end of templatemo_footer -->
 </div>
