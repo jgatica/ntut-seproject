@@ -4,21 +4,18 @@
 <struts-config>
     <form-beans>
         <form-bean name="FacebookLoginForm" type="com.projectplus.login.FacebookLoginForm"/>
-        <form-bean name="ComputeForm" type="com.seproject.conpute.ComputeForm"/>
+        <form-bean name="MemberActionForm" type="com.projectplus.member.MemberActionForm"/>
         <form-bean name="ArticleForm" type="com.profile.article.ArticleForm"/>
     </form-beans>
 
   <action-mappings>
   
   	<action name="FacebookLoginForm" path="/FacebookLoginAction" scope="request" type="com.projectplus.login.FacebookLoginAction">
-  		<forward name="success" path="/index.jsp"/>
-  		<forward name="error" path="/error.jsp"/>
-  	</action>
-  	
-  	<action name="ComputeForm" path="/ComputeAction" scope="request" type="com.seproject.conpute.ComputeAction">
-  		<forward name="result" path="/result.jsp"/>
   	</action>
 
+  	<action name="MemberActionForm" path="/MemberAction" scope="request" type="com.projectplus.member.MemberAction">
+  	</action>
+  	
 	<action name="ArticleForm" path="/ArticleAction" scope="request" type="com.profile.article.ArticleAction">
 	</action>
 	
