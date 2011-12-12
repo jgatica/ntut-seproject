@@ -20,6 +20,10 @@
 
 <link rel="stylesheet" type="text/css" href="/css/jquery.lightbox-0.5.css" media="screen" />
 
+
+<!--語系切換-->
+<script language="javascript" type="text/javascript" src="/js/langchange.js"></script>
+
 <!--colorbox-->
 <script type="text/javascript" src="/js/colorbox/jquery.colorbox-min.js"></script>
 <link rel="stylesheet" type="text/css" href="/js/colorbox/colorbox.css" media="screen" />
@@ -27,6 +31,9 @@
 <script src="http://connect.facebook.net/en_US/all.js"></script>
 <script language="javascript" type="text/javascript">
 	$(document).ready(function(){
+		var initPage;
+		langInit({lang: "en", file: "/js/files/lang-example.xml"}, initPage);
+		
 		$( "button" ).button();
 		
 		FB.init({
@@ -127,7 +134,7 @@ function loginFacebook(){
     
 				<div id="dropBox" class="toggler col_w700 lp_box float_l margin_20rl">		
 				<div class="subTopDiv" >
-					<h2 class="uiHeaderTitle">Project+<img class="arrow_right" src="/images/arrow_right.png" />最佳專案追蹤估算系統</h2>
+					<h2 class="uiHeaderTitle">Project+<img class="arrow_right" src="/images/arrow_right.png" /><label langtag="login-ads-title"></label></h2>
 				</div>	
 				
 
@@ -144,22 +151,22 @@ function loginFacebook(){
                 </div>
       			<div id="slide_left" class="col_p35 lp_box float_r">
 					<div class="subTopDiv" >
-						<h2 class="uiHeaderTitle">登入Project+</h2>
+						<h2 class="uiHeaderTitle" langtag="login-login-title">登入Project+</h2>
 					</div>					
 					
 <div id="cp_contact_form">
 
-              <label for="author3">帳號:</label>
+              <label for="author3" langtag="login-login-account"></label>
               <input type="text" id="account" name="author" class="input_field" />
               <div class="cleaner h10"></div>
-              <label for="email">密碼:</label>
+              <label for="email" langtag="login-login-password"></label>
               <input type="password" class="input_field" name="email" id="password" />
               
               <div class="cleaner h10"></div>
 			
-            <button><name>註冊</name></button>
-			<button id="login" class="float_r"><team>登入</team></button>  
-			<button id="facebook" class="float_r"><name>Facebook帳號登入</name></button>
+            <button><name langtag="login-login-register"></name></button>
+			<button id="login" class="float_r"><team langtag="login-login-login"></team></button>  
+			<button id="facebook" class="float_r" ><name langtag="login-login-facebook"></name></button>
 
       </div>
 

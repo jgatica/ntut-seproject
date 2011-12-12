@@ -1,6 +1,7 @@
 <%@ page contentType="text/html; charset=utf-8" language="java" import="java.sql.*" errorPage="" %>
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
-<html xmlns="http://www.w3.org/1999/xhtml"><!-- InstanceBegin template="/Templates/Main.dwt.jsp" codeOutsideHTMLIsLocked="false" -->
+<html xmlns="http://www.w3.org/1999/xhtml">
+<!-- InstanceBegin template="/Templates/Main.dwt.jsp" codeOutsideHTMLIsLocked="false" -->
 <head>
 <%
 	boolean goIndex = false;
@@ -8,9 +9,9 @@
 	
 	isLogin = (session.getAttribute("isLogin")!=null);
 	
-	if(!isLogin) 
-		goIndex = true;
-	
+	if(!isLogin) {
+		goIndex = false;
+	}
 %>
 
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
@@ -37,20 +38,30 @@
 <link rel="stylesheet" type="text/css" href="/js/colorbox/colorbox.css" media="screen" />
 
 <script type="text/javascript">
-var i = 0;
-	$(document).ready(function(){
+	
+
+	// 初始化結束後要呼叫的函數
+	function initPage(){
+
+		var langTitle = langtagTransform("top-lang-title");
+		$("#lang-dialog").dialog( {autoOpen: false, width: 170, minHeight: 80, modal: true, title: langTitle} );
+		
+		var logoutTitle = langtagTransform("top-logout-title");
+		$("#logout-dialog").dialog( {autoOpen: false, minWidth: 270, minHeight: 80, modal: true, title: logoutTitle} );
+					
+	}	
+
+
+	var i = 0;
+	$(document).ready(function(){	
 		
 		<%if(goIndex){%>
 			window.location = "/login.jsp";
 		<%}%>
-		
 		// 更換介面語系
 		langInit({lang: "en", file: "/js/files/lang-example.xml"});
-		
-		
-		// 更改語言
-		$("#lang-dialog").dialog( {autoOpen: false, width: 170, minHeight: 80, modal: true} );
-		
+		addLangInitHandler(initPage);
+
 		$("#lang-check").click(function(){
 			$("#lang-dialog").dialog('open');
 		});
@@ -59,18 +70,14 @@ var i = 0;
 			var lang = $('#lang-select').val();
 			$("body").changeLang({lang: lang});	
 			
-			window.location.reload();
-			//$("#lang-dialog").dialog('close');
+			
+			//window.location.reload();
+			$("#lang-dialog").dialog('close');
 		});
 		
 		$("#lang-cancel").click(function(){
 			$("#lang-dialog").dialog('close');
 		});				
-		
-		// 登出
-		$("#logout-dialog").dialog( {autoOpen: false, minWidth: 270, minHeight: 80, modal: true} );
-		
-
 		
 		
 		$("#logout-check").click(function(){
@@ -116,24 +123,7 @@ var i = 0;
 			$("#tip_message_count").fadeIn(300);
 			$("#tip_message").slideDown(300);
 		});
-		/*
-		// 點團隊s按鈕
-		$("#teams_btn").focusout(function(e) {
-			hideAll();
-		});
-		$("#message_btn").focusout(function(e) {
-			hideAll();
-		});
-		$("#account_btn").focusout(function(e) {
-			hideAll();
-		});
-		$("#team_btn").focusout(function(e) {
-			hideAll();
-		});
-		$("#mail_btn").focusout(function(e) {
-			hideAll();
-		});
-			*/							
+					
 		$( "#teams_btn" ).toggle(
 			function () { 
 				$( this ).addClass("menu_li_toogle");
@@ -187,10 +177,10 @@ var i = 0;
 				$( this ).removeClass("menu_li_toogle");
 				$( "#div-float-message" ).slideUp(250);
 			}
-		);						
-
-
+		);		
 		
+
+
 	});
 	
 	/*
@@ -214,19 +204,6 @@ var i = 0;
 <!-- InstanceBeginEditable name="Head" -->
 
 
-<script language="javascript" type="text/javascript">
-	/*
-	 * 一開始讀取第零筆資料
-	 */
-	$(document).ready(function(){
-		
-	}); 
-
-	  	
-
-</script>
-
-
 <!-- InstanceEndEditable -->
 
 </head>
@@ -248,22 +225,7 @@ var i = 0;
         </div>
         -->
 <!-- InstanceBeginEditable name="Menu" -->
-        <div id="templatemo_menu">
-            <ul>
-            	<li><a href="#"><img src="/images/templatemo_logo.png" /><img class="tip" src="/images/templatemo_logo.png" /></a></li>
-                <li><a href="#"><img src="/images/title_group.png" /></a></li>
-                <li><a href="#"><img src="/images/title_mail.png" /></a></li>
-				<li><a href="#"><img src="/images/title_message.png" /></a></li>
-                <li>
-				<form method="get" id="searchform" action="#">
-					<div>
-						<input type="text" value="搜尋" name="s" id="s" onfocus="defaultInput(this)" onblur="clearInput(this)" />
-						<input type="submit" id="searchsubmit" value=" " />
-					</div>
-				</form>       
-                </li>
-            </ul>    	
-        </div> 
+
 <!-- InstanceEndEditable -->
 <div id="templatemo_white">
 </div>
@@ -280,7 +242,7 @@ var i = 0;
                 </li>
 				
 <div id="div-float-team">
-					<div style="margin-left:20px;margin-top:10px;"><name>組員加入</name></div>
+					<div style="margin-left:20px;margin-top:10px;"><name langtag="top-teambox"></name></div>
 					<div class="divider10"></div> 
                   <div class="col_allw370 frontpage_box hoverdiv">
                       <img src="/images/2.jpg" alt="Image" width="32" height="32">
@@ -313,7 +275,7 @@ var i = 0;
                     </a>					
                 </li>				
 <div id="div-float-mail">
-					<div style="margin-left:20px;margin-top:10px;"><name>站內信通知</name></div>
+					<div style="margin-left:20px;margin-top:10px;"><name langtag="top-mail"></name></div>
 					<div class="divider10"></div> 
 					<div class="col_allw370 frontpage_box hoverdiv">
                     	<img src="/images/1.jpg" alt="Image" width="32" height="32">
@@ -328,7 +290,7 @@ var i = 0;
                     </a>
                 </li>
 <div id="div-float-message">
-					<div style="margin-left:20px;margin-top:10px;"><name>訊息通知</name></div>
+					<div style="margin-left:20px;margin-top:10px;"><name langtag="top-message"></name></div>
 					<div class="divider10"></div> 
 					<div class="col_allw370 frontpage_box hoverdiv">
                     	<img src="/images/1.jpg" alt="Image" width="32" height="32">
@@ -355,28 +317,28 @@ var i = 0;
 				
 				</li>
 <div id="div-float-account">
-					<div style="margin-left:20px;margin-top:10px;">個人功能</div>
+					<div style="margin-left:20px;margin-top:10px;"><label langtag="top-personal"></label></div>
 					<div class="divider10"></div> <!--分隔線-->
                     <div class="col_allw170 frontpage_box hoverdiv">
 						<a href="/member/task.jsp?id=123">
 						<img src="/images/task.png" alt="Image" width="24" height="24" />
-						<h2>目前工作</h2>
+						<h2 langtag="top-account-task"></h2>
 						</a>
                     </div>   
                     <div class="col_allw170 frontpage_box hoverdiv">
 						<a href="/member/mail.jsp?id=123">
                         <img src="/images/mail.png" alt="Image" width="24" height="24">
-                        <h2>我的信箱</h2>                        
+                        <h2 langtag="top-account-mail"></h2>                        
 						</a>
                     </div>					  
                   <div id="lang-check" class="col_allw170 frontpage_box hoverdiv">
                       <img src="/images/lang.png" alt="Image" width="24" height="24">
-                    <h2>更改語言</h2>
+                    <h2 langtag="top-account-language"></h2>
                   </div>  
 
 				<div id="logout-check" class="col_allw170 frontpage_box hoverdiv">	
                       <img src="/images/logout.png" alt="Image" width="24" height="24">
-                      <h2>登出</h2>             	
+                      <h2 langtag="top-account-logout"></h2>             	
 				</div>
 </div>
 			
@@ -385,7 +347,7 @@ var i = 0;
 					<label langtag="top-team"></label></a>
 				</li>	
 <div id="div-float-teams">
-					<div style="margin-left:20px;margin-top:10px;">我的團隊</div>
+					<div style="margin-left:20px;margin-top:10px;"><label langtag="top-myteam"></label></div>
 					<div class="divider10"></div> <!--分隔線-->
                     <div class="col_allw170 frontpage_box hoverdiv">
 					  <a href="/team/detail.jsp?id=123">
