@@ -31,7 +31,11 @@
 	</text>	
 	
 	
-
+	<text id="top-lang-title">
+		<tw>更改語言</tw>
+		<en>Languages</en>
+	</text>	
+	
 	<text id="top-lang-msg">
 		<tw>選擇您想要顯示的語言</tw>
 		<en>Select Language</en>
@@ -46,6 +50,51 @@
 		<tw>取消</tw>
 		<en>Cancel</en>
 	</text>		
+	
+	<text id="top-account-logout">
+		<tw>登出</tw>
+		<en>Logout</en>
+	</text>		
+	
+	<text id="top-account-language">
+		<tw>更改語言</tw>
+		<en>Languages</en>
+	</text>	
+
+	<text id="top-account-mail">
+		<tw>我的信箱</tw>
+		<en>Mail Box</en>
+	</text>	
+
+	<text id="top-account-task">
+		<tw>目前工作</tw>
+		<en>Tasks</en>
+	</text>	
+
+	<text id="top-message">
+		<tw>訊息通知</tw>
+		<en>Messages</en>
+	</text>	
+	
+	<text id="top-mail">
+		<tw>站內信通知</tw>
+		<en>Mail</en>
+	</text>	
+	
+	<text id="top-teambox">
+		<tw>團隊訊息</tw>
+		<en>Team Message</en>
+	</text>	
+	
+	<text id="top-personal">
+		<tw>個人功能</tw>
+		<en>Personal</en>
+	</text>	
+	
+	<text id="top-myteam">
+		<tw>我的團隊</tw>
+		<en>My Team</en>
+	</text>		
 <!--首頁-->
 	<text id="index-news">
 		<tw>最新動態消息</tw>
@@ -55,8 +104,106 @@
 	<text id="index-task">
 		<tw>尚未達成工作</tw>
 		<en>Task</en>
-	</text>	
+	</text>
+
 
 	
+<!--登入-->
+	<text id="login-ads-title">
+		<tw>最佳專案追蹤估算系統</tw>
+		<en>The Best Project System</en>
+	</text>	
+
+	<text id="login-login-title">
+		<tw>登入Project+</tw>
+		<en>Login Project+</en>
+	</text>		
+	
+	<text id="login-login-account">
+		<tw>帳號:</tw>
+		<en>Account:</en>
+	</text>	
+
+	<text id="login-login-password">
+		<tw>密碼:</tw>
+		<en>Password:</en>
+	</text>		
+
+	<text id="login-login-register">
+		<tw>註冊</tw>
+		<en>Register</en>
+	</text>		
+	
+	<text id="login-login-login">
+		<tw>登入</tw>
+		<en>Login</en>
+	</text>	
+
+	<text id="login-login-facebook">
+		<tw>Facebook帳號登入</tw>
+		<en>Facebook Login</en>
+	</text>	
+<!--個人資料頁面-->
+	
+	<text id="profile-title">
+		<tw>基本資料</tw>
+		<en>User</en>
+	</text>		
+	<text id="profile-table-contact">
+		<tw>聯絡方式</tw>
+		<en>Contact</en>
+	</text>		
+	<text id="profile-table-info">
+		<tw>資訊</tw>
+		<en>Info</en>
+	</text>		
+	<text id="profile-table-bigpic">
+		<tw>大頭照</tw>
+		<en>Picture</en>
+	</text>	
+	<text id="profile-table-name">
+		<tw>姓名</tw>
+		<en>Name</en>
+	</text>	
+	<text id="profile-table-gender">
+		<tw>性別</tw>
+		<en>Gender</en>
+	</text>	
+	<text id="profile-table-city">
+		<tw>現居城市</tw>
+		<en>City</en>
+	</text>	
+	<text id="profile-table-birthday">
+		<tw>生日</tw>
+		<en>Birthday</en>
+	</text>	
+	<text id="profile-table-blood">
+		<tw>血型</tw>
+		<en>Blood</en>
+	</text>	
+	<text id="profile-table-about">
+		<tw>關於我</tw>
+		<en>About Me</en>
+	</text>	
+	<text id="profile-info">
+		<tw>個人資訊</tw>
+		<en>Facebook Login</en>
+	</text>	
+	<text id="profile-basic">
+		<tw>基本資料</tw>
+		<en>Basic</en>
+	</text>	
+	<text id="profile-bigpic">
+		<tw>大頭貼照</tw>
+		<en>Picture</en>
+	</text>	
+	<text id="profile-contact">
+		<tw>聯絡資料</tw>
+		<en>Contact</en>
+	</text>	
+	<text id="profile-tasks">
+		<tw>目前工作</tw>
+		<en>Task</en>
+	</text>	
 </content>
 	

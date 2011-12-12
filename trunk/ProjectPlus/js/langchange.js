@@ -77,7 +77,12 @@
  **************************************************************************** 
  */
 
+
+
 (function($){
+	var initFunction = new Array();;
+	
+	
 	var language = "en"; // Last language record
 	var tmpXml;			 // Xml query temp
 	var defaults = {
@@ -100,7 +105,7 @@
 			$("body").changeLang({lang: '' + lang, file: "/js/files/lang-example.xml"});
 		} else {
 			$("body").changeLang({lang: params.lang, file: "/js/files/lang-example.xml"});
-		}
+		}	
 	}
 
 	/**
@@ -150,10 +155,16 @@
 						//$(item).attr('src',aTexts[$(item).attr("langtag")]);
 					}
 				});
+				for(var i = 0; i < initFunction.length; i++)				
+					initFunction[i]();
 			}
 		});
 	};
 	
+	
+	addLangInitHandler = function(fn){
+		initFunction.push(fn);
+	}
 	
 	
 	langtagTransform = function(langTag){
