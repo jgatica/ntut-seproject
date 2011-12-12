@@ -1,0 +1,62 @@
+<content>
+	
+	<text id="top-home">
+		<tw>首頁</tw>
+		<en>Home</en>
+	</text>
+
+	<text id="top-account">
+		<tw>帳號 ▼ </tw>
+		<en>Account ▼ </en>
+	</text>
+	
+	<text id="top-team">
+		<tw>團隊 ▼ </tw>
+		<en>Team ▼ </en>
+	</text>
+	
+	<text id="top-search">
+		<tw>搜尋...</tw>
+		<en>Search...</en>
+	</text>	
+	
+	<text id="top-logout-title">
+		<tw>登出系統</tw>
+		<en>Logout System</en>
+	</text>	
+	
+	<text id="top-logout-msg">
+		<tw>您確定要登出系統?</tw>
+		<en>Are you want logout?</en>
+	</text>	
+	
+	
+
+	<text id="top-lang-msg">
+		<tw>選擇您想要顯示的語言</tw>
+		<en>Select Language</en>
+	</text>		
+	
+	<text id="top-logout-ok">
+		<tw>確定</tw>
+		<en>OK</en>
+	</text>		
+	
+	<text id="top-logout-cancel">
+		<tw>取消</tw>
+		<en>Cancel</en>
+	</text>		
+<!--首頁-->
+	<text id="index-news">
+		<tw>最新動態消息</tw>
+		<en>The News</en>
+	</text>	
+
+	<text id="index-task">
+		<tw>尚未達成工作</tw>
+		<en>Task</en>
+	</text>	
+
+	
+</content>
+	
