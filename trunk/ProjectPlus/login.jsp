@@ -32,13 +32,22 @@
 		FB.init({
 			appId  : '187257524702118',
 			status : true, // check login status
-			cookie : false, // enable cookies to allow the server to access the session
+			cookie : true, // enable cookies to allow the server to access the session
 			xfbml  : true,  // parse XFBML
 			channelUrl : 'http://localhost:8080/'
 		});
 		$('#facebook').click(loginFacebook);
 
-		
+		$('#login').click(function(){
+			var op = 1;		
+			var account = $('#account').val();
+			var password = $('#password').val();
+			$.getJSON('/MemberAction.do',  { op:op, account:account, password:password }, function(data) {
+				if(data=="ok") {
+					window.location = "/index.jsp";
+				}
+			});			
+		});
 	});   
 
 var responseLogin;
@@ -141,15 +150,15 @@ function loginFacebook(){
 <div id="cp_contact_form">
 
               <label for="author3">帳號:</label>
-              <input type="text" id="author3" name="author" class="input_field" />
+              <input type="text" id="account" name="author" class="input_field" />
               <div class="cleaner h10"></div>
               <label for="email">密碼:</label>
-              <input type="password" class="input_field" name="email" id="email" />
+              <input type="password" class="input_field" name="email" id="password" />
               
               <div class="cleaner h10"></div>
 			
             <button><name>註冊</name></button>
-			<button class="float_r"><team>登入</team></button>  
+			<button id="login" class="float_r"><team>登入</team></button>  
 			<button id="facebook" class="float_r"><name>Facebook帳號登入</name></button>
 
       </div>

@@ -658,7 +658,13 @@ em { color: #359548 }
 	padding: 20px; 
 }
 
-
+#cp_contact_form .input_field:focus { 
+	border: 1px solid #0066CC;
+	cursor:pointer;
+	border-radius:10px;
+	-moz-border-radius:10px;
+	-webkit-border-radius:10px;		
+}
 
 #cp_contact_form .input_field:hover { 
 	border: 1px solid #0066CC;

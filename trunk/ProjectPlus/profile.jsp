@@ -29,6 +29,9 @@
 
 <link rel="stylesheet" type="text/css" href="/css/jquery.lightbox-0.5.css" media="screen" />
 
+<!--語系切換-->
+<script language="javascript" type="text/javascript" src="/js/langchange.js"></script>
+
 <!--colorbox-->
 <script type="text/javascript" src="/js/colorbox/jquery.colorbox-min.js"></script>
 <link rel="stylesheet" type="text/css" href="/js/colorbox/colorbox.css" media="screen" />
@@ -36,10 +39,57 @@
 <script type="text/javascript">
 var i = 0;
 	$(document).ready(function(){
-
+		
 		<%if(goIndex){%>
 			window.location = "/login.jsp";
 		<%}%>
+		
+		// 更換介面語系
+		langInit({lang: "en", file: "/js/files/lang-example.xml"});
+		
+		
+		// 更改語言
+		$("#lang-dialog").dialog( {autoOpen: false, width: 170, minHeight: 80, modal: true} );
+		
+		$("#lang-check").click(function(){
+			$("#lang-dialog").dialog('open');
+		});
+		
+		$("#lang-btn").click(function(){
+			var lang = $('#lang-select').val();
+			$("body").changeLang({lang: lang});	
+			
+			window.location.reload();
+			//$("#lang-dialog").dialog('close');
+		});
+		
+		$("#lang-cancel").click(function(){
+			$("#lang-dialog").dialog('close');
+		});				
+		
+		// 登出
+		$("#logout-dialog").dialog( {autoOpen: false, minWidth: 270, minHeight: 80, modal: true} );
+		
+
+		
+		
+		$("#logout-check").click(function(){
+			$("#logout-dialog").dialog('open');
+		});
+		
+		$("#logout").click(function(){
+			var op = 2;		
+			$.getJSON('/MemberAction.do',  { op:op }, function(data) {
+				if(data=="ok") {
+					window.location = "/login.jsp";
+				}
+			});
+		});
+		
+		$("#logout-cancel").click(function(){
+			$("#logout-dialog").dialog('close');
+		});		
+		
 
 		$(".ajax").colorbox(); 
 		$(".iframe").colorbox({iframe:true, width:"100%", height:"100%"}); 
@@ -66,13 +116,24 @@ var i = 0;
 			$("#tip_message_count").fadeIn(300);
 			$("#tip_message").slideDown(300);
 		});
-		
+		/*
 		// 點團隊s按鈕
-		$( "#teams_btn" ).focusout(function(e) {
-			$( "#teams_btn" ).removeClass("menu_li_toogle");
-			$( "#div-float-teams" ).slideUp(250);
+		$("#teams_btn").focusout(function(e) {
+			hideAll();
 		});
-		
+		$("#message_btn").focusout(function(e) {
+			hideAll();
+		});
+		$("#account_btn").focusout(function(e) {
+			hideAll();
+		});
+		$("#team_btn").focusout(function(e) {
+			hideAll();
+		});
+		$("#mail_btn").focusout(function(e) {
+			hideAll();
+		});
+			*/							
 		$( "#teams_btn" ).toggle(
 			function () { 
 				$( this ).addClass("menu_li_toogle");
@@ -83,11 +144,6 @@ var i = 0;
 				$( "#div-float-teams" ).slideUp(250);
 			}
 		);
-		// 點帳號按鈕
-		$( "#account_btn" ).focusout(function(e) {
-			$( "#account_btn" ).removeClass("menu_li_toogle");
-			$( "#div-float-account" ).slideUp(250);
-		});
 				
 		$( "#account_btn" ).toggle(
 			function () { 
@@ -99,12 +155,6 @@ var i = 0;
 				$( "#div-float-account" ).slideUp(250);
 			}
 		);
-		
-		// 點團隊按鈕
-		$( "#team_btn" ).focusout(function(e) {
-			$( "#team_btn" ).removeClass("menu_li_toogle");
-			$( "#div-float-team" ).slideUp(250);
-		});
 				
 		$( "#team_btn" ).toggle(
 			function () { 
@@ -117,12 +167,6 @@ var i = 0;
 			}
 		);
 		
-		// 點信箱按鈕
-		$( "#mail_btn" ).focusout(function(e) {
-			$( "#mail_btn" ).removeClass("menu_li_toogle");
-			$( "#div-float-mail" ).slideUp(250);
-		});		
-		
 		$( "#mail_btn" ).toggle(
 			function () { 
 				$( this ).addClass("menu_li_toogle");
@@ -133,12 +177,6 @@ var i = 0;
 				$( "#div-float-mail" ).slideUp(250);
 			}
 		);
-		
-		// 點訊息按鈕
-		$( "#message_btn" ).focusout(function(e) {
-			$( "#message_btn" ).removeClass("menu_li_toogle");
-			$( "#div-float-message" ).slideUp(250);
-		});	
 				
 		$( "#message_btn" ).toggle(
 			function () { 
@@ -154,6 +192,22 @@ var i = 0;
 
 		
 	});
+	
+	/*
+	function hideAll(){
+		$( "#team_btn" ).removeClass("menu_li_toogle");
+		$( "#div-float-team" ).slideUp(250);	
+		$( "#teams_btn" ).removeClass("menu_li_toogle");
+		$( "#div-float-teams" ).slideUp(250);	
+		$( "#account_btn" ).removeClass("menu_li_toogle");
+		$( "#div-float-account" ).slideUp(250);	
+		$( "#mail_btn" ).removeClass("menu_li_toogle");
+		$( "#div-float-mail" ).slideUp(250)	;
+		$( "#message_btn" ).removeClass("menu_li_toogle");
+		$( "#div-float-message" ).slideUp(250);	
+	}	*/
+
+
 
 </script>
 
@@ -274,13 +328,13 @@ Head
 </div>	
                 <li>
 				<form method="get" id="searchform" action="#">
-					<input type="text" value="搜尋..." name="s" id="s" onfocus="defaultInput(this)" onblur="clearInput(this)">
+					<input type="text" langtag="top-search" value="搜尋..." name="s" id="s" onfocus="defaultInput(this)" onblur="clearInput(this)"/>
 						<input type="submit" id="searchsubmit" value=" " />
 				</form>      
                 </li>
 				<li>
 
-				<a  id="account_btn" class="float_r" href="#"><img class="top" src="/images/top_profile.png" /><label>個人 ▼ </label></a>
+				<a  id="account_btn" class="float_r" href="#"><img class="top" src="/images/top_profile.png" /><label langtag="top-account"></label></a>
 				<!--<div id="circles" style="text-align:left; background-color:rgba(199, 199, 199, 0.7); width:120px; overflow:auto; position:absolute; padding:50px; max-height:60px;">
         		</div>-->
 
@@ -301,21 +355,20 @@ Head
                         <h2>我的信箱</h2>                        
 						</a>
                     </div>					  
-                  <div class="col_allw170 frontpage_box hoverdiv">
-                      <img src="/images/profile_task.png" alt="Image" width="24" height="24">
-                    <h2>使用說明</h2>
+                  <div id="lang-check" class="col_allw170 frontpage_box hoverdiv">
+                      <img src="/images/lang.png" alt="Image" width="24" height="24">
+                    <h2>更改語言</h2>
                   </div>  
 
-				<div class="col_allw170 frontpage_box hoverdiv">	
+				<div id="logout-check" class="col_allw170 frontpage_box hoverdiv">	
                       <img src="/images/logout.png" alt="Image" width="24" height="24">
-                      <h2>登出</h2> 
-                  	
+                      <h2>登出</h2>             	
 				</div>
 </div>
 			
 				<li>
 					<a id="teams_btn" class="float_r" href="/member/basic.jsp"><img class="top" src="/images/top_account.png" />
-					<label>團隊 ▼ </label></a>
+					<label langtag="top-team"></label></a>
 				</li>	
 <div id="div-float-teams">
 					<div style="margin-left:20px;margin-top:10px;">我的團隊</div>
@@ -347,7 +400,7 @@ Head
 </div>	
 				<li>
 					<a class="float_r" href="/index.jsp"><img class="top" src="/images/top_home.png" />
-					<label>首頁</label></a>
+					<label langtag="top-home"></label></a>
 				</li>										
 				
 				
@@ -430,6 +483,30 @@ Head
     
   </div> <!-- end of templatemo_footer -->
 </div>
+		<div id="logout-dialog"  title="">
+			<p langtag="top-logout-msg" title="登出"></p>
+						
+			<div class="divider"></div>
+			<div style="text-align:center;">
+				<button id="logout"><label langtag="top-logout-ok"></label></button>
+				<button id="logout-cancel"><label langtag="top-logout-cancel"></label></button>
+			</div>
+		</div>		
+
+		<div id="lang-dialog" title="更改語言">
+			<p langtag="top-lang-msg"></p>
+			<select id="lang-select">
+				<option value="tw">繁體中文</option>
+				<option value="cn">简体中文</option>
+				<option value="en">English</option>
+			</select>		
+			<div class="divider"></div>
+			<div style="text-align:center;">
+				<button id="lang-btn"><label langtag="top-logout-ok"></label></button>
+				<button id="lang-cancel"><label langtag="top-logout-cancel"></label></button>
+			</div>
+		</div>	
+
 
 </body>
 <!-- InstanceEnd --></html>
