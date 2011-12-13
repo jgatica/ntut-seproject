@@ -32,6 +32,7 @@
 <script language="javascript" type="text/javascript">
 	$(document).ready(function(){
 		var initPage;
+		
 		langInit({lang: "en", file: "/js/files/lang-example.xml"}, initPage);
 		
 		$( "button" ).button();

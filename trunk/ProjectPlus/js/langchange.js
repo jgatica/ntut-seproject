@@ -79,176 +79,180 @@
 
 
 
+
 (function($){
-	var initFunction = new Array();;
-	
-	
-	var language = "en"; // Last language record
-	var tmpXml;			 // Xml query temp
-	var defaults = {
-		file: '/js/files/lang-example.xml',
-		lang: 'en',
-		css: [''],	// your css file [ex: main_en.css, main_fr.css ==> then put "main" on this]
-		js: [''],
-	};
-	
-	/**
-	* Init LangChangePlus Plug-in
-	*/
-	langInit = function(params){	
-	
-		if(params) $.extend(defaults, params);
+		// 為了避免函數名稱的衝突，在這個版本開始，使用$['langChanger']的方式存取LangChanger
+		var langChanger = 'langChanger'; 		// 用來給外面存取的名稱，使用$['langChanger']即可存取內部方法
 		
-		var lang = getCookie('lang');
+		var publicMethod;						// 公用Method
+		var initFunction = new Array();		// 在changeLang後所呼叫的CallBack函式
+		var language = "en"; 					// Last language record
+		var tmpXml = null;			 			// 字典檔的Cache
+		var defaults = {						// 預設的初始值
+			file: '/js/files/lang-example.xml',
+			lang: 'en',
+			css: [''],	// your css file [ex: main_en.css, main_fr.css ==> then put "main" on this]
+			js: [''],
+		};
 		
-		if(lang != null){
-			$("body").changeLang({lang: '' + lang, file: "/js/files/lang-example.xml"});
-		} else {
-			$("body").changeLang({lang: params.lang, file: "/js/files/lang-example.xml"});
-		}	
-	}
-
-	/**
-	* Change page language
-	*/
-	$.fn.changeLang = function(params){
+		
+		// 公開的方法
+		var publicMethod = $.fn[langChanger] = $[langChanger] = function (options, callback) {}				
+		
+		/**
+		* Init LangChangePlus Plug-in
+		*/
+		publicMethod.langInit = function(params){	
+		
+			if(params) $.extend(defaults, params);
+			
+			var lang = getCookie('lang');
+			
+			if(lang == null){
+				$("body").changeLang({lang: params.lang, file: "/js/files/lang-example.xml"});
+			} else {
+				$("body").changeLang({lang: '' + lang, file: "/js/files/lang-example.xml"});
+			}	
+		}
 	
-		var aTexts = new Array();
+		/**
+		* Change page language
+		*/
+		$.fn.changeLang = function(params){
 		
-		if(params) $.extend(defaults, params);
-		
-		$.ajax({
-			type: "GET",
-			url: defaults.file,
-			dataType: "xml",
-			success: function(xml) {			   
-				tmpXml = xml;
-				
-				// load xml file
-				$(xml).find('text').each(function()
-				{
-					var textId = $(this).attr("id");
-					var text = $(this).find(defaults.lang).text();					
-					aTexts[textId] = text;
-				});				
-				
-				// replace js/css file
-				for(var i = 0; i < defaults.css.length; i++)
-					replacejscssfile("styles/" + defaults.css[i] + "_" + language + ".css", "styles/" + defaults.css[i] + "_" + params.lang + ".css", "css");
-				for(var i = 0; i < defaults.js.length; i++)
-					replacejscssfile("styles/" + defaults.js[i] + "_" + language + ".js", "styles/" + defaults.js[i] + "_" + params.lang + ".js", "js");
+			var aTexts = new Array();
+			
+			if(params) $.extend(defaults, params);
+			
+			$.ajax({
+				type: "GET",
+				url: defaults.file,
+				dataType: "xml",
+				success: function(xml) {			   
+					tmpXml = xml;
 					
-				// record language config
-				language = params.lang;
-				
-				// set cookie
-				setCookie('lang',language,100);
-
-				// replace page content
-				$.each($("*"), function(i, item)
-				{
-					//alert($(item).attr("langtag"));
-					if($(item).attr("langtag") != null) {
-						// replace text
-						$(item).text(aTexts[$(item).attr("langtag")]);
-						// replace img src
-						//$(item).attr('src',aTexts[$(item).attr("langtag")]);
-					}
-				});
-				for(var i = 0; i < initFunction.length; i++)				
-					initFunction[i]();
+					// load xml file
+					$(xml).find('text').each(function()
+					{
+						var textId = $(this).attr("id");
+						var text = $(this).find(defaults.lang).text();					
+						aTexts[textId] = text;
+					});				
+					
+					// replace js/css file
+					for(var i = 0; i < defaults.css.length; i++)
+						replacejscssfile("styles/" + defaults.css[i] + "_" + language + ".css", "styles/" + defaults.css[i] + "_" + params.lang + ".css", "css");
+					for(var i = 0; i < defaults.js.length; i++)
+						replacejscssfile("styles/" + defaults.js[i] + "_" + language + ".js", "styles/" + defaults.js[i] + "_" + params.lang + ".js", "js");
+					// record language config
+					language = params.lang;
+					// set cookie
+					setCookie('lang',language,100);
+					// replace page content
+					$.each($("*"), function(i, item)
+					{
+						//alert($(item).attr("langtag"));
+						if($(item).attr("langtag") != null) {
+							// replace text
+							$(item).text(aTexts[$(item).attr("langtag")]);
+							// replace img src
+							//$(item).attr('src',aTexts[$(item).attr("langtag")]);
+						}
+					});
+					for(var i = 0; i < initFunction.length; i++)				
+						initFunction[i]();
+				}		
+			});
+		};
+	
+		// 新增changLang的CallBack函式
+		publicMethod.addLangInitHandler = function(fn){
+			initFunction.push(fn);
+		}
+		
+		// 透過$['langChanger'].langTag()取得目標字串
+		publicMethod.langTag = function(langTag){
+			
+			var aTexts = new Array();
+			
+			// load xml file
+			$(tmpXml).find('text').each(function()
+			{
+				var textId = $(this).attr("id");
+				var text = $(this).find(language).text();					
+				aTexts[textId] = text;
+			});
+		
+			// return langTag's String
+			if(langTag != null) {				
+				return aTexts[langTag];					
+			}		
+			return "can't not read the language file";
+	
+		};	
+		
+		/**
+		* Create js/css file
+		*/
+		createjscssfile = function(filename, filetype){
+			//if filename is a external JavaScript file
+			if (filetype=="js"){ 
+				var fileref=document.createElement('script');
+					fileref.setAttribute("type","text/javascript");
+					fileref.setAttribute("src", filename);
+				}
+			//if filename is an external CSS file
+			else if (filetype=="css"){ 
+				var fileref=document.createElement("link");
+				fileref.setAttribute("rel", "stylesheet");
+				fileref.setAttribute("type", "text/css");
+				fileref.setAttribute("href", filename);
 			}
-		});
-	};
-	
-	
-	addLangInitHandler = function(fn){
-		initFunction.push(fn);
-	}
-	
-	
-	langtagTransform = function(langTag){
+			return fileref;
+		}
 		
-		var aTexts = new Array();
+		/**
+		* Replace js/css file
+		*/
+		replacejscssfile = function(oldfilename, newfilename, filetype){
+			var targetelement=(filetype=="js")? "script" : (filetype=="css")? "link" : "none"; //determine element type to create nodelist using
+			var targetattr=(filetype=="js")? "src" : (filetype=="css")? "href" : "none" ;//determine corresponding attribute to test for
+			var allsuspects=document.getElementsByTagName(targetelement);
+			for (var i=allsuspects.length; i>=0; i--){ //search backwards within nodelist for matching elements to remove
+				if (allsuspects[i] && allsuspects[i].getAttribute(targetattr)!=null && allsuspects[i].getAttribute(targetattr).indexOf(oldfilename)!=-1){
+					var newelement=createjscssfile(newfilename, filetype);
+					allsuspects[i].parentNode.replaceChild(newelement, allsuspects[i]);
+				}
+			}
+		}
 		
-		// load xml file
-		$(tmpXml).find('text').each(function()
+		/**
+		* Set an attribute into Cookie
+		*/
+		this.setCookie = function(c_name,value,exdays)
 		{
-			var textId = $(this).attr("id");
-			var text = $(this).find(language).text();					
-			aTexts[textId] = text;
-		});
-	
-		// return langTag's String
-		if(langTag != null) {				
-			return aTexts[langTag];					
-		}		
-		return "can't not read the language file";
+			var exdate=new Date();
+			exdate.setDate(exdate.getDate() + exdays);
+			var c_value=escape(value) + ((exdays==null) ? "" : "; expires="+exdate.toUTCString());
+			document.cookie=c_name + "=" + c_value;
+		}
+		
+		/**
+		* Get an attribute in Cookie
+		*/
+		this.getCookie = function(c_name)
+		{
+			var i,x,y,ARRcookies=document.cookie.split(";");
+			for (i=0;i<ARRcookies.length;i++)
+			{
+				x=ARRcookies[i].substr(0,ARRcookies[i].indexOf("="));
+				y=ARRcookies[i].substr(ARRcookies[i].indexOf("=")+1);
+				x=x.replace(/^\s+|\s+$/g,"");
+				if (x==c_name)
+				{
+					return unescape(y);
+				}
+			}
+		}
 
-	};	
-	
-	/**
-	* Create js/css file
-	*/
-	createjscssfile = function(filename, filetype){
-		//if filename is a external JavaScript file
-		if (filetype=="js"){ 
-			var fileref=document.createElement('script');
-				fileref.setAttribute("type","text/javascript");
-				fileref.setAttribute("src", filename);
-			}
-		//if filename is an external CSS file
-		else if (filetype=="css"){ 
-			var fileref=document.createElement("link");
-			fileref.setAttribute("rel", "stylesheet");
-			fileref.setAttribute("type", "text/css");
-			fileref.setAttribute("href", filename);
-		}
-		return fileref;
-	}
-	
-	/**
-	* Replace js/css file
-	*/
-	replacejscssfile = function(oldfilename, newfilename, filetype){
-		var targetelement=(filetype=="js")? "script" : (filetype=="css")? "link" : "none"; //determine element type to create nodelist using
-		var targetattr=(filetype=="js")? "src" : (filetype=="css")? "href" : "none" ;//determine corresponding attribute to test for
-		var allsuspects=document.getElementsByTagName(targetelement);
-		for (var i=allsuspects.length; i>=0; i--){ //search backwards within nodelist for matching elements to remove
-			if (allsuspects[i] && allsuspects[i].getAttribute(targetattr)!=null && allsuspects[i].getAttribute(targetattr).indexOf(oldfilename)!=-1){
-				var newelement=createjscssfile(newfilename, filetype);
-				allsuspects[i].parentNode.replaceChild(newelement, allsuspects[i]);
-			}
-		}
-	}
-	
-	/**
-	* Set an attribute into Cookie
-	*/
-function setCookie(c_name,value,exdays)
- {
- var exdate=new Date();
- exdate.setDate(exdate.getDate() + exdays);
- var c_value=escape(value) + ((exdays==null) ? "" : "; expires="+exdate.toUTCString());
- document.cookie=c_name + "=" + c_value;
- }
-	
-	/**
-	* Get an attribute in Cookie
-	*/
-function getCookie(c_name)
- {
- var i,x,y,ARRcookies=document.cookie.split(";");
- for (i=0;i<ARRcookies.length;i++)
- {
-   x=ARRcookies[i].substr(0,ARRcookies[i].indexOf("="));
-   y=ARRcookies[i].substr(ARRcookies[i].indexOf("=")+1);
-   x=x.replace(/^\s+|\s+$/g,"");
-   if (x==c_name)
-     {
-     return unescape(y);
-     }
-   }
- }
-	
 })(jQuery);
