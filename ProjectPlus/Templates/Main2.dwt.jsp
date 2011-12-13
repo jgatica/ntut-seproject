@@ -1,9 +1,14 @@
 <%@ page contentType="text/html; charset=utf-8" language="java" import="java.sql.*" errorPage="" %>
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
-<html xmlns="http://www.w3.org/1999/xhtml">
-<!-- InstanceBegin template="/Templates/Main.dwt.jsp" codeOutsideHTMLIsLocked="false" -->
+<html xmlns="http://www.w3.org/1999/xhtml"><!-- InstanceBegin template="/Templates/Main.dwt.jsp" codeOutsideHTMLIsLocked="false" -->
 <head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<title>Project+</title>
+<meta name="keywords" content="magic color, colorful theme, free CSS templates, CSS, HTML" />
 <%
+	// ----------------
+	// Java 程式碼部分
+	// ----------------
 	boolean goIndex = false;
 	boolean isLogin = false;
 	
@@ -13,77 +18,72 @@
 		goIndex = false;
 	}
 %>
-
-<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
-<title>Project+ - 最佳的專案追蹤與估算解決方案</title>
-<meta name="keywords" content="magic color, colorful theme, free CSS templates, CSS, HTML" />
-<meta name="description" content="Magic Color Theme, Colorful Template, free website template by templatemo.com" /> 
-
+<link rel="stylesheet" type="text/css" href="/css/jquery.lightbox-0.5.css" media="screen" />
 <link href="/css/templatemo_style.css" rel="stylesheet" type="text/css" />
 <link href="/css/bluetable.css" rel="stylesheet" type="text/css" />
-
+<link rel="stylesheet" type="text/css" href="/js/colorbox/colorbox.css" media="screen" />
 <link type="text/css" href="/css/ui-lightness/jquery-ui-1.8.16.custom.css" rel="stylesheet" />	
 <script language="javascript" type="text/javascript" src="/js/jquery-1.7.1.min.js"></script>
- 
-<!--jQueryUI-->
 <script type="text/javascript" src="/js/jquery-ui-1.8.16.custom.min.js"></script>
-
-<link rel="stylesheet" type="text/css" href="/css/jquery.lightbox-0.5.css" media="screen" />
-
-<!--語系切換-->
 <script language="javascript" type="text/javascript" src="/js/langchange.js"></script>
-
-<!--colorbox-->
 <script type="text/javascript" src="/js/colorbox/jquery.colorbox-min.js"></script>
-<link rel="stylesheet" type="text/css" href="/js/colorbox/colorbox.css" media="screen" />
-
 <script type="text/javascript">
-	
 
-	// 初始化結束後要呼叫的函數
+	// ------------------------------
+	// 語言切換的CallBack所要執行的函式
+	// ------------------------------
 	function initPage(){
 
-		var langTitle = langtagTransform("top-lang-title");
+		var langTitle = $['langChanger'].langTag("top-lang-title");
 		$("#lang-dialog").dialog( {autoOpen: false, width: 170, minHeight: 80, modal: true, title: langTitle} );
 		
-		var logoutTitle = langtagTransform("top-logout-title");
+		var logoutTitle = $['langChanger'].langTag("top-logout-title");
 		$("#logout-dialog").dialog( {autoOpen: false, minWidth: 270, minHeight: 80, modal: true, title: logoutTitle} );
 					
 	}	
 
 
 	var i = 0;
+	// ------------------------------
+	// DOM Tree 完成後執行
+	// ------------------------------	
 	$(document).ready(function(){	
 		
 		<%if(goIndex){%>
 			window.location = "/login.jsp";
 		<%}%>
+		
 		// 更換介面語系
-		langInit({lang: "en", file: "/js/files/lang-example.xml"});
-		addLangInitHandler(initPage);
-
+		$['langChanger'].langInit({lang: "en", file: "/js/files/lang-example.xml"});
+		$['langChanger'].addLangInitHandler(initPage);
+		
+		// 初始化jQueryUI Button
+		$( "button" ).button();
+		
+		// 綁定切換語系的按鈕
 		$("#lang-check").click(function(){
 			$("#lang-dialog").dialog('open');
 		});
 		
+		// 切換語系的確認案紐
 		$("#lang-btn").click(function(){
 			var lang = $('#lang-select').val();
 			$("body").changeLang({lang: lang});	
-			
-			
 			//window.location.reload();
 			$("#lang-dialog").dialog('close');
 		});
 		
+		// 取消按鈕
 		$("#lang-cancel").click(function(){
 			$("#lang-dialog").dialog('close');
 		});				
 		
-		
+		// 登出按鈕
 		$("#logout-check").click(function(){
 			$("#logout-dialog").dialog('open');
 		});
 		
+		// 登出確認按鈕
 		$("#logout").click(function(){
 			var op = 2;		
 			$.getJSON('/MemberAction.do',  { op:op }, function(data) {
@@ -93,16 +93,12 @@
 			});
 		});
 		
+		// 登出取消按鈕
 		$("#logout-cancel").click(function(){
 			$("#logout-dialog").dialog('close');
 		});		
 		
-
-		$(".ajax").colorbox(); 
-		$(".iframe").colorbox({iframe:true, width:"100%", height:"100%"}); 
-		$( "button" ).button();
-
-		// 測試
+		// 點及上方按鈕測試，必須讓提示值增加
 		$(".top").click(function(){
 			var last = 5;
 			$("#tip_group_count").hide();
@@ -123,7 +119,8 @@
 			$("#tip_message_count").fadeIn(300);
 			$("#tip_message").slideDown(300);
 		});
-					
+			
+		// 點擊右上角團隊按鈕拉出下拉選單
 		$( "#teams_btn" ).toggle(
 			function () { 
 				$( this ).addClass("menu_li_toogle");
@@ -134,7 +131,8 @@
 				$( "#div-float-teams" ).slideUp(250);
 			}
 		);
-				
+			
+		// 點擊右上角個人按鈕拉出下拉選單				
 		$( "#account_btn" ).toggle(
 			function () { 
 				$( this ).addClass("menu_li_toogle");
@@ -145,7 +143,8 @@
 				$( "#div-float-account" ).slideUp(250);
 			}
 		);
-				
+
+		// 點擊左上角團隊按鈕拉出下拉選單				
 		$( "#team_btn" ).toggle(
 			function () { 
 				$( this ).addClass("menu_li_toogle");
@@ -157,6 +156,7 @@
 			}
 		);
 		
+		// 點擊左上角站內信按鈕拉出下拉選單		
 		$( "#mail_btn" ).toggle(
 			function () { 
 				$( this ).addClass("menu_li_toogle");
@@ -167,7 +167,8 @@
 				$( "#div-float-mail" ).slideUp(250);
 			}
 		);
-				
+			
+		// 點擊左上角訊息按鈕拉出下拉選單				
 		$( "#message_btn" ).toggle(
 			function () { 
 				$( this ).addClass("menu_li_toogle");
@@ -178,27 +179,8 @@
 				$( "#div-float-message" ).slideUp(250);
 			}
 		);		
-		
 
-
-	});
-	
-	/*
-	function hideAll(){
-		$( "#team_btn" ).removeClass("menu_li_toogle");
-		$( "#div-float-team" ).slideUp(250);	
-		$( "#teams_btn" ).removeClass("menu_li_toogle");
-		$( "#div-float-teams" ).slideUp(250);	
-		$( "#account_btn" ).removeClass("menu_li_toogle");
-		$( "#div-float-account" ).slideUp(250);	
-		$( "#mail_btn" ).removeClass("menu_li_toogle");
-		$( "#div-float-mail" ).slideUp(250)	;
-		$( "#message_btn" ).removeClass("menu_li_toogle");
-		$( "#div-float-message" ).slideUp(250);	
-	}	*/
-
-
-
+	}); // End Ready
 </script>
 
 <!-- InstanceBeginEditable name="Head" -->
