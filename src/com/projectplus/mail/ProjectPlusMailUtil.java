@@ -62,10 +62,9 @@ public class ProjectPlusMailUtil {
 	}
 	
 	public static void main(String[] args) {
-		ArrayList<String> receivers = new ArrayList<String>(){{
-			add("augus19900302@yahoo.com.tw");
-			add("790302@gmail.com");
-		}};
+		ArrayList<String> receivers = new ArrayList<String>();
+		receivers.add("augus19900302@yahoo.com.tw");
+		receivers.add("790302@gmail.com");
 		sendMail("augus790302@gmail.com", "hello2", "Test content");
 	}
 	
