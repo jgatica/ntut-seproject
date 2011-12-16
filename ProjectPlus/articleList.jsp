@@ -6,27 +6,27 @@
 <title>Project+</title>
 <meta name="keywords" content="magic color, colorful theme, free CSS templates, CSS, HTML" />
 <%
-	// ----------------
+	// -------------------
 	// Java 程式碼部分
-	// ----------------
-	boolean goIndex = false;
+	// -------------------
 	boolean isLogin = false;
+	boolean goLogin = false;
 	
-	isLogin = (session.getAttribute("isLogin")!=null);
-	
-	if(!isLogin) {
-		goIndex = false;
+	if(session.getAttribute("isLogin")==null) {
+		isLogin = false;
+		goLogin = true;
 	}
+
 %>
-<link rel="stylesheet" type="text/css" href="/css/jquery.lightbox-0.5.css" media="screen" />
+
 <link href="/css/templatemo_style.css" rel="stylesheet" type="text/css" />
 <link href="/css/bluetable.css" rel="stylesheet" type="text/css" />
 <link rel="stylesheet" type="text/css" href="/js/colorbox/colorbox.css" media="screen" />
 <link type="text/css" href="/css/ui-lightness/jquery-ui-1.8.16.custom.css" rel="stylesheet" />	
 <script language="javascript" type="text/javascript" src="/js/jquery-1.7.1.min.js"></script>
 <script type="text/javascript" src="/js/jquery-ui-1.8.16.custom.min.js"></script>
+<script language="javascript" type="text/javascript" src="/js/jstorage.js"></script>
 <script language="javascript" type="text/javascript" src="/js/langchange.js"></script>
-<script type="text/javascript" src="/js/colorbox/jquery.colorbox-min.js"></script>
 <script type="text/javascript">
 
 	// ------------------------------
@@ -49,13 +49,13 @@
 	// ------------------------------	
 	$(document).ready(function(){	
 		
-		<%if(goIndex){%>
+		<%if(goLogin){%>
 			window.location = "/login.jsp";
 		<%}%>
 		
 		// 更換介面語系
-		$['langChanger'].langInit({lang: "en", file: "/js/files/lang-example.xml"});
 		$['langChanger'].addLangInitHandler(initPage);
+		$['langChanger'].langInit({lang: "en", file: "/js/files/lang-example.xml", version: 2});
 		
 		// 初始化jQueryUI Button
 		$( "button" ).button();

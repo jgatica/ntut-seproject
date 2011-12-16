@@ -22,6 +22,7 @@
 
 
 <!--語系切換-->
+<script language="javascript" type="text/javascript" src="/js/jstorage.js"></script>
 <script language="javascript" type="text/javascript" src="/js/langchange.js"></script>
 
 <!--colorbox-->
@@ -33,19 +34,20 @@
 	$(document).ready(function(){
 		var initPage;
 		
-		langInit({lang: "en", file: "/js/files/lang-example.xml"}, initPage);
+		$['langChanger'].langInit({lang: "en", file: "/js/files/lang-example.xml", version: 2}, initPage);
 		
 		$( "button" ).button();
+		$('#facebook').click(loginFacebook);
 		
 		FB.init({
 			appId  : '187257524702118',
 			status : true, // check login status
 			cookie : true, // enable cookies to allow the server to access the session
 			xfbml  : true,  // parse XFBML
-			channelUrl : 'http://localhost:8080/'
+			oauth: true,
+			channelUrl: 'http://localhost:8080/',
 		});
-		$('#facebook').click(loginFacebook);
-
+		
 		$('#login').click(function(){
 			var op = 1;		
 			var account = $('#account').val();
@@ -62,10 +64,6 @@ var responseLogin;
 var responseLogout;
 var responseStatusChange;
 var responseSessionChange;
-
-function loginQQ(){
-  location.href = "/qqlogin/" + "?type=1";
-}
 
 // 驗證登入
 FB.Event.subscribe('auth.login', function(resp) {
@@ -84,29 +82,30 @@ FB.Event.subscribe('auth.sessionChange', function(resp) {
   responseSessionChange = resp;
 });
 
-function checkToken(){
+function checkToken(resp){
   var fm = document.FBLoginForm;
   
-  if (!responseLogin.session){
+  if (!resp.userID){
 	return;
   }
-  fm.uid.value = responseLogin.session.uid;
-  fm.accesstoken.value = responseLogin.session.access_token;
+  fm.uid.value = resp.userID;
+  fm.accesstoken.value = resp.accessToken;
   $('#mainregion').hide();
   $('#progressregion').show();
   fm.submit();
 }
 
 //FaceBook登入
-function loginFacebook(){
+function loginFacebook(){	
 
-  FB.login(function(resp){
-    if (resp.session) {
-	  checkToken();
+FB.login(function(resp){
+    if (resp.authResponse) {
+	  checkToken(resp.authResponse);
     } else {
 	
     }
-  }, {perms:'email,read_stream,publish_stream,offline_access'});
+  }, {scope:'read_stream,publish_stream,offline_access,email'});
+
 }
 
 
