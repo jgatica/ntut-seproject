@@ -119,10 +119,26 @@
 			$("#tip_message_count").fadeIn(300);
 			$("#tip_message").slideDown(300);
 		});
+		
+		//已開啟之menu則關閉
+		function menu_adjust()
+		{
+			if($( "#div-float-teams" ).attr("style") == "display: block; ")
+				$( "#teams_btn" ).click();
+			if($( "#div-float-account" ).attr("style") == "display: block; ")
+				$( "#account_btn" ).click();
+			if($( "#div-float-team" ).attr("style") == "display: block; ")
+				$( "#team_btn" ).click();
+			if($( "#div-float-mail" ).attr("style") == "display: block; ")
+				$( "#mail_btn" ).click();
+			if($( "#div-float-message" ).attr("style") == "display: block; ")
+				$( "#message_btn" ).click();	
+		}	
 			
 		// 點擊右上角團隊按鈕拉出下拉選單
 		$( "#teams_btn" ).toggle(
 			function () { 
+				menu_adjust();
 				$( this ).addClass("menu_li_toogle");
 				$( "#div-float-teams" ).slideDown(250);
 			},		
@@ -135,6 +151,7 @@
 		// 點擊右上角個人按鈕拉出下拉選單				
 		$( "#account_btn" ).toggle(
 			function () { 
+				menu_adjust();
 				$( this ).addClass("menu_li_toogle");
 				$( "#div-float-account" ).slideDown(250);
 			},		
@@ -147,6 +164,7 @@
 		// 點擊左上角團隊按鈕拉出下拉選單				
 		$( "#team_btn" ).toggle(
 			function () { 
+				menu_adjust();
 				$( this ).addClass("menu_li_toogle");
 				$( "#div-float-team" ).slideDown(250);
 			},		
@@ -159,6 +177,7 @@
 		// 點擊左上角站內信按鈕拉出下拉選單		
 		$( "#mail_btn" ).toggle(
 			function () { 
+				menu_adjust();
 				$( this ).addClass("menu_li_toogle");
 				$( "#div-float-mail" ).slideDown(250);
 			},		
@@ -171,6 +190,7 @@
 		// 點擊左上角訊息按鈕拉出下拉選單				
 		$( "#message_btn" ).toggle(
 			function () { 
+				menu_adjust();
 				$( this ).addClass("menu_li_toogle");
 				$( "#div-float-message" ).slideDown(250);
 			},		
