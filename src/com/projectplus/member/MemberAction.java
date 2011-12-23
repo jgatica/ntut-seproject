@@ -13,7 +13,6 @@ import org.apache.struts.action.ActionMapping;
 
 import com.projectplus.context.Result;
 import com.projectplus.context.SessionContext;
-import com.projectplus.db.MemberDBmgr;
 import com.projectplus.util.JSONWriter;
 
 public class MemberAction extends Action {
@@ -74,17 +73,17 @@ public class MemberAction extends Action {
 		HttpServletRequest request, HttpServletResponse response, HttpSession session) {
 		//MemberDBmgr dbMgr= new MemberDBmgr();
 	//DON'T NEW
-		boolean isSuccess = MemberDBmgr.LoginMember(form.member_email, form.password);
+		boolean isSuccess = MemberDBMgr.checkLogin(form.member_email, form.password);
 		Result result = new Result();
 		result.isSuccess=isSuccess;
 		if(isSuccess)
 		{
-			session.setAttribute(SessionContext.ISLOGIN, "true");
+			session.setAttribute(SessionContext.ISLOGIN, isSuccess);
 			result.message="ok";
 		}
 		else
 		{
-			session.setAttribute(SessionContext.ISLOGIN, "false");
+			//session.setAttribute(SessionContext.ISLOGIN, "false");
 			result.message="帳號或密碼位輸入";
 		}
 		try {
@@ -105,24 +104,21 @@ public class MemberAction extends Action {
 		/*System.out.println("name:"+form.member_name);
 		System.out.println("password:"+form.password);
 		System.out.println("member_nickname:"+form.member_nickname);
-		System.out.println("member_descript:"+form.member_descript);
-		System.out.println("member_address:"+form.member_address);
-		System.out.println("member_moblie:"+form.member_mobile);
-		System.out.println("member_phone:"+form.member_phone);
-		System.out.println("member_birthday:"+form.member_birthday);
 		System.out.println("member_email:"+form.member_email);*/
 		
-		boolean isSuccess = MemberDBmgr.RegisterMember(form.member_name,form.password, form.member_nickname, form.member_descript, form.member_address, form.member_mobile, form.member_phone, form.member_birthday, form.member_email);
+		boolean isSuccess = MemberDBMgr.register(form.member_name,form.member_nickname,form.member_email,form.password);
 		Result result = new Result();
 		result.isSuccess=isSuccess;
+		System.out.println("Session time:"+session.getMaxInactiveInterval());
+		
 		if(isSuccess)
 		{
-			session.setAttribute(SessionContext.ISLOGIN, "true");
+			session.setAttribute(SessionContext.ISLOGIN, isSuccess);
 			result.message="ok";
 		}
 		else
 		{
-			session.setAttribute(SessionContext.ISLOGIN, "false");
+			//session.setAttribute(SessionContext.ISLOGIN, "false");
 			result.message="輸入不完整.";
 		}
 		try {

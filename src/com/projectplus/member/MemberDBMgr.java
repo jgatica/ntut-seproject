@@ -14,7 +14,9 @@ public class MemberDBMgr extends DBMgr{
 	 * @param email
 	 * @return true:註冊成功  false:註冊失敗
 	 */
-	static public boolean register(String name, String nickName, String account, String password, String email) {
+	static public boolean register(String name, String nickName, String account, String password) {
+		if(name.length()==0 || password.length()==0 || nickName.length()==0  )
+			return false;
 		// 註解部分是我別的專案的  可以參考使用
 //		if(!isInit)
 //			return false;
@@ -61,8 +63,10 @@ public class MemberDBMgr extends DBMgr{
 	 * @param password:登入密碼
 	 * @return 0:登入成功  1:密碼錯誤 2:查無此帳號
 	 */
-	static public int checkLogin(String account, String password) {
-		return 0;
+	static public boolean checkLogin(String account, String password) {
+		if(account.length()==0 || password.length()==0)
+			return false;
+		return true;
 	}
 	
 	/**
