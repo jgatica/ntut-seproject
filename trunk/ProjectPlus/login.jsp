@@ -35,7 +35,7 @@
 		var initPage;
 		
 		$['langChanger'].langInit({lang: "en", file: "/js/files/lang-example.xml", version: 2}, initPage);
-		
+		$( "#register_dialog" ).dialog( {autoOpen: false, minWidth: 200, minHeight: 120, modal: true} );
 		$( "button" ).button();
 		$('#facebook').click(loginFacebook);
 		
@@ -45,17 +45,49 @@
 			cookie : true, // enable cookies to allow the server to access the session
 			xfbml  : true,  // parse XFBML
 			oauth: true,
-			channelUrl: 'http://localhost:8080/',
+			channelUrl: 'http://localhost:8080/'
+		});
+		
+		$('#register').click(function(){
+			$( "#register_dialog" ).dialog("open");		
+		});
+	
+		$("#agree").click(function(){
+			var op = 0;		
+			var email = $('#member_email').val();
+			var name = $('#member_name').val();
+			var nick_name = $('#member_nickname').val();
+			var phone = $('#member_phone').val();
+			var mobile = $('#member_mobile').val();
+			var desc = $('#member_desc').val();
+			var address = $('#member_address').val();
+			var birthday = $('#member_birthday').val();
+			var password = $('#member_password').val();
+			$.getJSON('/MemberAction.do',  { op:'op',member_email:email, member_address:address,member_birthday:birthday,member_descript:desc,member_mobile:mobile,member_phone:phone,member_name:name,member_nickname:nick_name,password:password}, function(data) {
+			//console.log(data);
+				if(data.message=="ok") {
+					window.location = "/index.jsp";
+				}
+				else
+					alert(data.message);
+			});
+		});
+		
+		$('#cancel').click(function(){
+			$("#register_dialog").dialog('close');		
 		});
 		
 		$('#login').click(function(){
 			var op = 1;		
-			var account = $('#account').val();
+			var email = $('#email').val();
 			var password = $('#password').val();
-			$.getJSON('/MemberAction.do',  { op:op, account:account, password:password }, function(data) {
-				if(data=="ok") {
+			$.getJSON('/MemberAction.do',  { op:op, member_email:email, password:password }, function(data) {
+			console.log(data);
+				if(data.message=="ok") {
 					window.location = "/index.jsp";
 				}
+				else
+					alert(data.message);
 			});			
 		});
 	});   
@@ -108,10 +140,11 @@ FB.login(function(resp){
 
 }
 
+<%if(session.getAttribute("isLogin")!=null && session.getAttribute("isLogin")=="true"){%>
+	window.location = "/index.jsp";
+<%}%>
 
 </script>
-
-
 
 </head>
 <body>
@@ -156,20 +189,77 @@ FB.login(function(resp){
 					
 <div id="cp_contact_form">
 
-              <label for="author3" langtag="login-login-account"></label>
-              <input type="text" id="account" name="author" class="input_field" />
+              <label for="email" langtag="login-login-account"></label>
+              <input type="text" id="email" class="input_field" />
               <div class="cleaner h10"></div>
-              <label for="email" langtag="login-login-password"></label>
-              <input type="password" class="input_field" name="email" id="password" />
+              <label for="password" langtag="login-login-password"></label>
+              <input type="password" class="input_field"  id="password" />
               
               <div class="cleaner h10"></div>
 			
-            <button><name langtag="login-login-register"></name></button>
+            <button id="register" ><name langtag="login-login-register"></name></button>
 			<button id="login" class="float_r"><team langtag="login-login-login"></team></button>  
 			<button id="facebook" class="float_r" ><name langtag="login-login-facebook"></name></button>
 
       </div>
-
+	  <div id="register_dialog" title="註冊帳號">
+					<table width="100%">				
+					<form>
+						<tr>
+							<td width="25%"><label for="member_email">E-mail</label></td>
+							<td width="75%"><input type="text" id="member_email" class="text ui-widget-content ui-corner-all" /></td>
+						</tr>
+                        
+                        <tr>
+							<td width="25%"><label for="member_password">密碼</label></td>
+							<td width="75%"><input class="text ui-widget-content ui-corner-all" type="password" id="member_password" /></td>    
+						</tr>
+                        
+						<tr>
+							<td width="25%"><label for="member_name">姓名</label></td>
+							<td width="75%"><input type="text" class="text ui-widget-content ui-corner-all" id="member_name"/></td>
+						</tr>
+                        						
+						<tr>
+							<td width="25%"><label for="member_nickname">暱稱</label></td>
+							<td width="75%"><input type="text" class="text ui-widget-content ui-corner-all" id="member_nickname"/></td>
+						</tr>
+                        
+						<tr>
+							<td width="25%"><label for="member_birthday">生日</label></td>
+							<td width="75%"><input class="text ui-widget-content ui-corner-all" type="text" id="member_birthday" /></td>
+						</tr>
+                        
+                        <tr>
+							<td width="25%"><label for="member_phone">連絡電話</label></td>
+							<td width="75%"><input class="text ui-widget-content ui-corner-all" type="text" id="member_phone" /></td>
+						</tr>
+                        
+                        <tr>
+							<td width="25%"><label for="member_mobile">行動電話</label></td>
+							<td width="75%"><input class="text ui-widget-content ui-corner-all" type="text" id="member_mobile" /></td>
+						</tr>
+                        
+                        <tr>
+							<td width="25%"><label for="member_address">通訊地址</label></td>
+							<td width="75%"><input class="text ui-widget-content ui-corner-all" type="text" id="member_address" /></td>
+						</tr>
+                        
+						<tr>
+							<td width="25%"><label for="member_desc">自我介紹</label></td>
+							<td width="75%"><input class="text ui-widget-content ui-corner-all"  type="text" id="member_desc" /></td>
+						</tr>								
+					</form>	
+					</table>
+					
+					<div class="divider"></div>
+					<div style="text-align:right;">
+						<button id="agree">確定</button>
+						<button id="cancel">取消</button>
+					</div>
+					<!--<p>你確定要刪除該專案嗎?</p>
+					<button>確定</button> <button>取消</button> -->
+				</div>		
 						                 
                                                          
 					<div class="subBottomDiv" ></div>            

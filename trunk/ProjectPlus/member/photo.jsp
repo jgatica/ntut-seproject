@@ -87,7 +87,7 @@
 		$("#logout").click(function(){
 			var op = 2;		
 			$.getJSON('/MemberAction.do',  { op:op }, function(data) {
-				if(data=="ok") {
+				if(data.message=="ok") {
 					window.location = "/login.jsp";
 				}
 			});
@@ -205,12 +205,19 @@
 			}
 		});	
 		
-
 		// dialog
-		$( "#dialog" ).dialog( {autoOpen: false, minWidth: 270, minHeight: 150, modal: true} );
+		$( "#dialog" ).dialog( {autoOpen: false, minWidth: 350, minHeight: 150, modal: true} );
 		$( "#dialog_btn" ).click(function(){
 			$("#dialog").dialog('open');
 		});	
+		
+		$("#agree").click(function(){
+			
+		});
+		
+		$('#cancel').click(function(){
+			$("#dialog").dialog('close');		
+		});
 	}); 
 </script>
 
@@ -469,8 +476,8 @@
 									
 						<div class="divider"></div>
 						<div style="text-align:right;">
-							<button>確定</button>
-							<button>取消</button>
+							<button id="agree">確定</button>
+							<button id="cancel">取消</button>
 						</div>
 					</div>		
 	

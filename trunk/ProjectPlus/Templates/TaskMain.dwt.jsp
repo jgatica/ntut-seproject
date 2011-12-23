@@ -87,7 +87,7 @@
 		$("#logout").click(function(){
 			var op = 2;		
 			$.getJSON('/MemberAction.do',  { op:op }, function(data) {
-				if(data=="ok") {
+				if(data.message=="ok") {
 					window.location = "/login.jsp";
 				}
 			});
