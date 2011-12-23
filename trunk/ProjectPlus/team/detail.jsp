@@ -87,9 +87,9 @@
 		$("#logout").click(function(){
 			var op = 2;		
 			$.getJSON('/MemberAction.do',  { op:op }, function(data) {
-				if(data.message=="ok") {
+				//if(data.message=="ok") {
 					window.location = "/login.jsp";
-				}
+				//}
 			});
 		});
 		
@@ -421,13 +421,13 @@
 					</a> 
                     </div>   					       
                     <div class="col_allw170 frontpage_box hoverdiv">
-					<a href="/project/listTask.jsp">
+					<a href="/project/listProject.jsp">
 						<img src="/images/project_task.png" alt="Image" width="24" height="24">
 						<h2>開發專案</h2>
                     </a>
                     </div>
                     <div class="col_allw170 frontpage_box hoverdiv">
-					<a href="/project/listTask.jsp">
+					<a href="/project/listProject.jsp">
                       <img src="/images/project_chart.png" alt="Image" width="24" height="24">
                       <h2>查詢進度</h2>
 					</a>
@@ -435,7 +435,7 @@
 					
 					
                   <div class="frontpage_box col_allw170  hoverdiv">
-				  <a href="/project/listTask.jsp">
+				  <a href="/project/listProject.jsp">
                       <img src="/images/profile_task.png" alt="Image" width="24" height="24">
                     <h2>專案估算系統</h2>
 					</a>
