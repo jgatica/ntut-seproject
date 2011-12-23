@@ -57,13 +57,8 @@
 			var email = $('#member_email').val();
 			var name = $('#member_name').val();
 			var nick_name = $('#member_nickname').val();
-			var phone = $('#member_phone').val();
-			var mobile = $('#member_mobile').val();
-			var desc = $('#member_desc').val();
-			var address = $('#member_address').val();
-			var birthday = $('#member_birthday').val();
 			var password = $('#member_password').val();
-			$.getJSON('/MemberAction.do',  { op:'op',member_email:email, member_address:address,member_birthday:birthday,member_descript:desc,member_mobile:mobile,member_phone:phone,member_name:name,member_nickname:nick_name,password:password}, function(data) {
+			$.getJSON('/MemberAction.do',  { op:'op',member_email:email,password:password,member_name:name,member_nickname:nick_name}, function(data) {
 			//console.log(data);
 				if(data.message=="ok") {
 					window.location = "/index.jsp";
@@ -140,7 +135,7 @@ FB.login(function(resp){
 
 }
 
-<%if(session.getAttribute("isLogin")!=null && session.getAttribute("isLogin")=="true"){%>
+<%if(session.getAttribute("isLogin")!=null /*&& session.getAttribute("isLogin")=="true"*/){%>
 	window.location = "/index.jsp";
 <%}%>
 
@@ -223,32 +218,7 @@ FB.login(function(resp){
 						<tr>
 							<td width="25%"><label for="member_nickname">暱稱</label></td>
 							<td width="75%"><input type="text" class="text ui-widget-content ui-corner-all" id="member_nickname"/></td>
-						</tr>
-                        
-						<tr>
-							<td width="25%"><label for="member_birthday">生日</label></td>
-							<td width="75%"><input class="text ui-widget-content ui-corner-all" type="text" id="member_birthday" /></td>
-						</tr>
-                        
-                        <tr>
-							<td width="25%"><label for="member_phone">連絡電話</label></td>
-							<td width="75%"><input class="text ui-widget-content ui-corner-all" type="text" id="member_phone" /></td>
-						</tr>
-                        
-                        <tr>
-							<td width="25%"><label for="member_mobile">行動電話</label></td>
-							<td width="75%"><input class="text ui-widget-content ui-corner-all" type="text" id="member_mobile" /></td>
-						</tr>
-                        
-                        <tr>
-							<td width="25%"><label for="member_address">通訊地址</label></td>
-							<td width="75%"><input class="text ui-widget-content ui-corner-all" type="text" id="member_address" /></td>
-						</tr>
-                        
-						<tr>
-							<td width="25%"><label for="member_desc">自我介紹</label></td>
-							<td width="75%"><input class="text ui-widget-content ui-corner-all"  type="text" id="member_desc" /></td>
-						</tr>								
+						</tr>							
 					</form>	
 					</table>
 					
