@@ -87,7 +87,7 @@
 		$("#logout").click(function(){
 			var op = 2;		
 			$.getJSON('/MemberAction.do',  { op:op }, function(data) {
-				if(data=="ok") {
+				if(data.message=="ok") {
 					window.location = "/login.jsp";
 				}
 			});
@@ -220,6 +220,22 @@
         </div>
         -->
 <!-- InstanceBeginEditable name="Menu" -->
+        <div id="templatemo_menu">
+            <ul>
+            	<li><a href="#"><img src="/images/templatemo_logo.png" /><img class="tip" src="/images/templatemo_logo.png" /></a></li>
+                <li><a href="#"><img src="/images/title_group.png" /></a></li>
+                <li><a href="#"><img src="/images/title_mail.png" /></a></li>
+				<li><a href="#"><img src="/images/title_message.png" /></a></li>
+                <li>
+				<form method="get" id="searchform" action="#">
+					<div>
+						<input type="text" value="搜尋" name="s" id="s" onfocus="defaultInput(this)" onblur="clearInput(this)" />
+						<input type="submit" id="searchsubmit" value=" " />
+					</div>
+				</form>       
+                </li>
+            </ul>    	
+        </div> 
 <!-- InstanceEndEditable -->
 <div id="templatemo_white">
 </div>
@@ -386,65 +402,32 @@
           <div class="col_w900 hr_divider">
           		
       			<div class="col_w170 lp_box float_l">
-				<div class="subTopDiv" >
-						<h2 class="uiHeaderTitle">專案資料</h2></div>
-					
+
 					<div class="col_allw170 frontpage_box hoverdiv">
-					<a href="/project/detail.jsp">
-						<img src="/images/project_info.png" alt="Image" width="24" height="24">
-						<h2>專案資訊</h2>
-					</a> 
-                    </div>            
-					       
+                      <img src="/images/user.png" alt="Image" width="24" height="24">
+                      <h2>基本資料</h2>
+                    </div>                    
                     <div class="col_allw170 frontpage_box hoverdiv">
-					<a href="/project/listTask.jsp">
-						<img src="/images/project_task.png" alt="Image" width="24" height="24">
-						<h2>專案任務</h2>
-                    </a>
+                      <img src="/images/profile_img.png" alt="Image" width="24" height="24">
+                      <h2>大頭貼照</h2>
+                        
                     </div>
                     <div class="col_allw170 frontpage_box hoverdiv">
-					<a href="/project/listTask.jsp">
-                      <img src="/images/project_chart.png" alt="Image" width="24" height="24">
-                      <h2>查詢進度</h2>
-					</a>
+                      <img src="/images/profile_phone.png" alt="Image" width="24" height="24">
+                      <h2>聯絡資料</h2>
                     </div>     
-					
-					
-                  <div class="frontpage_box col_allw170  hoverdiv">
-				  <a href="/project/listTask.jsp">
+                  <div class="col_allw170 frontpage_box hoverdiv">
                       <img src="/images/profile_task.png" alt="Image" width="24" height="24">
-                    <h2>估算系統</h2>
-					</a>
-                  </div>    
-				                             
-                <div class="subBottomDiv" ></div>     
-            	</div>      
-				<div id="dropBox" class="toggler col_w700 lp_box float_l margin_20rl">		
-				<div class="subTopDiv" >
-				<!-- TemplateBeginEditable name="PageTitle" -->PageTitle<!-- TemplateEndEditable -->
-				</div>
+                    <h2>目前工作</h2>
+                  </div>                                       
+                
+            </div>      
+				<div class="col_w700 lp_box float_r col_padding20">
                 <!-- TemplateBeginEditable name="RightArea" -->RightArea<!-- TemplateEndEditable -->
-				<div class="subBottomDiv" ></div>
+				
                 </div>
                 
-				<div class="col_p20 lp_box float_r">
-					<div class="subTopDiv" >
-						<h2 class="uiHeaderTitle">贊助</h2>
-					</div>	
-						<div style="text-align:center; padding:5px;">
-							<img width="100%" class="bigpic" src="/images/templatemo_image_05.jpg" />
-							<p><message>廣告贊助</message></p>
-						</div>
-						<div style="text-align:center; padding:5px;">
-							<img width="100%" class="bigpic" src="/images/templatemo_image_05.jpg" />
-							<p><message>廣告贊助</message></p>
-						</div>
-						<div style="text-align:center; padding:5px;">
-							<img width="100%" class="bigpic" src="/images/templatemo_image_05.jpg" />
-							<p><message>廣告贊助</message></p>
-						</div>	
-                    <div class="subBottomDiv" ></div>     
-            	</div>                     
+               
                 
 
                 
