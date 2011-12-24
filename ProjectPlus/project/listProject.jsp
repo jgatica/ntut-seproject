@@ -551,16 +551,16 @@
 
 
 
-				<div id="dialog" title="新增任務">
-					<p>在<team>軟體工程</team>新增一個任務</p>
+				<div id="dialog" title="新增專案">
+					<p>在<team>軟體工程</team>新增一個專案</p>
 					<table width="100%">				
 					<form>
 						<tr>
-							<td width="25%"><label for="name">任務名稱</label></td>
+							<td width="25%"><label for="name">專案名稱</label></td>
 							<td width="75%"><input type="text" name="name" id="name" class="text ui-widget-content ui-corner-all" /></td>
 						</tr>
 						<tr>
-							<td width="25%"><label for="name">任務目標</label></td>
+							<td width="25%"><label for="name">專案目標</label></td>
 							<td width="75%"><input type="text" name="name" id="name" class="text ui-widget-content ui-corner-all" /></td>
 						</tr>						
 						<tr>
