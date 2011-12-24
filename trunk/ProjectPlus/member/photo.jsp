@@ -198,7 +198,38 @@
 				$( this ).removeClass("menu_li_toogle");
 				$( "#div-float-message" ).slideUp(250);
 			}
-		);		
+		);	
+			
+		
+		$( "#newteam_dialog" ).dialog( {autoOpen: false, minWidth: 200, minHeight: 120, modal: true} );
+		
+		// 點擊又上角新增團斷
+		$( "#newteam_btn" ).click(function(){
+			$("#newteam_dialog").dialog('open');
+		});
+		
+		$( "#newteam_agree" ).click(function(){
+			var op = 0;		
+			var name = $('#team_name').val();
+			var desc = $('#team_desc').val();
+			var phone= $('#team_phone').val();
+			var address= $('#team_address').val();
+			var fax= $('#team_fax').val();
+			var mail= $('#team_mail').val();
+			
+			$.getJSON('/TeamAction.do',  { op:op,name:name,description:desc,phone:phone,fax:fax,address:address,mail:mail}, function(data) {
+			//console.log(data);
+				if(data.message=="ok") {
+					window.location = "/index.jsp";
+				}
+				else
+					alert(data.message);
+			});	
+		});	
+			
+		$( "#newteam_cancel" ).click(function(){
+			$("#newteam_dialog").dialog('close');
+		});
 
 	}); // End Ready
 </script>
@@ -357,6 +388,14 @@
 <div id="div-float-account">
 					<div style="margin-left:20px;margin-top:10px;"><label langtag="top-personal"></label></div>
 					<div class="divider10"></div> <!--分隔線-->
+                    
+                    <div class="col_allw170 frontpage_box hoverdiv">
+						<a id="newteam_btn" href="#">
+                        <img src="/images/task_group.png" alt="Image" width="24" height="24">
+                        <h2 langtag="top-team-new"></h2>                        
+						</a>
+                    </div>
+                    
                     <div class="col_allw170 frontpage_box hoverdiv">
 						<a href="/member/task.jsp?id=123">
 						<img src="/images/task.png" alt="Image" width="24" height="24" />
@@ -538,7 +577,45 @@
 </div>
 
 
-
+<div id="newteam_dialog" title="新增團隊">
+					<p>在<team>軟體工程</team>新增一個團隊</p>
+					<table width="100%">				
+					<form>
+						<tr>
+							<td width="25%"><label for="name">團隊名稱</label></td>
+							<td width="75%"><input type="text"  id="team_name" class="text ui-widget-content ui-corner-all" /></td>
+						</tr>
+						<tr>
+							<td width="25%"><label for="name">團隊介紹</label></td>
+							<td width="75%"><input type="text" id="team_desc" class="text ui-widget-content ui-corner-all" /></td>
+						</tr>	
+                        <tr>
+							<td width="25%"><label for="name">聯絡電話</label></td>
+							<td width="75%"><input type="text" id="team_phone" class="text ui-widget-content ui-corner-all" /></td>
+						</tr>	
+                        <tr>
+							<td width="25%"><label for="name">聯絡信箱</label></td>
+							<td width="75%"><input type="text" id="team_mail" class="text ui-widget-content ui-corner-all" /></td>
+						</tr>	
+                        <tr>
+							<td width="25%"><label for="name">傳真</label></td>
+							<td width="75%"><input type="text" id="team_fax" class="text ui-widget-content ui-corner-all" /></td>
+						</tr>	
+                        <tr>
+							<td width="25%"><label for="name">地址</label></td>
+							<td width="75%"><input type="text" id="team_address" class="text ui-widget-content ui-corner-all" /></td>
+						</tr>							
+					</form>	
+					</table>
+					
+					<div class="divider"></div>
+					<div style="text-align:right;">
+						<button id="newteam_agree">確定</button>
+						<button id="newteam_cancel">取消</button>
+					</div>
+					<!--<p>你確定要刪除該專案嗎?</p>
+					<button>確定</button> <button>取消</button> -->
+				</div>	
 
 <div id="templatemo_footer_wrapper">
     <div id="templatemo_footer">

@@ -1,6 +1,6 @@
 <%@ page contentType="text/html; charset=utf-8" language="java" import="java.sql.*" errorPage="" %>
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
-<html xmlns="http://www.w3.org/1999/xhtml"><!-- InstanceBegin template="/Templates/ProjectMain.dwt.jsp" codeOutsideHTMLIsLocked="false" -->
+<html xmlns="http://www.w3.org/1999/xhtml"><!-- InstanceBegin template="/Templates/ProfileMain.dwt.jsp" codeOutsideHTMLIsLocked="false" -->
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
 <title>Project+</title>
@@ -87,9 +87,9 @@
 		$("#logout").click(function(){
 			var op = 2;		
 			$.getJSON('/MemberAction.do',  { op:op }, function(data) {
-				if(data=="ok") {
+				//if(data.message=="ok") {
 					window.location = "/login.jsp";
-				}
+				//}
 			});
 		});
 		
@@ -119,10 +119,26 @@
 			$("#tip_message_count").fadeIn(300);
 			$("#tip_message").slideDown(300);
 		});
+		
+		//已開啟之menu則關閉
+		function menu_adjust()
+		{
+			if($( "#div-float-teams" ).attr("style") == "display: block; ")
+				$( "#teams_btn" ).click();
+			if($( "#div-float-account" ).attr("style") == "display: block; ")
+				$( "#account_btn" ).click();
+			if($( "#div-float-team" ).attr("style") == "display: block; ")
+				$( "#team_btn" ).click();
+			if($( "#div-float-mail" ).attr("style") == "display: block; ")
+				$( "#mail_btn" ).click();
+			if($( "#div-float-message" ).attr("style") == "display: block; ")
+				$( "#message_btn" ).click();	
+		}	
 			
 		// 點擊右上角團隊按鈕拉出下拉選單
 		$( "#teams_btn" ).toggle(
 			function () { 
+				menu_adjust();
 				$( this ).addClass("menu_li_toogle");
 				$( "#div-float-teams" ).slideDown(250);
 			},		
@@ -135,6 +151,7 @@
 		// 點擊右上角個人按鈕拉出下拉選單				
 		$( "#account_btn" ).toggle(
 			function () { 
+				menu_adjust();
 				$( this ).addClass("menu_li_toogle");
 				$( "#div-float-account" ).slideDown(250);
 			},		
@@ -147,6 +164,7 @@
 		// 點擊左上角團隊按鈕拉出下拉選單				
 		$( "#team_btn" ).toggle(
 			function () { 
+				menu_adjust();
 				$( this ).addClass("menu_li_toogle");
 				$( "#div-float-team" ).slideDown(250);
 			},		
@@ -159,6 +177,7 @@
 		// 點擊左上角站內信按鈕拉出下拉選單		
 		$( "#mail_btn" ).toggle(
 			function () { 
+				menu_adjust();
 				$( this ).addClass("menu_li_toogle");
 				$( "#div-float-mail" ).slideDown(250);
 			},		
@@ -171,6 +190,7 @@
 		// 點擊左上角訊息按鈕拉出下拉選單				
 		$( "#message_btn" ).toggle(
 			function () { 
+				menu_adjust();
 				$( this ).addClass("menu_li_toogle");
 				$( "#div-float-message" ).slideDown(250);
 			},		
@@ -178,13 +198,43 @@
 				$( this ).removeClass("menu_li_toogle");
 				$( "#div-float-message" ).slideUp(250);
 			}
-		);		
+		);	
+			
+		
+		$( "#newteam_dialog" ).dialog( {autoOpen: false, minWidth: 200, minHeight: 120, modal: true} );
+		
+		// 點擊又上角新增團斷
+		$( "#newteam_btn" ).click(function(){
+			$("#newteam_dialog").dialog('open');
+		});
+		
+		$( "#newteam_agree" ).click(function(){
+			var op = 0;		
+			var name = $('#team_name').val();
+			var desc = $('#team_desc').val();
+			var phone= $('#team_phone').val();
+			var address= $('#team_address').val();
+			var fax= $('#team_fax').val();
+			var mail= $('#team_mail').val();
+			
+			$.getJSON('/TeamAction.do',  { op:op,name:name,description:desc,phone:phone,fax:fax,address:address,mail:mail}, function(data) {
+			//console.log(data);
+				if(data.message=="ok") {
+					window.location = "/index.jsp";
+				}
+				else
+					alert(data.message);
+			});	
+		});	
+			
+		$( "#newteam_cancel" ).click(function(){
+			$("#newteam_dialog").dialog('close');
+		});
 
 	}); // End Ready
 </script>
 
 <!-- InstanceBeginEditable name="Head" -->
-
 
 <script language="JavaScript" type="text/javascript">
 	/*
@@ -251,7 +301,6 @@
 
 </script>
 
-
 <!-- InstanceEndEditable -->
 
 </head>
@@ -273,7 +322,6 @@
         </div>
         -->
 <!-- InstanceBeginEditable name="Menu" -->
-<!-- end of templatemo_menu -->
 <!-- InstanceEndEditable -->
 <div id="templatemo_white">
 </div>
@@ -367,6 +415,14 @@
 <div id="div-float-account">
 					<div style="margin-left:20px;margin-top:10px;"><label langtag="top-personal"></label></div>
 					<div class="divider10"></div> <!--分隔線-->
+                    
+                    <div class="col_allw170 frontpage_box hoverdiv">
+						<a id="newteam_btn" href="#">
+                        <img src="/images/task_group.png" alt="Image" width="24" height="24">
+                        <h2 langtag="top-team-new"></h2>                        
+						</a>
+                    </div>
+                    
                     <div class="col_allw170 frontpage_box hoverdiv">
 						<a href="/member/task.jsp?id=123">
 						<img src="/images/task.png" alt="Image" width="24" height="24" />
@@ -437,50 +493,47 @@
 
         <div id="templatemo_main">
             
-          <div class="col_w900 hr_divider">
+          <div class="col_w900 hr_divider ">
           		
-      			<div class="col_w170 lp_box float_l">
-				<div class="subTopDiv" >
-						<h2 class="uiHeaderTitle">專案資料</h2></div>
+      			<div id="slide_left" class="col_w170 lp_box float_l">
+				<div class="subTopDiv" ><h2 class="uiHeaderTitle" langtag="profile-title"></h2></div>	
 					
 					<div class="col_allw170 frontpage_box hoverdiv">
-					<a href="/project/detail.jsp">
-						<img src="/images/project_info.png" alt="Image" width="24" height="24">
-						<h2>專案資訊</h2>
-					</a> 
-                    </div>            
-					       
+                      <a href="/member/basic.jsp">
+					  <img src="/images/user.png" alt="Image" width="24" height="24">
+                      <h2 langtag="profile-basic"></h2>
+					  </a>
+                    </div>                    
                     <div class="col_allw170 frontpage_box hoverdiv">
-					<a href="/project/listProject.jsp">
-						<img src="/images/project_task.png" alt="Image" width="24" height="24">
-						<h2>專案任務</h2>
-                    </a>
+					<a href="/member/photo.jsp">
+						<img src="/images/profile_img.png" alt="Image" width="24" height="24">
+						<h2 langtag="profile-bigpic"></h2>
+					</a>	
                     </div>
                     <div class="col_allw170 frontpage_box hoverdiv">
-					<a href="/project/listProject.jsp">
-                      <img src="/images/project_chart.png" alt="Image" width="24" height="24">
-                      <h2>查詢進度</h2>
-					</a>
+					<a href="/member/contact.jsp">
+						<img src="/images/profile_phone.png" alt="Image" width="24" height="24">
+						<h2 langtag="profile-contact"></h2>
+					</a>	
                     </div>     
-					
-					
-                  <div class="frontpage_box col_allw170  hoverdiv">
-				  <a href="/project/listProject.jsp">
-                      <img src="/images/profile_task.png" alt="Image" width="24" height="24">
-                    <h2>估算系統</h2>
+					<div class="col_allw170 frontpage_box hoverdiv">
+					<a href="/member/task.jsp">
+						<img src="/images/profile_task.png" alt="Image" width="24" height="24">
+						<h2 langtag="profile-tasks"></h2>
 					</a>
-                  </div>    
-				                             
-                <div class="subBottomDiv" ></div>     
-            	</div>      
+					</div>                                                         
+			<div class="subBottomDiv" ></div>            
+            </div>      
 				<div id="dropBox" class="toggler col_w700 lp_box float_l margin_20rl">		
 				<div class="subTopDiv" >
 				<!-- InstanceBeginEditable name="PageTitle" -->
-				<h2 class="uiHeaderTitle">軟體工程<img class="arrow_right" src="/images/arrow_right.png" />專案列表</h2>
+                <h2 class="uiHeaderTitle">軟體工程<img class="arrow_right" src="/images/arrow_right.png" />專案列表</h2>
 				<!-- InstanceEndEditable -->
-				</div>
+				
+				</div>	
+				<!--<img src="/images/subTitle.jpg" alt="Image" width="690" height="29" />-->
                 <!-- InstanceBeginEditable name="RightArea" -->
-				<div class="table-content">
+                <div class="table-content">
 					
 					<table summary="任務列表" width="100%" style="height:300px;">
 						<!--<caption>Table designs</caption>-->
@@ -585,11 +638,12 @@
 					</div>
 					<!--<p>你確定要刪除該專案嗎?</p>
 					<button>確定</button> <button>取消</button> -->
-				</div>		
-				<!-- InstanceEndEditable -->
+				</div>	
+                <!-- InstanceEndEditable -->
 				<div class="subBottomDiv" ></div>
+				
                 </div>
-                
+				
 				<div class="col_p20 lp_box float_r">
 					<div class="subTopDiv" >
 						<h2 class="uiHeaderTitle">贊助</h2>
@@ -607,19 +661,10 @@
 							<p><message>廣告贊助</message></p>
 						</div>	
                     <div class="subBottomDiv" ></div>     
-            	</div>                     
-                
-
-                
+            	</div>
+								
                 <div class="cleaner"></div>
-
             </div>
-
-
-            
-
-            
-            
         </div> 
 <!-- end of templatemo main -->
 
@@ -629,7 +674,45 @@
 </div>
 
 
-
+<div id="newteam_dialog" title="新增團隊">
+					<p>在<team>軟體工程</team>新增一個團隊</p>
+					<table width="100%">				
+					<form>
+						<tr>
+							<td width="25%"><label for="name">團隊名稱</label></td>
+							<td width="75%"><input type="text"  id="team_name" class="text ui-widget-content ui-corner-all" /></td>
+						</tr>
+						<tr>
+							<td width="25%"><label for="name">團隊介紹</label></td>
+							<td width="75%"><input type="text" id="team_desc" class="text ui-widget-content ui-corner-all" /></td>
+						</tr>	
+                        <tr>
+							<td width="25%"><label for="name">聯絡電話</label></td>
+							<td width="75%"><input type="text" id="team_phone" class="text ui-widget-content ui-corner-all" /></td>
+						</tr>	
+                        <tr>
+							<td width="25%"><label for="name">聯絡信箱</label></td>
+							<td width="75%"><input type="text" id="team_mail" class="text ui-widget-content ui-corner-all" /></td>
+						</tr>	
+                        <tr>
+							<td width="25%"><label for="name">傳真</label></td>
+							<td width="75%"><input type="text" id="team_fax" class="text ui-widget-content ui-corner-all" /></td>
+						</tr>	
+                        <tr>
+							<td width="25%"><label for="name">地址</label></td>
+							<td width="75%"><input type="text" id="team_address" class="text ui-widget-content ui-corner-all" /></td>
+						</tr>							
+					</form>	
+					</table>
+					
+					<div class="divider"></div>
+					<div style="text-align:right;">
+						<button id="newteam_agree">確定</button>
+						<button id="newteam_cancel">取消</button>
+					</div>
+					<!--<p>你確定要刪除該專案嗎?</p>
+					<button>確定</button> <button>取消</button> -->
+				</div>	
 
 <div id="templatemo_footer_wrapper">
     <div id="templatemo_footer">

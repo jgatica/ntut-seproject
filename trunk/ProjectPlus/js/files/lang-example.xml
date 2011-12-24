@@ -52,6 +52,11 @@
 		<en>Cancel</en>
 	</text>		
 	
+	<text id="top-team-new">
+		<tw>新增團隊</tw>
+		<en>New team</en>
+	</text>	
+	
 	<text id="top-account-logout">
 		<tw>登出</tw>
 		<en>Logout</en>

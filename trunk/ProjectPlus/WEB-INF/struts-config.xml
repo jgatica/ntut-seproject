@@ -5,7 +5,8 @@
     <form-beans>
         <form-bean name="FacebookLoginForm" type="com.projectplus.login.FacebookLoginForm"/>
         <form-bean name="MemberActionForm" type="com.projectplus.member.MemberActionForm"/>
-        <form-bean name="ArticleForm" type="com.profile.article.ArticleForm"/>
+        <form-bean name="TeamActionForm" type="com.projectplus.team.TeamActionForm"/>
+		<form-bean name="ArticleForm" type="com.profile.article.ArticleForm"/>
     </form-beans>
 
   <action-mappings>
@@ -16,6 +17,9 @@
   	<action name="MemberActionForm" path="/MemberAction" scope="request" type="com.projectplus.member.MemberAction">
   	</action>
   	
+	<action name="TeamActionForm" path="/TeamAction" scope="request" type="com.projectplus.team.TeamAction">
+	</action>
+	
 	<action name="ArticleForm" path="/ArticleAction" scope="request" type="com.profile.article.ArticleAction">
 	</action>
 	
