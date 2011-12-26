@@ -4,6 +4,18 @@ import org.apache.struts.action.ActionForm;
 
 @SuppressWarnings("serial")
 public class ProjectActionForm extends ActionForm {
+<<<<<<< .mine
+	public int op;
+	public String name;
+	public String destination;
+	public String leader;
+	public String startDate;
+	public String endDate;
+	
+	public String getName() {
+		return name;
+	}
+=======
 	
 	public int op;
 	public String projectName;
@@ -16,7 +28,46 @@ public class ProjectActionForm extends ActionForm {
 	public long getStartDate() {
 		return startDate;
 	}
+>>>>>>> .r70
 
+<<<<<<< .mine
+	public void setName(String name) {
+		this.name = name;
+	}
+
+	public String getDestination() {
+		return destination;
+	}
+
+	public void setDestination(String destination) {
+		this.destination = destination;
+	}
+
+	public String getLeader() {
+		return leader;
+	}
+
+	public void setLeader(String leader) {
+		this.leader = leader;
+	}
+
+	public String getStartDate() {
+		return startDate;
+	}
+
+	public void setStartDate(String startDate) {
+		this.startDate = startDate;
+	}
+
+	public String getEndDate() {
+		return endDate;
+	}
+
+	public void setEndDate(String endDate) {
+		this.endDate = endDate;
+	}
+
+=======
 	public void setStartDate(long startDate) {
 		this.startDate = startDate;
 	}
@@ -61,6 +112,7 @@ public class ProjectActionForm extends ActionForm {
 	public void setProjectState(String project_state) {
 		this.projectState = project_state;
 	}
+>>>>>>> .r70
 	public int getOp() {
 		return op;
 	}
