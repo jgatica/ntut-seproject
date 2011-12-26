@@ -1,8 +1,13 @@
 package com.projectplus.project;
 
+<<<<<<< .mine
+import java.io.IOException;
+
+=======
 import java.awt.print.Printable;
 import java.io.IOException;
 
+>>>>>>> .r70
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
@@ -12,9 +17,16 @@ import org.apache.struts.action.ActionForm;
 import org.apache.struts.action.ActionForward;
 import org.apache.struts.action.ActionMapping;
 
+<<<<<<< .mine
+import com.projectplus.context.Result;
+import com.projectplus.team.TeamDBMgr;
+import com.projectplus.util.JSONWriter;
+
+=======
 import com.projectplus.context.Result;
 import com.projectplus.util.JSONWriter;
 
+>>>>>>> .r70
 public class ProjectAction extends Action {
 
 	public static final int ADDPROJECT= 0;
@@ -33,7 +45,12 @@ public class ProjectAction extends Action {
 		ProjectActionForm form = (ProjectActionForm) actionForm;
 		
 		int op = form.getOp();
+<<<<<<< .mine
+		//System.out.println("the op  = " + op);
+
+=======
 		System.out.println("the ProjectAction op  = " + op);
+>>>>>>> .r70
 		switch (op) {
 			case ADDPROJECT:
 				addProject(mapping, form, request, response, session);
@@ -115,6 +132,29 @@ public class ProjectAction extends Action {
 	private void addProject(ActionMapping mapping, ProjectActionForm form,
 			HttpServletRequest request, HttpServletResponse response,
 			HttpSession session) {
+<<<<<<< .mine
+		/*System.out.println("name:"+form.name);
+		System.out.println("destination:"+form.destination);
+		System.out.println("leader:"+form.leader);
+		System.out.println("startDate:"+form.startDate);
+		System.out.println("endDate:"+form.endDate);*/
+		boolean isSuccess = ProjectDBMgr.addProject(form.name, form.destination, form.leader, form.startDate, form.endDate);
+		Result result = new Result();
+		result.isSuccess = isSuccess;
+		if(isSuccess)
+		{
+			result.message = "ok";
+		}	
+		else
+		{
+			result.message = "輸入不完整";
+		}
+		try {
+			JSONWriter.sendJSONResponse(response, result);
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
+=======
 		// 測試
 		System.out.println("project name:"+form.getProjectName());
 		System.out.println("project description:"+ form.getProjectTarget() );
@@ -122,6 +162,7 @@ public class ProjectAction extends Action {
 		System.out.println("project state:"+form.getProjectState());
 		System.out.println("project startDate:"+form.getStartDate());
 		System.out.println("project endDate:"+form.getEndDate());
+>>>>>>> .r70
 		
 		boolean isSuccess = ProjectDBMgr.addProject(form.getProjectName(), form.getProjectTarget(), form.getProjectManager(), form.getProjectState(), form.getStartDate(), form.getEndDate());
 		Result result = new Result();

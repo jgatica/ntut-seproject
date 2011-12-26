@@ -31,7 +31,7 @@ public class TeamAction extends Action {
 		TeamActionForm form = (TeamActionForm) actionForm;
 		
 		int op = form.getOp();
-		System.out.println("the op  = " + op);
+		//System.out.println("the op  = " + op);
 
 		switch (op) {
 			case ADDTEAM:
@@ -76,12 +76,12 @@ public class TeamAction extends Action {
 
 	private void addTeam(ActionMapping mapping, TeamActionForm form, HttpServletRequest request,
 			HttpServletResponse response, HttpSession session) {
-		System.out.println("name:"+form.name);
+		/*System.out.println("name:"+form.name);
 		System.out.println("description:"+form.description);
 		System.out.println("fax:"+form.fax);
 		System.out.println("phone:"+form.phone);
 		System.out.println("address:"+form.address);
-		System.out.println("mail:"+form.mail);
+		System.out.println("mail:"+form.mail);*/
 		
 		boolean isSuccess = TeamDBMgr.addTeam(form.name, form.description, form.fax, form.phone, form.address, form.mail);
 		Result result = new Result();
