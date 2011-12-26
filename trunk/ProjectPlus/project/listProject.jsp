@@ -246,6 +246,23 @@
 		$('#date_end').datepicker();
 		
 		$( "#agree" ).click(function(){
+<<<<<<< .mine
+			var op = 0;		
+			var name = $('#project_name').val();
+			var destination = $('#project_destination').val();
+			var leader = $('#project_leader').val();
+			var startDate = $('#project_startDate').val();
+			var endDate = $('#project_endDate').val();
+			$.getJSON('/ProjectAction.do',  { op:op,name:name,destination:destination,leader:leader,startDate:startDate,endDate:endDate}, function(data){
+			//console.log(data);
+				if(data.message=="ok") {
+					$("#dialog").dialog('close');
+					//window.location = "/index.jsp";
+				}
+				else
+					alert(data.message);
+			});	
+=======
 			<!-- 測試 addProject-->
 			var op = 0;
 			var name = $('#project_name').val();
@@ -260,6 +277,7 @@
 			if(data.isSuccess)
 				alert(data.message);
 			});
+>>>>>>> .r69
 		});	
 			
 		$( "#cancel" ).click(function(){
@@ -622,29 +640,54 @@
 					<table width="100%">				
 					<form>
 						<tr>
+<<<<<<< .mine
+							<td width="25%"><label for="name">專案名稱</label></td>
+							<td width="75%"><input type="text"id="project_name" class="text ui-widget-content ui-corner-all" /></td>
+=======
 							<td width="25%"><label for="project_name">專案名稱</label></td>
 							<td width="75%"><input type="text" name="name" id="project_name" class="text ui-widget-content ui-corner-all" /></td>
+>>>>>>> .r69
 						</tr>
 						<tr>
+<<<<<<< .mine
+							<td width="25%"><label for="name">專案目標</label></td>
+							<td width="75%"><input type="text" id="project_destination" class="text ui-widget-content ui-corner-all" /></td>
+=======
 							<td width="25%"><label for="project_target">專案目標</label></td>
 							<td width="75%"><input type="text" name="name" id="project_target" class="text ui-widget-content ui-corner-all" /></td>
+>>>>>>> .r69
 						</tr>						
 						<tr>
+<<<<<<< .mine
+							<td width="25%"><label for="email">負責人</label></td>
+							<td width="75%"><input type="text" id="project_leader" value="" class="text ui-widget-content ui-corner-all" /></td>
+=======
 							<td width="25%"><label for="project_manager">負責人</label></td>
 							<td width="75%"><input type="text" name="email" id="project_manager" value="" class="text ui-widget-content ui-corner-all" /></td>
+>>>>>>> .r69
 						</tr>
 						<tr>
+<<<<<<< .mine
+							<td width="25%"><label for="password">開始時間</label></td>
+							<td width="75%"><input class="text ui-widget-content ui-corner-all" type="text" name="date" id="project_startDate" /></td>    
+=======
                         <!-- 多加一個狀態-->
                         	<td width="25%"><label for="project_state">狀態</label></td>
 							<td width="75%"><input type="text" name="email" id="project_state" value="" class="text ui-widget-content ui-corner-all" /></td>
+>>>>>>> .r69
 						</tr>
 						<tr>
+<<<<<<< .mine
+							<td width="25%"><label for="password">結束時間</label></td>
+							<td width="75%"><input class="text ui-widget-content ui-corner-all" type="text" name="date" id="project_endDate" /></td>
+=======
 							<td width="25%"><label for="project_startDate">開始時間</label></td>
 							<td width="75%"><input class="text ui-widget-content ui-corner-all" type="text" name="date" id="project_startDate" /></td>    
 						</tr>
 						<tr>
 							<td width="25%"><label for="project_endDate">結束時間</label></td>
 							<td width="75%"><input class="text ui-widget-content ui-corner-all" type="text" name="date" id="project_endDate" /></td>
+>>>>>>> .r69
 						</tr>								
 					</form>	
 					</table>
