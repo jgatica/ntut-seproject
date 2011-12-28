@@ -76,6 +76,13 @@ a:hover{
 }
 
 /* Custom node styling */
+
+.jOrgChart .node:hover {
+	box-shadow : rgba(0, 0, 0, 1) 0px 0px 15px;
+	-moz-box-shadow: rgba(0, 0, 0, 1) 0px 0px 15px;
+	-webkit-box-shadow: rgba(0, 0, 0, 1) 0px 0px 15px;
+}
+
 .jOrgChart .node {
 	font-size 			: 14px;
 	background-color 	: #35363B;
@@ -99,10 +106,10 @@ a:hover{
 	-moz-border-bottom-right-radius 	: 35px;		
 	
 	padding-top:5px;
-
+/*
 box-shadow : rgba(0, 0, 0, 1) 0px 0px 8px;
 -moz-box-shadow: rgba(0, 0, 0, 1) 0px 0px 8px;
--webkit-box-shadow: rgba(0, 0, 0, 1) 0px 0px 8px;
+-webkit-box-shadow: rgba(0, 0, 0, 1) 0px 0px 8px;*/
 
 }
 	.node p{
