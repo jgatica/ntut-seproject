@@ -71,7 +71,7 @@ public class ProjectAction extends Action {
 	private ActionForward queryWbsTree(ActionMapping mapping, ProjectActionForm form,
 			HttpServletRequest request, HttpServletResponse response, HttpSession session) {
 		
-		ResultSet resultSet = null;
+		//ResultSet resultSet = null;
 		ArrayList<WbsScheme> schemes = new ArrayList<WbsScheme>();
 		// Step:1 由DB撈出所有的Task
 //		resultSet = ProjectDBMgr.listTask("projectId:123456");
