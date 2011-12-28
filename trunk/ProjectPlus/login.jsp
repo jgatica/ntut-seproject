@@ -192,7 +192,7 @@ FB.login(function(resp){
               
               <div class="cleaner h10"></div>
 			
-            <button id="register" ><name langtag="login-login-register"></name></button>
+            <button id="register" class="float_l" ><name langtag="login-login-register"></name></button>
 			<button id="login" class="float_r"><team langtag="login-login-login"></team></button>  
 			<button id="facebook" class="float_r" ><name langtag="login-login-facebook"></name></button>
 
