@@ -1,6 +1,6 @@
 <%@ page contentType="text/html; charset=utf-8" language="java" import="java.sql.*" errorPage="" %>
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
-<html xmlns="http://www.w3.org/1999/xhtml"><!-- InstanceBegin template="/Templates/ProfileMain.dwt.jsp" codeOutsideHTMLIsLocked="false" -->
+<html xmlns="http://www.w3.org/1999/xhtml"><!-- InstanceBegin template="/Templates/TeamMain.dwt.jsp" codeOutsideHTMLIsLocked="false" -->
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
 <title>Project+</title>
@@ -236,84 +236,23 @@
 
 <!-- InstanceBeginEditable name="Head" -->
 
+
 <script language="JavaScript" type="text/javascript">
 	/*
 	 * 一開始讀取第零筆資料
 	 */
 	$(document).ready(function(){
-		$( "button" ).button();
-		$('#date_start').datepicker();
-		$('#date_end').datepicker();
-		
-		$( "#agree" ).click(function(){
-			var op = 0;		
-			var name = $('#project_name').val();
-			var destination = $('#project_destination').val();
-			var leader = $('#project_leader').val();
-			var startDate = $('#project_startDate').val();
-			var endDate = $('#project_endDate').val();
-			$.getJSON('/ProjectAction.do',  { op:op,name:name,destination:destination,leader:leader,startDate:startDate,endDate:endDate}, function(data){
-			//console.log(data);
-				if(data.message=="ok") {
-					$("#dialog").dialog('close');
-					//window.location = "/index.jsp";
-				}
-				else
-					alert(data.message);
-			});	
-		});	
-			
-		$( "#cancel" ).click(function(){
-			$("#dialog").dialog('close');
-		});
-				
-		$( "#dialog" ).dialog( {autoOpen: false, minWidth: 200, minHeight: 120, modal: true} );
+		// dialog
+		$( "#dialog" ).dialog( {autoOpen: false, minWidth: 350, minHeight: 150, height:300, modal: true} );
 		$( "#dialog_btn" ).click(function(){
 			$("#dialog").dialog('open');
-		});	
-		
-		$( "#more" ).click(function(){
-			var content = 	'<tr>' + 
-							'<td>001</td>' +
-							'<td><team>軟體工程</team>專案任務1</td>'+
-							'<td><img src="/images/state_ok.png" width="16" /></td>'+
-							'</tr>'+
-							'<tr class="odd">'+
-							'<td>002</td>'+
-							'<td><team>軟體工程</team>專案任務1</td>'+
-							'<td><img src="/images/state_ok.png" width="16" /></td>'+
-							'</tr>'+
-							'<tr>' + 
-							'<td>001</td>' +
-							'<td><team>軟體工程</team>專案任務1</td>'+
-							'<td><img src="/images/state_ok.png" width="16" /></td>'+
-							'</tr>'+
-							'<tr class="odd">'+
-							'<td>002</td>'+
-							'<td><team>軟體工程</team>專案任務1</td>'+
-							'<td><img src="/images/state_ok.png" width="16" /></td>'+
-							'</tr>'
-							'<tr>' + 
-							'<td>001</td>' +
-							'<td><team>軟體工程</team>專案任務1</td>'+
-							'<td><img src="/images/state_ok.png" width="16" /></td>'+
-							'</tr>'+
-							'<tr class="odd">'+
-							'<td>002</td>'+
-							'<td><team>軟體工程</team>專案任務1</td>'+
-							'<td><img src="/images/state_ok.png" width="16" /></td>'+
-							'</tr>';
-	
-			var element = $(content+content+content).hide();
-			element.appendTo($("#task-list"));
-			element.show(1500);	
-		});
-		
+		});			
 	}); 
 
 	  	
 
 </script>
+
 
 <!-- InstanceEndEditable -->
 
@@ -507,47 +446,55 @@
 
         <div id="templatemo_main">
             
-          <div class="col_w900 hr_divider ">
+          <div class="col_w900 hr_divider">
           		
-      			<div id="slide_left" class="col_w170 lp_box float_l">
-				<div class="subTopDiv" ><h2 class="uiHeaderTitle" langtag="profile-title"></h2></div>	
+      			<div class="col_w170 lp_box float_l">
+				<div class="subTopDiv" ><h2 class="uiHeaderTitle">團隊資料</h2></div>	
 					
 					<div class="col_allw170 frontpage_box hoverdiv">
-                      <a href="/member/basic.jsp">
-					  <img src="/images/user.png" alt="Image" width="24" height="24">
-                      <h2 langtag="profile-basic"></h2>
-					  </a>
-                    </div>                    
+					<a href="/team/detail.jsp">
+						<img src="/images/project_info.png" alt="Image" width="24" height="24">
+						<h2>團隊資訊</h2>
+					</a> 
+                    </div>            
+					<div class="col_allw170 frontpage_box hoverdiv">
+					<a href="/team/listMember.jsp">
+						<img src="/images/task_group.png" alt="Image" width="24" height="24">
+						<h2>成員名單</h2>
+					</a> 
+                    </div>   					       
                     <div class="col_allw170 frontpage_box hoverdiv">
-					<a href="/member/photo.jsp">
-						<img src="/images/profile_img.png" alt="Image" width="24" height="24">
-						<h2 langtag="profile-bigpic"></h2>
-					</a>	
+					<a href="/project/listProject.jsp">
+						<img src="/images/project_task.png" alt="Image" width="24" height="24">
+						<h2>開發專案</h2>
+                    </a>
                     </div>
                     <div class="col_allw170 frontpage_box hoverdiv">
-					<a href="/member/contact.jsp">
-						<img src="/images/profile_phone.png" alt="Image" width="24" height="24">
-						<h2 langtag="profile-contact"></h2>
-					</a>	
-                    </div>     
-					<div class="col_allw170 frontpage_box hoverdiv">
-					<a href="/member/task.jsp">
-						<img src="/images/profile_task.png" alt="Image" width="24" height="24">
-						<h2 langtag="profile-tasks"></h2>
+					<a href="/project/listProject.jsp">
+                      <img src="/images/project_chart.png" alt="Image" width="24" height="24">
+                      <h2>查詢進度</h2>
 					</a>
-					</div>                                                         
-			<div class="subBottomDiv" ></div>            
-            </div>      
+                    </div>     
+					
+					
+                  <div class="frontpage_box col_allw170  hoverdiv">
+				  <a href="/project/listProject.jsp">
+                      <img src="/images/profile_task.png" alt="Image" width="24" height="24">
+                    <h2>專案估算系統</h2>
+					</a>
+                  </div>    
+				                             
+                <div class="subBottomDiv" ></div>     
+            	</div>      
 				<div id="dropBox" class="toggler col_w700 lp_box float_l margin_20rl">		
 				<div class="subTopDiv" >
 				<!-- InstanceBeginEditable name="PageTitle" -->
-                <h2 class="uiHeaderTitle">軟體工程<img class="arrow_right" src="/images/arrow_right.png" />專案列表</h2>
+				<h2 class="uiHeaderTitle">軟體工程<img class="arrow_right" src="/images/arrow_right.png" />專案列表</h2>				
 				<!-- InstanceEndEditable -->
-				
-				</div>	
-				<!--<img src="/images/subTitle.jpg" alt="Image" width="690" height="29" />-->
+				</div>
                 <!-- InstanceBeginEditable name="RightArea" -->
-                <div class="table-content">
+				
+				<div class="table-content">
 					
 					<table summary="任務列表" width="100%" style="height:300px;">
 						<!--<caption>Table designs</caption>-->
@@ -652,11 +599,12 @@
 					<!--<p>你確定要刪除該專案嗎?</p>
 					<button>確定</button> <button>取消</button> -->
 				</div>	
-                <!-- InstanceEndEditable -->
+				
+				
+				<!-- InstanceEndEditable -->
 				<div class="subBottomDiv" ></div>
-				
                 </div>
-				
+                
 				<div class="col_p20 lp_box float_r">
 					<div class="subTopDiv" >
 						<h2 class="uiHeaderTitle">贊助</h2>
@@ -674,10 +622,19 @@
 							<p><message>廣告贊助</message></p>
 						</div>	
                     <div class="subBottomDiv" ></div>     
-            	</div>
-								
+            	</div>                     
+                
+
+                
                 <div class="cleaner"></div>
+
             </div>
+
+
+            
+
+            
+            
         </div> 
 <!-- end of templatemo main -->
 
