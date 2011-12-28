@@ -34,7 +34,7 @@
 	$(document).ready(function(){
 		var initPage;
 		
-		$['langChanger'].langInit({lang: "en", file: "/js/files/lang-example.xml", version: 2}, initPage);
+		$['langChanger'].langInit({lang: "en", file: "/js/files/lang-example.xml", version: 7}, initPage);
 		$( "#register_dialog" ).dialog( {autoOpen: false, minWidth: 200, minHeight: 120, modal: true} );
 		$( "button" ).button();
 		$('#facebook').click(loginFacebook);
@@ -60,11 +60,11 @@
 			var password = $('#member_password').val();
 			$.getJSON('/MemberAction.do',  { op:'op',member_email:email,password:password,member_name:name,member_nickname:nick_name}, function(data) {
 			//console.log(data);
-				if(data.message=="ok") {
+				if(data.result.message=="ok") {
 					window.location = "/index.jsp";
 				}
 				else
-					alert(data.message);
+					alert(data.result.message);
 			});
 		});
 		

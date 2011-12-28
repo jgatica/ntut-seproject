@@ -55,7 +55,7 @@
 		
 		// 更換介面語系
 		$['langChanger'].addLangInitHandler(initPage);
-		$['langChanger'].langInit({lang: "en", file: "/js/files/lang-example.xml", version: 2});
+		$['langChanger'].langInit({lang: "en", file: "/js/files/lang-example.xml", version: 7});
 		
 		// 初始化jQueryUI Button
 		$( "button" ).button();
@@ -352,9 +352,9 @@
 					<div class="divider10"></div> <!--分隔線-->
                     
                     <div class="col_allw170 frontpage_box hoverdiv">
-						<a id="newteam_btn" href="#">
-                        <img src="/images/task_group.png" alt="Image" width="24" height="24">
-                        <h2 langtag="top-team-new"></h2>                        
+						<a href="/member/basic.jsp?id=123">
+                        <img src="/images/user.png" alt="Image" width="24" height="24">
+                        <h2 langtag="profile-basic"></h2>                        
 						</a>
                     </div>
                     
@@ -388,6 +388,13 @@
 <div id="div-float-teams">
 					<div style="margin-left:20px;margin-top:10px;"><label langtag="top-myteam"></label></div>
 					<div class="divider10"></div> <!--分隔線-->
+                    <div class="col_allw170 frontpage_box hoverdiv">
+						<a id="newteam_btn" href="#">
+                        <img src="/images/task_group.png" alt="Image" width="24" height="24">
+                        <h2 langtag="top-team-new"></h2>                        
+						</a>
+                        <!--怪怪<div class="divider10"></div>-->
+                    </div>
                     <div class="col_allw170 frontpage_box hoverdiv">
 					  <a href="/team/detail.jsp?id=123">
                       	<img src="/images/profile_img.png" alt="Image" width="24" height="24">

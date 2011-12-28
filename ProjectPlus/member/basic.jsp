@@ -55,7 +55,7 @@
 		
 		// 更換介面語系
 		$['langChanger'].addLangInitHandler(initPage);
-		$['langChanger'].langInit({lang: "en", file: "/js/files/lang-example.xml", version: 2});
+		$['langChanger'].langInit({lang: "en", file: "/js/files/lang-example.xml", version: 7});
 		
 		// 初始化jQueryUI Button
 		$( "button" ).button();
@@ -239,6 +239,20 @@
 
 <script language="JavaScript" type="text/javascript">
 	$(document).ready(function(){
+		$.getJSON('/MemberAction.do',  { op:3 }, function(data) {
+			$("#imageURL").attr("src",data.imageURL);
+			$("#name").text(data.member_name);
+			$("#nickName").text(data.member_nickname);
+			$("#gender").text(data.member_Gender);
+			$("#email").text(data.member_email);
+			$("#phone").text(data.member_phone);
+			$("#mobile").text(data.member_mobile);
+			$("#address").text(data.member_address);
+			$("#birthday").text(data.member_birthday);
+			$("#blood").text(data.member_blood);
+			$("#descript").text(data.member_descript);
+		});
+			
 		$( "button" ).button();
 		/*$['langChanger'].addLangInitHandler(function(){
 			
@@ -364,9 +378,9 @@
 					<div class="divider10"></div> <!--分隔線-->
                     
                     <div class="col_allw170 frontpage_box hoverdiv">
-						<a id="newteam_btn" href="#">
-                        <img src="/images/task_group.png" alt="Image" width="24" height="24">
-                        <h2 langtag="top-team-new"></h2>                        
+						<a href="/member/basic.jsp?id=123">
+                        <img src="/images/user.png" alt="Image" width="24" height="24">
+                        <h2 langtag="profile-basic"></h2>                        
 						</a>
                     </div>
                     
@@ -400,6 +414,13 @@
 <div id="div-float-teams">
 					<div style="margin-left:20px;margin-top:10px;"><label langtag="top-myteam"></label></div>
 					<div class="divider10"></div> <!--分隔線-->
+                    <div class="col_allw170 frontpage_box hoverdiv">
+						<a id="newteam_btn" href="#">
+                        <img src="/images/task_group.png" alt="Image" width="24" height="24">
+                        <h2 langtag="top-team-new"></h2>                        
+						</a>
+                        <!--怪怪<div class="divider10"></div>-->
+                    </div>
                     <div class="col_allw170 frontpage_box hoverdiv">
 					  <a href="/team/detail.jsp?id=123">
                       	<img src="/images/profile_img.png" alt="Image" width="24" height="24">
@@ -500,31 +521,47 @@
 							<tbody>
 								<tr class="odd">
 									<td langtag="profile-table-bigpic"></td>
-									<td><img class="bigpic" src="/images/1.jpg"  width="50" height="50"/></td>									
+									<td><img id="imageURL" class="bigpic" src="/images/1.jpg"  width="50" height="50"/></td>									
 								</tr>							
 								<tr>
 									<td langtag="profile-table-name"></td>
-									<td>陳奕豪</td>									
+									<td id="name">陳奕豪</td>									
 								</tr>
-								<tr class="odd">									
+                                <tr class="odd">
+									<td langtag="profile-table-nickname"></td>
+									<td id="nickName">阿豪</td>									
+								</tr>
+								<tr>									
 									<td langtag="profile-table-gender"></td>
-									<td>男生</td>									
-								</tr>					
+									<td id="gender">男生</td>									
+								</tr>	
+                                <tr class="odd">
+									<td langtag="top-account-mail"></td>
+									<td id="email">augus790302@gmail.com</td>									
+								</tr>
+                                <tr>									
+									<td langtag="profile-table-phone"></td>
+									<td id="phone">0980556436</td>									
+								</tr>	
+                                <tr class="odd">									
+									<td langtag="profile-table-mobile"></td>
+									<td id="mobile">0980556436</td>									
+								</tr>		
 								<tr>
-									<td langtag="profile-table-city"></td>
-									<td>新北市</td>									
+									<td langtag="profile-table-address"></td>
+									<td id = "address">新北市</td>									
 								</tr>
 								<tr class="odd">									
 									<td langtag="profile-table-birthday"></td>
-									<td>1990/03/02</td>									
+									<td id ="birthday">1990/03/02</td>									
 								</tr>		
 								<tr>
 									<td langtag="profile-table-blood"></td>
-									<td>A型</td>									
+									<td id="blood">A型</td>									
 								</tr>
 								<tr class="odd">									
 									<td langtag="profile-table-about"></td>
-									<td>我是北科大的學生。</td>									
+									<td id="descript">我是北科大的學生。</td>									
 								</tr>																															
 							</tbody>
 						</table>			
