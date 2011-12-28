@@ -1,0 +1,151 @@
+<!DOCTYPE html>
+<html><head><meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
+    <title>jOrgChart - A jQuery OrgChart Plugin</title>
+    <link rel="stylesheet" href="/js/tree/css/bootstrap.min.css"/>
+    <link rel="stylesheet" href="/js/tree/css/jquery.jOrgChart.css"/>
+    <link rel="stylesheet" href="js/tree/css/custom.css"/>
+	<link href="/js/tree/css/prettify.css" type="text/css" rel="stylesheet" />
+
+	<script type="text/javascript" src="/js/tree/prettify.js"></script>
+	
+	<!-- jQuery includes -->
+    <script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/1.7.1/jquery.min.js"></script><script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/1.7.1/jquery.min.js"></script>
+	<script type="text/javascript" src="/js/jquery-1.7.1.min.js"></script>
+	<script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jqueryui/1.8.16/jquery-ui.min.js"></script>
+	
+    <script src="/js/tree/jquery.jOrgChart.js"></script>
+
+    <script>
+    jQuery(document).ready(function() {
+
+		
+		// 測試與伺服器拿取WBS Tree
+		$.getJSON('/ProjectAction.do', {op: 8}, function(data){
+			
+			console.log(data); 
+			
+			// 一個階層為一個ul
+			// 不管怎樣都有一個階層?
+			// 由1 開始
+			var size = data.length,
+				index;
+				//currentLevel = 0;
+// 				
+			for(index = 0; index < size; index++){
+				
+				if(data[index].level == 0){
+					var content = '<li name="' + data[index].name + '">' + data[index].name +
+					'<ul name="' + data[index].name + '"></ul>' + '</li>' ;
+					$("#org").append(content);
+					console.log($("#org"));
+				}
+				else{
+					var content = '<li name="' + data[index].name + '">' + data[index].name +
+					'<ul name="' + data[index].name + '"></ul>'+ '</li>' ;
+					$('ul[name="' + data[index].parent + '"]').append(content);
+				}
+				
+				/*
+				// 新增<ul>
+				var content = '<li>' + data[index].name + '</li>';
+				
+				$("#test").append(content);
+				//if(data[index].level === currentLevel){
+					//綁入<li>並加入目前的<ul>中
+					
+				//}*/
+			}
+			
+			$("#org").jOrgChart({
+				chartElement : '#chart',
+				dragAndDrop  : false
+			});
+            			
+		});
+
+
+		/* Custom jQuery for the example */
+		$("#show-list").click(function(e){
+			e.preventDefault();
+			
+			$('#list-html').toggle('fast', function(){
+				if($(this).is(':visible')){
+					$('#show-list').text('Hide underlying list.');
+					$(".topbar").fadeTo('fast',0.9);
+				}else{
+					$('#show-list').text('Show underlying list.');
+					$(".topbar").fadeTo('fast',1);					
+				}
+			});
+		});
+        
+        $('#list-html').text($('#org').html());
+        
+        $("#org").bind("DOMSubtreeModified", function() {
+            $('#list-html').text('');
+            
+            $('#list-html').text($('#org').html());
+            
+            prettyPrint();                
+        });
+
+		
+    });
+    </script>
+  </head>
+
+  <body onload="prettyPrint();">
+
+	
+	<ul id="org" style="display:none">
+    <!--li>
+       根節點
+       <ul id="test">
+         <li>Beer</li>
+         <li>Vegetables
+           <ul>
+             <li>Pumpkin</li>
+             <li>
+				<a href="http://tquila.com" target="_blank">Aubergine</a>
+				<p>A link and paragraph is all we need.</p>
+			 </li>
+           </ul>
+         </li>
+         <li>Fruit
+           <ul>
+             <li>Apple
+               <ul>
+                 <li>Granny Smith</li>
+               </ul>
+             </li>
+             <li>Berries
+               <ul>
+                 <li>Blueberry</li>
+                 <li><img src="/js/tree/images/raspberry.jpg" alt="Raspberry"/></li>
+                 <li>Cucumber</li>
+               </ul>
+             </li>
+           </ul>
+         </li>
+         <li>Bread</li>
+         <li>Chocolate
+           <ul>
+             <li>Topdeck</li>
+             <li>Reese's Cups</li>
+           </ul>
+         </li>
+       </ul>
+     </li-->
+   </ul>			
+	
+	<div id="chart" class="orgChart"></div>
+    
+    <script>
+        jQuery(document).ready(function() {
+    		    		
+
+        });
+    </script>
+
+</body>
+</html>

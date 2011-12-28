@@ -250,8 +250,13 @@
 		var length = 2; // 取3筆
 		$.getJSON('/ArticleAction.do',  { op:op, start: start, length: length }, function(data) {
 			if(data != null){
-				var content = "";
-				for(var i = 0; i < data.length; i++){
+				/*$(data).each(function(index){
+					$(this).
+				});*/
+				var content = "",
+					size = data.length;
+					
+				for(var i = 0; i < size; i++){
 					content += '<div class="post_box">';
 					content += '<div class="post_box_date">';
 					content += new Date(data[i].edittime);
