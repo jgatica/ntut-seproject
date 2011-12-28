@@ -81,14 +81,16 @@ public class ProjectAction extends Action {
 //			try {
 //				while(resultSet.next()){
 					// Step:2 使用WbsSchemeCreator.createWbsScheme 建構節點
-					WbsScheme scheme = WbsSchemeCreator.createWbsScheme("", WbsTreeLevel.ROOT, "Root", "我是根結點");
-					WbsScheme scheme2 = WbsSchemeCreator.createWbsScheme("Root", WbsTreeLevel.ROOT + 1, "根", "根");
-					WbsScheme scheme4 = WbsSchemeCreator.createWbsScheme("Root", WbsTreeLevel.ROOT + 2, "二之二", "二之二");
-					WbsScheme scheme7 = WbsSchemeCreator.createWbsScheme("Root", WbsTreeLevel.ROOT + 3, "三之三", "三之三");
-					WbsScheme scheme3 = WbsSchemeCreator.createWbsScheme("根", WbsTreeLevel.ROOT + 1, "二之一", "二之一");
-					WbsScheme scheme5 = WbsSchemeCreator.createWbsScheme("二之一", WbsTreeLevel.ROOT + 3, "三之一", "三之一");
-					WbsScheme scheme6 = WbsSchemeCreator.createWbsScheme("二之一", WbsTreeLevel.ROOT + 3, "三之二", "三之二");
-					WbsScheme scheme8 = WbsSchemeCreator.createWbsScheme("三之三", WbsTreeLevel.ROOT + 4, "四之一", "四之一");
+					WbsScheme scheme = WbsSchemeCreator.createWbsScheme("", "jQuery開發團", "我是根結點");
+					WbsScheme scheme2 = WbsSchemeCreator.createWbsScheme("jQuery開發團", "開發WBS系統", "根");
+					WbsScheme scheme3 = WbsSchemeCreator.createWbsScheme("jQuery開發團", "開發登入系統", "二之二");
+					WbsScheme scheme4 = WbsSchemeCreator.createWbsScheme("jQuery開發團", "開發估算系統", "三之三");
+					WbsScheme scheme5 = WbsSchemeCreator.createWbsScheme("開發WBS系統", "美化外觀", "二之一");
+					WbsScheme scheme6 = WbsSchemeCreator.createWbsScheme("開發WBS系統", "更改超連結功能", "二之一");
+					WbsScheme scheme7 = WbsSchemeCreator.createWbsScheme("開發登入系統", "資料庫實作", "二之一");
+					WbsScheme scheme8 = WbsSchemeCreator.createWbsScheme("開發登入系統", "fb登入模式實作", "二之一");
+					WbsScheme scheme9 = WbsSchemeCreator.createWbsScheme("開發估算系統", "COCOMO開發", "二之一");
+					WbsScheme scheme10 = WbsSchemeCreator.createWbsScheme("開發估算系統", "Function Point開發", "二之一");
 					
 					/*
 					 * 根階層 : WbsTreeLevel.ROOT
@@ -106,6 +108,8 @@ public class ProjectAction extends Action {
 					schemes.add(scheme6);
 					schemes.add(scheme7);
 					schemes.add(scheme8);
+					schemes.add(scheme9);
+					schemes.add(scheme10);
 					
 					// Step:4 轉換該ArrayList為WBS Tree JSON字串傳回給客戶
 					try {
