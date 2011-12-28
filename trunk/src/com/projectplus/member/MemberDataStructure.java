@@ -1,28 +1,24 @@
 package com.projectplus.member;
 
-import org.apache.struts.action.ActionForm;
+import com.projectplus.context.Result;
 
-@SuppressWarnings("serial")
-public class MemberActionForm extends ActionForm {
-	public int op;
-	public int start;
-	public int length;
-	
-	public String imageURL;
+public class MemberDataStructure {
+	public Result result;
 	public String hex_mrscid;
 	public String ba_mrscid;
 	public String password;
+	public String imageURL;
 	public String member_name;
 	public String member_nickname;
+	public String member_Gender;
 	public String member_blood;
-	private String member_Gender;
 	public String member_descript;
 	public String member_address;
 	public String member_mobile;
 	public String member_phone;
 	public String member_birthday;
 	public String member_email;
-	
+
 	
 	public String getImageURL() {
 		return imageURL;
@@ -42,23 +38,11 @@ public class MemberActionForm extends ActionForm {
 	public void setMember_Gender(String member_Gender) {
 		this.member_Gender = member_Gender;
 	}
-	public int getOp() {
-		return op;
+	public Result getResult() {
+		return result;
 	}
-	public void setOp(int op) {
-		this.op = op;
-	}
-	public int getStart() {
-		return start;
-	}
-	public void setStart(int start) {
-		this.start = start;
-	}
-	public int getLength() {
-		return length;
-	}
-	public void setLength(int length) {
-		this.length = length;
+	public void setResult(Result result) {
+		this.result = result;
 	}
 	public String getHex_mrscid() {
 		return hex_mrscid;
@@ -126,5 +110,6 @@ public class MemberActionForm extends ActionForm {
 	public void setMember_email(String member_email) {
 		this.member_email = member_email;
 	}
+	
 	
 }
