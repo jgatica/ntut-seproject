@@ -16,7 +16,7 @@
     <script src="/js/tree/jquery.jOrgChart.js"></script>
 
     <script>
-    jQuery(document).ready(function() {
+    $(document).ready(function() {
 
 		
 		// 測試與伺服器拿取WBS Tree
@@ -24,16 +24,12 @@
 			
 			console.log(data); 
 			
-			// 一個階層為一個ul
-			// 不管怎樣都有一個階層?
-			// 由1 開始
 			var size = data.length,
 				index;
-				//currentLevel = 0;
-// 				
+				
 			for(index = 0; index < size; index++){
 				
-				if(data[index].level == 0){
+				if(data[index].parent == ""){
 					var content = '<li name="' + data[index].name + '">' + data[index].name +
 					'<ul name="' + data[index].name + '"></ul>' + '</li>' ;
 					$("#org").append(content);
@@ -44,16 +40,6 @@
 					'<ul name="' + data[index].name + '"></ul>'+ '</li>' ;
 					$('ul[name="' + data[index].parent + '"]').append(content);
 				}
-				
-				/*
-				// 新增<ul>
-				var content = '<li>' + data[index].name + '</li>';
-				
-				$("#test").append(content);
-				//if(data[index].level === currentLevel){
-					//綁入<li>並加入目前的<ul>中
-					
-				//}*/
 			}
 			
 			$("#org").jOrgChart({
@@ -63,8 +49,6 @@
             			
 		});
 
-
-		/* Custom jQuery for the example */
 		$("#show-list").click(function(e){
 			e.preventDefault();
 			
@@ -98,54 +82,9 @@
 
 	
 	<ul id="org" style="display:none">
-    <!--li>
-       根節點
-       <ul id="test">
-         <li>Beer</li>
-         <li>Vegetables
-           <ul>
-             <li>Pumpkin</li>
-             <li>
-				<a href="http://tquila.com" target="_blank">Aubergine</a>
-				<p>A link and paragraph is all we need.</p>
-			 </li>
-           </ul>
-         </li>
-         <li>Fruit
-           <ul>
-             <li>Apple
-               <ul>
-                 <li>Granny Smith</li>
-               </ul>
-             </li>
-             <li>Berries
-               <ul>
-                 <li>Blueberry</li>
-                 <li><img src="/js/tree/images/raspberry.jpg" alt="Raspberry"/></li>
-                 <li>Cucumber</li>
-               </ul>
-             </li>
-           </ul>
-         </li>
-         <li>Bread</li>
-         <li>Chocolate
-           <ul>
-             <li>Topdeck</li>
-             <li>Reese's Cups</li>
-           </ul>
-         </li>
-       </ul>
-     </li-->
-   </ul>			
+   	</ul>			
 	
 	<div id="chart" class="orgChart"></div>
-    
-    <script>
-        jQuery(document).ready(function() {
-    		    		
-
-        });
-    </script>
 
 </body>
 </html>
