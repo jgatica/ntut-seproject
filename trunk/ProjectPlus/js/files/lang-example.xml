@@ -171,21 +171,33 @@
 		<tw>姓名</tw>
 		<en>Name</en>
 	</text>	
+	<text id="profile-table-nickname">
+		<tw>暱稱</tw>
+		<en>Nick Name</en>
+	</text>	
 	<text id="profile-table-gender">
 		<tw>性別</tw>
 		<en>Gender</en>
 	</text>	
-	<text id="profile-table-city">
-		<tw>現居城市</tw>
-		<en>City</en>
+	<text id="profile-table-phone">
+		<tw>連絡電話</tw>
+		<en>Phone</en>
 	</text>	
-	<text id="profile-table-birthday">
-		<tw>生日</tw>
-		<en>Birthday</en>
+	<text id="profile-table-mobile">
+		<tw>手機</tw>
+		<en>Mobile phone</en>
 	</text>	
 	<text id="profile-table-blood">
 		<tw>血型</tw>
 		<en>Blood</en>
+	</text>	
+	<text id="profile-table-address">
+		<tw>住址</tw>
+		<en>Address</en>
+	</text>	
+	<text id="profile-table-birthday">
+		<tw>生日</tw>
+		<en>Birthday</en>
 	</text>	
 	<text id="profile-table-about">
 		<tw>關於我</tw>
