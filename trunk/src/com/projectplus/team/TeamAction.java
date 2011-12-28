@@ -35,46 +35,50 @@ public class TeamAction extends Action {
 
 		switch (op) {
 			case ADDTEAM:
-				addTeam(mapping, form, request, response, session);
+				return addTeam(mapping, form, request, response, session);
 			case DELTEAM:
-				delTeam(mapping, form, request, response, session);
+				return delTeam(mapping, form, request, response, session);
 			case UPDTEAM:
-				updateTeam(mapping, form, request, response, session);
+				return updateTeam(mapping, form, request, response, session);
 			case QYTEAM:
-				queryTeam(mapping, form, request, response, session);
+				return queryTeam(mapping, form, request, response, session);
 			case ADDTEAMMEMBER:
-				addTeamMember(mapping, form, request, response, session);
+				return addTeamMember(mapping, form, request, response, session);
 		}
 		
 		return null;
 	}
 	
-	private void addTeamMember(ActionMapping mapping, TeamActionForm form,
+	private ActionForward addTeamMember(ActionMapping mapping, TeamActionForm form,
 			HttpServletRequest request, HttpServletResponse response, HttpSession session) {
+				return null;
 
 		
 		// 呼叫 TeamDBMgr.addTeamMember(該會員id)
 		
 	}
 	
-	private void queryTeam(ActionMapping mapping, TeamActionForm form, HttpServletRequest request,
+	private ActionForward queryTeam(ActionMapping mapping, TeamActionForm form, HttpServletRequest request,
 			HttpServletResponse response, HttpSession session) {
+				return null;
 		// TODO Auto-generated method stub
 		
 	}
 
-	private void updateTeam(ActionMapping mapping, TeamActionForm form, HttpServletRequest request,
+	private ActionForward updateTeam(ActionMapping mapping, TeamActionForm form, HttpServletRequest request,
 			HttpServletResponse response, HttpSession session) {
+				return null;
 		// TODO Auto-generated method stub
 		
 	}
 	
-	private void delTeam(ActionMapping mapping, TeamActionForm form, HttpServletRequest request,
+	private ActionForward delTeam(ActionMapping mapping, TeamActionForm form, HttpServletRequest request,
 			HttpServletResponse response, HttpSession session) {
+				return null;
 		
 	}
 
-	private void addTeam(ActionMapping mapping, TeamActionForm form, HttpServletRequest request,
+	private ActionForward addTeam(ActionMapping mapping, TeamActionForm form, HttpServletRequest request,
 			HttpServletResponse response, HttpSession session) {
 		/*System.out.println("name:"+form.name);
 		System.out.println("description:"+form.description);
@@ -99,6 +103,7 @@ public class TeamAction extends Action {
 		} catch (IOException e) {
 			e.printStackTrace();
 		}
+		return null;
 	}
 	
 }
