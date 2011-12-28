@@ -8,7 +8,7 @@ import java.sql.DriverManager;
 import java.sql.PreparedStatement;
 import java.sql.SQLException;
 import java.util.Properties;
-
+import com.mysql.*;
 public class DBMgr {
 
 	private static Properties props;
@@ -25,23 +25,23 @@ public class DBMgr {
 	 * DB初始化連線設定 
 	 * */
 	
-	/*static {
+	static {
 		if(!isInit)
 		{
 			// 從config檔讀取參數
-			props = new Properties();
+			/*props = new Properties();
 	        try {
 	             props.load(new FileInputStream("config/dbconfig.properties"));
 	        } catch (FileNotFoundException e) {
 	             e.printStackTrace();
 	        } catch (IOException e) {
 	             e.printStackTrace();
-	        }
+	        }*/
 			
-	        driver = props.getProperty("driver");
-	        url = props.getProperty("url");
-	        user = props.getProperty("user");
-	        password = props.getProperty("password");
+	        driver = "com.mysql.jdbc.Driver";//props.getProperty("driver");
+	        url = "jdbc:mysql://localhost/projectplus";//props.getProperty("url");
+	        user = "root";//props.getProperty("user");
+	        password = "123456";//props.getProperty("password");
 			
 	        
 			try {
@@ -58,6 +58,6 @@ public class DBMgr {
 				isInit  = true;
 			}
 		}
-	}*/
+	}
 	
 }
