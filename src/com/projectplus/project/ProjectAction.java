@@ -75,13 +75,20 @@ public class ProjectAction extends Action {
 		ResultSet resultSet = null;
 		ArrayList<WbsScheme> schemes = new ArrayList<WbsScheme>();
 		// Step:1 由DB撈出所有的Task
-		resultSet = ProjectDBMgr.listTask("projectId:123456");
+//		resultSet = ProjectDBMgr.listTask("projectId:123456");
 		
-		if(resultSet != null){
-			try {
-				while(resultSet.next()){
+//		if(resultSet != null){
+//			try {
+//				while(resultSet.next()){
 					// Step:2 使用WbsSchemeCreator.createWbsScheme 建構節點
-					WbsScheme scheme = WbsSchemeCreator.createWbsScheme(WbsTreeLevel.ROOT, "Root", "我是根結點");
+					WbsScheme scheme = WbsSchemeCreator.createWbsScheme("", WbsTreeLevel.ROOT, "Root", "我是根結點");
+					WbsScheme scheme2 = WbsSchemeCreator.createWbsScheme("Root", WbsTreeLevel.ROOT + 1, "根", "根");
+					WbsScheme scheme4 = WbsSchemeCreator.createWbsScheme("Root", WbsTreeLevel.ROOT + 2, "二之二", "二之二");
+					WbsScheme scheme7 = WbsSchemeCreator.createWbsScheme("Root", WbsTreeLevel.ROOT + 3, "三之三", "三之三");
+					WbsScheme scheme3 = WbsSchemeCreator.createWbsScheme("根", WbsTreeLevel.ROOT + 1, "二之一", "二之一");
+					WbsScheme scheme5 = WbsSchemeCreator.createWbsScheme("二之一", WbsTreeLevel.ROOT + 3, "三之一", "三之一");
+					WbsScheme scheme6 = WbsSchemeCreator.createWbsScheme("二之一", WbsTreeLevel.ROOT + 3, "三之二", "三之二");
+					WbsScheme scheme8 = WbsSchemeCreator.createWbsScheme("三之三", WbsTreeLevel.ROOT + 4, "四之一", "四之一");
 					
 					/*
 					 * 根階層 : WbsTreeLevel.ROOT
@@ -92,17 +99,28 @@ public class ProjectAction extends Action {
 					
 					// Step:3 將節點組成ArrayList
 					schemes.add(scheme);
+					schemes.add(scheme2);
+					schemes.add(scheme3);
+					schemes.add(scheme4);
+					schemes.add(scheme5);
+					schemes.add(scheme6);
+					schemes.add(scheme7);
+					schemes.add(scheme8);
 					
 					// Step:4 轉換該ArrayList為WBS Tree JSON字串傳回給客戶
-					JSONWriter.sendJSONResponse(response, schemes);
+					try {
+						JSONWriter.sendJSONResponse(response, schemes);
+					} catch (IOException e) {
+						e.printStackTrace();
+					}
 					
-				}
-			} catch (SQLException e) {
-					e.printStackTrace();
-			} catch (IOException e) {
-				e.printStackTrace();
-			}
-		}
+//				}
+//			} catch (SQLException e) {
+//					e.printStackTrace();
+//			} catch (IOException e) {
+//				e.printStackTrace();
+//			}
+//		}
 	}
 
 	private void queryMember(ActionMapping mapping, ProjectActionForm form,
