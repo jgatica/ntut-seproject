@@ -442,45 +442,64 @@
 
         <div id="templatemo_main">
             
-          <div class="col_w900 hr_divider">
+          <div class="col_w900 hr_divider ">
           		
-      			<div class="col_w170 lp_box float_l">
-				<img src="/images/subTitleBl.jpg" alt="Image" width="170">
-				
+      			<div id="slide_left" class="col_w170 lp_box float_l">
+				<div class="subTopDiv" ><h2 class="uiHeaderTitle" langtag="profile-title"></h2></div>	
+					
 					<div class="col_allw170 frontpage_box hoverdiv">
-                      <img src="/images/project_info.png" alt="Image" width="24" height="24">
+                      <a href="/member/basic.jsp">
+					  <img src="/images/user.png" alt="Image" width="24" height="24">
                       <h2>任務資訊</h2>
+					  </a>
                     </div>                    
                     <div class="col_allw170 frontpage_box hoverdiv">
-                      <img src="/images/task_group.png" alt="Image" width="24" height="24">
-                      <h2>負責人員</h2>                        
+					<a href="/member/photo.jsp">
+						<img src="/images/profile_img.png" alt="Image" width="24" height="24">
+						<h2>負責人員</h2>
+					</a>	
                     </div>
                     <div class="col_allw170 frontpage_box hoverdiv">
-                      <img src="/images/project_chart.png" alt="Image" width="24" height="24">
-                      <h2>任務進度</h2>
+					<a href="/member/contact.jsp">
+						<img src="/images/profile_phone.png" alt="Image" width="24" height="24">
+						<h2>任務進度</h2>
+					</a>	
                     </div>     
-                                    
-            <img src="/images/subBottom.png" alt="Image" width="170">     
+					                                                 
+			<div class="subBottomDiv" ></div>            
             </div>      
-				<div class="col_w700 lp_box float_r col_padding20">
-                <img src="/images/subTitle.jpg" alt="Image" width="690" height="29" />
+				<div id="dropBox" class="toggler col_w700 lp_box float_l margin_20rl">		
+				<div class="subTopDiv" >
+				<!-- TemplateBeginEditable name="PageTitle" -->PageTitle<!-- TemplateEndEditable -->
+				
+				</div>	
+				<!--<img src="/images/subTitle.jpg" alt="Image" width="690" height="29" />-->
                 <!-- TemplateBeginEditable name="RightArea" -->RightArea<!-- TemplateEndEditable -->
-				<img src="/images/subBottom700.jpg" alt="Image" width="690" />				
+				<div class="subBottomDiv" ></div>
+				
                 </div>
-                
-               
-                
-
-                
+				
+				<div class="col_p20 lp_box float_r">
+					<div class="subTopDiv" >
+						<h2 class="uiHeaderTitle">贊助</h2>
+					</div>	
+						<div style="text-align:center; padding:5px;">
+							<img width="100%" class="bigpic" src="/images/templatemo_image_05.jpg" />
+							<p><message>廣告贊助</message></p>
+						</div>
+						<div style="text-align:center; padding:5px;">
+							<img width="100%" class="bigpic" src="/images/templatemo_image_05.jpg" />
+							<p><message>廣告贊助</message></p>
+						</div>
+						<div style="text-align:center; padding:5px;">
+							<img width="100%" class="bigpic" src="/images/templatemo_image_05.jpg" />
+							<p><message>廣告贊助</message></p>
+						</div>	
+                    <div class="subBottomDiv" ></div>     
+            	</div>
+								
                 <div class="cleaner"></div>
-
             </div>
-
-
-            
-
-            
-            
         </div> 
 <!-- end of templatemo main -->
 <!-- InstanceEndEditable -->
