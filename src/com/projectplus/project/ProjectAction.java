@@ -1,6 +1,9 @@
 package com.projectplus.project;
 
 import java.io.IOException;
+import java.sql.ResultSet;
+import java.sql.SQLException;
+import java.util.ArrayList;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -11,6 +14,9 @@ import org.apache.struts.action.ActionForm;
 import org.apache.struts.action.ActionForward;
 import org.apache.struts.action.ActionMapping;
 
+import com.projectplus.charts.WbsScheme;
+import com.projectplus.charts.WbsSchemeCreator;
+import com.projectplus.charts.WbsTreeLevel;
 import com.projectplus.context.Result;
 import com.projectplus.util.JSONWriter;
 
@@ -24,6 +30,7 @@ public class ProjectAction extends Action {
 	public static final int QYPROJECT = 5;
 	public static final int ASSIGNPM = 6;
 	public static final int QYMEMBER = 7;
+	public static final int WBSTREE = 8;
 	
 	public ActionForward execute(ActionMapping mapping, ActionForm actionForm,
 			HttpServletRequest request, HttpServletResponse response) {
@@ -50,9 +57,52 @@ public class ProjectAction extends Action {
 				assignPM(mapping, form, request, response, session);
 			case QYMEMBER:
 				queryMember(mapping, form, request, response, session);
+			case WBSTREE:
+				queryWbsTree(mapping, form, request, response, session);
 		}
 		
 		return null;
+	}
+
+	
+	/**
+	 * OP 8
+	 * 建構WBS TREE並回傳給前端顯示
+	 */
+	private void queryWbsTree(ActionMapping mapping, ProjectActionForm form,
+			HttpServletRequest request, HttpServletResponse response, HttpSession session) {
+		
+		ResultSet resultSet = null;
+		ArrayList<WbsScheme> schemes = new ArrayList<WbsScheme>();
+		// Step:1 由DB撈出所有的Task
+		resultSet = ProjectDBMgr.listTask("projectId:123456");
+		
+		if(resultSet != null){
+			try {
+				while(resultSet.next()){
+					// Step:2 使用WbsSchemeCreator.createWbsScheme 建構節點
+					WbsScheme scheme = WbsSchemeCreator.createWbsScheme(WbsTreeLevel.ROOT, "Root", "我是根結點");
+					
+					/*
+					 * 根階層 : WbsTreeLevel.ROOT
+					 * 第二階層 : WbsTreeLevel.ROOT + 1
+					 * 第三階層 : WbsTreeLevel.ROOT + 2
+					 * ... 以此類推
+					*/
+					
+					// Step:3 將節點組成ArrayList
+					schemes.add(scheme);
+					
+					// Step:4 轉換該ArrayList為WBS Tree JSON字串傳回給客戶
+					JSONWriter.sendJSONResponse(response, schemes);
+					
+				}
+			} catch (SQLException e) {
+					e.printStackTrace();
+			} catch (IOException e) {
+				e.printStackTrace();
+			}
+		}
 	}
 
 	private void queryMember(ActionMapping mapping, ProjectActionForm form,
