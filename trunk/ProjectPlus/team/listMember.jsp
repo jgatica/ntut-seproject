@@ -251,7 +251,6 @@
 		});			
 		
 		$( "#agree" ).click(function(){
-			
 		});	
 			
 		$( "#cancel" ).click(function(){

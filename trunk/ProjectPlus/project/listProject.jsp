@@ -242,6 +242,28 @@
 	 * 一開始讀取第零筆資料
 	 */
 	$(document).ready(function(){
+		$( "#agree" ).click(function(){
+			//alert("1");
+			var op = 0;
+			var name = $("#project_name").val();
+			var dest = $("#project_destination").val();
+			var leader = $("#project_leader").val();
+			var start = $("#project_startDate").val();
+			var end = $("#project_endDate").val();
+			
+			$.getJSON('/ProjectAction.do', {op:op,name:name,destination:dest,leader:leader,startDate:start,endDate:end}, function(data){
+				if(data.isSuccess)
+					$("#dialog").dialog('close');		
+				else
+					alert(data.message);
+			});
+			//alert("3");
+		});	
+		
+		$("#cancel").click(function(){
+			$("#dialog").dialog('close');	
+		});
+		
 		// dialog
 		$( "#dialog" ).dialog( {autoOpen: false, minWidth: 350, minHeight: 150, height:300, modal: true} );
 		$( "#dialog_btn" ).click(function(){
