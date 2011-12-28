@@ -271,22 +271,6 @@
         </div>
         -->
 <!-- InstanceBeginEditable name="Menu" -->
-        <div id="templatemo_menu">
-            <ul>
-            	<li><a href="#"><img src="/images/templatemo_logo.png" /><img class="tip" src="/images/templatemo_logo.png" /></a></li>
-                <li><a href="#"><img src="/images/title_group.png" /></a></li>
-                <li><a href="#"><img src="/images/title_mail.png" /></a></li>
-				<li><a href="#"><img src="/images/title_message.png" /></a></li>
-                <li>
-				<form method="get" id="searchform" action="#">
-					<div>
-						<input type="text" value="搜尋" name="s" id="s" onfocus="defaultInput(this)" onblur="clearInput(this)" />
-						<input type="submit" id="searchsubmit" value=" " />
-					</div>
-				</form>       
-                </li>
-            </ul>    	
-        </div> 
 <!-- InstanceEndEditable -->
 <div id="templatemo_white">
 </div>
