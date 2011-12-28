@@ -26,38 +26,38 @@ public class DBMgr {
 	 * */
 	
 	static {
-		if(!isInit)
-		{
-			// 從config檔讀取參數
-			/*props = new Properties();
-	        try {
-	             props.load(new FileInputStream("config/dbconfig.properties"));
-	        } catch (FileNotFoundException e) {
-	             e.printStackTrace();
-	        } catch (IOException e) {
-	             e.printStackTrace();
-	        }*/
-			
-	        driver = "com.mysql.jdbc.Driver";//props.getProperty("driver");
-	        url = "jdbc:mysql://localhost/projectplus";//props.getProperty("url");
-	        user = "root";//props.getProperty("user");
-	        password = "123456";//props.getProperty("password");
-			
-	        
-			try {
-				Class.forName(driver);
-				// 註冊driver
-				con = DriverManager.getConnection(url, user, password);
-			}
-			catch (ClassNotFoundException e) {
-				System.out.println("DriverClassNotFound :" + e.toString());
-			}
-			catch (SQLException x) {
-				System.out.println("Exception :" + x.toString());
-			} finally{
-				isInit  = true;
-			}
-		}
+//		if(!isInit)
+//		{
+//			// 從config檔讀取參數
+//			/*props = new Properties();
+//	        try {
+//	             props.load(new FileInputStream("config/dbconfig.properties"));
+//	        } catch (FileNotFoundException e) {
+//	             e.printStackTrace();
+//	        } catch (IOException e) {
+//	             e.printStackTrace();
+//	        }*/
+//			
+//	        driver = "com.mysql.jdbc.Driver";//props.getProperty("driver");
+//	        url = "jdbc:mysql://localhost/projectplus";//props.getProperty("url");
+//	        user = "root";//props.getProperty("user");
+//	        password = "123456";//props.getProperty("password");
+//			
+//	        
+//			try {
+//				Class.forName(driver);
+//				// 註冊driver
+//				con = DriverManager.getConnection(url, user, password);
+//			}
+//			catch (ClassNotFoundException e) {
+//				System.out.println("DriverClassNotFound :" + e.toString());
+//			}
+//			catch (SQLException x) {
+//				System.out.println("Exception :" + x.toString());
+//			} finally{
+//				isInit  = true;
+//			}
+//		}
 	}
 	
 }

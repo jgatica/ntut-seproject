@@ -2,7 +2,6 @@ package com.projectplus.project;
 
 import java.io.IOException;
 import java.sql.ResultSet;
-import java.sql.SQLException;
 import java.util.ArrayList;
 
 import javax.servlet.http.HttpServletRequest;
@@ -16,7 +15,6 @@ import org.apache.struts.action.ActionMapping;
 
 import com.projectplus.charts.WbsScheme;
 import com.projectplus.charts.WbsSchemeCreator;
-import com.projectplus.charts.WbsTreeLevel;
 import com.projectplus.context.Result;
 import com.projectplus.util.JSONWriter;
 
@@ -39,26 +37,26 @@ public class ProjectAction extends Action {
 		ProjectActionForm form = (ProjectActionForm) actionForm;
 		
 		int op = form.getOp();
-		//System.out.println("the op  = " + op);
+		System.out.println("the op  = " + op);
 		switch (op) {
 			case ADDPROJECT:
-				addProject(mapping, form, request, response, session);
+				return addProject(mapping, form, request, response, session);
 			case DELPROJECT:
-				delProject(mapping, form, request, response, session);
+				return delProject(mapping, form, request, response, session);
 			case FREEZEPROJECT:
-				freezeProject(mapping, form, request, response, session);
+				return freezeProject(mapping, form, request, response, session);
 			case UNFREEZEPROJECT:
-				unFreezeProject(mapping, form, request, response, session);
+				return unFreezeProject(mapping, form, request, response, session);
 			case UPDPROJECT:
-				updateProject(mapping, form, request, response, session);
+				return updateProject(mapping, form, request, response, session);
 			case QYPROJECT:
-				queryProject(mapping, form, request, response, session);
+				return queryProject(mapping, form, request, response, session);
 			case ASSIGNPM:
-				assignPM(mapping, form, request, response, session);
+				return assignPM(mapping, form, request, response, session);
 			case QYMEMBER:
-				queryMember(mapping, form, request, response, session);
+				return queryMember(mapping, form, request, response, session);
 			case WBSTREE:
-				queryWbsTree(mapping, form, request, response, session);
+				return queryWbsTree(mapping, form, request, response, session);
 		}
 		
 		return null;
@@ -68,8 +66,9 @@ public class ProjectAction extends Action {
 	/**
 	 * OP 8
 	 * 建構WBS TREE並回傳給前端顯示
+	 * @return 
 	 */
-	private void queryWbsTree(ActionMapping mapping, ProjectActionForm form,
+	private ActionForward queryWbsTree(ActionMapping mapping, ProjectActionForm form,
 			HttpServletRequest request, HttpServletResponse response, HttpSession session) {
 		
 		ResultSet resultSet = null;
@@ -117,6 +116,7 @@ public class ProjectAction extends Action {
 					} catch (IOException e) {
 						e.printStackTrace();
 					}
+					return null;
 					
 //				}
 //			} catch (SQLException e) {
@@ -127,30 +127,34 @@ public class ProjectAction extends Action {
 //		}
 	}
 
-	private void queryMember(ActionMapping mapping, ProjectActionForm form,
+	private ActionForward queryMember(ActionMapping mapping, ProjectActionForm form,
 			HttpServletRequest request, HttpServletResponse response,
 			HttpSession session) {
+				return null;
 		// TODO Auto-generated method stub
 		
 	}
 
-	private void assignPM(ActionMapping mapping, ProjectActionForm form,
+	private ActionForward assignPM(ActionMapping mapping, ProjectActionForm form,
 			HttpServletRequest request, HttpServletResponse response,
 			HttpSession session) {
+				return null;
 		// TODO Auto-generated method stub
 		
 	}
 
-	private void unFreezeProject(ActionMapping mapping, ProjectActionForm form,
+	private ActionForward unFreezeProject(ActionMapping mapping, ProjectActionForm form,
 			HttpServletRequest request, HttpServletResponse response,
 			HttpSession session) {
+				return null;
 		// TODO Auto-generated method stub
 		
 	}
 
-	private void queryProject(ActionMapping mapping, ProjectActionForm form,
+	private ActionForward queryProject(ActionMapping mapping, ProjectActionForm form,
 			HttpServletRequest request, HttpServletResponse response,
 			HttpSession session) {
+				return null;
 		// TODO Auto-generated method stub
 		/*
 		ProjectDataStructure projectDataStructure = new ProjectDataStructure();
@@ -162,51 +166,60 @@ public class ProjectAction extends Action {
 		projectDataStructure.endDate = form.getEndDate();*/
 	}
 
-	private void updateProject(ActionMapping mapping, ProjectActionForm form,
+	private ActionForward updateProject(ActionMapping mapping, ProjectActionForm form,
 			HttpServletRequest request, HttpServletResponse response,
 			HttpSession session) {
+				return null;
 		// TODO Auto-generated method stub
 		
 	}
 
-	private void freezeProject(ActionMapping mapping, ProjectActionForm form,
+	private ActionForward freezeProject(ActionMapping mapping, ProjectActionForm form,
 			HttpServletRequest request, HttpServletResponse response,
 			HttpSession session) {
+				return null;
 		// TODO Auto-generated method stub
 		
 	}
 
-	private void delProject(ActionMapping mapping, ProjectActionForm form,
+	private ActionForward delProject(ActionMapping mapping, ProjectActionForm form,
 			HttpServletRequest request, HttpServletResponse response,
 			HttpSession session) {
+				return null;
 		// TODO Auto-generated method stub
 		
 	}
 
-	private void addProject(ActionMapping mapping, ProjectActionForm form,
+	private ActionForward addProject(ActionMapping mapping, ProjectActionForm form,
 			HttpServletRequest request, HttpServletResponse response,
 			HttpSession session) {
-		System.out.println("name:"+form.name);
+		/*System.out.println("name:"+form.name);
 		System.out.println("destination:"+form.destination);
 		System.out.println("leader:"+form.leader);
 		System.out.println("startDate:"+form.startDate);
-		System.out.println("endDate:"+form.endDate);
+		System.out.println("endDate:"+form.endDate);*/
+		//boolean isSuccess =true;
 		boolean isSuccess = ProjectDBMgr.addProject(form.name, form.destination, form.leader, form.startDate, form.endDate);
-//		boolean isSuccess =true;
 		Result result = new Result();
 		result.isSuccess = isSuccess;
+		result.message = "ok";
+		result.isSuccess=isSuccess;
 		if(isSuccess)
 		{
-			result.message = "ok";
-		}	
+			//session.setAttribute(SessionContext.ISLOGIN, isSuccess);
+			result.message="ok";
+		}
 		else
 		{
-			result.message = "輸入不完整";
+			//session.setAttribute(SessionContext.ISLOGIN, "false");
+			result.message="帳號或密碼位輸入";
 		}
 		try {
 			JSONWriter.sendJSONResponse(response, result);
 		} catch (IOException e) {
 			e.printStackTrace();
 		}
+		
+		return null;
 	}
 }
