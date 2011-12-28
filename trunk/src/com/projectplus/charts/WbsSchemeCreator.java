@@ -27,9 +27,10 @@ public class WbsSchemeCreator {
 	 * @param descript : 該節點描述
 	 * @return WbsScheme節點
 	 */
-	public static WbsScheme createWbsScheme(int level, String name, String descript){
+	public static WbsScheme createWbsScheme(String parent ,int level, String name, String descript){
 		
 		WbsScheme wbsScheme = new WbsScheme();
+		wbsScheme.parent = parent;
 		wbsScheme.name = name;
 		wbsScheme.descript = descript;
 		wbsScheme.level = level;
