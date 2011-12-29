@@ -55,7 +55,7 @@
 		
 		// 更換介面語系
 		$['langChanger'].addLangInitHandler(initPage);
-		$['langChanger'].langInit({lang: "en", file: "/js/files/lang-example.xml", version: 7});
+		$['langChanger'].langInit({lang: "en", file: "/js/files/lang-example.xml", version: 8});
 		
 		// 初始化jQueryUI Button
 		$( "button" ).button();
@@ -242,10 +242,56 @@
 	 * 一開始讀取第零筆資料
 	 */
 	$(document).ready(function(){
-		$('#date').datepicker();
+				// dialog
+		$( "#dialog" ).dialog( {autoOpen: false, minWidth: 350, minHeight: 150, height:300, modal: true} );
+		$( "#task_dialog" ).dialog( {autoOpen: false, minWidth: 350, minHeight: 150, height:235, modal: true} );
+		$( "button" ).button();
+		
+		$.getJSON('/TaskAction.do',  { op:5 }, function(data) {
+			if(data!=null)
+			{
+				$("#taskArea").html("");
+				var size = data.length,index;
+					
+				for(index = 0; index < size; index++)
+				{
+					var content ="";
+					if(index%2==0)
+					{
+						content = '<tr class="odd">' + '<td>' + parseInt(index) + '</td>' +
+									 '<td><team>' + data[index].projectName + '</team>' + data[index].name + '</td>' +
+									 '<td><button id="'+data[index].projectId + '" class="dialog_btn">查看任務</button></td>' ;
+					}
+					else
+					{
+						content = '<tr>' + '<td>' + parseInt(index) + '</td>' +
+									 '<td><team>' + data[index].projectName + '</team>' + data[index].name + '</td>' +
+									 '<td><button id="'+data[index].projectId + '" class="dialog_btn">查看任務</button></td>' ;
+					}
+					
+					$("#taskArea").append(content);
+					$( ".dialog_btn" ).click(function(){
+						var op = 4;
+						var id = $(this).attr("id");
+						$.getJSON('/TaskAction.do',  { op:op,id:id }, function(data) {
+							$("#taskName").text(data.name);
+							$("#taskProject").text(data.projectName);
+							$("#taskDescript").text(data.description);
+							$("#taskStartDate").text(data.startDate);
+							$("#taskEndDate").text(data.endDate);
+							$("#taskStatus").text(data.status);
+						});
+						
+						$("#task_dialog").dialog('open');
+					});	
+					$( "button" ).button();
+				}
+			}
+		});
+		
+		/*$('#date').datepicker();
 		$('#date_start').datepicker();
 		$('#date_end').datepicker();
-		$( "button" ).button();
 		$( "#draggable" ).draggable();
 		$( "#droppable" ).droppable({
 			drop: function( event, ui ) {
@@ -254,14 +300,13 @@
 					.find( "p" )
 						.html( "Dropped!" );
 			}
-		});	
+		});	*/
 		
 
-		// dialog
-		$( "#dialog" ).dialog( {autoOpen: false, minWidth: 350, minHeight: 150, height:300, modal: true} );
-		$( ".dialog_btn" ).click(function(){
+
+		/*$( ".dialog_btn" ).click(function(){
 			$("#dialog").dialog('open');
-		});	
+		});*/	
 	}); 
 </script>
 
@@ -521,7 +566,7 @@
 							<td colspan="4"></td>
 						</tr>
 						</tfoot>
-						<tbody>
+						<tbody id="taskArea">
 							<tr>
 								<td>001</td>
 								<td><team>軟體工程</team>專案任務1</td>	
@@ -555,8 +600,45 @@
 						</tbody>
 					</table>	
 
+				<div id="task_dialog" title="工作資料">
+					<table width="100%">				
+					<form>
+                        <tr class="odd">
+                            <td langtag="task-name" width="35%"></td>
+                            <td id="taskName" width="65%"></td>									
+                        </tr>
+                        <tr>									
+                            <td langtag="task-project" width="35%"></td>
+                            <td id="taskProject"></td>									
+                        </tr>	
+                        <tr class="odd">									
+                            <td langtag="task-description" width="35%"></td>
+                            <td id="taskDescript" width="65%"></td>									
+                        </tr>		
+                        <tr>
+                            <td langtag="task-begin" width="35%"></td>
+                            <td id = "taskStartDate" width="65%"></td>									
+                        </tr>	
+                        <tr class="odd">
+                            <td langtag="task-end" width="35%"></td>
+                            <td id = "taskEndDate" width="65%"></td>									
+                        </tr>
+                        <tr>
+                            <td langtag="task-status" width="35%"></td>
+                            <td id = "taskStatus" width="65%"></td>									
+                        </tr>	
+					</form>	
+					</table>
 					
-					<div id="dialog" title="當前處理任務">
+					<div class="divider"></div>
+					<div style="text-align:right;">
+						<button id="edit" class="dialog_btn">編輯</button>
+					</div>
+					<!--<p>你確定要刪除該專案嗎?</p>
+					<button>確定</button> <button>取消</button> -->
+				</div>		
+                    
+					<div id="dialog" title="資訊任務">
 						<p>在<team>軟體工程</team>未處理的任務</p>
 						<table summary="站內信箱" width="100%" style="height:300px;">
 							<!--<caption>Table designs</caption>-->

@@ -223,5 +223,30 @@
 		<tw>目前工作</tw>
 		<en>Task</en>
 	</text>	
+	<text id="task-name">
+		<tw>工作名稱</tw>
+		<en>Task Name</en>
+	</text>	
+	<text id="task-project">
+		<tw>所屬專案</tw>
+		<en>Project Name</en>
+	</text>	
+	<text id="task-description">
+		<tw>工作描述</tw>
+		<en>Task description</en>
+	</text>	
+	<text id="task-status">
+		<tw>工作狀態</tw>
+		<en>Task status</en>
+	</text>	
+	<text id="task-begin">
+		<tw>起始日</tw>
+		<en>Beginning</en>
+	</text>	
+	<text id="task-end">
+		<tw>期限</tw>
+		<en>Deadline</en>
+	</text>	
+	
 </content>
 	
