@@ -199,12 +199,11 @@ public class ProjectAction extends Action {
 		System.out.println("startDate:"+form.startDate);
 		System.out.println("endDate:"+form.endDate);*/
 		//boolean isSuccess =true;
+		boolean check = form.name.length()==0 || form.destination.length()==0 ||  form.leader.length()==0 || form.startDate.length()==0 || form.endDate.length()==0;
 		boolean isSuccess = ProjectDBMgr.addProject(form.name, form.destination, form.leader, form.startDate, form.endDate);
 		Result result = new Result();
-		result.isSuccess = isSuccess;
-		result.message = "ok";
-		result.isSuccess=isSuccess;
-		if(isSuccess)
+		result.isSuccess = isSuccess && !check;
+		if(result.isSuccess)
 		{
 			//session.setAttribute(SessionContext.ISLOGIN, isSuccess);
 			result.message="ok";
@@ -212,7 +211,7 @@ public class ProjectAction extends Action {
 		else
 		{
 			//session.setAttribute(SessionContext.ISLOGIN, "false");
-			result.message="帳號或密碼位輸入";
+			result.message="未輸入完全";
 		}
 		try {
 			JSONWriter.sendJSONResponse(response, result);
