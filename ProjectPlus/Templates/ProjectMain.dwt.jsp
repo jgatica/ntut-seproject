@@ -55,7 +55,7 @@
 		
 		// 更換介面語系
 		$['langChanger'].addLangInitHandler(initPage);
-		$['langChanger'].langInit({lang: "en", file: "/js/files/lang-example.xml", version: 7});
+		$['langChanger'].langInit({lang: "en", file: "/js/files/lang-example.xml", version: 8});
 		
 		// 初始化jQueryUI Button
 		$( "button" ).button();

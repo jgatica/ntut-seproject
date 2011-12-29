@@ -34,7 +34,7 @@
 	$(document).ready(function(){
 		var initPage;
 		
-		$['langChanger'].langInit({lang: "en", file: "/js/files/lang-example.xml", version: 7}, initPage);
+		$['langChanger'].langInit({lang: "en", file: "/js/files/lang-example.xml", version: 8}, initPage);
 		$( "#register_dialog" ).dialog( {autoOpen: false, minWidth: 200, minHeight: 120, modal: true} );
 		$( "button" ).button();
 		$('#facebook').click(loginFacebook);

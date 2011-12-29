@@ -9,6 +9,7 @@
 		<form-bean name="ProjectActionForm" type="com.projectplus.project.ProjectActionForm"/>
 		<form-bean name="ArticleForm" type="com.profile.article.ArticleForm"/>
         <form-bean name="ProjectActionForm" type="com.projectplus.project.ProjectActionForm"/>
+		<form-bean name="TaskActionForm" type="com.projectplus.task.TaskActionForm"/>
     </form-beans>
 
   <action-mappings>
@@ -29,6 +30,9 @@
 	</action>
 	
 	<action name="ProjectActionForm" path="/ProjectAction" scope="request" type="com.projectplus.project.ProjectAction">
+	</action>
+	
+	<action name="TaskActionForm" path="/TaskAction" scope="request" type="com.projectplus.task.TaskAction">
 	</action>
 	
   </action-mappings>
