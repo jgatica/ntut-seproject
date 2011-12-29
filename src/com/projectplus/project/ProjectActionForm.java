@@ -10,6 +10,7 @@ public class ProjectActionForm extends ActionForm {
 	public String leader;
 	public String startDate;
 	public String endDate;
+	
 	public int getOp() {
 		return op;
 	}
