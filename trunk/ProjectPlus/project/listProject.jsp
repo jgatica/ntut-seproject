@@ -265,7 +265,7 @@
 		});
 		
 		// dialog
-		$( "#dialog" ).dialog( {autoOpen: false, minWidth: 350, minHeight: 150, height:300, modal: true} );
+		$( "#dialog" ).dialog( {autoOpen: false, minWidth: 350, minHeight: 150, modal: true} );
 		$( "#dialog_btn" ).click(function(){
 			$("#dialog").dialog('open');
 		});			
