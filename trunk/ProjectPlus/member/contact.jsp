@@ -242,6 +242,13 @@
 	 * 一開始讀取第零筆資料
 	 */
 	$(document).ready(function(){
+$.getJSON('/MemberAction.do',  { op:3 }, function(data) {
+			$("#email").text(data.member_email);
+			$("#phone").text(data.member_phone);
+			$("#mobile").text(data.member_mobile);
+			$("#address").text(data.member_address);
+		});
+		
 		$('#date').datepicker();
 		$('#date_start').datepicker();
 		$('#date_end').datepicker();
@@ -361,8 +368,7 @@
 					<div class="col_allw370 frontpage_box hoverdiv">
                     	<img src="/images/2.jpg" alt="Image" width="32" height="32">
                         <p><name>陳至圓</name>修改了<team>軟體工程</team>的內容。</p>
-  	                </div>      					                   
-				              	
+  	                </div>      
 </div>	
                 <li>
 				<form method="get" id="searchform" action="#">
@@ -523,7 +529,23 @@
 							</tr>
 							</tfoot>
 							<tbody>
+                            	<tr class="odd">
+									<td langtag="top-account-mail"></td>
+									<td id="email">augus790302@gmail.com</td>									
+								</tr>
+                                <tr>									
+									<td langtag="profile-table-phone"></td>
+									<td id="phone">0980556436</td>									
+								</tr>	
+                                <tr class="odd">									
+									<td langtag="profile-table-mobile"></td>
+									<td id="mobile">0980556436</td>									
+								</tr>		
 								<tr>
+									<td langtag="profile-table-address"></td>
+									<td id = "address">新北市</td>									
+								</tr>
+								<!--<tr>
 									<td>市內電話</td>
 									<td>02-12345678</td>									
 								</tr>
@@ -546,7 +568,7 @@
 								<tr class="odd">									
 									<td>個人網站</td>
 									<td>http://www.facebook.com/profile.php?id=100000398385599</td>									
-								</tr>																															
+								</tr>-->																															
 							</tbody>
 						</table>			
 

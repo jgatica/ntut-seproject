@@ -330,8 +330,7 @@
 					<div class="col_allw370 frontpage_box hoverdiv">
                     	<img src="/images/2.jpg" alt="Image" width="32" height="32">
                         <p><name>陳至圓</name>修改了<team>軟體工程</team>的內容。</p>
-  	                </div>      					                   
-				              	
+  	                </div>      
 </div>	
                 <li>
 				<form method="get" id="searchform" action="#">

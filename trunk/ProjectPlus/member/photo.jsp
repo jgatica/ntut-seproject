@@ -242,6 +242,10 @@
 	 * 一開始讀取第零筆資料
 	 */
 	$(document).ready(function(){
+		$.getJSON('/MemberAction.do',  { op:3 }, function(data) {
+			$("#imageURL").attr("src",data.imageURL);
+		});
+		
 		$('#date').datepicker();
 		$('#date_start').datepicker();
 		$('#date_end').datepicker();
@@ -368,8 +372,7 @@
 					<div class="col_allw370 frontpage_box hoverdiv">
                     	<img src="/images/2.jpg" alt="Image" width="32" height="32">
                         <p><name>陳至圓</name>修改了<team>軟體工程</team>的內容。</p>
-  	                </div>      					                   
-				              	
+  	                </div>      
 </div>	
                 <li>
 				<form method="get" id="searchform" action="#">
@@ -516,7 +519,7 @@
                 <div class="table-content">
 			
 					<div style="text-align:center">
-						<img class="bigpic" src="/images/bigpic.jpg" />
+						<img id="imageURL" class="bigpic" src="/images/bigpic.jpg" width="100px" height="100px"/>
 						<button id="dialog_btn">上傳圖片</button>
 						<div class="divider"></div>
 						透過上傳檔案，你即確定你有發表此照片的權利，並且沒有違反<name>服務項目條款</name>
