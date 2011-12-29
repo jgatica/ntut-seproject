@@ -55,7 +55,7 @@
 		
 		// 更換介面語系
 		$['langChanger'].addLangInitHandler(initPage);
-		$['langChanger'].langInit({lang: "en", file: "/js/files/lang-example.xml", version: 8});
+		$['langChanger'].langInit({lang: "en", file: "/js/files/lang-example.xml", version: 9});
 		
 		// 初始化jQueryUI Button
 		$( "button" ).button();
@@ -246,7 +246,6 @@
 		$( "#dialog" ).dialog( {autoOpen: false, minWidth: 350, minHeight: 150, height:300, modal: true} );
 		$( "#task_dialog" ).dialog( {autoOpen: false, minWidth: 350, minHeight: 150, height:235, modal: true} );
 		//$( "button" ).button();
-		
 		$.getJSON('/TaskAction.do',  { op:5 }, function(data) {
 			if(data!=null)
 			{

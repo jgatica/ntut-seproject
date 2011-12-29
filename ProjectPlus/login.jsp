@@ -58,7 +58,7 @@
 			var name = $('#member_name').val();
 			var nick_name = $('#member_nickname').val();
 			var password = $('#member_password').val();
-			$.getJSON('/MemberAction.do',  { op:'op',member_email:email,password:password,member_name:name,member_nickname:nick_name}, function(data) {
+			$.getJSON('/MemberAction.do',  { op:op,member_email:email,password:password,member_name:name,member_nickname:nick_name}, function(data) {
 			//console.log(data);
 				if(data.result.message=="ok") {
 					window.location = "/index.jsp";
@@ -78,11 +78,11 @@
 			var password = $('#password').val();
 			$.getJSON('/MemberAction.do',  { op:op, member_email:email, password:password }, function(data) {
 			console.log(data);
-				if(data.message=="ok") {
+				if(data.result.message=="ok") {
 					window.location = "/index.jsp";
 				}
 				else
-					alert(data.message);
+					alert(data.result.message);
 			});			
 		});
 	});   
