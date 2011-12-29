@@ -244,10 +244,10 @@
 			$("#name").text(data.member_name);
 			$("#nickName").text(data.member_nickname);
 			$("#gender").text(data.member_Gender);
-			$("#email").text(data.member_email);
-			$("#phone").text(data.member_phone);
-			$("#mobile").text(data.member_mobile);
-			$("#address").text(data.member_address);
+			//$("#email").text(data.member_email);
+			//$("#phone").text(data.member_phone);
+			//$("#mobile").text(data.member_mobile);
+			//$("#address").text(data.member_address);
 			$("#birthday").text(data.member_birthday);
 			$("#blood").text(data.member_blood);
 			$("#descript").text(data.member_descript);
@@ -356,8 +356,7 @@
 					<div class="col_allw370 frontpage_box hoverdiv">
                     	<img src="/images/2.jpg" alt="Image" width="32" height="32">
                         <p><name>陳至圓</name>修改了<team>軟體工程</team>的內容。</p>
-  	                </div>      					                   
-				              	
+  	                </div>      
 </div>	
                 <li>
 				<form method="get" id="searchform" action="#">
@@ -535,7 +534,7 @@
 									<td langtag="profile-table-gender"></td>
 									<td id="gender">男生</td>									
 								</tr>	
-                                <tr class="odd">
+                                <!--<tr class="odd">
 									<td langtag="top-account-mail"></td>
 									<td id="email">augus790302@gmail.com</td>									
 								</tr>
@@ -550,7 +549,7 @@
 								<tr>
 									<td langtag="profile-table-address"></td>
 									<td id = "address">新北市</td>									
-								</tr>
+								</tr>-->
 								<tr class="odd">									
 									<td langtag="profile-table-birthday"></td>
 									<td id ="birthday">1990/03/02</td>									
