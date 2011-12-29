@@ -1,6 +1,9 @@
 package com.projectplus.task;
 
 import java.io.IOException;
+import java.sql.ResultSet;
+import java.sql.SQLException;
+import java.util.ArrayList;
 import java.util.List;
 
 import javax.servlet.http.HttpServletRequest;
@@ -12,9 +15,7 @@ import org.apache.struts.action.ActionForm;
 import org.apache.struts.action.ActionForward;
 import org.apache.struts.action.ActionMapping;
 
-import com.projectplus.context.Result;
 import com.projectplus.context.SessionContext;
-import com.projectplus.member.MemberActionForm;
 import com.projectplus.member.MemberDataStructure;
 import com.projectplus.util.JSONWriter;
 
@@ -25,7 +26,7 @@ public class TaskAction extends Action {
 	public static final int ASSIGNTASK = 3;
 	public static final int QYTASK = 4;
 	public static final int QYMEMBERTASKS = 5;
-	public static final int QYMPROJECTTASKS = 5;
+	public static final int QYMPROJECTTASKS = 6;
 	@Override
 	public ActionForward execute(ActionMapping mapping, ActionForm actionForm,
 			HttpServletRequest request, HttpServletResponse response)
@@ -58,7 +59,45 @@ public class TaskAction extends Action {
 			TaskActionForm form, HttpServletRequest request,
 			HttpServletResponse response, HttpSession session) {
 		MemberDataStructure data = (MemberDataStructure)session.getAttribute(SessionContext.USERDATA);
-		List<TaskDataStructure> dataList = TaskDBMgr.queryMemberTasks(data.hex_mrscid);
+		ResultSet resultSet = TaskDBMgr.queryMemberTasks(data.member_email);
+		
+		List<TaskDataStructure> dataList=new ArrayList<TaskDataStructure>();
+		try {
+			if(resultSet!=null)
+			{
+				while(resultSet.next())
+				{
+					TaskDataStructure task = new TaskDataStructure();
+					task.setName(resultSet.getString(""));
+					task.setProjectId(resultSet.getString(""));
+					task.setMemberId(resultSet.getString(""));
+					task.setDescription(resultSet.getString(""));
+					task.setStartDate(1234);
+					task.setEndDate(5678);
+					task.setStatus(resultSet.getString(""));
+					dataList.add(task);
+				}
+			}
+			else //假的(測試用) 如有真資料請將此部分刪除 直接return
+			{
+				for(int i=0;i<5;i++)
+				{
+					TaskDataStructure task = new TaskDataStructure();
+					task.setId(Integer.toString(i));
+					task.setName("工作"+i);
+					task.setProjectName("軟體工程");
+					task.setProjectId(Integer.toString(i));
+					task.setMemberId("1");
+					task.setDescription("task"+i);
+					task.setStartDate(i*100);
+					task.setEndDate(i*100+100);
+					task.setStatus("init");
+					dataList.add(task);
+				}
+			}
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
 		
 		try {
 			if(dataList==null)
@@ -74,7 +113,40 @@ public class TaskAction extends Action {
 	private ActionForward queryTask(ActionMapping mapping, TaskActionForm form,
 			HttpServletRequest request, HttpServletResponse response,
 			HttpSession session) {
-		TaskDataStructure task = TaskDBMgr.queryTask(form.id);
+		ResultSet resultSet = TaskDBMgr.queryTask(form.id);
+		TaskDataStructure task = null;
+		try {
+			if(resultSet!=null)
+			{
+				while(resultSet.next())
+				{
+					task = new TaskDataStructure();
+					task.setName(resultSet.getString(""));
+					task.setProjectId(resultSet.getString(""));
+					task.setMemberId(resultSet.getString(""));
+					task.setDescription(resultSet.getString(""));
+					task.setStartDate(1234);
+					task.setEndDate(5678);
+					task.setStatus(resultSet.getString(""));
+				}
+			}
+			else //假的(測試用) 如有真資料請將此部分刪除 直接return
+			{
+				task = new TaskDataStructure();
+				task.setId(form.id);
+				task.setName("工作"+form.id);
+				task.setProjectName("軟體工程");
+				task.setProjectId(form.id);
+				task.setMemberId("1");
+				task.setDescription("task"+form.id);
+				task.setStartDate(100);
+				task.setEndDate(200);
+				task.setStatus("init");
+			}
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+		
 		try {
 			if(task==null)
 			{
