@@ -9,7 +9,7 @@ public class TaskActionForm extends ActionForm{
 	public String memberId;
 	public String name;
 	public String description;
-	public String status;
+	public String state;
 	public long startDate;
 	public long endDate;
 	
@@ -62,10 +62,10 @@ public class TaskActionForm extends ActionForm{
 	public void setDescription(String description) {
 		this.description = description;
 	}
-	public String getStatus() {
-		return status;
+	public String getState() {
+		return state;
 	}
-	public void setStatus(String status) {
-		this.status = status;
+	public void setState(String state) {
+		this.state = state;
 	}
 }

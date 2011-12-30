@@ -72,9 +72,9 @@ public class TaskAction extends Action {
 					task.setProjectId(resultSet.getString(""));
 					task.setMemberId(resultSet.getString(""));
 					task.setDescription(resultSet.getString(""));
-					task.setStartDate(1234);
-					task.setEndDate(5678);
-					task.setStatus(resultSet.getString(""));
+					task.setStartDate(Long.parseLong("0"));
+					task.setEndDate(Long.parseLong("0"));
+					task.setState(resultSet.getString(""));
 					dataList.add(task);
 				}
 			}
@@ -91,7 +91,7 @@ public class TaskAction extends Action {
 					task.setDescription("task"+i);
 					task.setStartDate(i*100);
 					task.setEndDate(i*100+100);
-					task.setStatus("init");
+					task.setState("init");
 					dataList.add(task);
 				}
 			}
@@ -127,7 +127,7 @@ public class TaskAction extends Action {
 					task.setDescription(resultSet.getString(""));
 					task.setStartDate(1234);
 					task.setEndDate(5678);
-					task.setStatus(resultSet.getString(""));
+					task.setState(resultSet.getString(""));
 				}
 			}
 			else //假的(測試用) 如有真資料請將此部分刪除 直接return
@@ -141,7 +141,7 @@ public class TaskAction extends Action {
 				task.setDescription("task"+form.id);
 				task.setStartDate(100);
 				task.setEndDate(200);
-				task.setStatus("init");
+				task.setState("init");
 			}
 		} catch (SQLException e) {
 			e.printStackTrace();

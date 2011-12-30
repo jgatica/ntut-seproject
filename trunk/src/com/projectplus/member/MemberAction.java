@@ -66,11 +66,9 @@ public class MemberAction extends Action {
 			if(resultSet!=null && resultSet.next())
 			{
 				data = new MemberDataStructure();//真的
-				data.setHex_mrscid(resultSet.getString(""));
-				data.setBa_mrscid(resultSet.getString(""));
 				data.setImageURL(resultSet.getString(""));
 				data.setMember_name(resultSet.getString(""));
-				data.setMember_Gender(resultSet.getString(""));
+				data.setMember_gender(resultSet.getString(""));
 				data.setMember_address(resultSet.getString(""));
 				data.setMember_birthday(resultSet.getString(""));
 				data.setMember_descript(resultSet.getString(""));
@@ -82,11 +80,9 @@ public class MemberAction extends Action {
 			else//假的(測試用) 如有真資料請將此部分刪除 直接return null
 			{
 				data = new MemberDataStructure();
-				data.setHex_mrscid("1234");
-				data.setBa_mrscid("xxxx");
 				data.setImageURL("/images/2.jpg");
 				data.setMember_name(userData.member_name);
-				data.setMember_Gender(userData.member_Gender);
+				data.setMember_gender(userData.member_gender);
 				data.setMember_address(userData.member_address);
 				data.setMember_birthday(userData.member_birthday);
 				data.setMember_descript(userData.member_descript);
@@ -151,11 +147,9 @@ public class MemberAction extends Action {
 		if(result.isSuccess)
 		{
 			data = new MemberDataStructure();
-			data.setHex_mrscid("1234");
-			data.setBa_mrscid("xxxx");
 			data.setImageURL("/images/2.jpg");
 			data.setMember_name(form.member_name);
-			data.setMember_Gender(form.getMember_Gender());
+			data.setMember_gender(form.member_gender);
 			data.setMember_address(form.member_address);
 			data.setMember_birthday(form.member_birthday);
 			data.setMember_descript(form.member_descript);
@@ -203,11 +197,9 @@ public class MemberAction extends Action {
 		if(result.isSuccess)
 		{
 			data = new MemberDataStructure();
-			data.setHex_mrscid("1234");
-			data.setBa_mrscid("xxxx");
 			data.setImageURL("/images/2.jpg");
 			data.setMember_name(form.member_name);
-			data.setMember_Gender(form.getMember_Gender());
+			data.setMember_gender(form.member_gender);
 			data.setMember_address(form.member_address);
 			data.setMember_birthday(form.member_birthday);
 			data.setMember_descript(form.member_descript);
