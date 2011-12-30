@@ -5,10 +5,17 @@ public class ProjectDataStructure {
 	public String projectName;
 	public String projectTarget;
 	public String projectManager;
+	public String projectManagerId;
 	public String projectState;
 	public long startDate;
 	public long endDate;
 	
+	public String getProjectManagerId() {
+		return projectManagerId;
+	}
+	public void setProjectManagerId(String projectManagerId) {
+		this.projectManagerId = projectManagerId;
+	}
 	public String getProjectId() {
 		return projectId;
 	}

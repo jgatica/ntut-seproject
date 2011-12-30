@@ -7,11 +7,16 @@ public class TaskDataStructure {
 	public String memberId;
 	public String projectName;
 	public String description;
-	public String status;
+	public String state;
 	public long startDate;
 	public long endDate;
 	
-	
+	public String getState() {
+		return state;
+	}
+	public void setState(String state) {
+		this.state = state;
+	}
 	public String getId() {
 		return id;
 	}
@@ -47,12 +52,6 @@ public class TaskDataStructure {
 	}
 	public void setDescription(String description) {
 		this.description = description;
-	}
-	public String getStatus() {
-		return status;
-	}
-	public void setStatus(String status) {
-		this.status = status;
 	}
 	public long getStartDate() {
 		return startDate;

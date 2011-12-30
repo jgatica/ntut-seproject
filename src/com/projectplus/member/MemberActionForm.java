@@ -9,13 +9,12 @@ public class MemberActionForm extends ActionForm {
 	public int length;
 	
 	public String imageURL;
-	public String hex_mrscid;
-	public String ba_mrscid;
+	public String id;
 	public String password;
 	public String member_name;
 	public String member_nickname;
 	public String member_blood;
-	private String member_Gender;
+	public String member_gender;
 	public String member_descript;
 	public String member_address;
 	public String member_mobile;
@@ -23,7 +22,18 @@ public class MemberActionForm extends ActionForm {
 	public String member_birthday;
 	public String member_email;
 	
-	
+	public String getMember_gender() {
+		return member_gender;
+	}
+	public void setMember_gender(String member_gender) {
+		this.member_gender = member_gender;
+	}
+	public String getId() {
+		return id;
+	}
+	public void setId(String id) {
+		this.id = id;
+	}
 	public String getImageURL() {
 		return imageURL;
 	}
@@ -35,12 +45,6 @@ public class MemberActionForm extends ActionForm {
 	}
 	public void setMember_blood(String member_blood) {
 		this.member_blood = member_blood;
-	}
-	public String getMember_Gender() {
-		return member_Gender;
-	}
-	public void setMember_Gender(String member_Gender) {
-		this.member_Gender = member_Gender;
 	}
 	public int getOp() {
 		return op;
@@ -59,18 +63,6 @@ public class MemberActionForm extends ActionForm {
 	}
 	public void setLength(int length) {
 		this.length = length;
-	}
-	public String getHex_mrscid() {
-		return hex_mrscid;
-	}
-	public void setHex_mrscid(String hex_mrscid) {
-		this.hex_mrscid = hex_mrscid;
-	}
-	public String getBa_mrscid() {
-		return ba_mrscid;
-	}
-	public void setBa_mrscid(String ba_mrscid) {
-		this.ba_mrscid = ba_mrscid;
 	}
 	public String getPassword() {
 		return password;
