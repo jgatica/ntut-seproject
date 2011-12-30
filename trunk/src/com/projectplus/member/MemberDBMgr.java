@@ -63,7 +63,7 @@ public class MemberDBMgr extends DBMgr{
 	 * @throws NoSuchAlgorithmException 
 	 * @throws UnsupportedEncodingException 
 	 */
-	static public boolean register(String email, String password, String name, String nickName ) throws NoSuchAlgorithmException, UnsupportedEncodingException {
+	static public boolean register(String email, String password, String name, String nickName )  {
 		//判斷是否無輸入,應該改在前端判斷!!!!!!!!!!!
 		if(email.length()==0 || password.length()==0 ||name.length()==0 || password.length()==0 || nickName.length()==0)
 			return false;
@@ -182,7 +182,7 @@ public class MemberDBMgr extends DBMgr{
 	 * @return 0:登入成功  1:帳號或密碼錯誤 2:查無此帳號
 	 * @throws NoSuchAlgorithmException 
 	 */
-	static public int checkLogin(String email, String password) throws NoSuchAlgorithmException {
+	static public int checkLogin(String email, String password) {
 		if(email.length()==0 || password.length()==0)
 			return 1;
 		
@@ -270,7 +270,7 @@ public class MemberDBMgr extends DBMgr{
 		//try{
 
 			//System.out.println(register("beatrice0516@gmail.com","123456","楊先絜","先絜"));
-			//System.out.println(checkLogin("beatrice05161@gmail.com", "123456"));
+			System.out.println(checkLogin("beatrice0516@gmail.com", "123456"));
 		//System.out.println(checkEmail("beatrice0516@gmail.com"));
 //		ResultSet test = queryMember("beatrice0516@gmail.com");
 //		try {
