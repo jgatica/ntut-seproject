@@ -28,6 +28,7 @@ public class DBMgr {
 	static {
 		if(!isInit)
 		{
+			System.out.println("Load property");
 			// 從config檔讀取參數
 			props = new Properties();
 	        try {
@@ -43,11 +44,17 @@ public class DBMgr {
 	        user = props.getProperty("user");
 	        password = props.getProperty("password");
 			
-	        
+	        System.out.println("Load driver:" + driver);
 			try {
 				Class.forName(driver);
+				System.out.println("Load driver finished");
 				// 註冊driver
+				System.out.println("Cnnect...");
+				System.out.println("Host address:" + url);
+				System.out.println("User:" + user);
+				System.out.println("Password:" + password);
 				con = DriverManager.getConnection(url, user, password);
+				System.out.println("Cnnected");
 			}
 			catch (ClassNotFoundException e) {
 				System.out.println("DriverClassNotFound :" + e.toString());
@@ -57,6 +64,7 @@ public class DBMgr {
 			} finally{
 				isInit  = true;
 			}
+			
 		}
 	}
 	

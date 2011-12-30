@@ -132,15 +132,24 @@ public class MemberAction extends Action {
 	private ActionForward login(ActionMapping mapping, MemberActionForm form,
 			HttpServletRequest request, HttpServletResponse response,
 			HttpSession session) {
+		/*
+		 * System.out.println("name:"+form.member_name);
+		 * System.out.println("password:"+form.password);
+		 * System.out.println("member_nickname:"+form.member_nickname);
+		 * System.out.println("member_email:"+form.member_email);
+		 */
+		System.out.println("0");
 		boolean check = (form.member_email == null || form.password == null)
 				|| (form.member_email.length() == 0 || form.password.length() == 0);
+		System.out.println("1");
 		int state = MemberDBMgr.checkLogin(form.member_email, form.password);
 		MemberDataStructure data = new MemberDataStructure();
 		String message[] = { "登入成功", "帳號或密碼錯誤", "查無此帳號" };
-
+		System.out.println("2");
 		Result result = new Result();
 		result.isSuccess = state == 0 && !check;
 		if (result.isSuccess) {
+			System.out.println("3");
 			data = new MemberDataStructure();
 			data.setImageURL("/images/2.jpg");
 			data.setMember_name(form.member_name);
@@ -157,6 +166,7 @@ public class MemberAction extends Action {
 			System.out.println(form.member_email);
 			result.message = "ok";
 		} else {
+			System.out.println("4");
 			// session.setAttribute(SessionContext.ISLOGIN, "false");
 			result.message = message[state];
 		}
