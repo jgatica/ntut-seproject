@@ -266,7 +266,7 @@ public class MemberDBMgr extends DBMgr{
 	}
 	
 	
-	public static void main(String[] args) throws UnsupportedEncodingException {
+	public static void main(String[] args) {
 		//try{
 
 			//System.out.println(register("beatrice0516@gmail.com","123456","楊先絜","先絜"));
