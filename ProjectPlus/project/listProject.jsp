@@ -251,7 +251,7 @@
 			var start = $("#project_startDate").val();
 			var end = $("#project_endDate").val();
 			
-			$.getJSON('/ProjectAction.do', {op:op,name:name,destination:dest,leader:leader,startDate:start,endDate:end}, function(data){
+			$.getJSON('/ProjectAction.do', {op:op,projectName:name,projectTarget:dest,projectManager:leader,startDate:start,endDate:end}, function(data){
 				if(data.isSuccess)
 					$("#dialog").dialog('close');		
 				else
@@ -524,16 +524,16 @@
 				
 				<div class="table-content">
 					
-					<table summary="任務列表" width="100%" style="height:300px;">
+					<table summary="專案列表" width="100%" style="height:300px;">
 						<!--<caption>Table designs</caption>-->
 						<thead>
 						<tr>
-							<th width="20%" scope="col">任務編號</th>
-							<th width="100%" scope="col">任務名稱</th>
+							<th width="20%" scope="col">專案編號</th>
+							<th width="100%" scope="col">專案名稱</th>
 							<th width="16" scope="col"></th>
 						</tr>
 						</thead>
-						<tbody id="task-list">
+						<tbody id="project-list">
 							<tr>
 								<td>001</td>
 								<td><team>軟體工程</team>專案任務1</td>
