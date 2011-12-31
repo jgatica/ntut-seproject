@@ -22,6 +22,7 @@ import com.projectplus.context.SessionContext;
 import com.projectplus.member.MemberDataStructure;
 import com.projectplus.task.TaskDBMgr;
 import com.projectplus.task.TaskDataStructure;
+import com.projectplus.team.TeamDBMgr;
 import com.projectplus.team.TeamDataStructure;
 import com.projectplus.util.JSONWriter;
 
@@ -58,7 +59,7 @@ public class ProjectAction extends Action {
 		case UPDPROJECT:
 			return updateProject(mapping, form, request, response, session);
 		case QYPROJECT:
-			return queryProject(mapping, form, request, response, session);
+			return queryTeamProject(mapping, form, request, response, session);
 		case ASSIGNPM:
 			return assignPM(mapping, form, request, response, session);
 		case QYMEMBER:
@@ -203,11 +204,11 @@ public class ProjectAction extends Action {
 
 	}
 
-	private ActionForward queryProject(ActionMapping mapping,
+	private ActionForward queryTeamProject(ActionMapping mapping,
 			ProjectActionForm form, HttpServletRequest request,
 			HttpServletResponse response, HttpSession session) {
 		
-		ResultSet resultSet = ProjectDBMgr.queryProject(form.projectManagerId);
+		ResultSet resultSet = ProjectDBMgr.queryProject(form.teamId);
 		List<ProjectDataStructure> dataList=new ArrayList<ProjectDataStructure>();
 		try {
 			if(resultSet!=null)

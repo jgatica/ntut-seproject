@@ -185,10 +185,10 @@ public class TeamAction extends Action {
 				team.setCreator("創始人"+form.id);
 				team.setId(form.id);
 				team.setName("團隊"+form.id);
-				team.setFax("");
-				team.setPhone("");
+				team.setFax("123");
+				team.setPhone("321");
 				team.setDescription("團隊"+form.id + "的專案描述");
-				team.setMail("");
+				team.setMail("anyo0928@gmail.com");
 				team.setImageURL("/images/group.jpg");
 				team.setCreateDate(form.id + "/1/2012");
 			}
