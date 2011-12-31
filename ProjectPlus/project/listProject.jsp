@@ -260,6 +260,44 @@
 	 * 一開始讀取第零筆資料
 	 */
 	$(document).ready(function(){
+		var teamId=$("#teamId").val();
+		$.getJSON('/TeamAction.do', {op:3,id:teamId}, function(data){
+			if(data!=null)
+			{
+				$("#teamNameArea").text(data.name);
+			}
+		});
+		
+		$.getJSON('/ProjectAction.do',  { op:5 ,teamId:teamId}, function(data) {		
+			if(data !=null){
+				$("#project-list").html("");	
+				var size = data.length,index;
+				
+				for(index = 0; index < size; index++)
+				{
+					var content ="";
+					if(index%2==0)
+					{
+						content = '<tr>' + '<td>' + parseInt(index) + '</td>' + '<td><team>' + data[index].teamName + '</team>'
+									 + data[index].projectName + data[index].projectId + '</td>';
+					
+					}
+					else
+					{
+						content = '<tr class="odd">' + '<td>' + parseInt(index) + '</td>' + '<td><team>' + data[index].teamName + '</team>'
+									 + data[index].projectName + data[index].projectId + '</td>';
+					}
+					if(data[index].projectState!="finished")
+						content+='<td><img src="/images/state_doing.png" width="16" /></td></tr>';
+					else
+						content+='<td><img src="/images/state_ok.png" width="16" /></td></tr>';
+					$("#project-list").append(content);
+				}
+				
+			}
+		
+		});
+		
 		$( "#agree" ).click(function(){
 			//alert("1");
 			var op = 0;
@@ -291,36 +329,6 @@
 		$( "#dialog_btn" ).click(function(){
 			$("#dialog").dialog('open');
 		});	
-		
-		$.getJSON('/ProjectAction.do',  { op:5 }, function(data) {		
-			if(data !=null){
-				$("#project-list").html("");	
-				var size = data.length,index;
-				
-				for(index = 0; index < size; index++)
-				{
-					var content ="";
-					if(index%2==0)
-					{
-						content = '<tr class="odd">' + '<td>' + parseInt(index) + '</td>' + '<td><team>' + data[index].teamName + '</team>'
-									 + data[index].projectName + data[index].projectId + '</td>';
-					
-					}
-					else
-					{
-						content = '<tr>' + '<td>' + parseInt(index) + '</td>' + '<td><team>' + data[index].teamName + '</team>'
-									 + data[index].projectName + data[index].projectId + '</td>';
-					}
-					if(data[index].projectState!="finished")
-						content+='<td><img src="/images/state_doing.png" width="16" /></td></tr>';
-					else
-						content+='<td><img src="/images/state_ok.png" width="16" /></td></tr>';
-					$("#project-list").append(content);
-				}
-				
-			}
-		
-		});
 	}); 
 
 	  	
@@ -544,7 +552,7 @@
 				<div id="dropBox" class="toggler col_w700 lp_box float_l margin_20rl">		
 				<div class="subTopDiv" >
 				<!-- InstanceBeginEditable name="PageTitle" -->
-				<h2 class="uiHeaderTitle">軟體工程<img class="arrow_right" src="/images/arrow_right.png" />專案列表</h2>				
+				<h2 class="uiHeaderTitle"><span id="teamNameArea"></span><img class="arrow_right" src="/images/arrow_right.png" />專案列表</h2>				
 				<!-- InstanceEndEditable -->
 				</div>
                 <!-- InstanceBeginEditable name="RightArea" -->

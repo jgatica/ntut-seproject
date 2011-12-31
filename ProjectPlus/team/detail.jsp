@@ -260,9 +260,8 @@
 	 * 一開始讀取第零筆資料
 	 */
 	$(document).ready(function(){
-		var op = 3;
 		var teamId=$("#teamId").val();
-		$.getJSON('/TeamAction.do', {op:op,id:teamId}, function(data){
+		$.getJSON('/TeamAction.do', {op:3,id:teamId}, function(data){
 			if(data!=null)
 			{
 				var url = '<img class="bigpic" src="' + data.imageURL + '"  width="50" height="50"/>';
@@ -274,6 +273,9 @@
 				$("#desc").text(data.description);
 				$("#createDate").text(data.createDate);
 				$("#creator").html(creator);
+				$("#phone").text(data.phone);
+				$("#mail").text(data.mail);
+				$("#fax").text(data.fax);
 			}
 		});
 	}); 
@@ -529,14 +531,26 @@
 								<td id="teamName"><team>軟體工程</team></td>								
 							</tr>							
 							<tr>
-								<td>團隊描述</td>
+								<td>團隊介紹</td>
 								<td id="desc">軟體工程專案是台北科技大學研究所課程期末的專案</td>
 							</tr>
-							<tr class="odd">									
+                            <tr class="odd">
+								<td>連絡電話</td>
+								<td id="phone"></td>
+							</tr>
+                            <tr>
+								<td>聯絡信箱</td>
+								<td id="mail"></td>
+							</tr>
+                            <tr class="odd">
+								<td>傳真</td>
+								<td id="fax"></td>
+							</tr>
+							<tr>									
 								<td>創立日期</td>
 								<td id="createDate">2011/12/10</td>		
 							</tr>			
-							<tr>									
+							<tr class="odd">									
 								<td>團隊創始人</td>
 								<td id="creator"><name>陳奕豪</name></td>	
 							</tr>																																			
