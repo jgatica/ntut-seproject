@@ -300,6 +300,7 @@ public class ProjectAction extends Action {
 		 * System.out.println("startDate:"+form.startDate);
 		 * System.out.println("endDate:"+form.endDate);
 		 */
+		System.out.println("startDate:"+form.startDate);
 		// boolean isSuccess =true;
 		boolean check = form.projectName.length() == 0
 				/*|| form.projectTarget.length() == 0

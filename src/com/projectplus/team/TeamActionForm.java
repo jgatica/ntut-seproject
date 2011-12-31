@@ -6,13 +6,21 @@ import org.apache.struts.action.ActionForm;
 public class TeamActionForm extends ActionForm {
 
 	int op;
-	
+	String id;
 	String phone;
 	String fax;
-	String address;
 	String mail;
 	String name;
 	String description;
+		
+	public String getId() {
+		return id;
+	}
+
+	public void setId(String id) {
+		this.id = id;
+	}
+
 	long createDate;
 	
 	
@@ -38,14 +46,6 @@ public class TeamActionForm extends ActionForm {
 
 	public void setFax(String fax) {
 		this.fax = fax;
-	}
-
-	public String getAddress() {
-		return address;
-	}
-
-	public void setAddress(String address) {
-		this.address = address;
 	}
 
 	public String getMail() {

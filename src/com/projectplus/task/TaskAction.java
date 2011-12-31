@@ -35,7 +35,7 @@ public class TaskAction extends Action {
 		 TaskActionForm form = (TaskActionForm)actionForm;
 		    
 		    int op = form.getOp();
-		    System.out.println("the op  = " + op);
+		    //System.out.println("the op  = " + op);
 		    
 		    switch (op) {
 			    // 註冊會員
@@ -100,10 +100,6 @@ public class TaskAction extends Action {
 		}
 		
 		try {
-			if(dataList==null)
-			{
-				System.out.println("無工作");
-			}
 			JSONWriter.sendJSONResponse(response, dataList);
 		} catch (IOException e) {
 			e.printStackTrace();
