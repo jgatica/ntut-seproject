@@ -1,4 +1,4 @@
-<%@ page contentType="text/html; charset=utf-8" language="java" import="java.sql.*" errorPage="" %>
+<%@ page contentType="text/html; charset=utf-8" language="java" import="java.sql.*,com.projectplus.member.MemberDataStructure" errorPage="" %>
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml"><!-- InstanceBegin template="/Templates/TeamMain.dwt.jsp" codeOutsideHTMLIsLocked="false" -->
 <head>
@@ -52,48 +52,22 @@
 		<%if(goLogin){%>
 			window.location = "/login.jsp";
 		<%}%>
-		
 		//div-float-team
-		$.getJSON('/ProjectAction.do',  { op:5 }, function(data) {
+		$.getJSON('/TeamAction.do',  { op:7 }, function(data) {
 			if(data!=null)
 			{
-				//$("#taskArea").html("");
+				//alert();
+				//console.log(data); 
+				//$("#div-float-teams").html("");
 				var size = data.length,index;
 					
 				for(index = 0; index < size; index++)
 				{
-					var content ="";
-					if(index%2==0)
-					{
-						content = '<tr class="odd">' + '<td>' + parseInt(index) + '</td>' +
-									 '<td><team>' + data[index].projectName + '</team>' + data[index].name + '</td>' +
-									 '<td><button id="'+data[index].projectId + '" class="dialog_btn">查看任務</button></td>' ;
-					}
-					else
-					{
-						content = '<tr>' + '<td>' + parseInt(index) + '</td>' +
-									 '<td><team>' + data[index].projectName + '</team>' + data[index].name + '</td>' +
-									 '<td><button id="'+data[index].projectId + '" class="dialog_btn">查看任務</button></td>' ;
-					}
-					
-					$("#div-float-team").append(content);
-					$( ".dialog_btn" ).click(function(){
-						var op = 4;
-						var id = $(this).attr("id");
-						$.getJSON('/TaskAction.do',  { op:op,id:id }, function(data) {
-							$("#taskName").text(data.name);
-							$("#taskProject").text(data.projectName);
-							$("#taskDescript").text(data.description);
-							$("#taskStartDate").text(data.startDate);
-							$("#taskEndDate").text(data.endDate);
-							$("#taskStatus").text(data.status);
-						});
-						//$( ".dialog_btn" ).button();
-						$(".task_dialog_btn").blur();
-						$("#task_dialog").dialog('open');
-						
-					});	
-					$( ".dialog_btn" ).button();
+					var content = '<div class="col_allw170 frontpage_box hoverdiv">' +
+								 '<a href="/team/detail.jsp?id='+ data[index].id +'">' +
+								' <img src="' + data[index].imageURL + '" alt="Image" width="24" height="24">'+
+								 '<h2>'+ data[index].name + '</h2></a</div>' ;
+					$("#div-float-teams").append(content);
 				}
 			}
 		});
@@ -258,11 +232,10 @@
 			var name = $('#team_name').val();
 			var desc = $('#team_desc').val();
 			var phone= $('#team_phone').val();
-			var address= $('#team_address').val();
 			var fax= $('#team_fax').val();
 			var mail= $('#team_mail').val();
 			
-			$.getJSON('/TeamAction.do',  { op:op,name:name,description:desc,phone:phone,fax:fax,address:address,mail:mail}, function(data) {
+			$.getJSON('/TeamAction.do',  { op:op,name:name,description:desc,phone:phone,fax:fax,mail:mail}, function(data) {
 			//console.log(data);
 				if(data.message=="ok") {
 					window.location = "/index.jsp";
@@ -289,6 +262,47 @@
 	
 	 
 	$(document).ready(function(){
+		/*<div class="col_allw170 perple_box">
+			<img class="bigpic" src="/images/1.jpg" alt="Image" width="48" height="48">
+			<h2><a href="/project/detail.jsp">陳奕豪</a><button>剔除成員</button><button>加入朋友</button></h2>	
+		<div class="divider"></div>
+		</div> 	*/
+		var teamId = $("#teamId").val();
+		$.getJSON('/TeamAction.do',  { op:8,id:teamId }, function(data) {
+			if(data!=null)
+			{
+				//alert();
+				//console.log(data); 
+				//$("#div-float-teams").html("");
+				$("#teamNameArea").text(data.name);
+				$("#teamNameArea1").text(data.name);
+				$("#teamNameArea2").text(data.name);
+				var size = data.members.length,index;
+					
+				for(index = 0; index < size; index++)
+				{
+					var content = '<div class="col_allw170 perple_box">' +
+								 '<img class="bigpic" src="' + data.members[i].imageURL + '" width="48" height="48">'+
+								 '<h2><a href="#">' + data.members[index].member_name + 
+								 '</a><button id="'+ data.members[index].id +'" class="delmember_btn">剔除成員</button>' + 
+								 '<button id="'+ data.members[index].id +'" class="addmember_btn">加入朋友</button></h2>'+
+								 '<div class="divider"></div></div>';
+								 
+					$("#div-members").append(content);
+					
+					$(".delmember_btn").click(function(){
+						//alert("新增成員 id:" + $(this).attr("id"));
+					});
+					$(".addmember_btn").click(function(){
+						//alert("刪除成員 id:" + $(this).attr("id"));
+					});
+					$(".delmember_btn").button();
+					$(".addmember_btn").button();
+				}
+			}
+		});
+		
+		
 		// dialog
 		$( "#dialog" ).dialog( {autoOpen: false, minWidth: 270, minHeight: 150, modal: true} );
 		$( "#dialog_btn" ).click(function(){
@@ -464,32 +478,7 @@
                         <img src="/images/task_group.png" alt="Image" width="24" height="24">
                         <h2 langtag="top-team-new"></h2>                        
 						</a>
-                        <!--怪怪<div class="divider10"></div>-->
-                    </div>
-                    <div class="col_allw170 frontpage_box hoverdiv">
-					  <a href="/team/detail.jsp?id=123">
-                      	<img src="/images/profile_img.png" alt="Image" width="24" height="24">
-                      	<h2>軟體工程</h2>                        
-					  </a>
-                    </div>
-                    <div class="col_allw170 frontpage_box hoverdiv">
-						<a href="/team/detail.jsp?id=123">
-						<img src="/images/android-icon.png" alt="Image" width="24" height="24">
-						<h2>Android開發社</h2>   
-						</a>                     
-                    </div>
-                    <div class="col_allw170 frontpage_box hoverdiv">
-						<a href="/team/detail.jsp?id=123">
-						<img src="/images/jquery-icon.gif" alt="Image" width="24" height="24">
-						<h2>jQuery研究社</h2>                        
-						</a>
-                    </div>
-                    <div class="col_allw170 frontpage_box hoverdiv">
-						<a href="/team/detail.jsp?id=123">
-						<img src="/images/c++-icon.png" alt="Image" width="24" height="24">
-						<h2>C++專研區</h2>                        
-						</a>
-                    </div>										                 	
+                    </div>									                 	
 </div>	
 				<li>
 					<a class="float_r" href="/index.jsp"><img class="top" src="/images/top_home.png" />
@@ -503,7 +492,7 @@
 
 
 
-
+		<input id="teamId" type="hidden" value="<%= request.getParameter("id") %>"/>
         <div id="templatemo_main">
             
           <div class="col_w900 hr_divider">
@@ -512,25 +501,25 @@
 				<div class="subTopDiv" ><h2 class="uiHeaderTitle">團隊資料</h2></div>	
 					
 					<div class="col_allw170 frontpage_box hoverdiv">
-					<a href="/team/detail.jsp">
+					<a href="/team/detail.jsp?id=<%= request.getParameter("id") %>">
 						<img src="/images/project_info.png" alt="Image" width="24" height="24">
 						<h2>團隊資訊</h2>
 					</a> 
                     </div>            
 					<div class="col_allw170 frontpage_box hoverdiv">
-					<a href="/team/listMember.jsp">
+					<a href="/team/listMember.jsp?id=<%= request.getParameter("id") %>">
 						<img src="/images/task_group.png" alt="Image" width="24" height="24">
 						<h2>成員名單</h2>
 					</a> 
                     </div>   					       
                     <div class="col_allw170 frontpage_box hoverdiv">
-					<a href="/project/listProject.jsp">
+					<a href="/project/listProject.jsp?id=<%= request.getParameter("id") %>">
 						<img src="/images/project_task.png" alt="Image" width="24" height="24">
 						<h2>開發專案</h2>
                     </a>
                     </div>
                     <div class="col_allw170 frontpage_box hoverdiv">
-					<a href="/project/listProject.jsp">
+					<a href="/project/listProject.jsp?id=<%= request.getParameter("id") %>">
                       <img src="/images/project_chart.png" alt="Image" width="24" height="24">
                       <h2>查詢進度</h2>
 					</a>
@@ -538,7 +527,7 @@
 					
 					
                   <div class="frontpage_box col_allw170  hoverdiv">
-				  <a href="/project/listProject.jsp">
+				  <a href="/project/listProject.jsp?id=<%= request.getParameter("id") %>">
                       <img src="/images/profile_task.png" alt="Image" width="24" height="24">
                     <h2>專案估算系統</h2>
 					</a>
@@ -549,54 +538,24 @@
 				<div id="dropBox" class="toggler col_w700 lp_box float_l margin_20rl">		
 				<div class="subTopDiv" >
 				<!-- InstanceBeginEditable name="PageTitle" -->
-				<h2 class="uiHeaderTitle">軟體工程研究社<img class="arrow_right" src="/images/arrow_right.png" />成員名單</h2>
+				<h2 class="uiHeaderTitle"><span id="teamNameArea"></span><img class="arrow_right" src="/images/arrow_right.png" />成員名單</h2>
 				<!-- InstanceEndEditable -->
 				</div>
                 <!-- InstanceBeginEditable name="RightArea" -->
+                <div id="div-members">
 					<div class="divider"></div>
 					<div class="col_allw170 perple_box">					
 						<img class="bigpic" src="/images/jquery-icon.gif"  width="50" height="50"/>
-						<h2><team>jQuery研討社</team><button id="dialog_btn">新增成員</button></h2>				
+						<h2><team id="teamNameArea1">jQuery研討社</team><button id="dialog_btn">新增成員</button></h2>				
 						<input type="text" />			
 					<div class="divider"></div>
                     </div> 	
-					<div class="col_allw170 perple_box">
-					
-						<img class="bigpic" src="/images/1.jpg" alt="Image" width="48" height="48">
-						<h2><a href="/project/detail.jsp">陳奕豪</a><button>剔除成員</button><button>加入朋友</button></h2>	
-					<div class="divider"></div>
-                    </div> 																																						
-					<div class="col_allw170 perple_box">
-					
-						<img class="bigpic" src="/images/3.jpg" alt="Image" width="48" height="48">
-						<h2><a href="/project/detail.jsp">楊先絜</a> 
-								<button>剔除成員</button><button>加入朋友</button></h2>						
-					
-					<div class="divider"></div>
-                    </div> 	
-					<div class="col_allw170 perple_box">
-					
-						<img class="bigpic" src="/images/2.jpg" alt="Image" width="48" height="48">
-						<h2><a href="/project/detail.jsp">陳至圓</a>
-								<button>剔除成員</button><button>加入朋友</button></h2>
-						
-					 
-					<div class="divider"></div>
-                    </div> 	
-					<div class="col_allw170 perple_box">
-					
-						<img class="bigpic" src="/images/4.jpg" alt="Image" width="48" height="48">
-						<h2><a href="/project/detail.jsp">郭奕成</a>
-								<button>剔除成員</button><button>加入朋友</button></h2>
-						
-					 
-					<div class="divider"></div>
-                    </div> 	
+                </div>
 																								   
 					       
 <!--新增隊友的對話框-->
 					<div id="dialog" title="新增成員">
-						<p>在<team>jQuery研討社</team>上新增會員，請輸入名稱</p>
+						<p>在<team id="teamNameArea2">jQuery研討社</team>上新增會員，請輸入名稱</p>
 						<table>					
 						<form>	
 							<tr>
@@ -686,11 +645,7 @@
                         <tr>
 							<td width="25%"><label for="name">傳真</label></td>
 							<td width="75%"><input type="text" id="team_fax" class="text ui-widget-content ui-corner-all" /></td>
-						</tr>	
-                        <tr>
-							<td width="25%"><label for="name">地址</label></td>
-							<td width="75%"><input type="text" id="team_address" class="text ui-widget-content ui-corner-all" /></td>
-						</tr>							
+						</tr>						
 					</form>	
 					</table>
 					
