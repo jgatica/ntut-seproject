@@ -65,16 +65,18 @@ public class MemberAction extends Action {
 		try {
 			if (resultSet != null && resultSet.next()) {
 				data = new MemberDataStructure();// 真的
-				data.setImageURL(resultSet.getString(""));
-				data.setMember_name(resultSet.getString(""));
-				data.setMember_gender(resultSet.getString(""));
-				data.setMember_address(resultSet.getString(""));
-				data.setMember_birthday(resultSet.getString(""));
-				data.setMember_descript(resultSet.getString(""));
-				data.setMember_email(resultSet.getString(""));
-				data.setMember_mobile(resultSet.getString(""));
-				data.setMember_phone(resultSet.getString(""));
-				data.setMember_nickname(resultSet.getString(""));
+		    	data = new MemberDataStructure();
+				data.setId(resultSet.getString("m_id"));
+				data.setImageURL(resultSet.getString("m_imageURL"));
+				data.setMember_name(resultSet.getString("m_name"));
+				data.setMember_gender(resultSet.getString("m_gender"));
+				data.setMember_address(resultSet.getString("m_addr"));
+				data.setMember_birthday(resultSet.getString("m_birthday"));
+				data.setMember_descript(resultSet.getString("m_introduction"));
+				data.setMember_email(member_mail);
+				data.setMember_mobile(resultSet.getString("m_phone"));
+				data.setMember_phone(resultSet.getString("m_tel"));
+				data.setMember_nickname(resultSet.getString("m_nickname"));
 			} else// 假的(測試用) 如有真資料請將此部分刪除 直接return null
 			{
 				data = new MemberDataStructure();
@@ -138,18 +140,16 @@ public class MemberAction extends Action {
 		 * System.out.println("member_nickname:"+form.member_nickname);
 		 * System.out.println("member_email:"+form.member_email);
 		 */
-		System.out.println("0");
+		System.out.println("member_email:"+form.member_email);
 		boolean check = (form.member_email == null || form.password == null)
 				|| (form.member_email.length() == 0 || form.password.length() == 0);
-		System.out.println("1");
+		
 		int state = MemberDBMgr.checkLogin(form.member_email, form.password);
 		MemberDataStructure data = new MemberDataStructure();
 		String message[] = { "登入成功", "帳號或密碼錯誤", "查無此帳號" };
-		System.out.println("2");
 		Result result = new Result();
 		result.isSuccess = state == 0 && !check;
 		if (result.isSuccess) {
-			System.out.println("3");
 			data = new MemberDataStructure();
 			data.setImageURL("/images/2.jpg");
 			data.setMember_name(form.member_name);
@@ -166,7 +166,6 @@ public class MemberAction extends Action {
 			System.out.println(form.member_email);
 			result.message = "ok";
 		} else {
-			System.out.println("4");
 			// session.setAttribute(SessionContext.ISLOGIN, "false");
 			result.message = message[state];
 		}
@@ -197,8 +196,8 @@ public class MemberAction extends Action {
 				|| form.member_name.length() == 0
 				|| form.member_nickname.length() == 0
 				|| form.password.length() == 0;
-		boolean isSuccess = MemberDBMgr.register(form.member_name,
-				form.member_nickname, form.member_email, form.password);
+		boolean isSuccess = MemberDBMgr.register(form.member_email,
+				form.password, form.member_name, form.member_nickname);
 
 		Result result = new Result();
 		result.isSuccess = isSuccess && !check;
