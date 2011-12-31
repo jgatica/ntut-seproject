@@ -32,7 +32,7 @@ public class MemberAction extends Action {
 
 		int op = form.getOp();
 
-		System.out.println("the op  = " + op);
+		// System.out.println("the op  = " + op);
 
 		switch (op) {
 		// 註冊會員
@@ -41,9 +41,10 @@ public class MemberAction extends Action {
 			// 會員登入
 		case LOGIN:
 			return login(mapping, form, request, response, session);
-
+			// 會員登出
 		case LOGOUT:
 			return logout(mapping, form, request, response, session);
+			// 會員資料查詢
 		case QYDATA:
 			return queryData(mapping, form, request, response, session);
 		default:
@@ -65,7 +66,6 @@ public class MemberAction extends Action {
 		try {
 			if (resultSet != null && resultSet.next()) {
 				data = new MemberDataStructure();// 真的
-		    	data = new MemberDataStructure();
 				data.setId(resultSet.getString("m_id"));
 				data.setImageURL(resultSet.getString("m_imageURL"));
 				data.setMember_name(resultSet.getString("m_name"));
@@ -77,20 +77,19 @@ public class MemberAction extends Action {
 				data.setMember_mobile(resultSet.getString("m_phone"));
 				data.setMember_phone(resultSet.getString("m_tel"));
 				data.setMember_nickname(resultSet.getString("m_nickname"));
-			} else// 假的(測試用) 如有真資料請將此部分刪除 直接return null
-			{
-				data = new MemberDataStructure();
-				data.setImageURL("/images/2.jpg");
-				data.setMember_name(userData.member_name);
-				data.setMember_gender(userData.member_gender);
-				data.setMember_address(userData.member_address);
-				data.setMember_birthday(userData.member_birthday);
-				data.setMember_descript(userData.member_descript);
-				data.setMember_email(userData.member_email);
-				data.setMember_mobile(userData.member_mobile);
-				data.setMember_phone(userData.member_phone);
-				data.setMember_nickname(userData.member_nickname);
-			}
+			} /*
+			 * else// 假的(測試用) 如有真資料請將此部分刪除 直接return null { data = new
+			 * MemberDataStructure(); data.setImageURL("/images/2.jpg");
+			 * data.setMember_name(userData.member_name);
+			 * data.setMember_gender(userData.member_gender);
+			 * data.setMember_address(userData.member_address);
+			 * data.setMember_birthday(userData.member_birthday);
+			 * data.setMember_descript(userData.member_descript);
+			 * data.setMember_email(userData.member_email);
+			 * data.setMember_mobile(userData.member_mobile);
+			 * data.setMember_phone(userData.member_phone);
+			 * data.setMember_nickname(userData.member_nickname); }
+			 */
 		} catch (SQLException e) {
 			e.printStackTrace();
 		}
@@ -105,6 +104,7 @@ public class MemberAction extends Action {
 		}
 		try {
 			data.setResult(result);
+			session.setAttribute(SessionContext.USERDATA, data);
 			JSONWriter.sendJSONResponse(response, data);
 		} catch (IOException e) {
 			e.printStackTrace();
@@ -140,39 +140,47 @@ public class MemberAction extends Action {
 		 * System.out.println("member_nickname:"+form.member_nickname);
 		 * System.out.println("member_email:"+form.member_email);
 		 */
-		System.out.println("member_email:"+form.member_email);
+		String message[] = { "登入成功", "帳號或密碼錯誤", "查無此帳號" };
 		boolean check = (form.member_email == null || form.password == null)
 				|| (form.member_email.length() == 0 || form.password.length() == 0);
-		
+
 		int state = MemberDBMgr.checkLogin(form.member_email, form.password);
+		ResultSet resultSet = null;
 		MemberDataStructure data = new MemberDataStructure();
-		String message[] = { "登入成功", "帳號或密碼錯誤", "查無此帳號" };
 		Result result = new Result();
 		result.isSuccess = state == 0 && !check;
-		if (result.isSuccess) {
-			data = new MemberDataStructure();
-			data.setImageURL("/images/2.jpg");
-			data.setMember_name(form.member_name);
-			data.setMember_gender(form.member_gender);
-			data.setMember_address(form.member_address);
-			data.setMember_birthday(form.member_birthday);
-			data.setMember_descript(form.member_descript);
-			data.setMember_email(form.member_email);
-			data.setMember_mobile(form.member_mobile);
-			data.setMember_phone(form.member_phone);
-			data.setMember_nickname(form.member_nickname);
-			session.setAttribute(SessionContext.ISLOGIN, result.isSuccess);
-			session.setAttribute(SessionContext.USERDATA, data);
-			System.out.println(form.member_email);
-			result.message = "ok";
-		} else {
-			// session.setAttribute(SessionContext.ISLOGIN, "false");
-			result.message = message[state];
-		}
+		if (result.isSuccess)
+			resultSet = MemberDBMgr.queryMember(form.member_email);
 		try {
-			data.setResult(result);
-			JSONWriter.sendJSONResponse(response, data);
-		} catch (IOException e) {
+			if (resultSet!=null && resultSet.next()) {
+				data = new MemberDataStructure();// 真的
+				data.setId(resultSet.getString("m_id"));
+				data.setImageURL(resultSet.getString("m_imageURL"));
+				data.setMember_name(resultSet.getString("m_name"));
+				data.setMember_gender(resultSet.getString("m_gender"));
+				data.setMember_address(resultSet.getString("m_addr"));
+				data.setMember_birthday(resultSet.getString("m_birthday"));
+				data.setMember_descript(resultSet.getString("m_introduction"));
+				data.setMember_email(form.member_email);
+				data.setMember_mobile(resultSet.getString("m_phone"));
+				data.setMember_phone(resultSet.getString("m_tel"));
+				data.setMember_nickname(resultSet.getString("m_nickname"));
+				session.setAttribute(SessionContext.ISLOGIN, result.isSuccess);
+				session.setAttribute(SessionContext.USERDATA, data);
+				result.message = "ok";
+
+			} else {
+				// session.setAttribute(SessionContext.ISLOGIN, "false");
+				result.message = message[state];
+			}
+			try {
+				data.setResult(result);
+				JSONWriter.sendJSONResponse(response, data);
+			} catch (IOException e) {
+				e.printStackTrace();
+			}
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
 
@@ -226,6 +234,7 @@ public class MemberAction extends Action {
 		try {
 			data.setResult(result);
 			JSONWriter.sendJSONResponse(response, data);
+			session.setAttribute(SessionContext.ISLOGIN, result.isSuccess);
 		} catch (IOException e) {
 			e.printStackTrace();
 		}

@@ -7,7 +7,7 @@ import com.projectplus.db.DBMgr;
 public class ProjectDBMgr extends DBMgr {
 
 	public static boolean addProject(String name, String destination,
-			String managerId, long startDate, long endDate) {
+			String managerId, String startDate, String endDate) {
 		return true;
 	}
 	

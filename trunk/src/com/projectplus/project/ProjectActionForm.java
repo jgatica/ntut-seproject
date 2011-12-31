@@ -13,8 +13,8 @@ public class ProjectActionForm extends ActionForm {
 	
 	public String projectManagerId;
 	public String projectState;
-	public long startDate;
-	public long endDate;
+	public String startDate;
+	public String endDate;
 	
 	public String getTeamId() {
 		return teamId;
@@ -53,16 +53,16 @@ public class ProjectActionForm extends ActionForm {
 	public void setProjectState(String projectState) {
 		this.projectState = projectState;
 	}
-	public long getStartDate() {
+	public String getStartDate() {
 		return startDate;
 	}
-	public void setStartDate(long startDate) {
+	public void setStartDate(String startDate) {
 		this.startDate = startDate;
 	}
-	public long getEndDate() {
+	public String getEndDate() {
 		return endDate;
 	}
-	public void setEndDate(long endDate) {
+	public void setEndDate(String endDate) {
 		this.endDate = endDate;
 	}
 	public int getOp() {
