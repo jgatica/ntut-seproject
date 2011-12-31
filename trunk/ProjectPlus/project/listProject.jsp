@@ -317,7 +317,37 @@
 		$( "#dialog" ).dialog( {autoOpen: false, minWidth: 350, minHeight: 150, modal: true} );
 		$( "#dialog_btn" ).click(function(){
 			$("#dialog").dialog('open');
-		});			
+		});	
+		
+		$.getJSON('/ProjectAction.do',  { op:5 }, function(data) {		
+			if(data !=null){
+				$("#project-list").html("");	
+				var size = data.length,index;
+				
+				for(index = 0; index < size; index++)
+				{
+					var content ="";
+					if(index%2==0)
+					{
+						content = '<tr class="odd">' + '<td>' + parseInt(index) + '</td>' + '<td><team>' + data[index].teamName + '</team>'
+									 + data[index].projectName + data[index].projectId + '</td>';
+					
+					}
+					else
+					{
+						content = '<tr>' + '<td>' + parseInt(index) + '</td>' + '<td><team>' + data[index].teamName + '</team>'
+									 + data[index].projectName + data[index].projectId + '</td>';
+					}
+					if(data[index].projectState!="finished")
+						content+='<td><img src="/images/state_doing.png" width="16" /></td></tr>';
+					else
+						content+='<td><img src="/images/state_ok.png" width="16" /></td></tr>';
+					$("#project-list").append(content);
+				}
+				
+			}
+		
+		});
 	}); 
 
 	  	
@@ -583,7 +613,7 @@
 						</tr>
 						</thead>
 						<tbody id="project-list">
-							<tr>
+							<!--<tr>
 								<td>001</td>
 								<td><team>軟體工程</team>專案任務1</td>
 								<td><img src="/images/state_ok.png" width="16" title="完成"/></td>									
@@ -627,7 +657,7 @@
 								<td>005</td>
 								<td><team>軟體工程</team>專案任務1</td>	
 								<td><img src="/images/state_doing.png" width="16" /></td>								
-							</tr>																																																																		
+							</tr>-->																																																																		
 						</tbody>
 					</table>						
 					<div class="divider"></div>
