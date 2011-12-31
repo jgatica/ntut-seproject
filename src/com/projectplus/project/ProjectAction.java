@@ -20,6 +20,9 @@ import com.projectplus.charts.WbsSchemeCreator;
 import com.projectplus.context.Result;
 import com.projectplus.context.SessionContext;
 import com.projectplus.member.MemberDataStructure;
+import com.projectplus.task.TaskDBMgr;
+import com.projectplus.task.TaskDataStructure;
+import com.projectplus.team.TeamDataStructure;
 import com.projectplus.util.JSONWriter;
 
 public class ProjectAction extends Action {
@@ -203,18 +206,64 @@ public class ProjectAction extends Action {
 	private ActionForward queryProject(ActionMapping mapping,
 			ProjectActionForm form, HttpServletRequest request,
 			HttpServletResponse response, HttpSession session) {
+		
+		ResultSet resultSet = ProjectDBMgr.queryProject(form.projectManagerId);
+		List<ProjectDataStructure> dataList=new ArrayList<ProjectDataStructure>();
+		try {
+			if(resultSet!=null)
+			{
+				while(resultSet.next())
+				{
+					ProjectDataStructure project = new ProjectDataStructure();
+					project.setProjectName(resultSet.getString(""));
+					project.setProjectId(resultSet.getString(""));
+					project.setProjectTarget(resultSet.getString(""));
+					project.setProjectManagerId(resultSet.getString(""));
+					project.setProjectManager(resultSet.getString(""));
+					project.setStartDate(Long.parseLong("0"));
+					project.setEndDate(Long.parseLong("0"));
+					project.setProjectState(resultSet.getString(""));
+					dataList.add(project);
+				}
+			}
+			else //假的(測試用) 如有真資料請將此部分刪除 直接return
+			{
+				for(int i=0;i<10;i++)
+				{
+					ProjectDataStructure project = new ProjectDataStructure();
+					project.setTeamId("1");
+					project.setTeamName("軟體工程");
+					project.setProjectId(Integer.toString(i));
+					project.setProjectName("專案");
+					project.setProjectTarget("完成所有需求");
+					project.setProjectManagerId("1");
+					project.setProjectManager("超級小可愛QQ");
+					project.setStartDate(i*100);
+					project.setEndDate(i*100+100);
+					if(i>4)
+						project.setProjectState("finished");
+					else
+						project.setProjectState("init");
+					
+					dataList.add(project);
+				}
+			}
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+		
+		try {
+			if(dataList==null)
+			{
+				System.out.println("無專案");
+			}
+			JSONWriter.sendJSONResponse(response, dataList);
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
 		return null;
 		// TODO Auto-generated method stub
-		/*
-		 * ProjectDataStructure projectDataStructure = new
-		 * ProjectDataStructure(); projectDataStructure.projectName =
-		 * form.getProjectName(); projectDataStructure.projectDescription =
-		 * form.getProjectDescription() ; projectDataStructure.projectManager =
-		 * form.getProjectManager(); projectDataStructure.projectState =
-		 * form.getProjectState(); projectDataStructure.startDate =
-		 * form.getStartDate(); projectDataStructure.endDate =
-		 * form.getEndDate();
-		 */
+		
 	}
 
 	private ActionForward updateProject(ActionMapping mapping,
@@ -256,7 +305,7 @@ public class ProjectAction extends Action {
 				/*|| form.projectTarget.length() == 0
 				|| form.projectManager.length() == 0*/;
 		boolean isSuccess = ProjectDBMgr.addProject(form.projectName,
-				form.projectTarget, form.projectManager, form.startDate,
+				form.projectTarget, form.projectManagerId, form.startDate,
 				form.endDate);
 		Result result = new Result();
 		result.isSuccess = isSuccess && !check;
