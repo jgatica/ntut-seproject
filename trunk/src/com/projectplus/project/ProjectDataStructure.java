@@ -1,6 +1,9 @@
 package com.projectplus.project;
 
 public class ProjectDataStructure {
+
+	public String teamId;
+	public String teamName;
 	public String projectId;
 	public String projectName;
 	public String projectTarget;
@@ -10,6 +13,19 @@ public class ProjectDataStructure {
 	public long startDate;
 	public long endDate;
 	
+	
+	public String getTeamId() {
+		return teamId;
+	}
+	public void setTeamId(String teamId) {
+		this.teamId = teamId;
+	}
+	public String getTeamName() {
+		return teamName;
+	}
+	public void setTeamName(String teamName) {
+		this.teamName = teamName;
+	}
 	public String getProjectManagerId() {
 		return projectManagerId;
 	}

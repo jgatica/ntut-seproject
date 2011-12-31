@@ -5,16 +5,29 @@ import org.apache.struts.action.ActionForm;
 @SuppressWarnings("serial")
 public class ProjectActionForm extends ActionForm {
 	public int op;
+	public String teamId;
+	
 	public String projectId;
 	public String projectName;
 	public String projectTarget;
-	public String projectManager;
+	
 	public String projectManagerId;
 	public String projectState;
 	public long startDate;
 	public long endDate;
 	
-	
+	public String getTeamId() {
+		return teamId;
+	}
+	public void setTeamId(String teamId) {
+		this.teamId = teamId;
+	}
+	public String getProjectManagerId() {
+		return projectManagerId;
+	}
+	public void setProjectManagerId(String projectManagerId) {
+		this.projectManagerId = projectManagerId;
+	}
 	public String getProjectId() {
 		return projectId;
 	}
@@ -33,12 +46,7 @@ public class ProjectActionForm extends ActionForm {
 	public void setProjectTarget(String projectTarget) {
 		this.projectTarget = projectTarget;
 	}
-	public String getProjectManager() {
-		return projectManager;
-	}
-	public void setProjectManager(String projectManager) {
-		this.projectManager = projectManager;
-	}
+	
 	public String getProjectState() {
 		return projectState;
 	}
