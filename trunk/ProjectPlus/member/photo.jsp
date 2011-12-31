@@ -54,6 +54,49 @@
 		<%}%>
 		
 		//div-float-team
+		$.getJSON('/ProjectAction.do',  { op:5 }, function(data) {
+			if(data!=null)
+			{
+				//$("#taskArea").html("");
+				var size = data.length,index;
+					
+				for(index = 0; index < size; index++)
+				{
+					var content ="";
+					if(index%2==0)
+					{
+						content = '<tr class="odd">' + '<td>' + parseInt(index) + '</td>' +
+									 '<td><team>' + data[index].projectName + '</team>' + data[index].name + '</td>' +
+									 '<td><button id="'+data[index].projectId + '" class="dialog_btn">查看任務</button></td>' ;
+					}
+					else
+					{
+						content = '<tr>' + '<td>' + parseInt(index) + '</td>' +
+									 '<td><team>' + data[index].projectName + '</team>' + data[index].name + '</td>' +
+									 '<td><button id="'+data[index].projectId + '" class="dialog_btn">查看任務</button></td>' ;
+					}
+					
+					$("#div-float-team").append(content);
+					$( ".dialog_btn" ).click(function(){
+						var op = 4;
+						var id = $(this).attr("id");
+						$.getJSON('/TaskAction.do',  { op:op,id:id }, function(data) {
+							$("#taskName").text(data.name);
+							$("#taskProject").text(data.projectName);
+							$("#taskDescript").text(data.description);
+							$("#taskStartDate").text(data.startDate);
+							$("#taskEndDate").text(data.endDate);
+							$("#taskStatus").text(data.status);
+						});
+						//$( ".dialog_btn" ).button();
+						$(".task_dialog_btn").blur();
+						$("#task_dialog").dialog('open');
+						
+					});	
+					$( ".dialog_btn" ).button();
+				}
+			}
+		});
 		
 		// 更換介面語系
 		$['langChanger'].addLangInitHandler(initPage);
@@ -245,12 +288,13 @@
 	 */
 	$(document).ready(function(){
 		$.getJSON('/MemberAction.do',  { op:3 }, function(data) {
+			$("#nameArea").text(data.member_name);
 			$("#imageURL").attr("src",data.imageURL);
 		});
 		
-		$('#date').datepicker();
+		/*$('#date').datepicker();
 		$('#date_start').datepicker();
-		$('#date_end').datepicker();
+		$('#date_end').datepicker();*/
 		$( "button" ).button();
 		$( "#draggable" ).draggable();
 		$( "#droppable" ).droppable({
@@ -512,7 +556,7 @@
 				<div id="dropBox" class="toggler col_w700 lp_box float_l margin_20rl">		
 				<div class="subTopDiv" >
 				<!-- InstanceBeginEditable name="PageTitle" -->
-				<h2 class="uiHeaderTitle">陳奕豪<img class="arrow_right" src="/images/arrow_right.png" />大頭貼</h2>
+				<h2 class="uiHeaderTitle"><span id="nameArea"></span><img class="arrow_right" src="/images/arrow_right.png" />大頭貼</h2>
 				<!-- InstanceEndEditable -->
 				
 				</div>	
@@ -521,7 +565,7 @@
                 <div class="table-content">
 			
 					<div style="text-align:center">
-						<img id="imageURL" class="bigpic" src="/images/bigpic.jpg" width="100px" height="100px"/>
+						<img id="imageURL" class="bigpic" src="/images/default.jpg"/>
 						<button id="dialog_btn">上傳圖片</button>
 						<div class="divider"></div>
 						透過上傳檔案，你即確定你有發表此照片的權利，並且沒有違反<name>服務項目條款</name>

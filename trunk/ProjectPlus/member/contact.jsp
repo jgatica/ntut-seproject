@@ -53,9 +53,54 @@
 			window.location = "/login.jsp";
 		<%}%>
 		
+		//div-float-team
+		$.getJSON('/ProjectAction.do',  { op:5 }, function(data) {
+			if(data!=null)
+			{
+				//$("#taskArea").html("");
+				var size = data.length,index;
+					
+				for(index = 0; index < size; index++)
+				{
+					var content ="";
+					if(index%2==0)
+					{
+						content = '<tr class="odd">' + '<td>' + parseInt(index) + '</td>' +
+									 '<td><team>' + data[index].projectName + '</team>' + data[index].name + '</td>' +
+									 '<td><button id="'+data[index].projectId + '" class="dialog_btn">查看任務</button></td>' ;
+					}
+					else
+					{
+						content = '<tr>' + '<td>' + parseInt(index) + '</td>' +
+									 '<td><team>' + data[index].projectName + '</team>' + data[index].name + '</td>' +
+									 '<td><button id="'+data[index].projectId + '" class="dialog_btn">查看任務</button></td>' ;
+					}
+					
+					$("#div-float-team").append(content);
+					$( ".dialog_btn" ).click(function(){
+						var op = 4;
+						var id = $(this).attr("id");
+						$.getJSON('/TaskAction.do',  { op:op,id:id }, function(data) {
+							$("#taskName").text(data.name);
+							$("#taskProject").text(data.projectName);
+							$("#taskDescript").text(data.description);
+							$("#taskStartDate").text(data.startDate);
+							$("#taskEndDate").text(data.endDate);
+							$("#taskStatus").text(data.status);
+						});
+						//$( ".dialog_btn" ).button();
+						$(".task_dialog_btn").blur();
+						$("#task_dialog").dialog('open');
+						
+					});	
+					$( ".dialog_btn" ).button();
+				}
+			}
+		});
+		
 		// 更換介面語系
 		$['langChanger'].addLangInitHandler(initPage);
-		$['langChanger'].langInit({lang: "en", file: "/js/files/lang-example.xml", version: 9});
+		$['langChanger'].langInit({lang: "en", file: "/js/files/lang-example.xml", version: 10});
 		
 		// 初始化jQueryUI Button
 		$( "button" ).button();
@@ -242,7 +287,8 @@
 	 * 一開始讀取第零筆資料
 	 */
 	$(document).ready(function(){
-$.getJSON('/MemberAction.do',  { op:3 }, function(data) {
+		$.getJSON('/MemberAction.do',  { op:3 }, function(data) {
+			$("#nameArea").text(data.member_name);
 			$("#email").text(data.member_email);
 			$("#phone").text(data.member_phone);
 			$("#mobile").text(data.member_mobile);
@@ -506,7 +552,7 @@ $.getJSON('/MemberAction.do',  { op:3 }, function(data) {
 				<div id="dropBox" class="toggler col_w700 lp_box float_l margin_20rl">		
 				<div class="subTopDiv" >
 				<!-- InstanceBeginEditable name="PageTitle" -->
-				<h2 class="uiHeaderTitle">陳奕豪<img class="arrow_right" src="/images/arrow_right.png" />聯絡資料</h2>
+				<h2 class="uiHeaderTitle"><span id="nameArea"></span><img class="arrow_right" src="/images/arrow_right.png" />聯絡資料</h2>
 				<!-- InstanceEndEditable -->
 				
 				</div>	
@@ -531,19 +577,19 @@ $.getJSON('/MemberAction.do',  { op:3 }, function(data) {
 							<tbody>
                             	<tr class="odd">
 									<td langtag="top-account-mail"></td>
-									<td id="email">augus790302@gmail.com</td>									
+									<td id="email"></td>									
 								</tr>
                                 <tr>									
 									<td langtag="profile-table-phone"></td>
-									<td id="phone">0980556436</td>									
+									<td id="phone"></td>									
 								</tr>	
                                 <tr class="odd">									
 									<td langtag="profile-table-mobile"></td>
-									<td id="mobile">0980556436</td>									
+									<td id="mobile"></td>									
 								</tr>		
 								<tr>
 									<td langtag="profile-table-address"></td>
-									<td id = "address">新北市</td>									
+									<td id = "address"></td>									
 								</tr>
 								<!--<tr>
 									<td>市內電話</td>

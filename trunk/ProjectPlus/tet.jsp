@@ -54,6 +54,49 @@
 		<%}%>
 		
 		//div-float-team
+		$.getJSON('/ProjectAction.do',  { op:5 }, function(data) {
+			if(data!=null)
+			{
+				//$("#taskArea").html("");
+				var size = data.length,index;
+					
+				for(index = 0; index < size; index++)
+				{
+					var content ="";
+					if(index%2==0)
+					{
+						content = '<tr class="odd">' + '<td>' + parseInt(index) + '</td>' +
+									 '<td><team>' + data[index].projectName + '</team>' + data[index].name + '</td>' +
+									 '<td><button id="'+data[index].projectId + '" class="dialog_btn">查看任務</button></td>' ;
+					}
+					else
+					{
+						content = '<tr>' + '<td>' + parseInt(index) + '</td>' +
+									 '<td><team>' + data[index].projectName + '</team>' + data[index].name + '</td>' +
+									 '<td><button id="'+data[index].projectId + '" class="dialog_btn">查看任務</button></td>' ;
+					}
+					
+					$("#div-float-team").append(content);
+					$( ".dialog_btn" ).click(function(){
+						var op = 4;
+						var id = $(this).attr("id");
+						$.getJSON('/TaskAction.do',  { op:op,id:id }, function(data) {
+							$("#taskName").text(data.name);
+							$("#taskProject").text(data.projectName);
+							$("#taskDescript").text(data.description);
+							$("#taskStartDate").text(data.startDate);
+							$("#taskEndDate").text(data.endDate);
+							$("#taskStatus").text(data.status);
+						});
+						//$( ".dialog_btn" ).button();
+						$(".task_dialog_btn").blur();
+						$("#task_dialog").dialog('open');
+						
+					});	
+					$( ".dialog_btn" ).button();
+				}
+			}
+		});
 		
 		// 更換介面語系
 		$['langChanger'].addLangInitHandler(initPage);
