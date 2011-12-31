@@ -8,6 +8,7 @@
         <form-bean name="TeamActionForm" type="com.projectplus.team.TeamActionForm"/>
 		<form-bean name="ProjectActionForm" type="com.projectplus.project.ProjectActionForm"/>
 		<form-bean name="ArticleForm" type="com.profile.article.ArticleForm"/>
+		<form-bean name="TaskActionForm" type="com.projectplus.task.TaskActionForm"/>
     </form-beans>
 
   <action-mappings>
