@@ -199,7 +199,8 @@ public class MemberDBMgr extends DBMgr{
 		    	//加密md5
 			    MD5Util md5Util = new MD5Util();
 				String md5_password = md5Util.getMD5HexStr(password, "utf8");
-		        
+				/*System.out.println(resultSet.getString("m_password"));
+			    System.out.println(md5_password); */
 			    if(md5_password.equals(resultSet.getString("m_password")))
 			    	return 0;
 			    else
@@ -210,7 +211,6 @@ public class MemberDBMgr extends DBMgr{
 		    	return 2;
 		    }
 		    
-		    //System.out.println(resultSet.getString("m_password")+"\t\t"); 
 		    //return 0;    		
 		} catch (SQLException e) {
 			System.out.println("InsertDB Exception :" + e.toString());
