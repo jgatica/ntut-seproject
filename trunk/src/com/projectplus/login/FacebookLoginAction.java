@@ -54,6 +54,12 @@ public class FacebookLoginAction extends Action {
 				String fb_url = user.getLink();
 				String fb_email = user.getEmail();
 				String fb_locale = user.getLocale();
+				String fb_gender = user.getGender();
+				String fb_birthday = user.getBirthday();
+				String fb_address = user.getHometownName();
+				String fb_introduct = user.getBio();
+				String fb_web = user.getLink();
+				
 				if (!StringUtil.isEmptyString(user.getEmail()))
 					fb_email = user.getEmail().toLowerCase().trim();
 
@@ -62,6 +68,12 @@ public class FacebookLoginAction extends Action {
 				System.out.println("fb_url = " + fb_url);
 				System.out.println("fb_email = " + fb_email);
 				System.out.println("fb_locale = " + fb_locale);
+				System.out.println("fb_gender = " + fb_gender);
+				System.out.println("fb_birthday = " + fb_birthday);
+//				System.out.println("fb_img = " + fb_img);
+				System.out.println("fb_address = " + fb_address);
+				System.out.println("fb_introduct = " + fb_introduct);
+				System.out.println("fb_web = " + fb_web);
 
 				// Step 1 如果是第一次登入，拿取該email(等資訊)，註冊我們的帳戶
 				// 查詢該會員是否存在，若為Null表示為第一次以FB帳號進入系統
@@ -71,17 +83,21 @@ public class FacebookLoginAction extends Action {
 						System.out.println("first");
 						// Step 2如以創建或是有該帳戶，以該mail拿取該用戶的id
 						MemberDBMgr.register(fb_email, "fbmemeber", fb_name, fb_name);
-						resultSet = MemberDBMgr.queryMember(fb_email);
+						
+						// 更新會員資料
+						MemberDBMgr.updDetail(fb_email, fb_name, fb_name, fb_gender, fb_birthday, "", fb_locale, "", "", fb_introduct,fb_web, "");
+						
+//						resultSet = MemberDBMgr.queryMember(fb_email);
+						
 					}
 				} catch (SQLException e) {
 					e.printStackTrace();
 				}
 				// Step 3將該id放入session中(這邊要做一些登入要做的事情)
 				// 將登入訊息加入Session
-				
+//				MemberDBMgr.updDetail(fb_email, fb_name, fb_name, fb_gender, "2012-01-02", "", fb_address, "", "", fb_introduct,fb_web, "");
 				Result result = new Result();
 				result.isSuccess = true;
-				
 				MemberDataStructure data = new MemberDataStructure();// 真的
 				try {
 					
