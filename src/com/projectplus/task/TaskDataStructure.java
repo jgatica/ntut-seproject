@@ -8,8 +8,8 @@ public class TaskDataStructure {
 	public String projectName;
 	public String description;
 	public String state;
-	public long startDate;
-	public long endDate;
+	public String startDate;
+	public String endDate;
 	
 	public String getState() {
 		return state;
@@ -53,16 +53,16 @@ public class TaskDataStructure {
 	public void setDescription(String description) {
 		this.description = description;
 	}
-	public long getStartDate() {
+	public String getStartDate() {
 		return startDate;
 	}
-	public void setStartDate(long startDate) {
+	public void setStartDate(String startDate) {
 		this.startDate = startDate;
 	}
-	public long getEndDate() {
+	public String getEndDate() {
 		return endDate;
 	}
-	public void setEndDate(long endDate) {
+	public void setEndDate(String endDate) {
 		this.endDate = endDate;
 	}
 }

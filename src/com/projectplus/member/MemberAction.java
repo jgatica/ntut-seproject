@@ -65,8 +65,8 @@ public class MemberAction extends Action {
 	private ActionForward addTeamMember(ActionMapping mapping,
 			MemberActionForm form, HttpServletRequest request,
 			HttpServletResponse response, HttpSession session) {
-		System.out.println(form.id);
-		System.out.println(form.teamId);
+		/*System.out.println(form.id);
+		System.out.println(form.teamId);*/
 		boolean isSuccess = MemberDBMgr.newMember(form.id, form.teamId);
 		Result result = new Result();
 		result.isSuccess = isSuccess;
@@ -289,7 +289,7 @@ public class MemberAction extends Action {
 		} else {
 			data = new MemberDataStructure();
 			result.message = "輸入不完整.";
-			System.out.println("no");
+			//System.out.println("no");
 		}
 		try {
 			data.setResult(result);
