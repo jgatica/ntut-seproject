@@ -781,6 +781,7 @@ em { color: #359548 }
 
 
 #searchform #s{
+	
 	color: #49494b;
 	font-size: 12px;
 	width: 160px;
@@ -797,10 +798,14 @@ em { color: #359548 }
 
 #searchform {
 	display:inline;
+	position:relative;
+	margin: 0;
+	padding: 0;
+	list-style: none;
 }
 
-
 #searchform #searchsubmit{
+	
 	top: 0px;
 	right: 0px;
 	width: 25px;
@@ -1077,3 +1082,32 @@ fat-font {
 	-moz-border-radius: 3px;
 	-webkit-border-radius: 3px;
 }
+
+/*搜尋人員懸浮視窗*/
+#div-float-members {
+	text-align:left;
+	font-size:12px;
+	padding: 5px 3px 10px 3px;
+	z-index: 99; 
+	position:absolute;
+	top:20px;
+	left:0px;
+	width:150px;
+	
+	background:#FFF;
+	border:1px solid;
+	
+	border-top-color:#000;
+	border-left-color:#000;
+	border-right-color:#000;
+	border-bottom-color:#000;
+	
+	border-bottom-left-radius:5px;
+	-moz-border-bottom-left-radius:5px;
+	-webkit-border-bottom-left-radius:5px;		
+	
+	border-bottom-right-radius:5px;
+	-moz-border-bottom-right-radius:5px;
+	-webkit-border-bottom-right-radius:5px;			
+}
+

@@ -353,10 +353,10 @@ Head
   	                </div>      
 </div>	
                 <li>
-				<form method="get" id="searchform" action="#">
+				<div id="searchform" action="#">
 					<input type="text" langtag="top-search" value="搜尋..." name="s" id="s" onfocus="defaultInput(this)" onblur="clearInput(this)"/>
-						<input type="submit" id="searchsubmit" value=" " />
-				</form>      
+					<input type="submit" id="searchsubmit" value=" " />			
+				</div>      
                 </li>
 				<li>
 
