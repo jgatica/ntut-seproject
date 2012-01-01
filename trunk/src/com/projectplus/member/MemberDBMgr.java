@@ -238,7 +238,7 @@ public class MemberDBMgr extends DBMgr{
 	 * @param m_note
 	 * @return true:修改成功 false:修改失敗
 	 */
-	static public boolean updDetail(String m_id, String m_name, String m_nickName, String m_gender, String m_birthday, String m_imageURL, String m_addr, String m_tel, String m_phone, String m_introduction,String m_web, String m_note) {
+	static public boolean updDetail(String m_email, String m_name, String m_nickName, String m_gender, String m_birthday, String m_imageURL, String m_addr, String m_tel, String m_phone, String m_introduction,String m_web, String m_note) {
 			
 		//日期Format
 		SimpleDateFormat formatter = new SimpleDateFormat("yyyy-MM-dd H:mm:ss");
@@ -247,7 +247,7 @@ public class MemberDBMgr extends DBMgr{
 		if(!isInit)
 			return false;
 			try {
-				pst = con.prepareStatement("update member set m_name='"+m_name+"' , m_nickName='"+m_nickName+"' , m_gender='"+m_gender+"' , m_birthday='"+m_birthday+"' , m_imageURL='"+m_imageURL+"' , m_addr='"+m_addr+"' , m_tel='"+m_tel+"' , m_phone='"+m_phone+"' , m_introduction='"+m_introduction+"' , m_web ='"+m_web+"' ,m_note='"+m_note+"' ,mdy_time='"+formatter.format(new Date())+"' where m_id="+m_id);
+				pst = con.prepareStatement("update member set m_name='"+m_name+"' , m_nickName='"+m_nickName+"' , m_gender='"+m_gender+"' , m_birthday='"+m_birthday+"' , m_imageURL='"+m_imageURL+"' , m_addr='"+m_addr+"' , m_tel='"+m_tel+"' , m_phone='"+m_phone+"' , m_introduction='"+m_introduction+"' , m_web ='"+m_web+"' ,m_note='"+m_note+"' ,mdy_time='"+formatter.format(new Date())+"' where m_email="+m_email);
 				pst.executeUpdate();
 				return true;
 					
