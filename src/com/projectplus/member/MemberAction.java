@@ -234,7 +234,6 @@ public class MemberAction extends Action {
 		try {
 			data.setResult(result);
 			JSONWriter.sendJSONResponse(response, data);
-			session.setAttribute(SessionContext.ISLOGIN, result.isSuccess);
 		} catch (IOException e) {
 			e.printStackTrace();
 		}

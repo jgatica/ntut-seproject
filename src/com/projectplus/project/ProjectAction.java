@@ -30,7 +30,7 @@ public class ProjectAction extends Action {
 	public static final int FREEZEPROJECT = 2;
 	public static final int UNFREEZEPROJECT = 3;
 	public static final int UPDPROJECT = 4;
-	public static final int QYPROJECT = 5;
+	public static final int QYTEAMPROJECTS = 5;
 	public static final int ASSIGNPM = 6;
 	public static final int QYMEMBER = 7;
 	public static final int WBSTREE = 8;
@@ -44,7 +44,7 @@ public class ProjectAction extends Action {
 		ProjectActionForm form = (ProjectActionForm) actionForm;
 
 		int op = form.getOp();
-		System.out.println("the op  = " + op);
+		//System.out.println("the op  = " + op);
 		switch (op) {
 		case ADDPROJECT:
 			return addProject(mapping, form, request, response, session);
@@ -56,7 +56,7 @@ public class ProjectAction extends Action {
 			return unFreezeProject(mapping, form, request, response, session);
 		case UPDPROJECT:
 			return updateProject(mapping, form, request, response, session);
-		case QYPROJECT:
+		case QYTEAMPROJECTS:
 			return queryTeamProjects(mapping, form, request, response, session);
 		case ASSIGNPM:
 			return assignPM(mapping, form, request, response, session);
