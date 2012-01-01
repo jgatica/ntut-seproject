@@ -270,7 +270,7 @@
 				for(index = 0; index < size; index++)
 				{
 					var content = '<label id="' + data.members[index].id + '" value="' + data.members[index].member_name + '" name="'+
-					data.members[i].imageURL + '"></label>';
+					data.members[index].imageURL + '"></label>';
 					$("#div-members").append(content);
 				}
 			}
