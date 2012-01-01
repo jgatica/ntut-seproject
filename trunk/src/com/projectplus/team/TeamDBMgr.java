@@ -147,7 +147,7 @@ public class TeamDBMgr extends DBMgr {
 			Statement stat = null; 
 			
 		    stat = con.createStatement(); 
-		    resultSet = stat.executeQuery("SELECT * FROM `g_m_relation` as gm left join `member` as m on gm.m_id=m.m_id where gm.g_id='" + team_id + "'"); 
+		    resultSet = stat.executeQuery("SELECT distinct m_id,m_name,m_imageURL FROM `g_m_relation` as gm left join `member` as m on gm.m_id=m.m_id where gm.g_id='" + team_id + "'"); 
 		    return resultSet;
 
 		    

@@ -307,7 +307,7 @@ public class MemberDBMgr extends DBMgr{
 		//{
 			//System.out.println(e);
 		//}
-		//System.out.println(updDetail("43",  "m_name",  "m_nickName",  "男",  "1990-05-16",  "",  "m_addr",  "",  "",  "", "",  ""));
+		//System.out.println(updDetail("beatri77666ce0251611@gmail.com",  "m_namjolke",  "m_nickName",  "男",  "1990-05-16",  "",  "m_addr",  "",  "",  "", "",  ""));
 		
 	}
 }
