@@ -63,7 +63,7 @@ public class MemberDBMgr extends DBMgr{
 	 * @throws NoSuchAlgorithmException 
 	 * @throws UnsupportedEncodingException 
 	 */
-	static public boolean register(String email, String password, String name, String nickName )  {
+	static public boolean register(String email, String password, String name, String nickName)  {
 		//判斷是否無輸入,應該改在前端判斷!!!!!!!!!!!
 		if(email.length()==0 || password.length()==0 ||name.length()==0 || password.length()==0 || nickName.length()==0)
 			return false;
