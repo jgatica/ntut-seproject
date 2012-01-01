@@ -563,7 +563,7 @@
 							<tbody>
                             	<tr class="odd">
 									<td langtag="top-account-mail"></td>
-									<td><input id="email_edit" type="text"/></td>									
+									<td><input id="email_edit" type="text" disabled="disabled"/></td>									
 								</tr>
                                 <tr>									
 									<td langtag="profile-table-phone"></td>
