@@ -329,6 +329,14 @@
 		$( "#dialog_btn" ).click(function(){
 			$("#dialog").dialog('open');
 		});	
+		
+		$("#project_leader").keyup(function(){
+			// 在這裡取得資料並且榜上去(仿造目前樣板)
+			
+		});
+		
+		
+		
 	}); 
 
 	  	
@@ -433,10 +441,10 @@
   	                </div>      
 </div>	
                 <li>
-				<form method="get" id="searchform" action="#">
+				<div id="searchform" action="#">
 					<input type="text" langtag="top-search" value="搜尋..." name="s" id="s" onfocus="defaultInput(this)" onblur="clearInput(this)"/>
-						<input type="submit" id="searchsubmit" value=" " />
-				</form>      
+					<input type="submit" id="searchsubmit" value=" " />			
+				</div>      
                 </li>
 				<li>
 
@@ -642,7 +650,36 @@
 						</tr>						
 						<tr>
 							<td width="25%"><label for="email">負責人</label></td>
-							<td width="75%"><input type="text" id="project_leader" value="" class="text ui-widget-content ui-corner-all" /></td>
+							<td width="75%">
+							
+							
+							
+							<!--input type="text"  value="" class="text ui-widget-content ui-corner-all" /-->
+							
+							<div id="searchform">
+								<input type="text" langtag="top-search" value="搜尋..." name="s" id="project_leader" onfocus="defaultInput(this)" onblur="clearInput(this)"/>
+							<div id="div-float-members">
+								<div class="frontpage_box hoverdiv">
+									<img src="/images/1.jpg" alt="Image" width="24" height="24">
+									<p><name>陳奕豪</name></p>
+								</div>    
+								<div class="frontpage_box hoverdiv">
+									<img src="/images/2.jpg" alt="Image" width="24" height="24">
+									<p><name>陳至圓</name></p>
+								</div>  
+								<div class="frontpage_box hoverdiv">
+									<img src="/images/2.jpg" alt="Image" width="24" height="24">
+									<p><name>陳至圓</name></p>
+								</div> 
+								<div class="frontpage_box hoverdiv">
+									<img src="/images/2.jpg" alt="Image" width="24" height="24">
+									<p><name>陳至圓</name></p>
+								</div> 																    
+							</div>						
+							</div>     
+							
+							
+							</td>
 						</tr>
 							<td width="25%"><label for="project_startDate">開始時間</label></td>
 							<td width="75%"><input class="text ui-widget-content ui-corner-all" type="text" name="date" id="project_startDate" /></td>    
