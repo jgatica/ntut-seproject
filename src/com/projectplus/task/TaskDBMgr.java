@@ -101,26 +101,87 @@ public class TaskDBMgr extends DBMgr{
 
 		
 		
+
+		
+
+		
+		public static ResultSet queryTeamProjects(String teamId) {
+			if(teamId.length()==0)
+				return null;
+			
+			ResultSet resultSet=null;
+			
+			try {
+				
+				Statement stat = null; 
+			    stat = con.createStatement(); 
+			    resultSet = stat.executeQuery("SELECT * FROM `project` where g_id='" + teamId + "'"); 
+			    return resultSet;
+
+			    
+			    //System.out.println(resultSet.getString("m_password")+"\t\t"); 
+			    //return 0;    		
+			} catch (SQLException e) {
+				System.out.println("InsertDB Exception :" + e.toString());
+				return null;
+			} 
+		}
+		
+		
+		
 		/**
-		 * member's task (for project???????)
+		 * member's task (for all team's project)
 		 * @param member_email
 		 * @return
 		 */
-		public static ResultSet queryMemberTasks(String member_email) {
-			// TODO Auto-generated method stub
+		public static ResultSet queryMemberTasks(String m_id) {
+			if(m_id.length()==0)
+				return null;
+			
 			ResultSet resultSet=null;
-			return resultSet;
+			
+			try {
+				
+				Statement stat = null; 
+			    stat = con.createStatement(); 
+			    resultSet = stat.executeQuery("SELECT * FROM `task` where m_id='" + m_id + "'"); 
+			    return resultSet;
+
+			    
+			    //System.out.println(resultSet.getString("m_password")+"\t\t"); 
+			    //return 0;    		
+			} catch (SQLException e) {
+				System.out.println("InsertDB Exception :" + e.toString());
+				return null;
+			} 
 		}
 
 		
 		/**
-		 * Team's project
-		 * @param teamName
+		 * 
+		 * @param project_id
 		 * @return
 		 */
-		public static ResultSet queryProjectTask(String teamName) {
-			// TODO Auto-generated method stub
-			return null;
+		public static ResultSet queryProjectTasks(String project_id) {
+			if(project_id.length()==0)
+				return null;
+			
+			ResultSet resultSet=null;
+			
+			try {
+				
+				Statement stat = null; 
+			    stat = con.createStatement(); 
+			    resultSet = stat.executeQuery("SELECT * FROM `task` where p_id='" + project_id + "'"); 
+			    return resultSet;
+
+			    
+			    //System.out.println(resultSet.getString("m_password")+"\t\t"); 
+			    //return 0;    		
+			} catch (SQLException e) {
+				System.out.println("InsertDB Exception :" + e.toString());
+				return null;
+			} 
 		}
 		
 		/**
