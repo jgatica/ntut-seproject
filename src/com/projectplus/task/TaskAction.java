@@ -72,8 +72,8 @@ public class TaskAction extends Action {
 					task.setProjectId(resultSet.getString(""));
 					task.setMemberId(resultSet.getString(""));
 					task.setDescription(resultSet.getString(""));
-					task.setStartDate(Long.parseLong("0"));
-					task.setEndDate(Long.parseLong("0"));
+					task.setStartDate(resultSet.getString(""));
+					task.setEndDate(resultSet.getString(""));
 					task.setState(resultSet.getString(""));
 					dataList.add(task);
 				}
@@ -89,8 +89,8 @@ public class TaskAction extends Action {
 					task.setProjectId(Integer.toString(i));
 					task.setMemberId("1");
 					task.setDescription("task"+i);
-					task.setStartDate(i*100);
-					task.setEndDate(i*100+100);
+					task.setStartDate("");
+					task.setEndDate("");
 					task.setState("init");
 					dataList.add(task);
 				}
