@@ -57,7 +57,7 @@ public class ProjectAction extends Action {
 		case UPDPROJECT:
 			return updateProject(mapping, form, request, response, session);
 		case QYPROJECT:
-			return queryTeamProject(mapping, form, request, response, session);
+			return queryTeamProjects(mapping, form, request, response, session);
 		case ASSIGNPM:
 			return assignPM(mapping, form, request, response, session);
 		case QYMEMBER:
@@ -73,41 +73,41 @@ public class ProjectAction extends Action {
 		return null;
 	}
 
-	
 	/**
-	 *  op 10 列出甘特圖
+	 * op 10 列出甘特圖
+	 * 
 	 * @return
 	 */
-	private ActionForward queryGantt(ActionMapping mapping, ProjectActionForm form,
-			HttpServletRequest request, HttpServletResponse response, HttpSession session) {
-		
+	private ActionForward queryGantt(ActionMapping mapping,
+			ProjectActionForm form, HttpServletRequest request,
+			HttpServletResponse response, HttpSession session) {
+
 		GanttScheme ganttScheme = new GanttScheme();
 		ganttScheme.title = "甘特圖測試";
 		ganttScheme.subtitle = "任務總表";
-		
+
 		ganttScheme.xCategories.add("任務1");
 		ganttScheme.xCategories.add("任務2");
 		ganttScheme.xCategories.add("任務3");
 		ganttScheme.xCategories.add("任務4");
 		ganttScheme.xCategories.add("任務5");
-		
+
 		ganttScheme.xTitle = "";
-//		ganttScheme.xTitle = "任務";
+		// ganttScheme.xTitle = "任務";
 		ganttScheme.yTitle = "時間";
-		
+
 		ganttScheme.data.add(200);
 		ganttScheme.data.add(300);
 		ganttScheme.data.add(200);
 		ganttScheme.data.add(700);
 		ganttScheme.data.add(400);
-		
+
 		try {
 			JSONWriter.sendJSONResponse(response, ganttScheme);
 		} catch (IOException e) {
 			e.printStackTrace();
 		}
-		
-		
+
 		return null;
 	}
 
@@ -134,8 +134,8 @@ public class ProjectAction extends Action {
 					project.setProjectState(resultSet.getString(""));
 					project.setStartDate(Long.parseLong("0"));
 					project.setEndDate(Long.parseLong("0"));
-					
-					//new stri
+
+					// new stri
 				}
 			}
 		} catch (SQLException e) {
@@ -242,17 +242,15 @@ public class ProjectAction extends Action {
 
 	}
 
-	private ActionForward queryTeamProject(ActionMapping mapping,
+	private ActionForward queryTeamProjects(ActionMapping mapping,
 			ProjectActionForm form, HttpServletRequest request,
 			HttpServletResponse response, HttpSession session) {
-		
-		ResultSet resultSet = ProjectDBMgr.queryProject(form.teamId);
-		List<ProjectDataStructure> dataList=new ArrayList<ProjectDataStructure>();
+
+		ResultSet resultSet = ProjectDBMgr.queryTeamProjects(form.teamId);
+		List<ProjectDataStructure> dataList = new ArrayList<ProjectDataStructure>();
 		try {
-			if(resultSet!=null)
-			{
-				while(resultSet.next())
-				{
+			if (resultSet != null) {
+				while (resultSet.next()) {
 					ProjectDataStructure project = new ProjectDataStructure();
 					project.setProjectName(resultSet.getString(""));
 					project.setProjectId(resultSet.getString(""));
@@ -264,11 +262,9 @@ public class ProjectAction extends Action {
 					project.setProjectState(resultSet.getString(""));
 					dataList.add(project);
 				}
-			}
-			else //假的(測試用) 如有真資料請將此部分刪除 直接return
+			} else // 假的(測試用) 如有真資料請將此部分刪除 直接return
 			{
-				for(int i=0;i<10;i++)
-				{
+				for (int i = 0; i < 10; i++) {
 					ProjectDataStructure project = new ProjectDataStructure();
 					project.setTeamId("1");
 					project.setTeamName("軟體工程");
@@ -277,23 +273,22 @@ public class ProjectAction extends Action {
 					project.setProjectTarget("完成所有需求");
 					project.setProjectManagerId("1");
 					project.setProjectManager("超級小可愛QQ");
-					project.setStartDate(i*100);
-					project.setEndDate(i*100+100);
-					if(i>4)
+					project.setStartDate(i * 100);
+					project.setEndDate(i * 100 + 100);
+					if (i > 4)
 						project.setProjectState("finished");
 					else
 						project.setProjectState("init");
-					
+
 					dataList.add(project);
 				}
 			}
 		} catch (SQLException e) {
 			e.printStackTrace();
 		}
-		
+
 		try {
-			if(dataList==null)
-			{
+			if (dataList == null) {
 				System.out.println("無專案");
 			}
 			JSONWriter.sendJSONResponse(response, dataList);
@@ -302,7 +297,7 @@ public class ProjectAction extends Action {
 		}
 		return null;
 		// TODO Auto-generated method stub
-		
+
 	}
 
 	private ActionForward updateProject(ActionMapping mapping,
@@ -339,14 +334,16 @@ public class ProjectAction extends Action {
 		 * System.out.println("startDate:"+form.startDate);
 		 * System.out.println("endDate:"+form.endDate);
 		 */
-		System.out.println("startDate:"+form.startDate);
+		MemberDataStructure data = (MemberDataStructure) session.getAttribute(SessionContext.USERDATA);
+		//System.out.println("startDate:" + form.startDate);
 		// boolean isSuccess =true;
-		boolean check = form.projectName.length() == 0
-				/*|| form.projectTarget.length() == 0
-				|| form.projectManager.length() == 0*/;
-		boolean isSuccess = ProjectDBMgr.addProject(form.projectName,
-				form.projectTarget, form.projectManagerId, form.startDate,
-				form.endDate);
+		boolean check = form.projectName.length() == 0 && ProjectDBMgr.checkProjectName(form.projectName, form.teamId);
+		boolean isSuccess = false;
+		if (check)
+			isSuccess = ProjectDBMgr.addProject(form.projectName,
+					form.projectTarget, form.projectManagerId, form.startDate,
+					form.endDate, data.id, form.teamId);
+
 		Result result = new Result();
 		result.isSuccess = isSuccess && !check;
 		if (result.isSuccess) {

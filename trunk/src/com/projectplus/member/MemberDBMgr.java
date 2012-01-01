@@ -67,11 +67,11 @@ public class MemberDBMgr extends DBMgr{
 		//判斷是否無輸入,應該改在前端判斷!!!!!!!!!!!
 		if(email.length()==0 || password.length()==0 ||name.length()==0 || password.length()==0 || nickName.length()==0)
 			return false;
-		// 註解部分是我別的專案的  可以參考使用
+		//密碼加密md5
 		MD5Util md5Util = new MD5Util();
 		String md5_password = md5Util.getMD5HexStr(password, "utf8");
 		//日期Format
-		SimpleDateFormat formatter = new SimpleDateFormat("yyyy-MM-dd hh:mm:ss");
+		SimpleDateFormat formatter = new SimpleDateFormat("yyyy-MM-dd H:mm:ss");
 		
 		
 		if(!isInit)
@@ -102,27 +102,12 @@ public class MemberDBMgr extends DBMgr{
 			return null;
 		
 		ResultSet resultSet=null;
-		//MemberDataStructure data =null;
 		
 		try {
 			
 			Statement stat = null; 
 		    stat = con.createStatement(); 
 		    resultSet = stat.executeQuery("SELECT * FROM member where m_email='" + email + "'"); 
-		    
-//		    	data = new MemberDataStructure();
-//				data.setId(resultSet.getString("m_id"));
-//				data.setImageURL(resultSet.getString("m_imageURL"));
-//				data.setMember_name(resultSet.getString("m_name"));
-//				data.setMember_gender(resultSet.getString("m_gender"));
-//				data.setMember_address(resultSet.getString("m_addr"));
-//				data.setMember_birthday(resultSet.getString("m_birthday"));
-//				data.setMember_descript(resultSet.getString("m_introduction"));
-//				data.setMember_email(email);
-//				data.setMember_mobile(resultSet.getString("m_phone"));
-//				data.setMember_phone(resultSet.getString("m_tel"));
-//				data.setMember_nickname(resultSet.getString("m_nickname"));
-//				
 		    return resultSet;
 
 		    
@@ -133,43 +118,6 @@ public class MemberDBMgr extends DBMgr{
 			return null;
 		} 
 		
-		
-//		try {
-//			if(resultSet!=null && resultSet.next())
-//			{
-//				data = new MemberDataStructure();//真的
-//				data.setHex_mrscid(resultSet.getString(""));
-//				data.setBa_mrscid(resultSet.getString(""));
-//				data.setImageURL(resultSet.getString(""));
-//				data.setMember_name(resultSet.getString(""));
-//				data.setMember_Gender(resultSet.getString(""));
-//				data.setMember_address(resultSet.getString(""));
-//				data.setMember_birthday(resultSet.getString(""));
-//				data.setMember_descript(resultSet.getString(""));
-//				data.setMember_email(resultSet.getString(""));
-//				data.setMember_mobile(resultSet.getString(""));
-//				data.setMember_phone(resultSet.getString(""));
-//				data.setMember_nickname(resultSet.getString(""));
-//			}
-//			else//假的(測試用) 如有真資料請將此部分刪除 直接return null
-//			{
-//				data = new MemberDataStructure();
-//				data.setHex_mrscid("1234");
-//				data.setBa_mrscid("xxxx");
-//				data.setImageURL("/images/2.jpg");
-//				data.setMember_name(name);
-//				data.setMember_Gender("男");
-//				data.setMember_address("台中");
-//				data.setMember_birthday("1990-02-16");
-//				data.setMember_descript("哇系圓圓");
-//				data.setMember_email(account);
-//				data.setMember_mobile("0952630832");
-//				data.setMember_phone("0952630832");
-//				data.setMember_nickname(nickName);
-//			}
-//		} catch (SQLException e) {
-//			e.printStackTrace();
-//		}
 		
 	}
 	
@@ -267,11 +215,12 @@ public class MemberDBMgr extends DBMgr{
 	
 	
 	public static void main(String[] args) {
+		
 		//try{
 
-			//System.out.println(register("beatrice0516@gmail.com","123456","楊先絜","先絜"));
-			System.out.println(checkLogin("beatrice0516@gmail.com", "123456"));
-		//System.out.println(checkEmail("beatrice0516@gmail.com"));
+			//System.out.println(register("beatrice051611@gmail.com","123456","楊先絜","先絜"));
+			//System.out.println(checkLogin("beatrice0516@gmail.com", "123456"));
+		//System.out.println(checkEmail("beatrice05o16@gmail.com"));
 //		ResultSet test = queryMember("beatrice0516@gmail.com");
 //		try {
 //			test.next();
