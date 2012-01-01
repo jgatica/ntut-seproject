@@ -383,8 +383,8 @@
 </div>	
                 <li>
 				<div id="searchform" action="#">
-					<input type="text" langtag="top-search" value="搜尋..." name="s" id="s" onfocus="defaultInput(this)" onblur="clearInput(this)"/>
-					<input type="submit" id="searchsubmit" value=" " />			
+					<input type="text" langtag="top-search" value="搜尋..." name="s" id="searchBlock"/>
+					<input type="submit" id="searchsubmit" value=" " />
 				</div>      
                 </li>
 				<li>
@@ -511,7 +511,7 @@
 						<!--<caption>Table designs</caption>-->
 						<thead>
 						<tr>
-							<th width="20%" scope="col">專案資訊</th>
+							<th width="20%" scope="col">團隊資訊</th>
 							<th width="80%" scope="col">內容</th>
 						</tr>
 						</thead>
@@ -548,11 +548,11 @@
 							</tr>
 							<tr>									
 								<td>創立日期</td>
-								<td id="createDate">2011/12/10</td>		
+								<td id="createDate"></td>		
 							</tr>			
 							<tr class="odd">									
 								<td>團隊創始人</td>
-								<td id="creator"><name>陳奕豪</name></td>	
+								<td id="creator"><name></name></td>	
 							</tr>																																			
 						</tbody>
 					</table>

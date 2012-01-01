@@ -420,8 +420,8 @@
 </div>	
                 <li>
 				<div id="searchform" action="#">
-					<input type="text" langtag="top-search" value="搜尋..." name="s" id="s" onfocus="defaultInput(this)" onblur="clearInput(this)"/>
-					<input type="submit" id="searchsubmit" value=" " />			
+					<input type="text" langtag="top-search" value="搜尋..." name="s" id="searchBlock"/>
+					<input type="submit" id="searchsubmit" value=" " />
 				</div>      
                 </li>
 				<li>
@@ -555,7 +555,7 @@
 					       
 <!--新增隊友的對話框-->
 					<div id="dialog" title="新增成員">
-						<p>在<team id="teamNameArea2">jQuery研討社</team>上新增會員，請輸入名稱</p>
+						<p>在<team id="teamNameArea2"></team>上新增會員，請輸入名稱</p>
 						<table>					
 						<form>	
 							<tr>
@@ -563,10 +563,10 @@
 								<td width="80%">
 									<input type="text" value="" class="text ui-widget-content ui-corner-all" />
 									<div class="name-hover-div">
-										<label class="name-hover"><name>郭奕成</name></label>
+										<label class="name-hover"><name></name></label>
 									</div></td>
 								<td>
-									<img class="bigpic" src="/images/4.jpg" alt="Image" width="48" height="48">
+									<img class="bigpic" src="/images/default.jpg" alt="Image" width="48" height="48">
 								</td>
 							</tr>																	
 						</form>	
