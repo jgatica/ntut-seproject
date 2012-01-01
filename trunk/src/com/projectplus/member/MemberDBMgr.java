@@ -170,6 +170,36 @@ public class MemberDBMgr extends DBMgr{
 	}
 	
 	/**
+	 * 
+	 * @param m_name
+	 * @return
+	 */
+	static public ResultSet queryAllMember(String m_name) {
+		if(m_name.length()==0)
+			return null;
+		
+		ResultSet resultSet=null;
+		
+		try {
+			
+			Statement stat = null; 
+		    stat = con.createStatement(); 
+		    resultSet = stat.executeQuery("SELECT * FROM member where m_name like '%" + m_name + "%'"); 
+		    return resultSet;
+
+		    
+		    //System.out.println(resultSet.getString("m_password")+"\t\t"); 
+		    //return 0;    		
+		} catch (SQLException e) {
+			System.out.println("InsertDB Exception :" + e.toString());
+			return null;
+		} 
+		
+		
+	}
+	
+	
+	/**
 	 * 更新會員的資料
 	 * @param name:名字
 	 * @param nickName:暱稱

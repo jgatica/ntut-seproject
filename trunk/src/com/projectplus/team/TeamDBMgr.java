@@ -136,7 +136,50 @@ public class TeamDBMgr extends DBMgr {
 		
 	}
 	
-	
+	public static ResultSet queryTeamMembers(String team_id) {
+		if(team_id.length()==0)
+			return null;
+		
+		ResultSet resultSet=null;
+		
+		try {
+			
+			Statement stat = null; 
+			
+		    stat = con.createStatement(); 
+		    resultSet = stat.executeQuery("SELECT * FROM `g_m_relation` as gm left join `member` as m on gm.m_id=m.m_id where gm.g_id='" + team_id + "'"); 
+		    return resultSet;
+
+		    
+		    //System.out.println(resultSet.getString("m_password")+"\t\t"); 
+		    //return 0;    		
+		} catch (SQLException e) {
+			System.out.println("InsertDB Exception :" + e.toString());
+			return null;
+		} 
+	}
+
+	public static ResultSet queryMemberTeams(String m_id) {
+		if(m_id.length()==0)
+			return null;
+		
+		ResultSet resultSet=null;
+		
+		try {
+			
+			Statement stat = null; 
+		    stat = con.createStatement(); 
+		    resultSet = stat.executeQuery("SELECT * FROM `g_m_relation` as gm left join `group` as g on gm.g_id=g.g_id where gm.m_id='" + m_id + "'"); 
+		    return resultSet;
+
+		    
+		    //System.out.println(resultSet.getString("m_password")+"\t\t"); 
+		    //return 0;    		
+		} catch (SQLException e) {
+			System.out.println("InsertDB Exception :" + e.toString());
+			return null;
+		} 
+	}
 	
 //	/**
 //	 * 會員登入
@@ -198,17 +241,27 @@ public class TeamDBMgr extends DBMgr {
 //			// TODO Auto-generated catch block
 //			e.printStackTrace();
 //		}
+//		ResultSet test = queryTeamMembers("11");
+//		try {
+//			test.next();
+//			System.out.println(test.getString("m_name"));
+//		} catch (SQLException e) {
+//			// TODO Auto-generated catch block
+//			e.printStackTrace();
+//		}
+		
+//		ResultSet test = queryMemberTeams("35");
+//		try {
+//			test.next();
+//			System.out.println(test.getString("g_name"));
+//		} catch (SQLException e) {
+//			// TODO Auto-generated catch block
+//			e.printStackTrace();
+//		}
+		
 	}
 
-	public static ResultSet queryTeamMembers(String id) {
-		// TODO Auto-generated method stub
-		return null;
-	}
-
-	public static ResultSet queryMemberTeams(String member_email) {
-		// TODO Auto-generated method stub
-		return null;
-	}
+	
 	
 	
 }
