@@ -657,7 +657,7 @@
 							<!--input type="text"  value="" class="text ui-widget-content ui-corner-all" /-->
 							
 							<div id="searchform">
-								<input type="text" langtag="top-search" value="搜尋..." name="s" id="project_leader" onfocus="defaultInput(this)" onblur="clearInput(this)"/>
+								<input type="text" AUTOCOMPLETE=OFF langtag="top-search" value="搜尋..." name="s" id="project_leader" onfocus="defaultInput(this)" onblur="clearInput(this)"/>
 							<div id="div-float-members">
 								<div class="frontpage_box hoverdiv">
 									<img src="/images/1.jpg" alt="Image" width="24" height="24">
