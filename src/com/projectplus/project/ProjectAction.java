@@ -15,15 +15,12 @@ import org.apache.struts.action.ActionForm;
 import org.apache.struts.action.ActionForward;
 import org.apache.struts.action.ActionMapping;
 
+import com.projectplus.charts.GanttScheme;
 import com.projectplus.charts.WbsScheme;
 import com.projectplus.charts.WbsSchemeCreator;
 import com.projectplus.context.Result;
 import com.projectplus.context.SessionContext;
 import com.projectplus.member.MemberDataStructure;
-import com.projectplus.task.TaskDBMgr;
-import com.projectplus.task.TaskDataStructure;
-import com.projectplus.team.TeamDBMgr;
-import com.projectplus.team.TeamDataStructure;
 import com.projectplus.util.JSONWriter;
 
 public class ProjectAction extends Action {
@@ -38,6 +35,7 @@ public class ProjectAction extends Action {
 	public static final int QYMEMBER = 7;
 	public static final int WBSTREE = 8;
 	public static final int QYMEMBERPROJECT = 9;
+	public static final int GANTT = 10;
 
 	public ActionForward execute(ActionMapping mapping, ActionForm actionForm,
 			HttpServletRequest request, HttpServletResponse response) {
@@ -68,8 +66,48 @@ public class ProjectAction extends Action {
 			return queryWbsTree(mapping, form, request, response, session);
 		case QYMEMBERPROJECT:
 			return queryMemberProject(mapping, form, request, response, session);
+		case GANTT:
+			return queryGantt(mapping, form, request, response, session);
 		}
 
+		return null;
+	}
+
+	
+	/**
+	 *  op 10 列出甘特圖
+	 * @return
+	 */
+	private ActionForward queryGantt(ActionMapping mapping, ProjectActionForm form,
+			HttpServletRequest request, HttpServletResponse response, HttpSession session) {
+		
+		GanttScheme ganttScheme = new GanttScheme();
+		ganttScheme.title = "甘特圖測試";
+		ganttScheme.subtitle = "任務總表";
+		
+		ganttScheme.xCategories.add("任務1");
+		ganttScheme.xCategories.add("任務2");
+		ganttScheme.xCategories.add("任務3");
+		ganttScheme.xCategories.add("任務4");
+		ganttScheme.xCategories.add("任務5");
+		
+		ganttScheme.xTitle = "";
+//		ganttScheme.xTitle = "任務";
+		ganttScheme.yTitle = "時間";
+		
+		ganttScheme.data.add(200);
+		ganttScheme.data.add(300);
+		ganttScheme.data.add(200);
+		ganttScheme.data.add(700);
+		ganttScheme.data.add(400);
+		
+		try {
+			JSONWriter.sendJSONResponse(response, ganttScheme);
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
+		
+		
 		return null;
 	}
 
