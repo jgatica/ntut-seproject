@@ -122,7 +122,7 @@ public class TeamDBMgr extends DBMgr {
 			
 			Statement stat = null; 
 		    stat = con.createStatement(); 
-		    resultSet = stat.executeQuery("SELECT * FROM `group` where g_id='" + id + "'"); 
+		    resultSet = stat.executeQuery("SELECT * FROM `group` as g left join `member` as m on g.add_id=m_id where g_id='" + id + "'"); 
 		    return resultSet;
 
 		    
