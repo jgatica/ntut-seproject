@@ -44,7 +44,7 @@ public class ProjectAction extends Action {
 		ProjectActionForm form = (ProjectActionForm) actionForm;
 
 		int op = form.getOp();
-		//System.out.println("the op  = " + op);
+		// System.out.println("the op  = " + op);
 		switch (op) {
 		case ADDPROJECT:
 			return addProject(mapping, form, request, response, session);
@@ -327,19 +327,22 @@ public class ProjectAction extends Action {
 	private ActionForward addProject(ActionMapping mapping,
 			ProjectActionForm form, HttpServletRequest request,
 			HttpServletResponse response, HttpSession session) {
-		/*
-		 * System.out.println("name:"+form.projectName);
-		 * System.out.println("destination:"+form.projectTarget);
-		 * System.out.println("leader:"+form.projectManager);
-		 * System.out.println("startDate:"+form.startDate);
-		 * System.out.println("endDate:"+form.endDate);
-		 */
-		MemberDataStructure data = (MemberDataStructure) session.getAttribute(SessionContext.USERDATA);
-		//System.out.println("startDate:" + form.startDate);
+
+//		System.out.println("name:" + form.projectName);
+//		System.out.println("destination:" + form.projectTarget);
+//		System.out.println("leader:" + form.projectManagerId);
+//		System.out.println("startDate:" + form.startDate);
+//		System.out.println("endDate:" + form.endDate);
+
+		MemberDataStructure data = (MemberDataStructure) session
+				.getAttribute(SessionContext.USERDATA);
+		// System.out.println("startDate:" + form.startDate);
 		// boolean isSuccess =true;
-		boolean check = form.projectName.length() == 0 && ProjectDBMgr.checkProjectName(form.projectName, form.teamId);
+		boolean check = form.projectName.length() == 0
+				&& !ProjectDBMgr
+						.checkProjectName(form.projectName, form.teamId);
 		boolean isSuccess = false;
-		if (check)
+		if (!check)
 			isSuccess = ProjectDBMgr.addProject(form.projectName,
 					form.projectTarget, form.projectManagerId, form.startDate,
 					form.endDate, data.id, form.teamId);
