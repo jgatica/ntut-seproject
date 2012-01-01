@@ -262,11 +262,7 @@
 	
 	 
 	$(document).ready(function(){
-		/*<div class="col_allw170 perple_box">
-			<img class="bigpic" src="/images/1.jpg" alt="Image" width="48" height="48">
-			<h2><a href="/project/detail.jsp">陳奕豪</a><button>剔除成員</button><button>加入朋友</button></h2>	
-		<div class="divider"></div>
-		</div> 	*/
+				
 		var teamId = $("#teamId").val();
 		$.getJSON('/TeamAction.do',  { op:8,id:teamId }, function(data) {
 			if(data!=null)
@@ -310,14 +306,87 @@
 		});			
 		
 		$( "#agree" ).click(function(){
+			var op=5;
+			var id = $("#add_member_name").attr("name");
+			var teamId = $("#teamId").val();
+			$.getJSON('/MemberAction.do', {op:op,id:id,teamId:teamId}, function(data){
+				if(data!=null)
+				{
+					if(data.isSuccess)
+						window.location = "/team/listMember.jsp?id=" + teamId;
+					else
+						alert(data.message);
+				}
+			});
 		});	
 			
 		$( "#cancel" ).click(function(){
 			$("#dialog").dialog('close');
 		});
+		
+		$("#div-float-members").hide();
+		
+		$("#project_managerId").click(function(){
+			if($("#project_managerId").val()=="搜尋...")
+				$("#project_managerId").val('');
+		});
+		
+		$("#project_managerId").keydown(function(){
+			// 在這裡取得資料並且榜上去(仿造目前樣板)
+			if($("#project_managerId").val()!="搜尋..." && $("#project_managerId").val() !="")
+				$( "#div-float-members" ).show();
+				var name = $("#project_managerId").val();
+				var op=4;
+				//var data = $("label[value*="+ name +"]");
+				$.getJSON('/MemberAction.do', {op:op,member_name:name}, function(data){
+					if(data!=null)
+					{
+						//console.log(data);
+						var size = data.length,index;
+						$("#div-float-members").html("");
+						for(index = 0; index < size; index++)
+						{
+							var content = '<div id="' + data[index].id + '" name="' + data[index].member_name + '" class="selected_btn frontpage_box hoverdiv">' +
+								'<img src="' + data[index].imageURL + '" alt="Image" width="24" height="24">'+
+								'<p><name>' + data[index].member_name + '</name></p>';
+							$("#div-float-members").append(content);
+							//alert();
+							$(".selected_btn").click(function(){
+								var id = $(this).attr("id");
+								var name = $(this).attr("name");
+								$("#dialog_btn").button({disabled:false});
+								$("#project_managerId").val(name);
+								$("#project_managerId").attr("name",id);
+								$("#add_member_name").val(name);
+								$("#add_member_name").attr("name",id);
+								$("#div-float-members").html("");
+								$( "#div-float-members" ).hide();
+							});
+						}
+					}
+				});
+				/*$("#div-float-members").html("");
+				var size = data.length,index;
+				for(index = 0; index < size; index++)
+				{
+					var content = '<div id="' + data[index].id + '" class="frontpage_box hoverdiv">' +
+					'<img src="' + $("#"+data[index].id).attr("name") + '" alt="Image" width="24" height="24">'+
+					'<p><name>' + $("#"+data[index].id).attr("value") + '</name></p>';
+					$("#div-float-members").append(content);
+				}*/
+		});
+		
+		/*$("#project_managerId").blur(function(){
+			$( "#div-float-members" ).hide();
+		});*/
+		
+		$("#project_managerId").focus(function(){
+			if($("#project_managerId").val()!="搜尋..." && $("#project_managerId").val() !="")
+				$( "#div-float-members" ).show();
+		});
 	}); 
 
-	  	
+	
 
 </script>
 
@@ -546,8 +615,13 @@
 					<div class="divider"></div>
 					<div class="col_allw170 perple_box">					
 						<img class="bigpic" src="/images/jquery-icon.gif"  width="50" height="50"/>
-						<h2><team id="teamNameArea1">jQuery研討社</team><button id="dialog_btn">新增成員</button></h2>				
-						<input type="text" />			
+						<h2><team id="teamNameArea1">jQuery研討社</team><button id="dialog_btn" disabled="disabled">新增成員</button></h2>
+                        				
+						<div id="searchform">
+								<input type="text" AUTOCOMPLETE=OFF langtag="top-search" value="搜尋..." name="" id="project_managerId"/>
+							<div id="div-float-members">											    
+							</div>						
+						</div>   	
 					<div class="divider"></div>
                     </div> 	
                 </div>
@@ -559,12 +633,13 @@
 						<table>					
 						<form>	
 							<tr>
-								<td width="20%"><label for="email">名稱</label></td>
+								<td width="20%"><label for="name">名稱</label></td>
 								<td width="80%">
-									<input type="text" value="" class="text ui-widget-content ui-corner-all" />
-									<div class="name-hover-div">
+									<input id="add_member_name" name="name" type="text" value="" class="text ui-widget-content ui-corner-all" disabled="disabled"/>
+									<!--<div class="name-hover-div">
 										<label class="name-hover"><name></name></label>
-									</div></td>
+									</div>-->
+                                </td>
 								<td>
 									<img class="bigpic" src="/images/default.jpg" alt="Image" width="48" height="48">
 								</td>
@@ -577,7 +652,7 @@
 							<button id="agree">確定</button>
 							<button id="cancel">取消</button>
 						</div>
-					</div>							
+					</div>			
 				
 				<!-- InstanceEndEditable -->
 				<div class="subBottomDiv" ></div>
