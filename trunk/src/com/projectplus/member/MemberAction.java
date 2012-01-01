@@ -3,6 +3,8 @@ package com.projectplus.member;
 import java.io.IOException;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.ArrayList;
+import java.util.List;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -23,6 +25,7 @@ public class MemberAction extends Action {
 	public static final int LOGIN = 1;
 	public static final int LOGOUT = 2;
 	public static final int QYDATA = 3;
+	public static final int QYMEMBERBYCMP = 4;
 
 	public ActionForward execute(ActionMapping mapping, ActionForm actionForm,
 			HttpServletRequest request, HttpServletResponse response) {
@@ -47,10 +50,44 @@ public class MemberAction extends Action {
 			// 會員資料查詢
 		case QYDATA:
 			return queryData(mapping, form, request, response, session);
+		case QYMEMBERBYCMP:
+			return queryMemberByCMP(mapping, form, request, response, session);
 		default:
 			break;
 		}
 
+		return null;
+	}
+
+	private ActionForward queryMemberByCMP(ActionMapping mapping,
+			MemberActionForm form, HttpServletRequest request,
+			HttpServletResponse response, HttpSession session) {
+		boolean check = form.member_name != null
+				&& form.member_name.length() != 0;
+		ResultSet resultSet = null;
+		if (check)
+			resultSet = MemberDBMgr.queryAllMember(form.member_name);
+		List<MemberDataStructure> dataList = new ArrayList<MemberDataStructure>();
+
+		try {
+			if (resultSet != null) {
+				while (resultSet.next()) {
+					MemberDataStructure data = new MemberDataStructure();// 真的
+					data.setId(resultSet.getString("m_id"));
+					data.setImageURL(resultSet.getString("m_imageURL") == null ? "/images/default.jpg"
+							: resultSet.getString("m_imageURL"));
+					data.setMember_name(resultSet.getString("m_name"));
+					dataList.add(data);
+				}
+			}
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+		try {
+			JSONWriter.sendJSONResponse(response, dataList);
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
 		return null;
 	}
 
@@ -152,7 +189,7 @@ public class MemberAction extends Action {
 		if (result.isSuccess)
 			resultSet = MemberDBMgr.queryMember(form.member_email);
 		try {
-			if (resultSet!=null && resultSet.next()) {
+			if (resultSet != null && resultSet.next()) {
 				data = new MemberDataStructure();// 真的
 				data.setId(resultSet.getString("m_id"));
 				data.setImageURL(resultSet.getString("m_imageURL"));
