@@ -198,6 +198,29 @@ public class MemberDBMgr extends DBMgr{
 		
 	}
 	
+	/**
+	 * 
+	 * @param m_id
+	 * @param team_id
+	 * @return
+	 */
+	static public boolean newMember(String m_id, String team_id) {
+		
+		if(!isInit)
+			return false;
+		try {
+			pst = con.prepareStatement("insert into `g_m_relation`(`m_id`,`g_id`,`status`,`l_id`) "
+					+ " value (?,?,1,3)");
+			pst.setString(1, m_id);
+			pst.setString(2, team_id);
+			pst.executeUpdate();
+			return true;
+			
+		} catch (SQLException e) {
+			System.out.println("InsertDB Exception :" + e.toString());
+			return false;
+		}
+	}
 	
 	/**
 	 * 更新會員的資料
