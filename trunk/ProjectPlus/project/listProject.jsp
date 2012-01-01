@@ -265,6 +265,7 @@
 		$.getJSON('/TeamAction.do', {op:8,id:teamId}, function(data){
 			if(data!=null)
 			{
+				//console.log(data);
 				var size = data.members.length,index;
 				for(index = 0; index < size; index++)
 				{
@@ -287,7 +288,6 @@
 			if(data !=null){
 				$("#project-list").html("");	
 				var size = data.length,index;
-				
 				for(index = 0; index < size; index++)
 				{
 					var content ="";
@@ -318,11 +318,11 @@
 			var op = 0;
 			var name = $("#project_name").val();
 			var dest = $("#project_destination").val();
-			var leader = $("#project_leader").val();
+			var pmid = $("#project_managerId").attr("name");
 			var start = $("#project_startDate").val();
 			var end = $("#project_endDate").val();
 			var teamId = $("#teamId").val();
-			$.getJSON('/ProjectAction.do', {op:op,projectName:name,projectTarget:dest,projectManager:leader,startDate:start,endDate:end,teamId:teamId}, function(data){
+			$.getJSON('/ProjectAction.do', {op:op,projectName:name,projectTarget:dest,projectManagerId:pmid,startDate:start,endDate:end,teamId:teamId}, function(data){
 				if(data.isSuccess)
 					$("#dialog").dialog('close');		
 				else
@@ -359,23 +359,26 @@
 				$( "#div-float-members" ).show();
 				var name = $("#project_managerId").val();
 				var data = $("label[value*="+ name +"]");
-				/*<div id="div-float-members">
-								<!--<div class="frontpage_box hoverdiv">
-									<img src="/images/1.jpg" alt="Image" width="24" height="24">
-									<p><name>陳奕豪</name></p>
-								</div>    */
+				
 				$("#div-float-members").html("");
 				var size = data.length,index;
 				for(index = 0; index < size; index++)
 				{
-					/*console.log(data[index]);
-					console.log(data[index].id);
-					console.log($("#"+data[index].id).attr("name"));
-					console.log($("#"+data[index].id).attr("value"));*/
-					var content = '<div id="' + data[index].id + '" class="frontpage_box hoverdiv">' +
+					var content = '<div id="' + data[index].id + '" name="' + $("#"+data[index].id).attr("value") + '" class="frontpage_box hoverdiv">' +
 					'<img src="' + $("#"+data[index].id).attr("name") + '" alt="Image" width="24" height="24">'+
 					'<p><name>' + $("#"+data[index].id).attr("value") + '</name></p>';
+					/*console.log(data[index].id);
+					console.log($("#"+data[index].id).attr("name"));
+					console.log($("#"+data[index].id).attr("value"));*/
 					$("#div-float-members").append(content);
+					$("#"+ data[index].id).click(function(){
+						var id = $(this).attr("id");
+						var name = $(this).attr("name");
+						$("#project_managerId").val(name);
+						$("#project_managerId").attr("name",id);
+						$("#div-float-members").html("");
+						$( "#div-float-members" ).hide();
+					});
 				}
 		});
 		
@@ -709,25 +712,9 @@
 							<!--input type="text"  value="" class="text ui-widget-content ui-corner-all" /-->
 							
 							<div id="searchform">
-								<input type="text" AUTOCOMPLETE=OFF langtag="top-search" value="搜尋..." name="s" id="project_managerId"/>
-							<div id="div-float-members">
-								<!--<div class="frontpage_box hoverdiv">
-									<img src="/images/1.jpg" alt="Image" width="24" height="24">
-									<p><name>陳奕豪</name></p>
-								</div>    
-								<div class="frontpage_box hoverdiv">
-									<img src="/images/2.jpg" alt="Image" width="24" height="24">
-									<p><name>陳至圓</name></p>
-								</div>  
-								<div class="frontpage_box hoverdiv">
-									<img src="/images/2.jpg" alt="Image" width="24" height="24">
-									<p><name>陳至圓</name></p>
-								</div> 
-								<div class="frontpage_box hoverdiv">
-									<img src="/images/2.jpg" alt="Image" width="24" height="24">
-									<p><name>陳至圓</name></p>
-								</div> -->													    
-							</div>						
+								<input type="text" AUTOCOMPLETE=OFF langtag="top-search" value="搜尋..." name="" id="project_managerId"/>
+                                <div id="div-float-members">												    
+                                </div>						
 							</div>     
 							
 							
