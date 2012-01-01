@@ -175,24 +175,43 @@ public class MemberDBMgr extends DBMgr{
 	 */
 	static public ResultSet queryAllMember(String m_name) {
 		if(m_name.length()==0)
-			return null;
-		
-		ResultSet resultSet=null;
-		
-		try {
+		{
+			ResultSet resultSet=null;
 			
-			Statement stat = null; 
-		    stat = con.createStatement(); 
-		    resultSet = stat.executeQuery("SELECT * FROM member where m_name like '%" + m_name + "%'"); 
-		    return resultSet;
-
-		    
-		    //System.out.println(resultSet.getString("m_password")+"\t\t"); 
-		    //return 0;    		
-		} catch (SQLException e) {
-			System.out.println("InsertDB Exception :" + e.toString());
-			return null;
-		} 
+			try {
+				
+				Statement stat = null; 
+			    stat = con.createStatement(); 
+			    resultSet = stat.executeQuery("SELECT * FROM member"); 
+			    return resultSet;
+	
+			    
+			    //System.out.println(resultSet.getString("m_password")+"\t\t"); 
+			    //return 0;    		
+			} catch (SQLException e) {
+				System.out.println("InsertDB Exception :" + e.toString());
+				return null;
+			} 
+		}
+		else
+		{
+			ResultSet resultSet=null;
+			
+			try {
+				
+				Statement stat = null; 
+			    stat = con.createStatement(); 
+			    resultSet = stat.executeQuery("SELECT * FROM member where m_name like '%" + m_name + "%'"); 
+			    return resultSet;
+	
+			    
+			    //System.out.println(resultSet.getString("m_password")+"\t\t"); 
+			    //return 0;    		
+			} catch (SQLException e) {
+				System.out.println("InsertDB Exception :" + e.toString());
+				return null;
+			} 
+		}
 		
 		
 	}
