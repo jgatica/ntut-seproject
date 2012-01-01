@@ -26,6 +26,7 @@ public class MemberAction extends Action {
 	public static final int LOGOUT = 2;
 	public static final int QYDATA = 3;
 	public static final int QYMEMBERBYCMP = 4;
+	public static final int ADDTEAMMEMBER = 5;
 
 	public ActionForward execute(ActionMapping mapping, ActionForm actionForm,
 			HttpServletRequest request, HttpServletResponse response) {
@@ -52,10 +53,32 @@ public class MemberAction extends Action {
 			return queryData(mapping, form, request, response, session);
 		case QYMEMBERBYCMP:
 			return queryMemberByCMP(mapping, form, request, response, session);
+		case ADDTEAMMEMBER:
+			return addTeamMember(mapping, form, request, response, session);
 		default:
 			break;
 		}
 
+		return null;
+	}
+
+	private ActionForward addTeamMember(ActionMapping mapping,
+			MemberActionForm form, HttpServletRequest request,
+			HttpServletResponse response, HttpSession session) {
+		System.out.println(form.id);
+		System.out.println(form.teamId);
+		boolean isSuccess = MemberDBMgr.newMember(form.id, form.teamId);
+		Result result = new Result();
+		result.isSuccess = isSuccess;
+		if(result.isSuccess)
+			result.message = "ok";
+		else
+			result.message = "faild";
+		try {
+			JSONWriter.sendJSONResponse(response, result);
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
 		return null;
 	}
 
