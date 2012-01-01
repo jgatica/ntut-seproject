@@ -286,6 +286,7 @@
 		
 		$.getJSON('/ProjectAction.do',  { op:5 ,teamId:teamId}, function(data) {		
 			if(data !=null){
+				console.log(data);
 				$("#project-list").html("");	
 				var size = data.length,index;
 				for(index = 0; index < size; index++)
@@ -293,14 +294,13 @@
 					var content ="";
 					if(index%2==0)
 					{
-						content = '<tr id="' + data[index].projectId + '">' + '<td>' + parseInt(index) + '</td>' + '<td><team>' + data[index].teamName + '</team>'
-									 + data[index].projectName + data[index].projectId + '</td>';
+						content = '<tr id="' + data[index].projectId + '">' + '<td>' + parseInt(index) + '</td>' + '<td>' + 
+									 data[index].projectName + data[index].projectId + '</td>';
 					
 					}
 					else
 					{
-						content = '<tr id="' + data[index].projectId + '" class="odd">' + '<td>' + parseInt(index) + '</td>' + '<td><team>' + data[index].teamName + '</team>'
-									 + data[index].projectName + data[index].projectId + '</td>';
+						content = '<tr id="' + data[index].projectId + '" class="odd">' + '<td>' + parseInt(index) + '</td>' + '<td>' + data[index].projectName + data[index].projectId + '</td>';
 					}
 					if(data[index].projectState!="finished")
 						content+='<td><img src="/images/state_doing.png" width="16" /></td></tr>';
@@ -324,7 +324,7 @@
 			var teamId = $("#teamId").val();
 			$.getJSON('/ProjectAction.do', {op:op,projectName:name,projectTarget:dest,projectManagerId:pmid,startDate:start,endDate:end,teamId:teamId}, function(data){
 				if(data.isSuccess)
-					$("#dialog").dialog('close');		
+					window.location = "/project/listProject.jsp?id="+teamId;		
 				else
 					alert(data.message);
 			});
@@ -622,7 +622,7 @@
 				
 				<div class="table-content">
 					
-					<table summary="專案列表" width="100%" style="height:300px;">
+					<table summary="專案列表" width="100%" style="max-height:300px; ">
 						<!--<caption>Table designs</caption>-->
 						<thead>
 						<tr>
