@@ -7,7 +7,7 @@ public class MemberActionForm extends ActionForm {
 	public int op;
 	public int start;
 	public int length;
-	
+	public String teamId;
 	public String imageURL;
 	public String id;
 	public String password;
@@ -22,6 +22,12 @@ public class MemberActionForm extends ActionForm {
 	public String member_birthday;
 	public String member_email;
 	
+	public String getTeamId() {
+		return teamId;
+	}
+	public void setTeamId(String teamId) {
+		this.teamId = teamId;
+	}
 	public String getMember_gender() {
 		return member_gender;
 	}
