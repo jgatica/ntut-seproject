@@ -229,12 +229,14 @@ public class TeamAction extends Action {
 		System.out.println("phone:"+form.phone);
 		System.out.println("address:"+form.address);
 		System.out.println("mail:"+form.mail);*/
-		
 		MemberDataStructure userData = (MemberDataStructure)session.getAttribute(SessionContext.USERDATA);
-		boolean isSuccess = TeamDBMgr.addTeam(userData.id,form.name, form.description, form.fax, form.phone,form.mail);
+		boolean check = TeamDBMgr.checkTeamName(form.name);
+		boolean isSuccess = false;
+		if(check)
+			isSuccess = TeamDBMgr.addTeam(form.name, form.description, form.fax, form.phone,form.mail,userData.id);
 		Result result = new Result();
 		result.isSuccess = isSuccess;
-		if(isSuccess)
+		if(result.isSuccess)
 		{
 			result.message = "ok";
 		}	
