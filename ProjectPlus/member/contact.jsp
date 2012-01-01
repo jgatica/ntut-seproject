@@ -266,28 +266,33 @@
 			$("#phone").text(data.member_phone);
 			$("#mobile").text(data.member_mobile);
 			$("#address").text(data.member_address);
+			
+			$("#nameArea_edit").val(data.member_name);
+			$("#email_edit").val(data.member_email);
+			$("#phone_edit").val(data.member_phone);
+			$("#mobile_edit").val(data.member_mobile);
+			$("#address_edit").val(data.member_address);			
 		});
 		
-		$('#date').datepicker();
-		$('#date_start').datepicker();
-		$('#date_end').datepicker();
-		$( "button" ).button();
-		$( "#draggable" ).draggable();
-		$( "#droppable" ).droppable({
-			drop: function( event, ui ) {
-				$( this )
-					.addClass( "ui-state-highlight" )
-					.find( "p" )
-						.html( "Dropped!" );
-			}
-		});	
-		
 
+		
+		
 		// dialog
-		$( "#dialog" ).dialog( {autoOpen: false, minWidth: 70, minHeight: 100, modal: true} );
-		$( "#dialog_btn" ).click(function(){
+		$( "#dialog" ).dialog( {autoOpen: false, minWidth: 350, minHeight: 150, modal: true} );
+		
+		$("#agree").click(function(){
+			
+		});
+		
+		$("#updateInfo").click(function(){
 			$("#dialog").dialog('open');
-		});	
+		});
+				
+		$('#cancel').click(function(){
+			$("#dialog").dialog('close');		
+		});
+		
+				
 	}); 
 </script>
 
@@ -519,7 +524,7 @@
 							<tfoot>
 							<tr>
 								<th scope="row"></th>
-								<td colspan="4"></td>
+								<td colspan="4" style="text-align:right"><button id="updateInfo">更新聯絡資料</button></td>
 							</tr>
 							</tfoot>
 							<tbody>
@@ -538,37 +543,50 @@
 								<tr>
 									<td langtag="profile-table-address"></td>
 									<td id = "address"></td>									
-								</tr>
-								<!--<tr>
-									<td>市內電話</td>
-									<td>02-12345678</td>									
-								</tr>
-								<tr class="odd">									
-									<td>行動電話</td>
-									<td>0980-556-436</td>									
-								</tr>					
-								<tr>
-									<td>電子信箱</td>
-									<td>augus790302@gmail.com</td>									
-								</tr>
-								<tr class="odd">									
-									<td>備份信箱</td>
-									<td>augus19900302@yahoo.com.tw</td>									
-								</tr>		
-								<tr>
-									<td>聯絡地址</td>
-									<td>新北市瑞芳區中中路99巷99號99樓</td>									
-								</tr>
-								<tr class="odd">									
-									<td>個人網站</td>
-									<td>http://www.facebook.com/profile.php?id=100000398385599</td>									
-								</tr>-->																															
+								</tr>																																						
 							</tbody>
 						</table>			
 
 
 				 </div>
- 					
+				 
+				<div id="dialog" title="修改資訊">
+					<p>修改你的<team>聯絡資訊</team>，請選輸入</p>
+						<table summary="站內信箱" width="100%">
+							<!--<caption>Table designs</caption>-->
+							<thead>
+							<tr>
+								<th scope="col">聯絡方式</th>
+								<th scope="col">資訊</th>
+							</tr>
+							</thead>
+							<tbody>
+                            	<tr class="odd">
+									<td langtag="top-account-mail"></td>
+									<td><input id="email_edit" type="text"/></td>									
+								</tr>
+                                <tr>									
+									<td langtag="profile-table-phone"></td>
+									<td><input id="phone_edit" type="text"/></td>									
+								</tr>	
+                                <tr class="odd">									
+									<td langtag="profile-table-mobile"></td>
+									<td><input id="mobile_edit" type="text"/></td>									
+								</tr>		
+								<tr>
+									<td langtag="profile-table-address"></td>
+									<td><input id="address_edit" type="text"/></td>									
+								</tr>																																						
+							</tbody>
+						</table>			
+
+								
+					<div class="divider"></div>
+					<div style="text-align:right;">
+						<button id="agree">確定</button>
+						<button id="cancel">取消</button>
+					</div>
+				</div>		
 				<!-- InstanceEndEditable -->
 				<div class="subBottomDiv" ></div>
 				
