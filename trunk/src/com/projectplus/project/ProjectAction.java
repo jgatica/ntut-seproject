@@ -132,8 +132,8 @@ public class ProjectAction extends Action {
 					project.setProjectManager(resultSet.getString(""));
 					project.setProjectTarget(resultSet.getString(""));
 					project.setProjectState(resultSet.getString(""));
-					project.setStartDate(Long.parseLong("0"));
-					project.setEndDate(Long.parseLong("0"));
+					project.setStartDate(resultSet.getString(""));
+					project.setEndDate(resultSet.getString(""));
 
 					// new stri
 				}
@@ -245,21 +245,23 @@ public class ProjectAction extends Action {
 	private ActionForward queryTeamProjects(ActionMapping mapping,
 			ProjectActionForm form, HttpServletRequest request,
 			HttpServletResponse response, HttpSession session) {
-
+		
 		ResultSet resultSet = ProjectDBMgr.queryTeamProjects(form.teamId);
 		List<ProjectDataStructure> dataList = new ArrayList<ProjectDataStructure>();
 		try {
 			if (resultSet != null) {
 				while (resultSet.next()) {
 					ProjectDataStructure project = new ProjectDataStructure();
-					project.setProjectName(resultSet.getString(""));
-					project.setProjectId(resultSet.getString(""));
-					project.setProjectTarget(resultSet.getString(""));
-					project.setProjectManagerId(resultSet.getString(""));
-					project.setProjectManager(resultSet.getString(""));
-					project.setStartDate(Long.parseLong("0"));
-					project.setEndDate(Long.parseLong("0"));
-					project.setProjectState(resultSet.getString(""));
+					project.setTeamId(form.teamId);
+					project.setTeamName("null");
+					project.setProjectId(resultSet.getString("p_id"));
+					project.setProjectName(resultSet.getString("p_name"));
+					project.setProjectTarget(resultSet.getString("p_desc"));
+					project.setProjectManagerId(resultSet.getString("add_id"));
+					project.setProjectManager("");
+					project.setStartDate(resultSet.getString("p_startdate"));
+					project.setEndDate(resultSet.getString("p_enddate"));
+					project.setProjectState("finished");
 					dataList.add(project);
 				}
 			} else // 假的(測試用) 如有真資料請將此部分刪除 直接return
@@ -273,8 +275,8 @@ public class ProjectAction extends Action {
 					project.setProjectTarget("完成所有需求");
 					project.setProjectManagerId("1");
 					project.setProjectManager("超級小可愛QQ");
-					project.setStartDate(i * 100);
-					project.setEndDate(i * 100 + 100);
+					project.setStartDate("");
+					project.setEndDate("");
 					if (i > 4)
 						project.setProjectState("finished");
 					else
@@ -328,12 +330,11 @@ public class ProjectAction extends Action {
 			ProjectActionForm form, HttpServletRequest request,
 			HttpServletResponse response, HttpSession session) {
 
-//		System.out.println("name:" + form.projectName);
-//		System.out.println("destination:" + form.projectTarget);
-//		System.out.println("leader:" + form.projectManagerId);
-//		System.out.println("startDate:" + form.startDate);
-//		System.out.println("endDate:" + form.endDate);
-
+		// System.out.println("name:" + form.projectName);
+		// System.out.println("destination:" + form.projectTarget);
+		// System.out.println("leader:" + form.projectManagerId);
+		// System.out.println("startDate:" + form.startDate);
+		// System.out.println("endDate:" + form.endDate);
 		MemberDataStructure data = (MemberDataStructure) session
 				.getAttribute(SessionContext.USERDATA);
 		// System.out.println("startDate:" + form.startDate);

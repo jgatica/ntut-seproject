@@ -99,7 +99,7 @@ public class ProjectDBMgr extends DBMgr {
 			pst.setString(2, destination);
 			pst.setString(3, startDate);
 			pst.setString(4, endDate);
-			pst.setString(5, pm_id);
+			pst.setString(5, team_id);
 			pst.setString(6, add_id);
 			pst.setString(7, formatter.format(new Date()));
 			pst.setString(8, add_id);
