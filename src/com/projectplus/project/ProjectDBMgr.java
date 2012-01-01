@@ -162,7 +162,27 @@ public class ProjectDBMgr extends DBMgr {
 		
 	}
 	
-	
+	public static ResultSet queryTeamProjects(String teamId) {
+		if(teamId.length()==0)
+			return null;
+		
+		ResultSet resultSet=null;
+		
+		try {
+			
+			Statement stat = null; 
+		    stat = con.createStatement(); 
+		    resultSet = stat.executeQuery("SELECT * FROM `project` where g_id='" + teamId + "'"); 
+		    return resultSet;
+
+		    
+		    //System.out.println(resultSet.getString("m_password")+"\t\t"); 
+		    //return 0;    		
+		} catch (SQLException e) {
+			System.out.println("InsertDB Exception :" + e.toString());
+			return null;
+		} 
+	}
 	
 //	/**
 //	 * 會員登入
@@ -244,8 +264,5 @@ public class ProjectDBMgr extends DBMgr {
 	    
 	}
 	
-	public static ResultSet queryTeamProjects(String teamId) {
-		// TODO Auto-generated method stub
-		return null;
-	}
+
 }
