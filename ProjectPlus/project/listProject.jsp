@@ -306,8 +306,8 @@
 			var leader = $("#project_leader").val();
 			var start = $("#project_startDate").val();
 			var end = $("#project_endDate").val();
-			
-			$.getJSON('/ProjectAction.do', {op:op,projectName:name,projectTarget:dest,projectManager:leader,startDate:start,endDate:end}, function(data){
+			var teamId = $("#teamId").val();
+			$.getJSON('/ProjectAction.do', {op:op,projectName:name,projectTarget:dest,projectManager:leader,startDate:start,endDate:end,teamId:teamId}, function(data){
 				if(data.isSuccess)
 					$("#dialog").dialog('close');		
 				else
@@ -321,8 +321,8 @@
 		});
 		
 		//$('#date').datepicker();
-		$('#project_startDate').datepicker();
-		$('#project_endDate').datepicker();
+		$('#project_startDate').datepicker({dateFormat:"yy-mm-dd"});
+		$('#project_endDate').datepicker({dateFormat:"yy-mm-dd"});
 		
 		// dialog
 		$( "#dialog" ).dialog( {autoOpen: false, minWidth: 350, minHeight: 150, modal: true} );
@@ -330,13 +330,28 @@
 			$("#dialog").dialog('open');
 		});	
 		
-		$("#project_leader").keyup(function(){
-			// 在這裡取得資料並且榜上去(仿造目前樣板)
-			
+		//hide searchform
+		$("#div-float-members").hide();
+		
+		$("#project_managerId").click(function(){
+			if($("#project_managerId").val()=="搜尋...")
+				$("#project_managerId").val('');
 		});
 		
+		$("#project_managerId").keyup(function(){
+			// 在這裡取得資料並且榜上去(仿造目前樣板)
+			if($("#project_managerId").val()!="搜尋..." && $("#project_managerId").val() !="")
+				$( "#div-float-members" ).show();
+		});
 		
+		$("#project_managerId").blur(function(){
+			$( "#div-float-members" ).hide();
+		});
 		
+		$("#project_managerId").focus(function(){
+			if($("#project_managerId").val()!="搜尋..." && $("#project_managerId").val() !="")
+				$( "#div-float-members" ).show();
+		});
 	}); 
 
 	  	
@@ -657,7 +672,7 @@
 							<!--input type="text"  value="" class="text ui-widget-content ui-corner-all" /-->
 							
 							<div id="searchform">
-								<input type="text" AUTOCOMPLETE=OFF langtag="top-search" value="搜尋..." name="s" id="project_leader" onfocus="defaultInput(this)" onblur="clearInput(this)"/>
+								<input type="text" AUTOCOMPLETE=OFF langtag="top-search" value="搜尋..." name="s" id="project_managerId" onfocus="defaultInput(this)" onblur="clearInput(this)"/>
 							<div id="div-float-members">
 								<div class="frontpage_box hoverdiv">
 									<img src="/images/1.jpg" alt="Image" width="24" height="24">
