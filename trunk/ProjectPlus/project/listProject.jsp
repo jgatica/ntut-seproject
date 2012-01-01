@@ -260,6 +260,21 @@
 	 * 一開始讀取第零筆資料
 	 */
 	$(document).ready(function(){
+		var team_members;
+		var teamId = $("#teamId").val();
+		$.getJSON('/TeamAction.do', {op:8,id:teamId}, function(data){
+			if(data!=null)
+			{
+				var size = data.members.length,index;
+				for(index = 0; index < size; index++)
+				{
+					var content = '<label id="' + data.members[index].id + '" value="' + data.members[index].member_name + '" name="'+
+					data.members[i].imageURL + '"></label>';
+					$("#div-members").append(content);
+				}
+			}
+		});
+		
 		var teamId=$("#teamId").val();
 		$.getJSON('/TeamAction.do', {op:3,id:teamId}, function(data){
 			if(data!=null)
@@ -278,13 +293,13 @@
 					var content ="";
 					if(index%2==0)
 					{
-						content = '<tr>' + '<td>' + parseInt(index) + '</td>' + '<td><team>' + data[index].teamName + '</team>'
+						content = '<tr id="' + data[index].projectId + '">' + '<td>' + parseInt(index) + '</td>' + '<td><team>' + data[index].teamName + '</team>'
 									 + data[index].projectName + data[index].projectId + '</td>';
 					
 					}
 					else
 					{
-						content = '<tr class="odd">' + '<td>' + parseInt(index) + '</td>' + '<td><team>' + data[index].teamName + '</team>'
+						content = '<tr id="' + data[index].projectId + '" class="odd">' + '<td>' + parseInt(index) + '</td>' + '<td><team>' + data[index].teamName + '</team>'
 									 + data[index].projectName + data[index].projectId + '</td>';
 					}
 					if(data[index].projectState!="finished")
@@ -337,11 +352,31 @@
 			if($("#project_managerId").val()=="搜尋...")
 				$("#project_managerId").val('');
 		});
-		
-		$("#project_managerId").keyup(function(){
+
+		$("#project_managerId").keydown(function(){
 			// 在這裡取得資料並且榜上去(仿造目前樣板)
 			if($("#project_managerId").val()!="搜尋..." && $("#project_managerId").val() !="")
 				$( "#div-float-members" ).show();
+				var name = $("#project_managerId").val();
+				var data = $("label[value*="+ name +"]");
+				/*<div id="div-float-members">
+								<!--<div class="frontpage_box hoverdiv">
+									<img src="/images/1.jpg" alt="Image" width="24" height="24">
+									<p><name>陳奕豪</name></p>
+								</div>    */
+				$("#div-float-members").html("");
+				var size = data.length,index;
+				for(index = 0; index < size; index++)
+				{
+					/*console.log(data[index]);
+					console.log(data[index].id);
+					console.log($("#"+data[index].id).attr("name"));
+					console.log($("#"+data[index].id).attr("value"));*/
+					var content = '<div id="' + data[index].id + '" class="frontpage_box hoverdiv">' +
+					'<img src="' + $("#"+data[index].id).attr("name") + '" alt="Image" width="24" height="24">'+
+					'<p><name>' + $("#"+data[index].id).attr("value") + '</name></p>';
+					$("#div-float-members").append(content);
+				}
 		});
 		
 		$("#project_managerId").blur(function(){
@@ -352,6 +387,8 @@
 			if($("#project_managerId").val()!="搜尋..." && $("#project_managerId").val() !="")
 				$( "#div-float-members" ).show();
 		});
+		
+		$("#div-members").hide();
 	}); 
 
 	  	
@@ -457,8 +494,8 @@
 </div>	
                 <li>
 				<div id="searchform" action="#">
-					<input type="text" langtag="top-search" value="搜尋..." name="s" id="s" onfocus="defaultInput(this)" onblur="clearInput(this)"/>
-					<input type="submit" id="searchsubmit" value=" " />			
+					<input type="text" langtag="top-search" value="搜尋..." name="s" id="searchBlock"/>
+					<input type="submit" id="searchsubmit" value=" " />
 				</div>      
                 </li>
 				<li>
@@ -664,7 +701,7 @@
 							<td width="75%"><input type="text" id="project_destination" class="text ui-widget-content ui-corner-all" /></td>
 						</tr>						
 						<tr>
-							<td width="25%"><label for="email">負責人</label></td>
+							<td width="25%"><label for="email">專案經理</label></td>
 							<td width="75%">
 							
 							
@@ -672,9 +709,9 @@
 							<!--input type="text"  value="" class="text ui-widget-content ui-corner-all" /-->
 							
 							<div id="searchform">
-								<input type="text" AUTOCOMPLETE=OFF langtag="top-search" value="搜尋..." name="s" id="project_managerId" onfocus="defaultInput(this)" onblur="clearInput(this)"/>
+								<input type="text" AUTOCOMPLETE=OFF langtag="top-search" value="搜尋..." name="s" id="project_managerId"/>
 							<div id="div-float-members">
-								<div class="frontpage_box hoverdiv">
+								<!--<div class="frontpage_box hoverdiv">
 									<img src="/images/1.jpg" alt="Image" width="24" height="24">
 									<p><name>陳奕豪</name></p>
 								</div>    
@@ -689,7 +726,7 @@
 								<div class="frontpage_box hoverdiv">
 									<img src="/images/2.jpg" alt="Image" width="24" height="24">
 									<p><name>陳至圓</name></p>
-								</div> 																    
+								</div> -->													    
 							</div>						
 							</div>     
 							
@@ -711,6 +748,8 @@
 						<button id="agree">確定</button>
 						<button id="cancel">取消</button>
 					</div>
+                    <div id="div-members">
+                    </div>
 					<!--<p>你確定要刪除該專案嗎?</p>
 					<button>確定</button> <button>取消</button> -->
 				</div>	
