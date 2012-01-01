@@ -247,7 +247,7 @@ public class MemberDBMgr extends DBMgr{
 		if(!isInit)
 			return false;
 			try {
-				pst = con.prepareStatement("update member set m_name='"+m_name+"' , m_nickName='"+m_nickName+"' , m_gender='"+m_gender+"' , m_birthday='"+m_birthday+"' , m_imageURL='"+m_imageURL+"' , m_addr='"+m_addr+"' , m_tel='"+m_tel+"' , m_phone='"+m_phone+"' , m_introduction='"+m_introduction+"' , m_web ='"+m_web+"' ,m_note='"+m_note+"' ,mdy_time='"+formatter.format(new Date())+"' where m_email="+m_email);
+				pst = con.prepareStatement("update member set m_name='"+m_name+"' , m_nickName='"+m_nickName+"' , m_gender='"+m_gender+"' , m_birthday='"+m_birthday+"' , m_imageURL='"+m_imageURL+"' , m_addr='"+m_addr+"' , m_tel='"+m_tel+"' , m_phone='"+m_phone+"' , m_introduction='"+m_introduction+"' , m_web ='"+m_web+"' ,m_note='"+m_note+"' ,mdy_time='"+formatter.format(new Date())+"' where m_email='"+m_email+"'");
 				pst.executeUpdate();
 				return true;
 					
