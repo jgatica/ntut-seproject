@@ -261,6 +261,7 @@
 	 */
 	$(document).ready(function(){
 				// dialog
+		
 		$( "#dialog" ).dialog( {autoOpen: false, minWidth: 350, minHeight: 150, height:300, modal: true} );
 		$( "#task_dialog" ).dialog( {autoOpen: false, minWidth: 350, minHeight: 150, height:235, modal: true} );
 		//$( "button" ).button();
@@ -595,10 +596,11 @@
 					</form>	
 					</table>
 					
-					<div class="divider"></div>
+					<div class="divider" ></div>
 					<div style="text-align:right;">
 						<button id="edit" class="task_dialog_btn">編輯</button>
 					</div>
+
 					<!--<p>你確定要刪除該專案嗎?</p>
 					<button>確定</button> <button>取消</button> -->
 				</div>		

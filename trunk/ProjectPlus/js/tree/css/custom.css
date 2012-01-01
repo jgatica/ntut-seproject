@@ -29,13 +29,11 @@ h1 {
 }
 
 a{
-	color 				: #E05E00;	
+	/*color 				: #E05E00;	*/
 	text-decoration		: none;
+	cursor: pointer;
 }
 
-a:hover{
-	text-decoration		: underline;
-}
 
 /* general */
 .clear {
@@ -75,12 +73,14 @@ a:hover{
   padding               : 20px;
 }
 
+
 /* Custom node styling */
 
 .jOrgChart .node:hover {
 	box-shadow : rgba(0, 0, 0, 1) 0px 0px 15px;
 	-moz-box-shadow: rgba(0, 0, 0, 1) 0px 0px 15px;
 	-webkit-box-shadow: rgba(0, 0, 0, 1) 0px 0px 15px;
+	cursor: pointer;
 }
 
 .jOrgChart .node {
