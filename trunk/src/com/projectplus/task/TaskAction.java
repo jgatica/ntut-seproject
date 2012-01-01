@@ -121,8 +121,8 @@ public class TaskAction extends Action {
 					task.setProjectId(resultSet.getString(""));
 					task.setMemberId(resultSet.getString(""));
 					task.setDescription(resultSet.getString(""));
-					task.setStartDate(1234);
-					task.setEndDate(5678);
+					task.setStartDate(resultSet.getString(""));
+					task.setEndDate(resultSet.getString(""));
 					task.setState(resultSet.getString(""));
 				}
 			}
@@ -135,8 +135,8 @@ public class TaskAction extends Action {
 				task.setProjectId(form.id);
 				task.setMemberId("1");
 				task.setDescription("task"+form.id);
-				task.setStartDate(100);
-				task.setEndDate(200);
+				task.setStartDate("");
+				task.setEndDate("");
 				task.setState("init");
 			}
 		} catch (SQLException e) {
