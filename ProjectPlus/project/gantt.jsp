@@ -266,7 +266,7 @@
 <script language="JavaScript" type="text/javascript">
 
 	Highcharts.theme = {
-	   colors: ['#058DC7', '#50B432', '#ED561B', '#DDDF00', '#24CBE5', '#64E572', '#FF9655', '#FFF263', '#6AF9C4'],
+	   colors: ['#50B432', '#058DC7', '#ED561B', '#DDDF00', '#24CBE5', '#64E572', '#FF9655', '#FFF263', '#6AF9C4'],
 	   chart: {
 		  backgroundColor: {
 			 linearGradient: [0, 0, 500, 500],
@@ -654,9 +654,9 @@
 				<!-- InstanceEndEditable -->
 				</div>
                 <!-- InstanceBeginEditable name="RightArea" -->
-				
+				<div style="padding: 20px;">
 				<div id="container" style="width: 95%; height: 80%; margin: 0 auto;"></div>
-				
+				</div>
 				<!-- InstanceEndEditable -->
 				<div class="subBottomDiv" ></div>
                 </div>
