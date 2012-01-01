@@ -268,17 +268,17 @@
 			if(data!=null)
 			{
 				//alert();
-				//console.log(data); 
+				console.log(data); 
 				//$("#div-float-teams").html("");
 				$("#teamNameArea").text(data.name);
 				$("#teamNameArea1").text(data.name);
 				$("#teamNameArea2").text(data.name);
 				var size = data.members.length,index;
-					
+				
 				for(index = 0; index < size; index++)
 				{
 					var content = '<div class="col_allw170 perple_box">' +
-								 '<img class="bigpic" src="' + data.members[i].imageURL + '" width="48" height="48">'+
+								 '<img class="bigpic" src="' + data.members[index].imageURL + '" width="48" height="48">'+
 								 '<h2><a href="#">' + data.members[index].member_name + 
 								 '</a><button id="'+ data.members[index].id +'" class="delmember_btn">剔除成員</button>' + 
 								 '<button id="'+ data.members[index].id +'" class="addmember_btn">加入朋友</button></h2>'+
