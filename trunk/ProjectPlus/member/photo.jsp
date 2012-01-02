@@ -395,8 +395,8 @@
 </div>	
                 <li>
 				<div id="searchform" action="#">
-					<input type="text" langtag="top-search" value="搜尋..." name="s" id="searchBlock"/>
-					<input type="submit" id="searchsubmit" value=" " />
+					<input type="text" langtag="top-search" value="搜尋..." name="s" id="s" onfocus="defaultInput(this)" onblur="clearInput(this)"/>
+					<input type="submit" id="searchsubmit" value=" " />			
 				</div>      
                 </li>
 				<li>
