@@ -13,17 +13,17 @@ import com.projectplus.db.DBMgr;
 public class ProjectDBMgr extends DBMgr {
 
 
-	//move to taskdbmgr?????????
-	/**
-	 * 撈出該專案的所有任務
-	 * 
-	 * @param projectId
-	 *            : 專案id
-	 * @return 所有任務
-	 */
-	public static ResultSet listTask(String project_id) {
-		return null;
-	}
+//	//move to taskdbmgr?????????
+//	/**
+//	 * 撈出該專案的所有任務
+//	 * 
+//	 * @param projectId
+//	 *            : 專案id
+//	 * @return 所有任務
+//	 */
+//	public static ResultSet listTask(String project_id) {
+//		return null;
+//	}
 	
 	/**
 	 * 刪除專案
