@@ -130,6 +130,9 @@ public class TaskDBMgr extends DBMgr {
 			pst.setString(9, asign_id);
 			System.out.println(pst);
 			pst.executeUpdate();
+			
+			
+			
 			return true;
 
 		} catch (SQLException e) {
