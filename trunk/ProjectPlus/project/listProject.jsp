@@ -308,7 +308,6 @@
 						content+='<td><img src="/images/state_ok.png" width="16" /></td></tr>';
 					$("#project-list").append(content);
 				}
-				
 			}
 		
 		});
@@ -340,7 +339,7 @@
 		$('#project_endDate').datepicker({dateFormat:"yy-mm-dd"});
 		
 		// dialog
-		$( "#dialog" ).dialog( {autoOpen: false, minWidth: 350, minHeight: 150, modal: true} );
+		$( "#dialog" ).dialog( {autoOpen: false, minWidth: 350, minHeight: 250, modal: true} );
 		$( "#dialog_btn" ).click(function(){
 			$("#dialog").dialog('open');
 		});	
@@ -353,12 +352,9 @@
 				$("#project_managerId").val('');
 		});
 
-		$("#project_managerId").keydown(function(){
-			// 在這裡取得資料並且榜上去(仿造目前樣板)
-			if($("#project_managerId").val()!="搜尋..." && $("#project_managerId").val() !="")
-				$( "#div-float-members" ).show();
-				var name = $("#project_managerId").val();
-				var data = $("label[value*="+ name +"]");
+		function search_member(name)
+		{
+			var data = $("label[value*="+ name +"]");
 				
 				$("#div-float-members").html("");
 				var size = data.length,index;
@@ -380,6 +376,23 @@
 						$( "#div-float-members" ).hide();
 					});
 				}
+		}
+
+		$("#project_managerId").bind('paste', function(e) {
+				var el = $(this);
+				setTimeout(function() {
+					var name = $(el).val();
+					$( "#div-float-members" ).show();
+					search_member(name);
+				}, 100);
+		});
+
+		$("#project_managerId").keydown(function(){
+			// 在這裡取得資料並且榜上去(仿造目前樣板)
+			if($("#project_managerId").val()!="搜尋..." && $("#project_managerId").val() !="")
+				$( "#div-float-members" ).show();
+				var name = $("#project_managerId").val();
+				search_member(name);
 		});
 		
 		$("#project_managerId").blur(function(){
@@ -713,7 +726,7 @@
 							
 							<div id="searchform">
 								<input type="text" AUTOCOMPLETE=OFF langtag="top-search" value="搜尋..." name="" id="project_managerId"/>
-                                <div id="div-float-members">												    
+                                <div id="div-float-members" style="overflow-y: scroll; max-height:85px ; width:135px;">
                                 </div>						
 							</div>     
 							

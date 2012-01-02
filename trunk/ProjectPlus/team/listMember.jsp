@@ -281,19 +281,31 @@
 								 '<img class="bigpic" src="' + data.members[index].imageURL + '" width="48" height="48">'+
 								 '<h2><a href="#">' + data.members[index].member_name + 
 								 '</a><button id="'+ data.members[index].id +'" class="delmember_btn">剔除成員</button>' + 
-								 '<button id="'+ data.members[index].id +'" class="addmember_btn">加入朋友</button></h2>'+
+								 '<button id="'+ data.members[index].id +'" class="addfriend_btn">加入朋友</button></h2>'+
 								 '<div class="divider"></div></div>';
 								 
 					$("#div-members").append(content);
 					
 					$(".delmember_btn").click(function(){
-						//alert("新增成員 id:" + $(this).attr("id"));
-					});
-					$(".addmember_btn").click(function(){
 						//alert("刪除成員 id:" + $(this).attr("id"));
+						var op = 6;
+						var id = $(this).attr("id");
+						var teamId = $("#teamId").val();
+						$.getJSON('/MemberAction.do', {op:op,id:id,teamId:teamId}, function(data){
+							if(data!=null)
+							{
+								if(data.isSuccess)
+									window.location = "/team/listMember.jsp?id=" + teamId;
+								else
+									alert(data.message);
+							}
+						});
+					});
+					$(".addfriend_btn").click(function(){
+						//alert("新增好友 id:" + $(this).attr("id"));
 					});
 					$(".delmember_btn").button();
-					$(".addmember_btn").button();
+					$(".addfriend_btn").button();
 				}
 			}
 		});
@@ -331,12 +343,10 @@
 				$("#project_managerId").val('');
 		});
 		
-		$("#project_managerId").keydown(function(){
-			// 在這裡取得資料並且榜上去(仿造目前樣板)
-			if($("#project_managerId").val()!="搜尋..." && $("#project_managerId").val() !="")
-				$( "#div-float-members" ).show();
-				var name = $("#project_managerId").val();
+		function search_member(name)
+		{
 				var op=4;
+				$("#dialog_btn").button({disabled:true});
 				//var data = $("label[value*="+ name +"]");
 				$.getJSON('/MemberAction.do', {op:op,member_name:name}, function(data){
 					if(data!=null)
@@ -365,15 +375,23 @@
 						}
 					}
 				});
-				/*$("#div-float-members").html("");
-				var size = data.length,index;
-				for(index = 0; index < size; index++)
-				{
-					var content = '<div id="' + data[index].id + '" class="frontpage_box hoverdiv">' +
-					'<img src="' + $("#"+data[index].id).attr("name") + '" alt="Image" width="24" height="24">'+
-					'<p><name>' + $("#"+data[index].id).attr("value") + '</name></p>';
-					$("#div-float-members").append(content);
-				}*/
+		}
+		
+		$("#project_managerId").bind('paste', function(e) {
+				var el = $(this);
+				setTimeout(function() {
+					var name = $(el).val();
+					$( "#div-float-members" ).show();
+					search_member(name);
+				}, 100);
+		});
+		
+		$("#project_managerId").keydown(function(){
+			// 在這裡取得資料並且榜上去(仿造目前樣板)
+			if($("#project_managerId").val()!="搜尋..." && $("#project_managerId").val() !="")
+				$( "#div-float-members" ).show();
+				var name = $("#project_managerId").val();
+				search_member(name);
 		});
 		
 		/*$("#project_managerId").blur(function(){
@@ -629,7 +647,7 @@
 					       
 <!--新增隊友的對話框-->
 					<div id="dialog" title="新增成員">
-						<p>在<team id="teamNameArea2"></team>上新增會員，請輸入名稱</p>
+						<p>在<team id="teamNameArea2"></team>上新增成員</p>
 						<table>					
 						<form>	
 							<tr>
