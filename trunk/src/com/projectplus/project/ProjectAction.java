@@ -21,7 +21,6 @@ import com.projectplus.charts.WbsSchemeCreator;
 import com.projectplus.context.Result;
 import com.projectplus.context.SessionContext;
 import com.projectplus.member.MemberDataStructure;
-import com.projectplus.task.TaskDBMgr;
 import com.projectplus.util.JSONWriter;
 
 public class ProjectAction extends Action {

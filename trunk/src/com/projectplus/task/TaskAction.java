@@ -29,6 +29,7 @@ public class TaskAction extends Action {
 	public static final int QYTASK = 4;
 	public static final int QYMEMBERTASKS = 5;
 	public static final int QYMPROJECTTASKS = 6;
+	public static final int QYPROJECTTASKS = 7;
 
 	@Override
 	public ActionForward execute(ActionMapping mapping, ActionForm actionForm,
@@ -54,6 +55,55 @@ public class TaskAction extends Action {
 			return queryTask(mapping, form, request, response, session);
 		case QYMEMBERTASKS:
 			return queryMemberTasks(mapping, form, request, response, session);
+		case QYPROJECTTASKS:
+			return queryProjectTasks(mapping, form, request, response, session);
+		}
+		return null;
+	}
+
+	private ActionForward queryProjectTasks(ActionMapping mapping,
+			TaskActionForm form, HttpServletRequest request,
+			HttpServletResponse response, HttpSession session) {
+		ResultSet resultSet=TaskDBMgr.queryProjectTasks(form.projectId);
+		List<TaskDataStructure> dataList = new ArrayList<TaskDataStructure>();
+		
+		try {
+			if (resultSet != null) {
+				while (resultSet.next()) {
+					TaskDataStructure task = new TaskDataStructure();
+					task.setName(resultSet.getString(""));
+					task.setProjectId(resultSet.getString(""));
+					task.setMemberId(resultSet.getString(""));
+					task.setDescription(resultSet.getString(""));
+					task.setStartDate(resultSet.getString(""));
+					task.setEndDate(resultSet.getString(""));
+					task.setState(resultSet.getString(""));
+					dataList.add(task);
+				}
+			} else // 假的(測試用) 如有真資料請將此部分刪除 直接return
+			{
+				for (int i = 0; i < 5; i++) {
+					TaskDataStructure task = new TaskDataStructure();
+					task.setId(Integer.toString(i));
+					task.setName("工作" + i);
+					task.setProjectName("軟體工程");
+					task.setProjectId(Integer.toString(i));
+					task.setMemberId("1");
+					task.setDescription("task" + i);
+					task.setStartDate("");
+					task.setEndDate("");
+					task.setState("init");
+					dataList.add(task);
+				}
+			}
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+
+		try {
+			JSONWriter.sendJSONResponse(response, dataList);
+		} catch (IOException e) {
+			e.printStackTrace();
 		}
 		return null;
 	}
@@ -226,16 +276,16 @@ public class TaskAction extends Action {
 	private ActionForward addTask(ActionMapping mapping, TaskActionForm form,
 			HttpServletRequest request, HttpServletResponse response,
 			HttpSession session) {
-		// TODO Auto-generated method stub
-		Result result = new Result();
 		boolean isSuccess = false;
 		//名稱是否有重複
 		boolean isChecked = TaskDBMgr.checkTaskName(form.getName(),
 				form.getProjectId());
+		Result result = new Result();
+		
 		if (isChecked) {
 			isSuccess = TaskDBMgr.addTask(form.getName(),
-					form.getDescription(), String.valueOf(form.getStartDate()),
-					String.valueOf(form.getEndDate()), form.getId(),
+					form.getDescription(), form.getStartDate(),
+					form.getEndDate(), form.getId(),
 					form.getProjectId(), form.memberId);
 			result.isSuccess = isSuccess;
 			if (result.isSuccess){

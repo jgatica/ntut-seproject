@@ -10,8 +10,8 @@ public class TaskActionForm extends ActionForm{
 	public String name;
 	public String description;
 	public String state;
-	public long startDate;
-	public long endDate;
+	public String startDate;
+	public String endDate;
 	
 	
 	public String getId() {
@@ -26,16 +26,16 @@ public class TaskActionForm extends ActionForm{
 	public void setMemberId(String memberId) {
 		this.memberId = memberId;
 	}
-	public long getStartDate() {
+	public String getStartDate() {
 		return startDate;
 	}
-	public void setStartDate(long startDate) {
+	public void setStartDate(String startDate) {
 		this.startDate = startDate;
 	}
-	public long getEndDate() {
+	public String getEndDate() {
 		return endDate;
 	}
-	public void setEndDate(long endDate) {
+	public void setEndDate(String endDate) {
 		this.endDate = endDate;
 	}
 	public String getProjectId() {
