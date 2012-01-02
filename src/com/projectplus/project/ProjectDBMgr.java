@@ -112,7 +112,7 @@ public class ProjectDBMgr extends DBMgr {
 	 * @return
 	 */
 
-	public static boolean addProject(String name, String destination,String pm_id, String startDate, String endDate,String add_id,String team_id)
+	public static boolean addProject(String name, String destination,String pm_id, String startDate, String endDate,String add_id,String team_id,int duration)
 	{
 		//SimpleDateFormat sdf= new SimpleDateFormat("yyyy-MM-dd");
 		
@@ -158,15 +158,15 @@ public class ProjectDBMgr extends DBMgr {
 	}
 	
 	
-	/**
-	 * member's project
-	 * @param member_email
-	 * @return
-	 */
-	public static ResultSet queryMemberProject(String member_email) {
-		// TODO Auto-generated method stub
-		return null;
-	}
+//	/**
+//	 * member's project
+//	 * @param member_email
+//	 * @return
+//	 */
+//	public static ResultSet queryMemberProject(String member_email) {
+//		// TODO Auto-generated method stub
+//		return null;
+//	}
 	
 	/**
 	 *  project資料(!!!!!!!!in team's project)

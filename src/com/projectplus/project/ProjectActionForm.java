@@ -6,16 +6,21 @@ import org.apache.struts.action.ActionForm;
 public class ProjectActionForm extends ActionForm {
 	public int op;
 	public String teamId;
-	
 	public String projectId;
 	public String projectName;
 	public String projectTarget;
-	
 	public String projectManagerId;
 	public String projectState;
 	public String startDate;
 	public String endDate;
+	public int duration;
 	
+	public int getDuration() {
+		return duration;
+	}
+	public void setDuration(int duration) {
+		this.duration = duration;
+	}
 	public String getTeamId() {
 		return teamId;
 	}
