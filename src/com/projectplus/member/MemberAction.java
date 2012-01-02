@@ -37,7 +37,7 @@ public class MemberAction extends Action {
 
 		int op = form.getOp();
 
-		// System.out.println("the op  = " + op);
+		 System.out.println("the op  = " + op);
 
 		switch (op) {
 		// 註冊會員

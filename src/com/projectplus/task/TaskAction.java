@@ -15,8 +15,10 @@ import org.apache.struts.action.ActionForm;
 import org.apache.struts.action.ActionForward;
 import org.apache.struts.action.ActionMapping;
 
+import com.projectplus.context.Result;
 import com.projectplus.context.SessionContext;
 import com.projectplus.member.MemberDataStructure;
+import com.projectplus.project.ProjectDBMgr;
 import com.projectplus.util.JSONWriter;
 
 public class TaskAction extends Action {
@@ -157,8 +159,21 @@ public class TaskAction extends Action {
 	private ActionForward assignTask(ActionMapping mapping,
 			TaskActionForm form, HttpServletRequest request,
 			HttpServletResponse response, HttpSession session) {
+			
 		// TODO Auto-generated method stub
+		Result result = new Result();
+		boolean isSuccess = TaskDBMgr.assigTask(form.id, form.memberId);
+		if(isSuccess)
+			result.message = "指派成功";
+		else
+			result.message = "指派失敗";
+		try {
+			JSONWriter.sendJSONResponse(response, result);
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
 		return null;
+	
 	}
 	private ActionForward updateTask(ActionMapping mapping,
 			TaskActionForm form, HttpServletRequest request,
@@ -170,8 +185,20 @@ public class TaskAction extends Action {
 			HttpServletRequest request, HttpServletResponse response,
 			HttpSession session) {
 		// TODO Auto-generated method stub
+		Result result = new Result();
+		boolean isSuccess = TaskDBMgr.deleteTask(form.id);
+		if(isSuccess)
+			result.message = "刪除成功";
+		else
+			result.message = "刪除失敗";
+		try {
+			JSONWriter.sendJSONResponse(response, result);
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
 		return null;
 	}
+
 	private ActionForward addTask(ActionMapping mapping, TaskActionForm form,
 			HttpServletRequest request, HttpServletResponse response,
 			HttpSession session) {

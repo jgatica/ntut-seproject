@@ -229,8 +229,20 @@ public class ProjectAction extends Action {
 	private ActionForward assignPM(ActionMapping mapping,
 			ProjectActionForm form, HttpServletRequest request,
 			HttpServletResponse response, HttpSession session) {
-		return null;
 		// TODO Auto-generated method stub
+		Result result = new Result();
+		boolean isSuccess = ProjectDBMgr.assignProjectManager(form.projectManagerId);
+		if(isSuccess)
+			result.message = "指派成功";
+		else
+			result.message = "指派失敗";
+		try {
+			JSONWriter.sendJSONResponse(response, result);
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
+		return null;
+		
 
 	}
 
@@ -321,8 +333,20 @@ public class ProjectAction extends Action {
 	private ActionForward delProject(ActionMapping mapping,
 			ProjectActionForm form, HttpServletRequest request,
 			HttpServletResponse response, HttpSession session) {
-		return null;
 		// TODO Auto-generated method stub
+		Result result = new Result();
+		boolean isSuccess = ProjectDBMgr.deleteProject(form.projectId);
+		if(isSuccess)
+			result.message = "刪除成功";
+		else
+			result.message = "刪除失敗";
+		try {
+			JSONWriter.sendJSONResponse(response, result);
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
+		return null;
+		
 
 	}
 
