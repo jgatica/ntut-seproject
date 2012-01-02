@@ -600,7 +600,7 @@
 					</a> 
                     </div>   					       
                     <div class="col_allw170 frontpage_box hoverdiv">
-					<a href="/team/listProject.jsp?id=<%= request.getParameter("id") %>">
+					<a href="/project/listProject.jsp?id=<%= request.getParameter("id") %>">
 						<img src="/images/project_task.png" alt="Image" width="24" height="24">
 						<h2>開發專案</h2>
                     </a>
