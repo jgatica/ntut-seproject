@@ -266,41 +266,48 @@
 		$( "#uiradio4" ).buttonset();
 		$( "#uiradio5" ).buttonset();
 		
-		
+		//var data = $("label[value*="+ name +"]");
 		function cal_function_point()
 		{
+			var data = $("input[checked^=checked]");
+			/*var size = data.length,index;
+			for(index = 0; index < size; index++)
+			{
+				console.log(data[index].id);
+				console.log($("label[for="+ data[index].id +"]").text());
+			}*/
 			//-------------------------------------------------------will Cal Unadjusted Function Point
 			// Measurement Parameter Count 之後請與各個cot2對應!!!!
-			var EI = 6; //External Input File => number_of_user_inputs
-			var EO = 5; //External Output File => number_of_outputs
-			var EQ = 3; //external Inquire File => number_of_inquires
-			var ILF = 2; // Internal Logical File => number_of_files
-			var EIF = 1; //External Logical File => number_of_external_interface
+			var EI = $("#EI").val(); //External Input File => number_of_user_inputs
+			var EO = $("#EO").val(); //External Output File => number_of_outputs
+			var EQ = $("#EQ").val(); //external Inquire File => number_of_inquires
+			var ILF = $("#ILF").val(); // Internal Logical File => number_of_files
+			var EIF = $("#EIF").val(); //External Logical File => number_of_external_interface
 			
 			
 			//Weighting Factor  之後請與按鈕對應 !!!
-			var EI_WF = 4;
-			var EO_WF = 5;
-			var EQ_WF = 4; 
-			var ILF_WF =10;
-			var EIF_WF =7;
+			var EI_WF = $("label[for="+ data[0].id +"]").text();
+			var EO_WF = $("label[for="+ data[1].id +"]").text();
+			var EQ_WF = $("label[for="+ data[2].id +"]").text(); 
+			var ILF_WF =$("label[for="+ data[3].id +"]").text();
+			var EIF_WF =$("label[for="+ data[4].id +"]").text();
 			
 			//--------------------------------------------------------will Cal value adjustment factor
 			//The ratings parameter is between 0 - 5 之後請對應輸入的位置!!!
-			var f1 = 0; // Does the system require reliable backup and recovery?
-			var f2 = 1; // Are data communications required?
-			var f3 = 2; //Are there distributed processing functions?
-			var f4 = 3; // Is performance critical?
-			var f5 = 4; // Will the system run in a existing, heavily utilized operational environment?
-			var f6 = 5; //Does the system require on-line data entry?
-			var f7 = 0; // Does the on-line data entry require the input transaction to be built over multiple screens or operations?
-			var f8 = 1; // Are the master files updated on-line?
-			var f9 = 2; //Are the inputs, outputs, files or inquiries complex?
-			var f10 =3;//Is the internal processing complex?
-			var f11 = 4;//Is the code designed to be reusable?
-			var f12 = 5;//Are conversion and installation included in the design?
-			var f13 = 5;//Is the system designed for multiple installations in different organizations?
-			var f14 = 4;// Is the application designed to facilitate change and ease of use by the user?
+			var f1 = $("#F1").val(); // Does the system require reliable backup and recovery?
+			var f2 = $("#F2").val(); // Are data communications required?
+			var f3 = $("#F3").val();; //Are there distributed processing functions?
+			var f4 = $("#F4").val();; // Is performance critical?
+			var f5 = $("#F5").val();; // Will the system run in a existing, heavily utilized operational environment?
+			var f6 = $("#F6").val();; //Does the system require on-line data entry?
+			var f7 = $("#F7").val();; // Does the on-line data entry require the input transaction to be built over multiple screens or operations?
+			var f8 = $("#F8").val();; // Are the master files updated on-line?
+			var f9 = $("#F9").val();; //Are the inputs, outputs, files or inquiries complex?
+			var f10 =$("#F10").val();;//Is the internal processing complex?
+			var f11 = $("#F11").val();;//Is the code designed to be reusable?
+			var f12 = $("#F12").val();;//Are conversion and installation included in the design?
+			var f13 = $("#F13").val();;//Is the system designed for multiple installations in different organizations?
+			var f14 = $("#F14").val();;// Is the application designed to facilitate change and ease of use by the user?
 			//-------------------------------------------------------
 			//1.先計算未調整功能點UDP
 			var UDF = ( EI *  EI_WF) + ( EIF * EIF_WF) +  ( ILF * ILF_WF) + ( EO * EO_WF) + ( EQ *  EQ_WF) ; 
@@ -313,7 +320,7 @@
 			console.log('FP = %d,VAF=%d,UDF=%d',FP,VAF,UDF); //會出現91 ok 
 			
 		}
-		console.log(cal_function_point());
+		cal_function_point();
 	}); 
 
 	  	
@@ -557,7 +564,7 @@
 												background-color:#D3E4E5;
 												">
 					<li>
-						<input type="text" style="width: 20px;"/>   *   
+						<input id="EI" type="text" style="width: 20px;" value="6"/>   *   
 							<span id="uiradio">
 								<input type="radio" id="radio1" name="radio" /><label class="radioButton" for="radio1">3</label>
 								<input type="radio" id="radio2" name="radio" checked="checked" /><label class="radioButton" for="radio2">4</label>
@@ -566,7 +573,7 @@
 							=  <input type="text" style="width: 30px; text-align:center;" value="20" disabled="disabled"/>
 					</li>
 					<li>
-						<input type="text" style="width: 20px;"/>   *   
+						<input id="EO" type="text" style="width: 20px;" value="5"/>   *   
 							<span id="uiradio2">
 								<input type="radio" id="radio4" name="radio2" /><label class="radioButton" for="radio4">4</label>
 								<input type="radio" id="radio5" name="radio2" checked="checked" /><label class="radioButton" for="radio5">5</label>
@@ -575,7 +582,7 @@
 							=  <input type="text" style="width: 30px; text-align:center;" value="20" disabled="disabled"/>
 					</li>		
 					<li>
-						<input type="text" style="width: 20px;"/>   *   
+						<input id="EQ" type="text" style="width: 20px;" value="3"/>   *   
 							<span id="uiradio3">
 								<input type="radio" id="radio7" name="radio3" /><label class="radioButton" for="radio7">7</label>
 								<input type="radio" id="radio8" name="radio3" checked="checked" /><label class="radioButton" for="radio8">10</label>
@@ -584,7 +591,7 @@
 							=  <input type="text" style="width: 30px; text-align:center;" value="20" disabled="disabled"/>
 					</li>	
 					<li>
-						<input type="text" style="width: 20px;"/>   *   
+						<input id="ILF" type="text" style="width: 20px;" value="2"/>   *   
 							<span id="uiradio5">
 								<input type="radio" id="radio13" name="radio5" /><label class="radioButton" for="radio13">3</label>
 								<input type="radio" id="radio14" name="radio5" checked="checked" /><label class="radioButton" for="radio14">4</label>
@@ -593,7 +600,7 @@
 							=  <input type="text" style="width: 30px; text-align:center;" value="20" disabled="disabled"/>
 					</li>					
 					<li>
-						<input type="text" style="width: 20px;"/>   *   
+						<input id="EIF" type="text" style="width: 20px;" value="1"/>   *   
 							<span id="uiradio4">
 								<input type="radio" id="radio10" name="radio4" /><label class="radioButton" for="radio10">5</label>
 								<input type="radio" id="radio11" name="radio4" checked="checked" /><label class="radioButton" for="radio11">7</label>
@@ -622,64 +629,64 @@
   <tr>
     <td width="89%">F1.&nbsp;&nbsp; Does the system require reliable backup and
       recovery?</td>
-    <td width="11%" align="right"><input name="F1" size="1" value="0">  </td>
+    <td width="11%" align="right"><input id="F1" name="F1" size="1" value="0">  </td>
   </tr>
   <tr>
     <td width="89%">F2.&nbsp;&nbsp; Are data communications required?</td>
-    <td width="11%" align="right"><input name="F1" size="1" value="0">  </td>
+    <td width="11%" align="right"><input id="F2" name="F1" size="1" value="1">  </td>
   </tr>
   <tr>
     <td width="89%">F3.&nbsp;&nbsp; Are there distributed processing functions?</td>
-    <td width="11%" align="right"><input name="F1" size="1" value="0">  </td>
+    <td width="11%" align="right"><input id="F3" name="F1" size="1" value="2">  </td>
   </tr>
   <tr>
     <td width="89%">F4.&nbsp;&nbsp; Is performance critical?</td>
-    <td width="11%" align="right"><input name="F1" size="1" value="0">  </td>
+    <td width="11%" align="right"><input id="F4" name="F1" size="1" value="3">  </td>
   </tr>
   <tr>
     <td width="89%">F5.&nbsp;&nbsp; Will the system run in a existing, heavily utilized
       operational environment?</td>
-    <td width="11%" align="right"><input name="F1" size="1" value="0">  </td>
+    <td width="11%" align="right"><input id="F5" name="F1" size="1" value="4">  </td>
   </tr>
   <tr>
     <td width="89%">F6.&nbsp;&nbsp; Does the system require on-line data entry?</td>
-    <td width="11%" align="right"><input name="F1" size="1" value="0">  </td>
+    <td width="11%" align="right"><input id="F6" name="F1" size="1" value="5">  </td>
   </tr>
   <tr>
     <td width="89%">F7.&nbsp;&nbsp; Does the on-line data entry require the input
       transaction to be built over multiple screens or operations?</td>
-    <td width="11%" align="right"><input name="F1" size="1" value="0">  </td>
+    <td width="11%" align="right"><input id="F7" name="F1" size="1" value="0">  </td>
   </tr>
   <tr>
     <td width="89%">F8.&nbsp;&nbsp; Are the master files updated on-line?</td>
-    <td width="11%" align="right"><input name="F1" size="1" value="0">  </td>
+    <td width="11%" align="right"><input id="F8" name="F1" size="1" value="1">  </td>
   </tr>
   <tr>
     <td width="89%">F9.&nbsp; Are the inputs, outputs, files or inquiries
       complex?</td>
-    <td width="11%" align="right"><input name="F1" size="1" value="0">  </td>
+    <td width="11%" align="right"><input id="F9" name="F1" size="1" value="2">  </td>
   </tr>
   <tr>
     <td width="89%">F10. Is the internal processing complex?</td>
-    <td width="11%" align="right"><input name="F1" size="1" value="0">  </td>
+    <td width="11%" align="right"><input id="F10" name="F1" size="1" value="3">  </td>
   </tr>
   <tr>
     <td width="89%">F11. Is the code designed to be reusable?</td>
-    <td width="11%" align="right"><input name="F1" size="1" value="0">  </td>
+    <td width="11%" align="right"><input id="F11" name="F1" size="1" value="4">  </td>
   </tr>
   <tr>
     <td width="89%">F12. Are conversion and installation included in the design?</td>
-    <td width="11%" align="right"><input name="F1" size="1" value="0">  </td>
+    <td width="11%" align="right"><input id="F12" name="F1" size="1" value="5">  </td>
   </tr>
   <tr>
     <td width="89%">F13. Is the system designed for multiple installations in
       different organizations?</td>
-    <td width="11%" align="right"><input name="F1" size="1" value="0">  </td>
+    <td width="11%" align="right"><input id="F13" name="F1" size="1" value="5">  </td>
   </tr>
   <tr>
     <td width="89%">F14. Is the application designed to facilitate change and
       ease of use by the user?</td>
-    <td width="11%" align="right"><input name="F1" size="1" value="0">  </td>
+    <td width="11%" align="right"><input id="F14" name="F1" size="1" value="4">  </td>
   </tr>
 </tbody></table>
 </div>

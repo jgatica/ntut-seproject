@@ -1,6 +1,6 @@
 <%@ page contentType="text/html; charset=utf-8" language="java" import="java.sql.*,com.projectplus.member.MemberDataStructure" errorPage="" %>
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
-<html xmlns="http://www.w3.org/1999/xhtml"><!-- InstanceBegin template="/Templates/TeamMain.dwt.jsp" codeOutsideHTMLIsLocked="false" -->
+<html xmlns="http://www.w3.org/1999/xhtml"><!-- InstanceBegin template="/Templates/ProjectMain.dwt.jsp" codeOutsideHTMLIsLocked="false" -->
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
 <title>Project+</title>
@@ -260,12 +260,11 @@
 	 * 一開始讀取第零筆資料
 	 */
 	$(document).ready(function(){
-		var team_members;
-		var teamId = $("#teamId").val();
-		$.getJSON('/TeamAction.do', {op:8,id:teamId}, function(data){
+		/*var projectId = $("#projectId").val();
+		$.getJSON('/TaskAction.do', {op:7,projectId:projectId}, function(data){
 			if(data!=null)
 			{
-				//console.log(data);
+				console.log(data);
 				var size = data.members.length,index;
 				for(index = 0; index < size; index++)
 				{
@@ -274,17 +273,17 @@
 					$("#div-members").append(content);
 				}
 			}
-		});
+		});*/
 		
-		var teamId=$("#teamId").val();
-		$.getJSON('/TeamAction.do', {op:3,id:teamId}, function(data){
+		var projectId = $("#projectId").val();
+		$.getJSON('/ProjectAction.do', {op:11,projectId:projectId}, function(data){
 			if(data!=null)
 			{
-				$("#teamNameArea").text(data.name);
+				$("#projectNameArea").text(data.projectName);
 			}
 		});
 		
-		$.getJSON('/ProjectAction.do',  { op:5 ,teamId:teamId}, function(data) {		
+		$.getJSON('/TaskAction.do', {op:7,projectId:projectId}, function(data) {		
 			if(data !=null){
 				//console.log(data);
 				$("#project-list").html("");	
@@ -294,13 +293,13 @@
 					var content ="";
 					if(index%2==0)
 					{
-						content = '<tr id="' + data[index].projectId + '">' + '<td>' + parseInt(index) + '</td>' + '<td>' + 
-									 data[index].projectName + data[index].projectId + '</td>';
+						content = '<tr id="' + data[index].projectId + '" class="hoverdiv">' + '<td>' + parseInt(index) + '</td>' + '<td>' + 
+									 data[index].projectName + '</td>';
 					
 					}
 					else
 					{
-						content = '<tr id="' + data[index].projectId + '" class="odd">' + '<td>' + parseInt(index) + '</td>' + '<td>' + data[index].projectName + data[index].projectId + '</td>';
+						content = '<tr id="' + data[index].projectId + '" class="odd hoverdiv">' + '<td>' + parseInt(index) + '</td>' + '<td>' + data[index].projectName + '</td>';
 					}
 					if(data[index].projectState!="finished")
 						content+='<td><img src="/images/state_doing.png" width="16" /></td></tr>';
@@ -320,13 +319,6 @@
 		$( "#agree" ).click(function(){
 			//alert("1");
 			var op = 0;
-			var name = $("#project_name").val();
-			var dest = $("#project_destination").val();
-			var pmid = $("#project_managerId").attr("name");
-			var start = $("#project_startDate").val();
-			var end = $("#project_endDate").val();
-			var teamId = $("#teamId").val();
-			var duration = $("#project_duration").val();
 			$.getJSON('/ProjectAction.do', {op:op,projectName:name,projectTarget:dest,projectManagerId:pmid,startDate:start,endDate:end,teamId:teamId,duration:duration}, function(data){
 				if(data.isSuccess)
 					window.location = "/project/listProject.jsp?id="+teamId;		
@@ -411,9 +403,7 @@
 		});
 		
 		$("#div-members").hide();
-	}); 
-
-	  	
+	}); 	
 
 </script>
 
@@ -588,42 +578,43 @@
 
 
 
-		<input id="teamId" type="hidden" value="<%= request.getParameter("id") %>"/>
+		<input type="hidden" id="projectId" value="<%= request.getParameter("id")%>" />
         <div id="templatemo_main">
             
           <div class="col_w900 hr_divider">
           		
       			<div class="col_w170 lp_box float_l">
-				<div class="subTopDiv" ><h2 class="uiHeaderTitle">團隊資料</h2></div>	
+				<div class="subTopDiv" >
+						<h2 class="uiHeaderTitle">專案資料</h2></div>	
 					
 					<div class="col_allw170 frontpage_box hoverdiv">
-					<a href="/team/detail.jsp?id=<%= request.getParameter("id") %>">
+					<a href="/project/detail.jsp?id=<%= request.getParameter("id")%>">
 						<img src="/images/project_info.png" alt="Image" width="24" height="24">
-						<h2>團隊資訊</h2>
+						<h2>專案資訊</h2>
 					</a> 
                     </div>            
 					<div class="col_allw170 frontpage_box hoverdiv">
-					<a href="/team/listMember.jsp?id=<%= request.getParameter("id") %>">
+					<a href="/project/listMember.jsp?id=<%= request.getParameter("id")%>">
 						<img src="/images/task_group.png" alt="Image" width="24" height="24">
-						<h2>成員名單</h2>
+						<h2>專案人員</h2>
 					</a> 
                     </div>   					       
                     <div class="col_allw170 frontpage_box hoverdiv">
-					<a href="/team/listProject.jsp?id=<%= request.getParameter("id") %>">
+					<a href="/project/listTask.jsp?id=<%= request.getParameter("id")%>">
 						<img src="/images/project_task.png" alt="Image" width="24" height="24">
-						<h2>開發專案</h2>
+						<h2>專案任務</h2>
                     </a>
                     </div>
                     <div class="col_allw170 frontpage_box hoverdiv">
-					<a href="/team/listProject.jsp?id=<%= request.getParameter("id") %>">
+					<a href="/example.html">
                       <img src="/images/project_chart.png" alt="Image" width="24" height="24">
-                      <h2>查詢進度</h2>
+                      <h2>WBS</h2>
 					</a>
                     </div>     
 					
 					
                   <div class="frontpage_box col_allw170  hoverdiv">
-				  <a href="/team/listProject.jsp?id=<%= request.getParameter("id") %>">
+				  <a href="/team/listProject.jsp?id=<%= request.getParameter("id")%>">
                       <img src="/images/profile_task.png" alt="Image" width="24" height="24">
                     <h2>專案估算系統</h2>
 					</a>
@@ -634,7 +625,7 @@
 				<div id="dropBox" class="toggler col_w700 lp_box float_l margin_20rl">		
 				<div class="subTopDiv" >
 				<!-- InstanceBeginEditable name="PageTitle" -->
-				<h2 class="uiHeaderTitle"><span id="teamNameArea"></span><img class="arrow_right" src="/images/arrow_right.png" />專案列表</h2>				
+                <h2 class="uiHeaderTitle"><span id="projectNameArea"></span><img class="arrow_right" src="/images/arrow_right.png" />專案列表</h2>		
 				<!-- InstanceEndEditable -->
 				</div>
                 <!-- InstanceBeginEditable name="RightArea" -->
@@ -715,11 +706,11 @@
 					<table width="100%">				
 					<form>
 						<tr>
-							<td width="25%"><label for="name">專案名稱</label></td>
+							<td width="25%"><label for="name">工作名稱</label></td>
 							<td width="75%"><input type="text"id="project_name" class="text ui-widget-content ui-corner-all" /></td>
 						</tr>
 						<tr>
-							<td width="25%"><label for="name">專案目標</label></td>
+							<td width="25%"><label for="name">工作內容</label></td>
 							<td width="75%"><input type="text" id="project_destination" class="text ui-widget-content ui-corner-all" /></td>
 						</tr>						
 						<tr>
@@ -760,12 +751,8 @@
 					</div>
                     <div id="div-members">
                     </div>
-					<!--<p>你確定要刪除該專案嗎?</p>
-					<button>確定</button> <button>取消</button> -->
-				</div>	
-				
-				
-				<!-- InstanceEndEditable -->
+                     </div>
+					<!-- InstanceEndEditable -->
 				<div class="subBottomDiv" ></div>
                 </div>
                 
