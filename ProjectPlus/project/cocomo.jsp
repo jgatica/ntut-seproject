@@ -261,6 +261,51 @@
 	 */
 	$(document).ready(function(){
 		
+		funciton cal_COCOMOII()
+		{
+			//FP and Language------------------------------功能點值 與 程式語言類型
+			var FP;
+			var languageType;
+			// Software Scale Drivers--------------------為權重值
+			var pecedentednes;
+			var architecture_risk_Resolution;
+			var development_Flexibility;
+			var team_Cohesion;
+			var process_Maturity;
+			
+			//Software Cost Drivers --------------------------------------為權重值
+			//Product======================
+			var required_Software_Reliability;
+			var data_Base_Size;
+			var product_Complexity;
+			var developed_for_Reusability;
+			var documentation_Match_to_Lifecycle_Needs;
+			
+			//Personnel======================
+			var analyst_Capability;
+			var programmer Capability;	
+			var personnel_Continuity;	
+			var application_Experience;	
+			var platform_Experience;
+			var language_and_Toolset_Experience;
+			
+			//Platform======================
+			var time_Constraint;
+			var storage_Constraint;	
+			var platform_Volatility;	
+			
+			//Project======================
+			var use_of_Software_Tools;	
+			var multisite_Development;
+			var required_Development_Schedule;
+			//-------------------------------------------------------------
+			
+			//Software Labor Rates--------------
+			var cost_per_Person-Month;
+			
+			//----------------------------------------------------------------
+			//1.計算B
+			var B = 1.01 + 0.01 *(pecedentednes + architecture_risk_Resolution + development_Flexibility +team_Cohesion + process_Maturity);		}
 	}); 
 
 	  	
