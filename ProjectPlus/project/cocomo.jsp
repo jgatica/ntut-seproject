@@ -549,7 +549,8 @@
 
 <br>
 </h3>
-<table style="width: 100%; text-align: left; 
+<div style="padding:20px;border-radius: 10px;-moz-border-radius: 10px;-webkit-border-radius: 10px;border-color:transparent;background-color:#D3E4E5;">
+<table style="width: 100%; text-align: left; border-color:transparent;"
 border=" 1"="" cellpadding="1" cellspacing="0"><tbody><tr><td style="width: 50px; vertical-align: top;"><br>
 
 <table style="width: 60%; text-align: left;" border="0" cellpadding="2" cellspacing="2">
@@ -779,6 +780,7 @@ border=" 1"="" cellpadding="1" cellspacing="0"><tbody><tr><td style="width: 50px
 
 <td style="text-align: left; vertical-align: top;"></td>
 </tr></tbody></table>
+</div>
 <br />
 
 <div class="divider10"></div>
@@ -786,12 +788,12 @@ border=" 1"="" cellpadding="1" cellspacing="0"><tbody><tr><td style="width: 50px
 <h3>&nbsp;Software Scale Drivers </h3>
 
 
-
-<table border="0"><tbody><tr valign="top">
+<div style="padding:20px;border-radius: 10px;-moz-border-radius: 10px;-webkit-border-radius: 10px;border-color:transparent;background-color:#D3E4E5;">
+<table border="0" style="border-color:transparent;"><tbody><tr valign="top">
 
 <td>
 
-  <table border="0"><tbody><tr>
+  <table><tbody ><tr>
 
   <td align="left">Precedentedness</td>
 
@@ -1142,11 +1144,15 @@ border=" 1"="" cellpadding="1" cellspacing="0"><tbody><tr><td style="width: 50px
 
 </td>
 </tr>
-</tbody></table><br />
+</tbody></table></div><br />
 
 <div class="divider10"></div>
-<h3>Software Labor Rates</h3><br>
-Cost per Person-Month (Dollars)  <input type="text" name="software_labor_cost_per_PM" size="8" maxlength="8" align="right" value=""> <button>進行估算</button>
+
+<div style="padding:20px;border:#000000; border-radius: 10px;-moz-border-radius: 10px;-webkit-border-radius: 10px; border-color:transparent;background-color:#D3E4E5;">
+	<h3>Software Labor Rates</h3><br>
+	Cost per Person-Month (Dollars)  <input type="text" name="software_labor_cost_per_PM" size="8" maxlength="8" align="right" value=""> <button>進行估算</button>
+</div>
+
 </form>
 				
 </div>				
