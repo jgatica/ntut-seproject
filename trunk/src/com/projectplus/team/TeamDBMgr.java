@@ -181,6 +181,53 @@ public class TeamDBMgr extends DBMgr {
 		} 
 	}
 	
+	static public ResultSet queryTeam(String id) {
+		if(id.length()==0)
+			return null;
+		
+		ResultSet resultSet=null;
+		
+		try {
+			
+			Statement stat = null; 
+		    stat = con.createStatement(); 
+		    resultSet = stat.executeQuery("SELECT * FROM `group` as g left join `member` as m on g.add_id=m_id where g_id='" + id + "'"); 
+		    return resultSet;
+
+		    
+		    //System.out.println(resultSet.getString("m_password")+"\t\t"); 
+		    //return 0;    		
+		} catch (SQLException e) {
+			System.out.println("InsertDB Exception :" + e.toString());
+			return null;
+		} 
+		
+		
+	}
+	
+	public static ResultSet queryMemberTasks(String m_id) {
+		if(m_id.length()==0)
+			return null;
+		
+		ResultSet resultSet=null;
+		
+		try {
+			
+			Statement stat = null; 
+			
+		    stat = con.createStatement(); 
+		    resultSet = stat.executeQuery("SELECT * FROM `task` where t.m_id='" + m_id + "'"); 
+		    return resultSet;
+
+		    
+		    //System.out.println("SELECT distinct m_id,m_name,m_imageURL FROM `g_m_relation` as gm left join `member` as m on gm.m_id=m.m_id where gm.g_id='" + team_id + "'"); 
+		    //return 0;    		
+		} catch (SQLException e) {
+			System.out.println("InsertDB Exception :" + e.toString());
+			return null;
+		} 
+	}
+	
 //	/**
 //	 * 會員登入
 //	 * @param account:登入帳戶
