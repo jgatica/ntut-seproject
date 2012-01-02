@@ -85,10 +85,10 @@ public class ProjectAction extends Action {
 			if (resultSet != null && resultSet.next()) {
 				project = new ProjectDataStructure();
 				project.setProjectId(resultSet.getString("p_id"));
-				project.setProjectManagerId("沒欄未");
-				project.setProjectManager("沒欄未");
+				project.setProjectManagerId(resultSet.getString("m_id"));
+				project.setProjectManager(resultSet.getString("m_name"));
 				project.setProjectName(resultSet.getString("p_name"));
-				project.setProjectState("沒欄未");
+				project.setProjectState("");
 				project.setProjectTarget(resultSet.getString("p_desc"));
 				project.setStartDate(resultSet.getString("p_startdate"));
 				project.setEndDate(resultSet.getString("p_enddate"));
