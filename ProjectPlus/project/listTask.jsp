@@ -266,6 +266,11 @@
 	.hover {
 		background:#BFDFFF;
 	}
+	
+	span {
+		cursor: pointer;
+	}
+
 </style>
 
 <script src="/js/jquery.cookie.js" type="text/javascript"></script>
