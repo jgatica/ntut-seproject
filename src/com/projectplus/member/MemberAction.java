@@ -37,10 +37,10 @@ public class MemberAction extends Action {
 
 		int op = form.getOp();
 
-		 System.out.println("the op  = " + op);
+		//System.out.println("the op  = " + op);
 
 		switch (op) {
-		// 註冊會員
+			// 註冊會員
 		case REGISTER:
 			return register(mapping, form, request, response, session);
 			// 會員登入
@@ -52,10 +52,13 @@ public class MemberAction extends Action {
 			// 會員資料查詢
 		case QYDATA:
 			return queryData(mapping, form, request, response, session);
+			// 模糊比對會員
 		case QYMEMBERBYCMP:
 			return queryMemberByCMP(mapping, form, request, response, session);
+			// 新增團隊成員
 		case ADDTEAMMEMBER:
 			return addTeamMember(mapping, form, request, response, session);
+			// 刪成團隊成員
 		case DELTEAMMEMBER:
 			return delTeamMember(mapping, form, request, response, session);
 		default:
