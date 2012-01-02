@@ -32,7 +32,29 @@ public class ProjectDBMgr extends DBMgr {
 	 */
 	public static boolean deleteProject(String project_id)
 	{
-		return true;
+		if(project_id.length()==0)
+			return false;
+		
+
+		if(!isInit)
+			return false;
+		try {
+			pst = con.prepareStatement("delete FROM `project`where p_id='"+ project_id + "'";
+			
+			pst.executeUpdate();
+			
+			pst = con.prepareStatement("delete FROM `task`where p_id='"+ project_id + "'";
+					
+			pst.executeUpdate();
+			
+			
+			
+			return true;
+			
+		} catch (SQLException e) {
+			System.out.println("InsertDB Exception :" + e.toString());
+			return false;
+		}
 	}
 	
 	/**
