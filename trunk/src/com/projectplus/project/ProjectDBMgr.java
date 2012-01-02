@@ -32,7 +32,7 @@ public class ProjectDBMgr extends DBMgr {
 	 */
 	public static boolean deleteProject(String project_id)
 	{
-		if(project_id.length()==0)
+		/*if(project_id.length()==0)
 			return false;
 		
 
@@ -54,7 +54,7 @@ public class ProjectDBMgr extends DBMgr {
 		} catch (SQLException e) {
 			System.out.println("InsertDB Exception :" + e.toString());
 			return false;
-		}
+		}*/
 	}
 	
 	/**
@@ -135,14 +135,14 @@ public class ProjectDBMgr extends DBMgr {
 	 * @return
 	 */
 
-	public static boolean addProject(String name, String destination,String pm_id, String startDate, String endDate,String add_id,String team_id,int duration)
+	public static boolean addProject(String name, String destination,String pm_id, String startDate, String endDate,String add_id,String team_id,int duration,String parent)
 	{
 		//SimpleDateFormat sdf= new SimpleDateFormat("yyyy-MM-dd");
 		
 		//Long to String
 		//String sDate = sdf.format(startDate); 
 		//String eDate = sdf.format(endDate); 
-		if(name.length()==0 || destination.length()==0 || pm_id.length()==0 || startDate.length() ==0 || endDate.length()==0)
+		if(name.length()==0 || destination.length()==0 || pm_id.length()==0 || startDate.length() ==0 || endDate.length()==0 || parent.length()==0)
 			return false;
 		//日期Format
 		SimpleDateFormat formatter = new SimpleDateFormat("yyyy-MM-dd");
@@ -151,16 +151,17 @@ public class ProjectDBMgr extends DBMgr {
 		if(!isInit)
 			return false;
 		try {
-			pst = con.prepareStatement("insert into `project`(`p_name`,`p_desc`,`p_startdate`,`p_enddate`,`pm_id`,`add_id`,`mdy_time`,`mdy_id`,`g_id`) "
-					+ " value (?,?,?,?,?,?,?,?,?)");
-			pst.setString(1, name);
-			pst.setString(2, destination);
-			pst.setString(3, startDate);
-			pst.setString(4, endDate);
-			pst.setString(5, pm_id);
-			pst.setString(6, add_id);
-			pst.setString(7, formatter.format(new Date()));
-			pst.setString(8, add_id);
+			pst = con.prepareStatement("insert into `project`(`p_parent`,`p_name`,`p_desc`,`p_startdate`,`p_enddate`,`pm_id`,`add_id`,`mdy_time`,`mdy_id`,`g_id`) "
+					+ " value (?,?,?,?,?,?,?,?,?,?)");
+			pst.setString(1, parent);
+			pst.setString(2, name);
+			pst.setString(3, destination);
+			pst.setString(4, startDate);
+			pst.setString(5, endDate);
+			pst.setString(6, pm_id);
+			pst.setString(7, add_id);
+			pst.setString(8, formatter.format(new Date()));
+			pst.setString(9, add_id);
 			pst.setString(9, team_id);
 			//System.out.println(pst);
 			pst.executeUpdate();
