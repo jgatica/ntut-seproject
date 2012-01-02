@@ -37,6 +37,7 @@ public class ProjectAction extends Action {
 	public static final int WBSTREE = 8;
 	public static final int QYMEMBERPROJECT = 9;
 	public static final int GANTT = 10;
+	public static final int QYPROJECT = 11;
 
 	public ActionForward execute(ActionMapping mapping, ActionForm actionForm,
 			HttpServletRequest request, HttpServletResponse response) {
@@ -69,6 +70,50 @@ public class ProjectAction extends Action {
 			return queryMemberProject(mapping, form, request, response, session);
 		case GANTT:
 			return queryGantt(mapping, form, request, response, session);
+		case QYPROJECT:
+			return queryProject(mapping, form, request, response, session);
+		}
+
+		return null;
+	}
+
+	private ActionForward queryProject(ActionMapping mapping,
+			ProjectActionForm form, HttpServletRequest request,
+			HttpServletResponse response, HttpSession session) {
+		ResultSet resultSet = ProjectDBMgr.queryProject(form.projectId);
+		ProjectDataStructure project = null;
+		try {
+			if (resultSet != null && resultSet.next()) {
+				project = new ProjectDataStructure();
+				project.setProjectId(resultSet.getString("p_id"));
+				project.setProjectManagerId("沒欄未");
+				project.setProjectManager("沒欄未");
+				project.setProjectName(resultSet.getString("p_name"));
+				project.setProjectState("沒欄未");
+				project.setProjectTarget(resultSet.getString("p_desc"));
+				project.setStartDate(resultSet.getString("p_startdate"));
+				project.setEndDate(resultSet.getString("p_enddate"));
+			} 
+			else
+			{
+//				project = new ProjectDataStructure();
+//				project.setProjectId(resultSet.getString(""));
+//				project.setProjectManagerId(resultSet.getString(""));
+//				project.setProjectManager(resultSet.getString(""));
+//				project.setProjectName(resultSet.getString(""));
+//				project.setProjectState(resultSet.getString(""));
+//				project.setProjectTarget(resultSet.getString(""));
+//				project.setStartDate(resultSet.getString(""));
+//				project.setEndDate(resultSet.getString(""));
+			}
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+
+		try {
+			JSONWriter.sendJSONResponse(response, project);
+		} catch (IOException e) {
+			e.printStackTrace();
 		}
 
 		return null;
@@ -115,34 +160,35 @@ public class ProjectAction extends Action {
 	private ActionForward queryMemberProject(ActionMapping mapping,
 			ProjectActionForm form, HttpServletRequest request,
 			HttpServletResponse response, HttpSession session) {
-		MemberDataStructure userData = (MemberDataStructure) session
-				.getAttribute(SessionContext.USERDATA);
-		if (userData == null)
-			return null;
-		ResultSet resultSet = ProjectDBMgr
-				.queryMemberProject(userData.member_email);
-		List<ProjectDataStructure> dataList = new ArrayList<ProjectDataStructure>();
-		try {
-			if (resultSet != null) {
-
-				while (resultSet.next()) {
-					ProjectDataStructure project = new ProjectDataStructure();
-					project.setProjectId(resultSet.getString(""));
-					project.setProjectName(resultSet.getString(""));
-					project.setProjectManagerId(resultSet.getString(""));
-					project.setProjectManager(resultSet.getString(""));
-					project.setProjectTarget(resultSet.getString(""));
-					project.setProjectState(resultSet.getString(""));
-					project.setStartDate(resultSet.getString(""));
-					project.setEndDate(resultSet.getString(""));
-
-					// new stri
-				}
-			}
-		} catch (SQLException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
+		// MemberDataStructure userData = (MemberDataStructure) session
+		// .getAttribute(SessionContext.USERDATA);
+		// if (userData == null)
+		// return null;
+		// ResultSet resultSet = ProjectDBMgr
+		// .queryMemberProject(userData.member_email);
+		// List<ProjectDataStructure> dataList = new
+		// ArrayList<ProjectDataStructure>();
+		// try {
+		// if (resultSet != null) {
+		//
+		// while (resultSet.next()) {
+		// ProjectDataStructure project = new ProjectDataStructure();
+		// project.setProjectId(resultSet.getString(""));
+		// project.setProjectName(resultSet.getString(""));
+		// project.setProjectManagerId(resultSet.getString(""));
+		// project.setProjectManager(resultSet.getString(""));
+		// project.setProjectTarget(resultSet.getString(""));
+		// project.setProjectState(resultSet.getString(""));
+		// project.setStartDate(resultSet.getString(""));
+		// project.setEndDate(resultSet.getString(""));
+		//
+		// // new stri
+		// }
+		// }
+		// } catch (SQLException e) {
+		// // TODO Auto-generated catch block
+		// e.printStackTrace();
+		// }
 		return null;
 	}
 
@@ -270,8 +316,8 @@ public class ProjectAction extends Action {
 					project.setProjectId(resultSet.getString("p_id"));
 					project.setProjectName(resultSet.getString("p_name"));
 					project.setProjectTarget(resultSet.getString("p_desc"));
-					project.setProjectManagerId(resultSet.getString("add_id"));
-					project.setProjectManager("");
+					project.setProjectManagerId("缺少");
+					project.setProjectManager("缺少");
 					project.setStartDate(resultSet.getString("p_startdate"));
 					project.setEndDate(resultSet.getString("p_enddate"));
 					project.setProjectState("finished");
@@ -396,7 +442,7 @@ public class ProjectAction extends Action {
 		if (!check)
 			isSuccess = ProjectDBMgr.addProject(form.projectName,
 					form.projectTarget, form.projectManagerId, form.startDate,
-					form.endDate, data.id, form.teamId);
+					form.endDate, data.id, form.teamId,form.duration);
 
 		Result result = new Result();
 		result.isSuccess = isSuccess && !check;
