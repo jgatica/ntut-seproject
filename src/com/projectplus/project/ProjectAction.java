@@ -441,7 +441,7 @@ public class ProjectAction extends Action {
 		if (!check)
 			isSuccess = ProjectDBMgr.addProject(form.projectName,
 					form.projectTarget, form.projectManagerId, form.startDate,
-					form.endDate, data.id, form.teamId,form.duration);
+					form.endDate, data.id, form.teamId,form.duration,"parent");
 
 		Result result = new Result();
 		result.isSuccess = isSuccess && !check;
