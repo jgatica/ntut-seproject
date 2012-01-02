@@ -253,182 +253,21 @@
 </script>
 
 <!-- InstanceBeginEditable name="Head" -->
-<script type="text/javascript" src="/js/highcharts/highcharts.js"></script>
 
-<!-- 1a) Optional: add a theme file -->
-<!--
-	<script type="text/javascript" src="../js/themes/gray.js"></script>
--->
-
-<!-- 1b) Optional: the exporting module -->
-<script type="text/javascript" src="/js/highcharts/exporting.js"></script>
 
 <script language="JavaScript" type="text/javascript">
+	/*
+	 * 一開始讀取第零筆資料
+	 */
+	$(document).ready(function(){
+		$( "#uiradio" ).buttonset();
+		$( "#uiradio2" ).buttonset();
+		$( "#uiradio3" ).buttonset();
+		$( "#uiradio4" ).buttonset();
+		$( "#uiradio5" ).buttonset();
+	}); 
 
-	Highcharts.theme = {
-	   colors: ['#50B432', '#058DC7', '#ED561B', '#DDDF00', '#24CBE5', '#64E572', '#FF9655', '#FFF263', '#6AF9C4'],
-	   chart: {
-		  backgroundColor: {
-			 linearGradient: [0, 0, 500, 500],
-			 stops: [
-				[0, 'rgb(255, 255, 255)'],
-				[1, 'rgb(240, 240, 255)']
-			 ]
-		  }
-	,
-		  borderWidth: 2,
-		  plotBackgroundColor: 'rgba(255, 255, 255, .9)',
-		  plotShadow: true,
-		  plotBorderWidth: 1
-	   },
-	   title: {
-		  style: { 
-			 color: '#000',
-			 font: 'bold 16px "Trebuchet MS", Verdana, sans-serif'
-		  }
-	   },
-	   subtitle: {
-		  style: { 
-			 color: '#666666',
-			 font: 'bold 12px "Trebuchet MS", Verdana, sans-serif'
-		  }
-	   },
-	   xAxis: {
-		  gridLineWidth: 1,
-		  lineColor: '#000',
-		  tickColor: '#000',
-		  labels: {
-			 style: {
-				color: '#000',
-				font: '11px Trebuchet MS, Verdana, sans-serif'
-			 }
-		  },
-		  title: {
-			 style: {
-				color: '#333',
-				fontWeight: 'bold',
-				fontSize: '12px',
-				fontFamily: 'Trebuchet MS, Verdana, sans-serif'
-	
-			 }            
-		  }
-	   },
-	   yAxis: {
-		  minorTickInterval: 'auto',
-		  lineColor: '#000',
-		  lineWidth: 1,
-		  tickWidth: 1,
-		  tickColor: '#000',
-		  labels: {
-			 style: {
-				color: '#000',
-				font: '11px Trebuchet MS, Verdana, sans-serif'
-			 }
-		  },
-		  title: {
-			 style: {
-				color: '#333',
-				fontWeight: 'bold',
-				fontSize: '12px',
-				fontFamily: 'Trebuchet MS, Verdana, sans-serif'
-			 }            
-		  }
-	   },
-	   legend: {
-		  itemStyle: {         
-			 font: '9pt Trebuchet MS, Verdana, sans-serif',
-			 color: 'black'
-	
-		  },
-		  itemHoverStyle: {
-			 color: '#039'
-		  },
-		  itemHiddenStyle: {
-			 color: 'gray'
-		  }
-	   },
-	   labels: {
-		  style: {
-			 color: '#99b'
-		  }
-	   }
-	};
-	
-	// Apply the theme
-	var highchartsOptions = Highcharts.setOptions(Highcharts.theme);	
-		
-	var chart;
-	$(document).ready(function() {
-		
-		$.getJSON('/ProjectAction.do', {
-			op : 10
-		}, function(data) {
-			console.log(data);
-			
-			chart = new Highcharts.Chart({
-				chart: {
-					renderTo: 'container',
-					defaultSeriesType: 'bar'
-				},
-				title: {
-					//text: 'Historic World Population by Region'
-					text: data.title
-				},
-				subtitle: {
-					text: data.subtitle
-				},
-				xAxis: {
-					categories: data.xCategories,
-					title: {
-						text: data.xTitle
-					}
-				},
-				yAxis: {
-					min: 0,
-					title: {
-						text: data.yTitle,
-						align: 'high'
-					}
-				},
-				tooltip: {
-					formatter: function() {
-						return ''+
-							 this.y +' 單位';
-					}
-				},
-				plotOptions: {
-					bar: {
-						dataLabels: {
-							enabled: true
-						}
-					}
-				},
-				legend: {
-					layout: 'vertical',
-					align: 'right',
-					verticalAlign: 'top',
-					x: -100,
-					y: 100,
-					floating: true,
-					borderWidth: 1,
-					backgroundColor: '#FFFFFF',
-					shadow: true
-				},
-				credits: {
-					enabled: false
-				},
-					series: [{
-					name: 'Year 1800',
-					data: data.data
-				}]
-			});					
-	
-			
-		});
-	
-	});
-	
-			
+	  	
 
 </script>
 
@@ -650,13 +489,165 @@
 				<div id="dropBox" class="toggler col_w700 lp_box float_l margin_20rl">		
 				<div class="subTopDiv" >
 				<!-- InstanceBeginEditable name="PageTitle" -->
-				<h2 class="uiHeaderTitle"><span id="teamNameArea"></span><img class="arrow_right" src="/images/arrow_right.png" />甘特圖</h2>	
+				<h2 class="uiHeaderTitle"><span id="teamNameArea"></span><img class="arrow_right" src="/images/arrow_right.png" />COCOMO II 估算</h2>
+				
 				<!-- InstanceEndEditable -->
 				</div>
                 <!-- InstanceBeginEditable name="RightArea" -->
-				<div style="padding: 20px;">
-				<div id="container" style="width: 95%; height: 80%; margin: 0 auto;"></div>
-				</div>
+				<style>
+					.radioButton{
+						width: 40px;
+					}
+				</style>
+				<div style="padding:0px 20px 0px 20px;">
+				<ul class="" style="padding:10px ;list-style-type:none; 
+												border-radius: 10px;
+												-moz-border-radius: 10px;
+												-webkit-border-radius: 10px;
+												border-color:transparent;
+												background-color:#D3E4E5;
+												">
+					<li>
+						<input type="text" style="width: 20px;"/>   *   
+							<span id="uiradio">
+								<input type="radio" id="radio1" name="radio" /><label class="radioButton" for="radio1">3</label>
+								<input type="radio" id="radio2" name="radio" checked="checked" /><label class="radioButton" for="radio2">4</label>
+								<input type="radio" id="radio3" name="radio" /><label class="radioButton" for="radio3">6</label>
+							</span>
+							=  <input type="text" style="width: 30px; text-align:center;" value="20" disabled="disabled"/>
+					</li>
+					<li>
+						<input type="text" style="width: 20px;"/>   *   
+							<span id="uiradio2">
+								<input type="radio" id="radio4" name="radio2" /><label class="radioButton" for="radio4">4</label>
+								<input type="radio" id="radio5" name="radio2" checked="checked" /><label class="radioButton" for="radio5">5</label>
+								<input type="radio" id="radio6" name="radio2" /><label class="radioButton" for="radio6">7</label>
+							</span>
+							=  <input type="text" style="width: 30px; text-align:center;" value="20" disabled="disabled"/>
+					</li>		
+					<li>
+						<input type="text" style="width: 20px;"/>   *   
+							<span id="uiradio3">
+								<input type="radio" id="radio7" name="radio3" /><label class="radioButton" for="radio7">7</label>
+								<input type="radio" id="radio8" name="radio3" checked="checked" /><label class="radioButton" for="radio8">10</label>
+								<input type="radio" id="radio9" name="radio3" /><label class="radioButton" for="radio9">15</label>
+							</span>
+							=  <input type="text" style="width: 30px; text-align:center;" value="20" disabled="disabled"/>
+					</li>	
+					<li>
+						<input type="text" style="width: 20px;"/>   *   
+							<span id="uiradio5">
+								<input type="radio" id="radio13" name="radio5" /><label class="radioButton" for="radio13">3</label>
+								<input type="radio" id="radio14" name="radio5" checked="checked" /><label class="radioButton" for="radio14">4</label>
+								<input type="radio" id="radio15" name="radio5" /><label class="radioButton" for="radio15">6</label>
+							</span>
+							=  <input type="text" style="width: 30px; text-align:center;" value="20" disabled="disabled"/>
+					</li>					
+					<li>
+						<input type="text" style="width: 20px;"/>   *   
+							<span id="uiradio4">
+								<input type="radio" id="radio10" name="radio4" /><label class="radioButton" for="radio10">5</label>
+								<input type="radio" id="radio11" name="radio4" checked="checked" /><label class="radioButton" for="radio11">7</label>
+								<input type="radio" id="radio12" name="radio4" /><label class="radioButton" for="radio12">10</label>
+							</span>
+							=  <input type="text" style="width: 30px; text-align:center;" value="20" disabled="disabled"/>
+					</li>	
+					<li style="margin: 20px; text-align: right;">
+						<h3>Total : <input type="text" style="width: 70px; height:50px; text-align:center; font-size:25pt;" value="20" disabled="disabled"/></h3>
+					</li>																		
+				</ul>
+</div>
+<div style="text-align:center;  padding:20px;">				
+<table border="0" width="100%" style="	
+	border-radius: 10px;
+	-moz-border-radius: 10px;
+	-webkit-border-radius: 10px;
+	border-color:transparent;"
+	> 
+  <tbody>
+  
+  <tr>
+    <td width="99%"><h4>Rate each factor (Fi, i=1 to14) on a scale of 0 to 5:</h4></td>
+    <td></td>
+  </tr>  
+  <tr>
+    <td width="89%">F1.&nbsp;&nbsp; Does the system require reliable backup and
+      recovery?</td>
+    <td width="11%" align="right"><input name="F1" size="1" value="0">  </td>
+  </tr>
+  <tr>
+    <td width="89%">F2.&nbsp;&nbsp; Are data communications required?</td>
+    <td width="11%" align="right"><input name="F1" size="1" value="0">  </td>
+  </tr>
+  <tr>
+    <td width="89%">F3.&nbsp;&nbsp; Are there distributed processing functions?</td>
+    <td width="11%" align="right"><input name="F1" size="1" value="0">  </td>
+  </tr>
+  <tr>
+    <td width="89%">F4.&nbsp;&nbsp; Is performance critical?</td>
+    <td width="11%" align="right"><input name="F1" size="1" value="0">  </td>
+  </tr>
+  <tr>
+    <td width="89%">F5.&nbsp;&nbsp; Will the system run in a existing, heavily utilized
+      operational environment?</td>
+    <td width="11%" align="right"><input name="F1" size="1" value="0">  </td>
+  </tr>
+  <tr>
+    <td width="89%">F6.&nbsp;&nbsp; Does the system require on-line data entry?</td>
+    <td width="11%" align="right"><input name="F1" size="1" value="0">  </td>
+  </tr>
+  <tr>
+    <td width="89%">F7.&nbsp;&nbsp; Does the on-line data entry require the input
+      transaction to be built over multiple screens or operations?</td>
+    <td width="11%" align="right"><input name="F1" size="1" value="0">  </td>
+  </tr>
+  <tr>
+    <td width="89%">F8.&nbsp;&nbsp; Are the master files updated on-line?</td>
+    <td width="11%" align="right"><input name="F1" size="1" value="0">  </td>
+  </tr>
+  <tr>
+    <td width="89%">F9.&nbsp; Are the inputs, outputs, files or inquiries
+      complex?</td>
+    <td width="11%" align="right"><input name="F1" size="1" value="0">  </td>
+  </tr>
+  <tr>
+    <td width="89%">F10. Is the internal processing complex?</td>
+    <td width="11%" align="right"><input name="F1" size="1" value="0">  </td>
+  </tr>
+  <tr>
+    <td width="89%">F11. Is the code designed to be reusable?</td>
+    <td width="11%" align="right"><input name="F1" size="1" value="0">  </td>
+  </tr>
+  <tr>
+    <td width="89%">F12. Are conversion and installation included in the design?</td>
+    <td width="11%" align="right"><input name="F1" size="1" value="0">  </td>
+  </tr>
+  <tr>
+    <td width="89%">F13. Is the system designed for multiple installations in
+      different organizations?</td>
+    <td width="11%" align="right"><input name="F1" size="1" value="0">  </td>
+  </tr>
+  <tr>
+    <td width="89%">F14. Is the application designed to facilitate change and
+      ease of use by the user?</td>
+    <td width="11%" align="right"><input name="F1" size="1" value="0">  </td>
+  </tr>
+</tbody></table>
+</div>
+<div style="padding:0px 20px 0px 20px; margin-bottom: 20px;">
+				<div class="" style="padding:10px;list-style-type:none; 
+												border-radius: 10px;
+												-moz-border-radius: 10px;
+												-webkit-border-radius: 10px;
+												border-color:transparent;
+												background-color:#D3E4E5;">
+<p><input type="button" value="Calculate" name="B1" onclick="checkDataEntry(); calculate()"> 
+     <input type="reset" value="Reset" name="B2"></p>
+<p><i><u><font size="4"><b>Result</b>.</font></u></i>&nbsp; According to the input your project has:&nbsp;
+<input type="text" name="Result" disabled="" size="10" style="font-weight: bold; font-size: 14pt; font-family: Arial; border-style: inset">
+</p>
+</div>
+		</div>		
 				<!-- InstanceEndEditable -->
 				<div class="subBottomDiv" ></div>
                 </div>
