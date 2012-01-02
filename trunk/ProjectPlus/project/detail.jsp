@@ -260,11 +260,22 @@
 	 * 一開始讀取第零筆資料
 	 */
 	$(document).ready(function(){
-		
+		var projectId=$("#projectId").val();
+		$.getJSON('/ProjectAction.do',  { op:11,projectId:projectId }, function(data) {
+			if(data!=null)
+			{
+				//console.log(data); 
+				var name = '<team>' + data.projectName + '</team>';
+				var pm = '<name>' + data.projectManager + '</name>';
+				$("#project_name").html(name);
+				$("#project_desc").text(data.projectTarget);
+				$("#project_startDate").text(data.startDate);
+				$("#project_endDate").text(data.endDate);
+				$("#project_duration").text(data.duration+" 天");
+				$("#project_manager").html(pm);
+			}
+		});
 	}); 
-
-	  	
-
 </script>
 
 
@@ -439,7 +450,7 @@
 
 
 
-
+		<input type="hidden" id="projectId" value="<%= request.getParameter("id")%>" />
         <div id="templatemo_main">
             
           <div class="col_w900 hr_divider">
@@ -449,19 +460,19 @@
 						<h2 class="uiHeaderTitle">專案資料</h2></div>	
 					
 					<div class="col_allw170 frontpage_box hoverdiv">
-					<a href="/project/detail.jsp">
+					<a href="/project/detail.jsp?id=<%= request.getParameter("id")%>">
 						<img src="/images/project_info.png" alt="Image" width="24" height="24">
 						<h2>專案資訊</h2>
 					</a> 
                     </div>            
 					<div class="col_allw170 frontpage_box hoverdiv">
-					<a href="/project/listMember.jsp">
+					<a href="/project/listMember.jsp?id=<%= request.getParameter("id")%>">
 						<img src="/images/task_group.png" alt="Image" width="24" height="24">
 						<h2>專案人員</h2>
 					</a> 
                     </div>   					       
                     <div class="col_allw170 frontpage_box hoverdiv">
-					<a href="/project/listProject.jsp">
+					<a href="/project/listTask.jsp?id=<%= request.getParameter("id")%>">
 						<img src="/images/project_task.png" alt="Image" width="24" height="24">
 						<h2>專案任務</h2>
                     </a>
@@ -475,7 +486,7 @@
 					
 					
                   <div class="frontpage_box col_allw170  hoverdiv">
-				  <a href="/project/listProject.jsp">
+				  <a href="/team/listProject.jsp?id=<%= request.getParameter("id")%>">
                       <img src="/images/profile_task.png" alt="Image" width="24" height="24">
                     <h2>專案估算系統</h2>
 					</a>
@@ -491,7 +502,6 @@
 				</div>
                 <!-- InstanceBeginEditable name="RightArea" -->
 					<div class="table-content">
-				 		<input type="hidden" id="projectId" value="<%= request.getParameter("id")%>" />
 						<table summary="站內信箱" width="100%">
 							<!--<caption>Table designs</caption>-->
 							<thead>
@@ -531,14 +541,14 @@
 									<td>專案負責人</td>
 									<td id="project_manager"><name>陳奕豪</name></td>									
 								</tr>			
-								<tr>									
+								<!--<tr>									
 									<td>專案成員</td>
 									<td id="project_members"><name>陳奕豪</name>
 										<name>陳至圓</name>
 										<name>楊先絜</name>
 										<name>郭奕成</name>
 										<name>黃臣逸</name></td>									
-								</tr>																																					
+								</tr>	-->																																				
 							</tbody>
 						</table>			
 
