@@ -69,35 +69,36 @@ public class ProjectDBMgr extends DBMgr {
 	 * @return true:無相同名稱  false:有相同名稱
 	 */
 	static public boolean checkProjectName(String name,String team_id){
-		if(name.length()==0)
-			return false;
+//		if(name.length()==0)
+//			return false;
+////		
+////		//if(!isInit)
+////		//	return null;
+//		ResultSet resultSet = null;
+//		try {
+//			
+//			Statement stat = null; 
+//		    stat = con.createStatement(); 
+//		    resultSet = stat.executeQuery("SELECT * FROM `project` where p_name='" + name + "' and g_id='" + team_id + "'"); 
+//		    
+//		    if(resultSet.next()){ 
+//			    return false;
+//		    }
+//		    else
+//		    {
+//		    	return true;
+//		    }
+//		    
+//		    //System.out.println(resultSet.getString("m_password")+"\t\t"); 
+//		    //return 0;    		
+//		} catch (SQLException e) {
+//			System.out.println("InsertDB Exception :" + e.toString());
+//			return false;
+//		} 
 //		
-//		//if(!isInit)
-//		//	return null;
-		ResultSet resultSet = null;
-		try {
-			
-			Statement stat = null; 
-		    stat = con.createStatement(); 
-		    resultSet = stat.executeQuery("SELECT * FROM `project` where p_name='" + name + "' and g_id='" + team_id + "'"); 
-		    
-		    if(resultSet.next()){ 
-			    return false;
-		    }
-		    else
-		    {
-		    	return true;
-		    }
-		    
-		    //System.out.println(resultSet.getString("m_password")+"\t\t"); 
-		    //return 0;    		
-		} catch (SQLException e) {
-			System.out.println("InsertDB Exception :" + e.toString());
-			return false;
-		} 
-		
 		 
 		//return 0;
+		return true;
 	}
 	
 	/**
@@ -128,16 +129,17 @@ public class ProjectDBMgr extends DBMgr {
 		if(!isInit)
 			return false;
 		try {
-			pst = con.prepareStatement("insert into `project`(`p_name`,`p_desc`,`p_startdate`,`p_enddate`,`g_id`,`add_id`,`mdy_time`,`mdy_id`) "
-					+ " value (?,?,?,?,?,?,?,?)");
+			pst = con.prepareStatement("insert into `project`(`p_name`,`p_desc`,`p_startdate`,`p_enddate`,`pm_id`,`add_id`,`mdy_time`,`mdy_id`,`g_id`) "
+					+ " value (?,?,?,?,?,?,?,?,?)");
 			pst.setString(1, name);
 			pst.setString(2, destination);
 			pst.setString(3, startDate);
 			pst.setString(4, endDate);
-			pst.setString(5, team_id);
+			pst.setString(5, pm_id);
 			pst.setString(6, add_id);
 			pst.setString(7, formatter.format(new Date()));
 			pst.setString(8, add_id);
+			pst.setString(9, team_id);
 			//System.out.println(pst);
 			pst.executeUpdate();
 			ResultSet rs=pst.getGeneratedKeys();
@@ -173,7 +175,7 @@ public class ProjectDBMgr extends DBMgr {
 	 * @param name
 	 * @return
 	 */
-	static public ResultSet queryProject(String id) {
+	public static ResultSet queryProject(String id) {
 		if(id.length()==0)
 			return null;
 		
@@ -183,7 +185,11 @@ public class ProjectDBMgr extends DBMgr {
 			
 			Statement stat = null; 
 		    stat = con.createStatement(); 
-		    resultSet = stat.executeQuery("SELECT * FROM `project` where p_id='" + id + "'"); 
+		    //System.out.println("SELECT * FROM `project` as p left join `g_m_relation` as gm on p.g_id=gm.g_id  where p.p_id='" + id + "' and gm.l_id = 2"); 
+		    
+		    resultSet = stat.executeQuery("SELECT * FROM `project` as p left join `member` as m on m.m_id=p.pm_id where p.p_id='" + id + "'"); 
+		    //System.out.println("SELECT * FROM `project` as p left join `g_m_relation` as gm on g.g_id=gm.g_id  where p.p_id='" + id + "' and gm.l_id = 2"); 
+		    
 		    return resultSet;
 
 		    

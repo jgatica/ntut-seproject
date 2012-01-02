@@ -241,7 +241,7 @@ public class TeamDBMgr extends DBMgr {
 //			// TODO Auto-generated catch block
 //			e.printStackTrace();
 //		}
-//		ResultSet test = queryTeamMembers("11");
+//		ResultSet test = queryTeamMembers("16");
 //		try {
 //			test.next();
 //			System.out.println(test.getString("m_name"));

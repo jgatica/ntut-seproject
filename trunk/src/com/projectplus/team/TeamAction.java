@@ -74,6 +74,7 @@ public class TeamAction extends Action {
 
 		try {
 			if (resultSet != null) {
+				System.out.println("0");
 				while (resultSet.next()) {
 					MemberDataStructure member = new MemberDataStructure();
 					member.setId(resultSet.getString("m_id"));
@@ -83,6 +84,7 @@ public class TeamAction extends Action {
 				}
 			} else // 假的(測試用) 如有真資料請將此部分刪除 直接return
 			{
+				System.out.println("1");
 				for (int i = 1; i < 6; i++) {
 					MemberDataStructure member = new MemberDataStructure();
 					member.setId(Integer.toString(i));
