@@ -32,6 +32,7 @@ public class ProjectDBMgr extends DBMgr {
 	 */
 	public static boolean deleteProject(String project_id)
 	{
+		return isInit;
 		/*if(project_id.length()==0)
 			return false;
 		

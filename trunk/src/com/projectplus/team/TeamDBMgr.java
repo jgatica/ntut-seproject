@@ -102,40 +102,6 @@ public class TeamDBMgr extends DBMgr {
 		}
 	}
 	
-	
-	
-	
-
-	
-	/**
-	 *  公司資料
-	 * @param name
-	 * @return
-	 */
-	static public ResultSet queryTeam(String id) {
-		if(id.length()==0)
-			return null;
-		
-		ResultSet resultSet=null;
-		
-		try {
-			
-			Statement stat = null; 
-		    stat = con.createStatement(); 
-		    resultSet = stat.executeQuery("SELECT * FROM `group` as g left join `member` as m on g.add_id=m_id where g_id='" + id + "'"); 
-		    return resultSet;
-
-		    
-		    //System.out.println(resultSet.getString("m_password")+"\t\t"); 
-		    //return 0;    		
-		} catch (SQLException e) {
-			System.out.println("InsertDB Exception :" + e.toString());
-			return null;
-		} 
-		
-		
-	}
-	
 	public static ResultSet queryTeamMembers(String team_id) {
 		if(team_id.length()==0)
 			return null;
