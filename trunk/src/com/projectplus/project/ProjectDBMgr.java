@@ -21,10 +21,30 @@ public class ProjectDBMgr extends DBMgr {
 	 *            : 專案id
 	 * @return 所有任務
 	 */
-	public static ResultSet listTask(String projectId) {
+	public static ResultSet listTask(String project_id) {
 		return null;
 	}
-
+	
+	/**
+	 * 刪除專案
+	 * @param project_id
+	 * @return
+	 */
+	public static boolean deleteProject(String project_id)
+	{
+		return true;
+	}
+	
+	/**
+	 * 指派此專案的專案經理(透過Id)
+	 * @param managerId
+	 * @return
+	 */
+	 
+	public static boolean assignProjectManager(String manager_id)
+	{
+		return true;
+	}
 	
 	
 	//前端知道現在的TEAM是哪個嗎?是存什麼資料?!!!!!!!!!!!

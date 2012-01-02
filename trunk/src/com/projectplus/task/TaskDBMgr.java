@@ -12,8 +12,25 @@ import com.projectplus.db.DBMgr;
 
 public class TaskDBMgr extends DBMgr{
 	
-
 	
+	/**
+	 * 刪除專案
+	 * @param taskId
+	 * @return
+	 */
+	public static boolean deleteTask(String taskId){
+		return true;
+	}
+
+	/**
+	 * 指派工作(透過為一個taskId 何memberId) 
+	 * @param taskId
+	 * @param memberId
+	 * @return
+	 */
+	public static boolean assigTask(String taskId,String memberId){
+		return true;
+	}
 	//前端知道現在的Project&Team是哪個嗎?是存什麼資料?!!!!!!!!!!!
 		/**
 		 * 
