@@ -329,4 +329,9 @@ public class MemberDBMgr extends DBMgr{
 		//System.out.println(updDetail("beatri77666ce0251611@gmail.com",  "m_namjolke",  "m_nickName",  "男",  "1990-05-16",  "",  "m_addr",  "",  "",  "", "",  ""));
 		
 	}
+
+	public static boolean delMember(String id, String teamId) {
+		// TODO Auto-generated method stub
+		return false;
+	}
 }
