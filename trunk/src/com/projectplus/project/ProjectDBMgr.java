@@ -46,6 +46,21 @@ public class ProjectDBMgr extends DBMgr {
 		return true;
 	}
 	
+	/**
+	 * 更新專案
+	 * @param name
+	 * @param destination
+	 * @param pm_id
+	 * @param startDate
+	 * @param endDate
+	 * @param add_id
+	 * @param team_id
+	 * @return
+	 */
+	public static boolean updateProject(String name, String destination,String pm_id, String startDate, String endDate,String add_id,String team_id)
+	{
+		return true;
+	}
 	
 	//前端知道現在的TEAM是哪個嗎?是存什麼資料?!!!!!!!!!!!
 	/**

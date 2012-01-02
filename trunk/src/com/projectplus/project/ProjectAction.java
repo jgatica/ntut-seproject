@@ -21,6 +21,7 @@ import com.projectplus.charts.WbsSchemeCreator;
 import com.projectplus.context.Result;
 import com.projectplus.context.SessionContext;
 import com.projectplus.member.MemberDataStructure;
+import com.projectplus.task.TaskDBMgr;
 import com.projectplus.util.JSONWriter;
 
 public class ProjectAction extends Action {
@@ -231,8 +232,9 @@ public class ProjectAction extends Action {
 			HttpServletResponse response, HttpSession session) {
 		// TODO Auto-generated method stub
 		Result result = new Result();
-		boolean isSuccess = ProjectDBMgr.assignProjectManager(form.projectManagerId);
-		if(isSuccess)
+		boolean isSuccess = ProjectDBMgr
+				.assignProjectManager(form.projectManagerId);
+		if (isSuccess)
 			result.message = "指派成功";
 		else
 			result.message = "指派失敗";
@@ -242,7 +244,6 @@ public class ProjectAction extends Action {
 			e.printStackTrace();
 		}
 		return null;
-		
 
 	}
 
@@ -257,7 +258,7 @@ public class ProjectAction extends Action {
 	private ActionForward queryTeamProjects(ActionMapping mapping,
 			ProjectActionForm form, HttpServletRequest request,
 			HttpServletResponse response, HttpSession session) {
-		
+
 		ResultSet resultSet = ProjectDBMgr.queryTeamProjects(form.teamId);
 		List<ProjectDataStructure> dataList = new ArrayList<ProjectDataStructure>();
 		try {
@@ -317,8 +318,33 @@ public class ProjectAction extends Action {
 	private ActionForward updateProject(ActionMapping mapping,
 			ProjectActionForm form, HttpServletRequest request,
 			HttpServletResponse response, HttpSession session) {
-		return null;
 		// TODO Auto-generated method stub
+		Result result = new Result();
+		MemberDataStructure data = (MemberDataStructure) session
+				.getAttribute(SessionContext.USERDATA);
+		boolean isSuccess = false;
+		// 名稱是否有重複
+		boolean isChecked = ProjectDBMgr.checkProjectName(
+				form.getProjectName(), form.getProjectId());
+		if (isChecked) {
+			isSuccess = ProjectDBMgr.updateProject(form.projectName,
+					form.projectTarget, form.projectManagerId, form.startDate,
+					form.endDate, data.id, form.teamId);
+			result.isSuccess = isSuccess;
+			if (result.isSuccess)
+				result.message = "更新工作成功";
+			else
+				result.message = "更新工作失敗";
+		} else {
+			result.isSuccess = isSuccess;
+			result.message = "失敗,工作名稱有重複";
+		}
+		try {
+			JSONWriter.sendJSONResponse(response, result);
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
+		return null;
 
 	}
 
@@ -336,7 +362,8 @@ public class ProjectAction extends Action {
 		// TODO Auto-generated method stub
 		Result result = new Result();
 		boolean isSuccess = ProjectDBMgr.deleteProject(form.projectId);
-		if(isSuccess)
+		result.isSuccess = isSuccess;
+		if (result.isSuccess)
 			result.message = "刪除成功";
 		else
 			result.message = "刪除失敗";
@@ -346,7 +373,6 @@ public class ProjectAction extends Action {
 			e.printStackTrace();
 		}
 		return null;
-		
 
 	}
 
