@@ -27,6 +27,7 @@ public class MemberAction extends Action {
 	public static final int QYDATA = 3;
 	public static final int QYMEMBERBYCMP = 4;
 	public static final int ADDTEAMMEMBER = 5;
+	public static final int DELTEAMMEMBER = 6;
 
 	public ActionForward execute(ActionMapping mapping, ActionForm actionForm,
 			HttpServletRequest request, HttpServletResponse response) {
@@ -55,6 +56,8 @@ public class MemberAction extends Action {
 			return queryMemberByCMP(mapping, form, request, response, session);
 		case ADDTEAMMEMBER:
 			return addTeamMember(mapping, form, request, response, session);
+		case DELTEAMMEMBER:
+			return delTeamMember(mapping, form, request, response, session);
 		default:
 			break;
 		}
@@ -62,15 +65,34 @@ public class MemberAction extends Action {
 		return null;
 	}
 
+	private ActionForward delTeamMember(ActionMapping mapping,
+			MemberActionForm form, HttpServletRequest request,
+			HttpServletResponse response, HttpSession session) {
+		boolean isSuccess = MemberDBMgr.delMember(form.id, form.teamId);
+		Result result = new Result();
+		result.isSuccess = isSuccess;
+		if (result.isSuccess)
+			result.message = "ok";
+		else
+			result.message = "faild";
+		try {
+			JSONWriter.sendJSONResponse(response, result);
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
+		return null;
+	}
+
 	private ActionForward addTeamMember(ActionMapping mapping,
 			MemberActionForm form, HttpServletRequest request,
 			HttpServletResponse response, HttpSession session) {
-		/*System.out.println(form.id);
-		System.out.println(form.teamId);*/
+		/*
+		 * System.out.println(form.id); System.out.println(form.teamId);
+		 */
 		boolean isSuccess = MemberDBMgr.newMember(form.id, form.teamId);
 		Result result = new Result();
 		result.isSuccess = isSuccess;
-		if(result.isSuccess)
+		if (result.isSuccess)
 			result.message = "ok";
 		else
 			result.message = "faild";
@@ -289,7 +311,7 @@ public class MemberAction extends Action {
 		} else {
 			data = new MemberDataStructure();
 			result.message = "輸入不完整.";
-			//System.out.println("no");
+			// System.out.println("no");
 		}
 		try {
 			data.setResult(result);
