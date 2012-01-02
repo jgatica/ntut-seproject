@@ -491,7 +491,7 @@
 				</div>
                 <!-- InstanceBeginEditable name="RightArea" -->
 					<div class="table-content">
-				 
+				 		<input type="hidden" id="projectId" value="<%= request.getParameter("id")%>" />
 						<table summary="站內信箱" width="100%">
 							<!--<caption>Table designs</caption>-->
 							<thead>
@@ -509,31 +509,31 @@
 							<tbody>
 								<tr>
 									<td>專案名稱</td>
-									<td><team>軟體工程</team></td>									
+									<td id="project_name"><team>軟體工程</team></td>									
 								</tr>
 								<tr class="odd">									
 									<td>專案描述</td>
-									<td>軟體工程專案是台北科技大學研究所課程期末的專案</td>									
+									<td id="project_desc">軟體工程專案是台北科技大學研究所課程期末的專案</td>									
 								</tr>					
 								<tr>
 									<td>開始日期</td>
-									<td>2011/12/10</td>									
+									<td id="project_startDate">2011/12/10</td>									
 								</tr>
 								<tr class="odd">									
 									<td>結束日期</td>
-									<td>2011/01/07</td>									
+									<td id="project_endDate">2011/01/07</td>									
 								</tr>		
 								<tr>
 									<td>工期</td>
-									<td>3個月</td>									
+									<td id="project_duration">3個月</td>									
 								</tr>
 								<tr class="odd">									
 									<td>專案負責人</td>
-									<td><name>陳奕豪</name></td>									
+									<td id="project_manager"><name>陳奕豪</name></td>									
 								</tr>			
 								<tr>									
 									<td>專案成員</td>
-									<td><name>陳奕豪</name>
+									<td id="project_members"><name>陳奕豪</name>
 										<name>陳至圓</name>
 										<name>楊先絜</name>
 										<name>郭奕成</name>

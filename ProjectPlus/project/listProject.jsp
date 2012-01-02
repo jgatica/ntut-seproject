@@ -307,6 +307,11 @@
 					else
 						content+='<td><img src="/images/state_ok.png" width="16" /></td></tr>';
 					$("#project-list").append(content);
+					
+					$("#"+data[index].projectId).click(function(){
+						//alert($(this).attr("id"));
+						window.location="/project/detail.jsp?id=" + $(this).attr("id");
+					});
 				}
 			}
 		
@@ -321,7 +326,8 @@
 			var start = $("#project_startDate").val();
 			var end = $("#project_endDate").val();
 			var teamId = $("#teamId").val();
-			$.getJSON('/ProjectAction.do', {op:op,projectName:name,projectTarget:dest,projectManagerId:pmid,startDate:start,endDate:end,teamId:teamId}, function(data){
+			var duration = $("#project_duration").val();
+			$.getJSON('/ProjectAction.do', {op:op,projectName:name,projectTarget:dest,projectManagerId:pmid,startDate:start,endDate:end,teamId:teamId,duration:duration}, function(data){
 				if(data.isSuccess)
 					window.location = "/project/listProject.jsp?id="+teamId;		
 				else
@@ -739,6 +745,10 @@
 						<tr>
 							<td width="25%"><label for="project_endDate">結束時間</label></td>
 							<td width="75%"><input class="text ui-widget-content ui-corner-all" type="text" name="date" id="project_endDate" /></td>
+						</tr>	
+                        <tr>
+							<td width="25%"><label for="name">工期</label></td>
+							<td width="75%"><input type="text" id="project_duration" class="text ui-widget-content ui-corner-all" /></td>
 						</tr>								
 					</form>	
 					</table>
