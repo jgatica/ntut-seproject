@@ -762,13 +762,31 @@
 					</div>
 
 				 </div>
-
-			    <div id="dialog2" title="任務" style="text-align:center">
+				
+				<style>
+					.task_img{
+						padding:5px;
+						border: 1px solid;
+						border-radius: 10px;
+						-moz-border-radius: 10px;
+						-webkit-border-radius: 10px;
+					}
+					.task_img:hover{
+						cursor:pointer;
+						background:#0099FF;
+						border-radius: 10px;
+						-moz-border-radius: 10px;
+						-webkit-border-radius: 10px;
+					}
+				</style>
+			    <div id="dialog2" title="任務" style="text-align:center;display:inline;">
 					<p>在<team id="task_name"></team>的操作</p>
-						<button id="agree" class="feature_btn">新增子任務</button>
-						<button id="cancel" class="feature_btn">查看任務</button>
-						<button id="agree" class="feature_btn">刪除任務</button>
-						<button id="cancel" class="feature_btn">關閉</button>
+						<div>
+							<img class="task_img" width="50" src="/images/add_article.png" title="新增子任務"/>
+							<img class="task_img" width="50" src="/images/task_see.png" title="查看任務"/>
+							<img class="task_img" width="50" src="/images/task_delete.png" title="刪除任務"/>
+							<img class="task_img" width="50" src="/images/task_exit.png" title="關閉"/>
+						</div>					
                     <div id="div-members">
                     </div>
                 </div>
