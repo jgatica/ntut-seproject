@@ -34,7 +34,7 @@ public class ProjectAction extends Action {
 	public static final int ASSIGNPM = 6;
 	public static final int QYMEMBER = 7;
 	public static final int WBSTREE = 8;
-	public static final int QYMEMBERPROJECT = 9;
+	public static final int QYMEMBERPROJECTS = 9;
 	public static final int GANTT = 10;
 	public static final int QYPROJECT = 11;
 
@@ -65,8 +65,8 @@ public class ProjectAction extends Action {
 			return queryMember(mapping, form, request, response, session);
 		case WBSTREE:
 			return queryWbsTree(mapping, form, request, response, session);
-		case QYMEMBERPROJECT:
-			return queryMemberProject(mapping, form, request, response, session);
+		case QYMEMBERPROJECTS:
+			return queryMemberProjects(mapping, form, request, response, session);
 		case GANTT:
 			return queryGantt(mapping, form, request, response, session);
 		case QYPROJECT:
@@ -156,7 +156,7 @@ public class ProjectAction extends Action {
 		return null;
 	}
 
-	private ActionForward queryMemberProject(ActionMapping mapping,
+	private ActionForward queryMemberProjects(ActionMapping mapping,
 			ProjectActionForm form, HttpServletRequest request,
 			HttpServletResponse response, HttpSession session) {
 		// MemberDataStructure userData = (MemberDataStructure) session
