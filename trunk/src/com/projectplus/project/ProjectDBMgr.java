@@ -273,6 +273,33 @@ public class ProjectDBMgr extends DBMgr {
 		
 		
 	}
+	public static ResultSet queryProjectTasks(String p_id) {
+		if(p_id.length()==0)
+			return null;
+		
+		ResultSet resultSet=null;
+		
+		try {
+			
+			Statement stat = null; 
+		    stat = con.createStatement(); 
+		    //System.out.println("SELECT * FROM `project` as p left join `g_m_relation` as gm on p.g_id=gm.g_id  where p.p_id='" + id + "' and gm.l_id = 2"); 
+		    
+		    resultSet = stat.executeQuery("SELECT * FROM `task` where p_id='" + p_id + "'"); 
+		    //System.out.println("SELECT * FROM `project` as p left join `g_m_relation` as gm on g.g_id=gm.g_id  where p.p_id='" + id + "' and gm.l_id = 2"); 
+		    
+		    return resultSet;
+
+		    
+		    //System.out.println(resultSet.getString("m_password")+"\t\t"); 
+		    //return 0;    		
+		} catch (SQLException e) {
+			System.out.println("InsertDB Exception :" + e.toString());
+			return null;
+		} 
+		
+		
+	}
 	
 //	/**
 //	 * 會員登入
