@@ -374,7 +374,7 @@
 			$("#dialog").dialog('open');
 		});	
 		
-		$( "#dialog2" ).dialog( {autoOpen: false, minWidth: 150, minHeight: 100, modal: false} );
+		$( "#dialog2" ).dialog( {autoOpen: false, modal: false} );
 		
 		//hide searchform
 		$("#div-float-members").hide();
@@ -782,10 +782,10 @@
 			    <div id="dialog2" title="任務" style="text-align:center;display:inline;">
 					<p>在<team id="task_name"></team>的操作</p>
 						<div>
-							<img class="task_img" width="50" src="/images/add_article.png" title="新增子任務"/>
-							<img class="task_img" width="50" src="/images/task_see.png" title="查看任務"/>
-							<img class="task_img" width="50" src="/images/task_delete.png" title="刪除任務"/>
-							<img class="task_img" width="50" src="/images/task_exit.png" title="關閉"/>
+							<img class="task_img" width="35" src="/images/add_article.png" title="新增子任務"/>
+							<img class="task_img" width="35" src="/images/task_see.png" title="查看任務"/>
+							<img class="task_img" width="35" src="/images/task_delete.png" title="刪除任務"/>
+							<img class="task_img" width="35" src="/images/task_exit.png" title="關閉"/>
 						</div>					
                     <div id="div-members">
                     </div>
