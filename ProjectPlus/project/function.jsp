@@ -265,6 +265,55 @@
 		$( "#uiradio3" ).buttonset();
 		$( "#uiradio4" ).buttonset();
 		$( "#uiradio5" ).buttonset();
+		
+		
+		function cal_function_point()
+		{
+			//-------------------------------------------------------will Cal Unadjusted Function Point
+			// Measurement Parameter Count 之後請與各個cot2對應!!!!
+			var EI = 6; //External Input File => number_of_user_inputs
+			var EO = 5; //External Output File => number_of_outputs
+			var EQ = 3; //external Inquire File => number_of_inquires
+			var ILF = 2; // Internal Logical File => number_of_files
+			var EIF = 1; //External Logical File => number_of_external_interface
+			
+			
+			//Weighting Factor  之後請與按鈕對應 !!!
+			var EI_WF = 4;
+			var EO_WF = 5;
+			var EQ_WF = 4; 
+			var ILF_WF =10;
+			var EIF_WF =7;
+			
+			//--------------------------------------------------------will Cal value adjustment factor
+			//The ratings parameter is between 0 - 5 之後請對應輸入的位置!!!
+			var f1 = 0; // Does the system require reliable backup and recovery?
+			var f2 = 1; // Are data communications required?
+			var f3 = 2; //Are there distributed processing functions?
+			var f4 = 3; // Is performance critical?
+			var f5 = 4; // Will the system run in a existing, heavily utilized operational environment?
+			var f6 = 5; //Does the system require on-line data entry?
+			var f7 = 0; // Does the on-line data entry require the input transaction to be built over multiple screens or operations?
+			var f8 = 1; // Are the master files updated on-line?
+			var f9 = 2; //Are the inputs, outputs, files or inquiries complex?
+			var f10 =3;//Is the internal processing complex?
+			var f11 = 4;//Is the code designed to be reusable?
+			var f12 = 5;//Are conversion and installation included in the design?
+			var f13 = 5;//Is the system designed for multiple installations in different organizations?
+			var f14 = 4;// Is the application designed to facilitate change and ease of use by the user?
+			//-------------------------------------------------------
+			//1.先計算未調整功能點UDP
+			var UDF = ( EI *  EI_WF) + ( EIF * EIF_WF) +  ( ILF * ILF_WF) + ( EO * EO_WF) + ( EQ *  EQ_WF) ; 
+			//console.log(UDF);
+			//2.再計算數值調整因子VAF 透過14個通用系統特性GSC’s
+			var VAF = 0.65 +  (  f1 +   f2 +   f3 +   f4 +   f5 +   f6 +   f7 +   f8 +   f9 +  f10 +  f11+  f12 +f13 +f14) /100;
+			//console.log(VAF);
+			//3.Function points(FP) = UAF *VAF
+			var FP = parseInt(UDF * VAF);
+			console.log('FP = %d,VAF=%d,UDF=%d',FP,VAF,UDF); //會出現91 ok 
+			
+		}
+		console.log(cal_function_point());
 	}); 
 
 	  	
