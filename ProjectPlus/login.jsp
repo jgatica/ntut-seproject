@@ -131,7 +131,7 @@ FB.login(function(resp){
     } else {
 	
     }
-  }, {scope:'read_stream,publish_stream,offline_access,email'});
+  }, {scope:'read_stream,publish_stream,offline_access,email,user_about_me,user_birthday,user_hometown,user_location,user_notes,user_photos,user_website'});
 
 }
 

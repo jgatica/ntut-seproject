@@ -254,12 +254,39 @@
 
 <!-- InstanceBeginEditable name="Head" -->
 
+<link rel="stylesheet" href="/js/jquery.treeview.css" />
+
+<style>
+	.feature_btn{
+		width:100px;
+		height:50px;
+		font-size:9px;
+	}
+	
+	.hover {
+		background:#BFDFFF;
+	}
+</style>
+
+<script src="/js/jquery.cookie.js" type="text/javascript"></script>
+<script src="/js/jquery.treeview.js" type="text/javascript"></script>
+<script src="/js/jquery.treeview.edit.js" type="text/javascript"></script>
 
 <script language="JavaScript" type="text/javascript">
 	/*
 	 * 一開始讀取第零筆資料
 	 */
 	$(document).ready(function(){
+		
+		$("#browser").treeview();
+		
+		
+		$("#browser").find("span").unbind('click').click(function(){
+			$("#task_name").html($(this).html());
+			$("#dialog2").dialog('open');	
+		});
+
+
 		/*var projectId = $("#projectId").val();
 		$.getJSON('/TaskAction.do', {op:7,projectId:projectId}, function(data){
 			if(data!=null)
@@ -286,7 +313,7 @@
 		$.getJSON('/TaskAction.do', {op:7,projectId:projectId}, function(data) {		
 			if(data !=null){
 				//console.log(data);
-				$("#project-list").html("");	
+				//$("#project-list").html("");	
 				var size = data.length,index;
 				for(index = 0; index < size; index++)
 				{
@@ -341,6 +368,8 @@
 		$( "#dialog_btn" ).click(function(){
 			$("#dialog").dialog('open');
 		});	
+		
+		$( "#dialog2" ).dialog( {autoOpen: false, minWidth: 150, minHeight: 100, modal: false} );
 		
 		//hide searchform
 		$("#div-float-members").hide();
@@ -625,10 +654,41 @@
 				<div id="dropBox" class="toggler col_w700 lp_box float_l margin_20rl">		
 				<div class="subTopDiv" >
 				<!-- InstanceBeginEditable name="PageTitle" -->
-                <h2 class="uiHeaderTitle"><span id="projectNameArea"></span><img class="arrow_right" src="/images/arrow_right.png" />專案列表</h2>		
+                <h2 class="uiHeaderTitle"><span id="projectNameArea"></span>專案列表</h2>		
 				<!-- InstanceEndEditable -->
 				</div>
                 <!-- InstanceBeginEditable name="RightArea" -->
+
+				
+				<div style="padding:20px;">
+					<ul id="browser" class="filetree">
+						<li><span class="folder"><team>軟體工程</team>
+						</span>
+							<ul>
+								<li><span class="file">子任務1</span></li>
+							</ul>
+						</li>
+						<li><span class="folder"><team>軟體工程</team></span>
+							<ul>
+								<li><span class="folder">Subfolder 2.1</span>
+									<ul id="folder21">
+										<li><span class="file">File 2.1.1</span></li>
+										<li><span class="file">File 2.1.2</span></li>
+									</ul>
+								</li>
+								<li><span class="file">File 2.2</span></li>
+							</ul>
+						</li>
+						<li class="closed"><span class="folder"><team>軟體工程</team></span>
+							<ul>
+								<li><span class="file">File 3.1</span></li>
+							</ul>
+						</li>
+						<li><span class="file"><team>軟體工程</team></span></li>
+					</ul>						
+				</div>
+				
+				
 				
 				<div class="table-content">
 					
@@ -642,7 +702,7 @@
 						</tr>
 						</thead>
 						<tbody id="project-list">
-							<!--<tr>
+							<tr>
 								<td>001</td>
 								<td><team>軟體工程</team>專案任務1</td>
 								<td><img src="/images/state_ok.png" width="16" title="完成"/></td>									
@@ -651,7 +711,8 @@
 								<td>002</td>
 								<td><team>軟體工程</team>專案任務1</td>	
 								<td><img src="/images/state_ok.png" width="16" /></td>									
-							</tr>					
+							</tr>	
+							<!--				
 							<tr>
 								<td>003</td>
 								<td><team>軟體工程</team>專案任務1</td>		
@@ -697,8 +758,15 @@
 
 				 </div>
 
-
-
+			    <div id="dialog2" title="任務" style="text-align:center">
+					<p>在<team id="task_name"></team>的操作</p>
+						<button id="agree" class="feature_btn">新增子任務</button>
+						<button id="cancel" class="feature_btn">查看任務</button>
+						<button id="agree" class="feature_btn">刪除任務</button>
+						<button id="cancel" class="feature_btn">關閉</button>
+                    <div id="div-members">
+                    </div>
+                </div>
 
 
 				<div id="dialog" title="新增專案">

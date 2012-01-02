@@ -45,7 +45,7 @@ tbody th a {
  font-weight:normal;
  text-decoration:none;
 }
-tbody th a:hover { color:#363636;
+tbody th a:hover { /*color:#363636;*/
 }
 tbody td+td+td+td a { background-image:url('bullet_blue.png');
  background-position:left center;
@@ -66,7 +66,7 @@ tfoot td { background:#444;
 }
 .odd { background:#fff;
 }
-tbody tr:hover { background:#99BCBF;
+tbody tr:hover { /*background:#99BCBF;*/
  /*border:1px solid #03476F;*/
- color:#000000;
+/*color:#000000;*/
 }

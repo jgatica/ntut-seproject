@@ -258,6 +258,7 @@
 <script language="JavaScript" type="text/javascript">
 	$(document).ready(function(){
 		$.getJSON('/MemberAction.do',  { op:3 }, function(data) {
+			console.log(data);
 			$("#imageURL").attr("src",data.imageURL);
 			$("#name").text(data.member_name);
 			$("#nameArea").text(data.member_name);

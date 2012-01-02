@@ -261,6 +261,7 @@
 	 */
 	$(document).ready(function(){
 		$.getJSON('/MemberAction.do',  { op:3 }, function(data) {
+			console.log(data);
 			$("#nameArea").text(data.member_name);
 			$("#email").text(data.member_email);
 			$("#phone").text(data.member_phone);
