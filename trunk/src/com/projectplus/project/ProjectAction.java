@@ -129,36 +129,40 @@ public class ProjectAction extends Action {
 			ProjectActionForm form, HttpServletRequest request,
 			HttpServletResponse response, HttpSession session) {
 
-		
+		// 前端會丟projectId過來  以這個id去撈資料給前端
 		String projectId = form.getProjectId();
-		ResultSet resultSet = TaskDBMgr.queryProjectTasks(projectId);
-		
-		
-		
-		GanttScheme ganttScheme = new GanttScheme();
-		ganttScheme.title = "甘特圖測試";
-		ganttScheme.subtitle = "任務總表";
 
-		ganttScheme.xCategories.add("任務1");
-		ganttScheme.xCategories.add("任務2");
-		ganttScheme.xCategories.add("任務3");
-		ganttScheme.xCategories.add("任務4");
-		ganttScheme.xCategories.add("任務5");
-
-		ganttScheme.xTitle = "";
-		// ganttScheme.xTitle = "任務";
-		ganttScheme.yTitle = "時間";
-
-		ganttScheme.data.add(200);
-		ganttScheme.data.add(300);
-		ganttScheme.data.add(200);
-		ganttScheme.data.add(700);
-		ganttScheme.data.add(400);
-
-		try {
-			JSONWriter.sendJSONResponse(response, ganttScheme);
-		} catch (IOException e) {
-			e.printStackTrace();
+		if(projectId != null){
+			ResultSet resultSet = TaskDBMgr.queryProjectTasks(projectId);
+			
+			// 以下面的格式組資料 
+			// resultSet.get()
+			
+			GanttScheme ganttScheme = new GanttScheme();
+			ganttScheme.title = "甘特圖測試";
+			ganttScheme.subtitle = "任務總表";
+	
+			ganttScheme.xCategories.add("任務1");
+			ganttScheme.xCategories.add("任務2");
+			ganttScheme.xCategories.add("任務3");
+			ganttScheme.xCategories.add("任務4");
+			ganttScheme.xCategories.add("任務5");
+	
+			ganttScheme.xTitle = "";
+			// ganttScheme.xTitle = "任務";
+			ganttScheme.yTitle = "時間";
+	
+			ganttScheme.data.add(200);
+			ganttScheme.data.add(300);
+			ganttScheme.data.add(200);
+			ganttScheme.data.add(700);
+			ganttScheme.data.add(400);
+	
+			try {
+				JSONWriter.sendJSONResponse(response, ganttScheme);
+			} catch (IOException e) {
+				e.printStackTrace();
+			}
 		}
 
 		return null;
