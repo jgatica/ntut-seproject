@@ -396,7 +396,6 @@
 			
 			//Software Labor Rates--------------
 			var cost_per_Person_Month = 10;
-			
 			//----------------------------------------------------------------
 			//1.計算B
 			var B = 1.01 + 0.01 *(pecedentednes + architecture_risk_Resolution + development_Flexibility +team_Cohesion + process_Maturity);
