@@ -550,7 +550,7 @@
 <h3>Software Size - Sizing Method 
 		<select name="size_type" onchange="f1.submit()">
 				
-				<option value="SLOC" selected="">Source Lines of Code</option>
+				<!--option value="SLOC" selected="">Source Lines of Code</option-->
 				
 				<option value="Function Points">Function Points</option>
 				
@@ -559,250 +559,40 @@
 <br>
 </h3>
 <div style="padding:20px;border-radius: 10px;-moz-border-radius: 10px;-webkit-border-radius: 10px;border-color:transparent;background-color:#D3E4E5;">
-<table style="width: 100%; text-align: left; border-color:transparent;"
-border=" 1"="" cellpadding="1" cellspacing="0"><tbody><tr><td style="width: 50px; vertical-align: top;"><br>
 
-<table style="width: 60%; text-align: left;" border="0" cellpadding="2" cellspacing="2">
+<table style="width: 100%; text-align: left; 
+border=" 1"="" cellpadding="1" cellspacing="0"><tbody><tr><td style="width: 101px; vertical-align: top;"><table border="0">
 
-<tbody>
+  <tbody><tr><td align="right">Unadjusted Function Points</td>
 
-<tr>
+  <td> <input type="text" name="function_points" size="8" maxlength="8" value="">  </td>
 
-<td style="vertical-align: top;"><br>
+  <td align="right">Language</td>
 
-</td>
+  <td><select name="language">
 
-<td style="vertical-align: top; text-align: center;"><a href="http://sunset.usc.edu/research/COCOMOII/expert_cocomo/sloc.html">SLOC</a></td>
+  <option>Basic</option><option selected="">C</option><option>Database - Default</option><option>Java</option><option>PERL</option><option>3rd Generation Language</option></select></td>
 
-<td style="vertical-align: top; text-align: center;"><font color="#000000"><i>&nbsp;</i>% Design Modified</font></td>
-
-<td style="vertical-align: top; text-align: center;"><font color="#000000">% Code Modified</font></td>
-
-<td style="vertical-align: top; text-align: center;"><font color="#000000">% Integration Required</font></td>
-
-</tr>
-
-<tr>
-
-<td style="vertical-align: top;">New<br>
-
-</td>
-
-<td style="vertical-align: top;"><input type="text" name="new_size" size="8" maxlength="8" align="right" value=""> <br>
-
-</td>
-
-<td style="vertical-align: top;"><br>
-
-</td>
-
-<td style="vertical-align: top;"><br>
-
-</td>
-
-<td style="vertical-align: top;"><br>
-		
-</td>
-
-</tr>
-
-<tr>
-
-<td style="vertical-align: top;">Reused<br>
-
-</td>
-
-<td style="vertical-align: top;"><input type="text" name="reused_size" size="8" maxlength="8" align="right" value=""> <br>
-
-</td>
-
-<td style="vertical-align: top;"><center><input name="DM_reused" size="6" align="right" value="0" disabled=""></center>
-
-</td>
-
-<td style="vertical-align: top;"><center><input name="CM_reused" size="6" align="right" value="0" disabled=""></center>
-
-</td>
-
-<td style="vertical-align: top;"><center><input type="text" name="IM_reused" size="6" maxlength="6" align="right" value=""> <br></center>
-		
-</td>
-
-</tr>
-
-<tr>
-
-<td style="vertical-align: top;">Modified<br>
-
-</td>
-
-<td style="vertical-align: top;"><input type="text" name="modified_size" size="8" maxlength="8" align="right" value=""> <br>
-
-</td>
-
-<td style="vertical-align: top;"><center>
-
-<input type="text" name="DM_modified" size="6" maxlength="6" align="right" value=""> <br>
-
-</center>
-
-</td>
-
-<td style="vertical-align: top;"><center>
-
-<input type="text" name="CM_modified" size="6" maxlength="6" align="right" value=""> <br>
-
-</center>
-
-</td>
-
-<td style="vertical-align: top;"><center>
-		
-		<input type="text" name="IM_modified" size="6" maxlength="6" align="right" value=""> <br>
-		
-		</center>
-		
-</td>
-
-</tr>
-
-</tbody>
-
-</table>
-<br />
-<br />
-
-<table style="width: 60%; text-align: left;" border="0" cellpadding="2" cellspacing="2">
-
-<tbody>
-
-<tr>
-
-<td style="vertical-align: top;"><br>
-		
-</td>
-
-<td style="vertical-align: top; text-align: center;"><font color="#000000">Assessment and Assimilation <br>
-		
-		(0%
-		
-		- 8%)</font></td>
-
-<td style="vertical-align: top; text-align: center;"><font color="#000000">&nbsp;Software Understanding <br>
-
-(0% - 50%)</font></td>
-
-<td style="vertical-align: top; text-align: center;">
-
-<center><font color="#000000">Unfamiliarity</font> <br>
-
-<font color="#000000">(0-1)</font></center>
-
-</td>
-
-</tr>
-
-<tr>
-
-<td style="vertical-align: top;">New<br>
-		
-</td>
-
-<td style="vertical-align: top;"><br>
-		
-</td>
-
-<td style="vertical-align: top;"><br>
-
-</td>
-
-<td style="vertical-align: top;"><br>
-
-</td>
-
-</tr>
-
-<tr>
-
-<td style="vertical-align: top;">Reused<br>
-		
-</td>
-
-<td style="vertical-align: top;"><center>
-		
-		<input type="text" name="AA_reused" size="6" maxlength="6" align="right" value=""> <br>
-		
-		</center>
-		
-</td>
-
-<td style="vertical-align: top;"><br>
-
-</td>
-
-<td style="vertical-align: top;"><br>
-
-</td>
-
-</tr>
-
-<tr>
-
-<td style="vertical-align: top;">Modified<br>
-		
-</td>
-
-<td style="vertical-align: top;"><center>
-		
-		<input type="text" name="AA_modified" size="6" maxlength="6" align="right" value=""> <br>
-		
-		</center>
-		
-</td>
-
-<td style="vertical-align: top;"><center>
-
-<input type="text" name="SU_modified" size="6" maxlength="6" align="right" value=""> <br>
-
-</center>
-
-</td>
-
-<td style="vertical-align: top;"><center>
-
-<input type="text" name="UNFM_modified" size="6" maxlength="6" align="right" value=""> <br>
-
-</center>
-
-</td>
-
-</tr>
-
-</tbody>
-
-</table>
-
-
-
-<br></td>
-
-
-<td style="text-align: left; vertical-align: top;"></td>
 </tr></tbody></table>
+
+<br></td><td style="text-align: left; vertical-align: top;"></td>
+</tr></tbody></table>
+
+
 </div>
 <br />
 
 <div class="divider10"></div>
 
-<h3>&nbsp;Software Scale Drivers </h3>
+<h3> Software Scale Drivers  </h3>
 
 
 <div style="padding:20px;border-radius: 10px;-moz-border-radius: 10px;-webkit-border-radius: 10px;border-color:transparent;background-color:#D3E4E5;">
-<table border="0" style="border-color:transparent;"><tbody><tr valign="top">
+<table border="0"><tbody><tr valign="top">
 
 <td>
 
-  <table><tbody ><tr>
+  <table border="0"><tbody><tr>
 
   <td align="left">Precedentedness</td>
 
@@ -824,13 +614,13 @@ border=" 1"="" cellpadding="1" cellspacing="0"><tbody><tr><td style="width: 50px
 
   <td><br>
   <b>Software Cost Drivers</b></td>
-  <td></td>
+
   </tr>
 
   <tr>
 
-  <td><b>Product</b></td> 
-  <td></td>
+  <td><b>Product</b></td>
+
   </tr>
 
 <tr>
@@ -901,7 +691,17 @@ border=" 1"="" cellpadding="1" cellspacing="0"><tbody><tr><td style="width: 50px
 
 </tr>
 
+<tr>
 
+  <td>&nbsp;</td>
+
+  </tr>
+
+  <tr>
+
+  <td>&nbsp;</td>
+
+  </tr>
 
 
 
@@ -927,14 +727,18 @@ border=" 1"="" cellpadding="1" cellspacing="0"><tbody><tr><td style="width: 50px
 
   </tr>
 
+<tr>
 
+  <td><b>&nbsp;</b></td>
+
+  </tr>
 
 <tr>
 
 </tr><tr>
 
   <td><br><b>Personnel</b></td>
-	<td></td>
+
   </tr>
 
 <tr>
@@ -1021,10 +825,143 @@ border=" 1"="" cellpadding="1" cellspacing="0"><tbody><tr><td style="width: 50px
 
 </tr>
 
+  <tr>
+
+    <td>&nbsp;</td>
+
+  </tr>
+
 
 
     </tbody></table>
 
+</td>
+
+<td>
+
+  <table border="0"><tbody><tr>
+
+    <td align="left">Process Maturity</td>
+
+   <td><select name="pmat">
+
+  <option value="Very_Low">Very Low</option><option value="Low">Low</option><option value="Nominal" selected="">Nominal</option><option value="High">High</option><option value="Very_High">Very High</option><option value="Extra_High">Extra High</option></select></td>  </tr>
+
+  <tr>
+
+    <td>&nbsp;</td>
+
+  </tr>
+
+  <tr>
+
+  </tr><tr>
+
+  <td><b>&nbsp;</b></td>
+
+  </tr>
+
+<tr>
+
+</tr><tr>
+
+    <td><br><b>Platform</b></td>
+
+  </tr>
+
+<tr>
+
+<td align="left">Time Constraint</td>
+
+<td>
+
+<select name="time">
+
+  <option value="Nominal" selected="">Nominal</option><option value="High">High</option><option value="Very_High">Very High</option><option value="Extra_High">Extra High</option></select>
+
+</td>
+
+</tr>
+
+
+
+<tr>
+
+<td align="left">Storage Constraint</td>
+
+<td>
+
+<select name="stor">
+
+  <option value="Nominal" selected="">Nominal</option><option value="High">High</option><option value="Very_High">Very High</option><option value="Extra_High">Extra High</option></select>
+
+</td>
+
+</tr>
+
+
+
+<tr>
+
+<td align="left">Platform Volatility</td>
+
+<td>
+
+<select name="pvol">
+
+  <option value="Low">Low</option><option value="Nominal" selected="">Nominal</option><option value="High">High</option><option value="Very_High">Very High</option></select>
+
+</td>
+
+</tr>
+
+   <tr>
+
+    <td><br><b>Project</b></td>
+
+  </tr>
+
+<tr>
+
+<td align="left">Use of Software Tools</td>
+
+<td>
+
+<select name="tool">
+
+  <option value="Very_Low">Very Low</option><option value="Low">Low</option><option value="Nominal" selected="">Nominal</option><option value="High">High</option><option value="Very_High">Very High</option></select>
+
+</td>
+
+</tr>
+
+<tr>
+
+<td align="left">Multisite Development</td>
+
+<td>
+
+<select name="site">
+
+  <option value="Very_Low">Very Low</option><option value="Low">Low</option><option value="Nominal" selected="">Nominal</option><option value="High">High</option><option value="Very_High">Very High</option><option value="Extra_High">Extra High</option></select></td>
+
+</tr>
+
+<tr><td align="left">Required Development Schedule</td>
+
+<td>
+
+<select name="sced">
+
+  <option value="Very_Low">Very Low</option><option value="Low">Low</option><option value="Nominal" selected="">Nominal</option><option value="High">High</option><option value="Very_High">Very High</option></select></td>
+
+</tr>
+
+      </tbody></table>
+
+</td></tr>
+
+</tbody></table>
 </td>
 
 </tr>
