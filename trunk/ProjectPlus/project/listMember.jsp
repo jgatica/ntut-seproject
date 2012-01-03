@@ -658,7 +658,7 @@
                     </a>
                     </div>
                     <div class="col_allw170 frontpage_box hoverdiv">
-					<a href="/project/newwbs.jsp?id=<%= request.getParameter("id")%>">
+					<a href="/project/newwbs.jsp?id=<%= request.getParameter("id")%>&tid=<%= request.getParameter("tid")%>">
                       <img src="/images/project_chart.png" alt="Image" width="24" height="24">
                       <h2>WBS</h2>
 					</a>

@@ -26,7 +26,7 @@
 
                     for( index = 0; index < size; index++) {
 
-                        var content = '<li name="' + data[index].name + '">' + '<a>' + data[index].name + '</a>' + '<ul name="' + data[index].name + '"></ul>' + '</li>';
+                        var content = '<li name="' + data[index].name + '">' + '<div><a>' + data[index].name + '</a></div>' + '<div><a>' + data[index].descript + '</a></div>' + '<ul name="' + data[index].name + '"></ul>' + '</li>';
                         // 如果為根節點
                         if(data[index].parent == "") {
                             $("#org").append(content);
