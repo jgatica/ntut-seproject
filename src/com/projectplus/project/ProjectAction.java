@@ -183,7 +183,7 @@ public class ProjectAction extends Action {
 	
 			ganttScheme.xTitle = "";
 			// ganttScheme.xTitle = "任務";
-			ganttScheme.yTitle = "時間";
+			ganttScheme.yTitle = "天數";
 	
 //			ganttScheme.data.add(200);
 //			ganttScheme.data.add(300);
