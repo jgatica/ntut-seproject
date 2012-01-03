@@ -17,6 +17,7 @@ import org.apache.struts.action.ActionMapping;
 
 import com.projectplus.context.Result;
 import com.projectplus.context.SessionContext;
+import com.projectplus.member.MemberDBMgr;
 import com.projectplus.member.MemberDataStructure;
 import com.projectplus.project.ProjectDBMgr;
 import com.projectplus.util.JSONWriter;
@@ -71,13 +72,14 @@ public class TaskAction extends Action {
 			if (resultSet != null) {
 				while (resultSet.next()) {
 					TaskDataStructure task = new TaskDataStructure();
-					task.setName(resultSet.getString(""));
-					task.setProjectId(resultSet.getString(""));
-					task.setMemberId(resultSet.getString(""));
-					task.setDescription(resultSet.getString(""));
-					task.setStartDate(resultSet.getString(""));
-					task.setEndDate(resultSet.getString(""));
-					task.setState(resultSet.getString(""));
+					task.setId(resultSet.getString("t_id"));
+					task.setName(resultSet.getString("t_name"));
+					task.setProjectId(resultSet.getString("p_id"));
+					task.setMemberId(resultSet.getString("m_id"));
+					task.setDescription(resultSet.getString("t_target"));
+					task.setStartDate(resultSet.getString("t_startdate"));
+					task.setEndDate(resultSet.getString("t_enddate"));
+					task.setLayer(resultSet.getString("t_parent"));
 					dataList.add(task);
 				}
 			} else // 假的(測試用) 如有真資料請將此部分刪除 直接return
@@ -101,7 +103,43 @@ public class TaskAction extends Action {
 		}
 
 		try {
-			JSONWriter.sendJSONResponse(response, dataList);
+			//System.out.println("Start Sort...");
+			List<TaskDataStructure> dataSortList = new ArrayList<TaskDataStructure>();
+			//System.out.println("size is :" + dataList.size());
+			int preCount=0;
+			for(int i=4;dataList.size()!=dataSortList.size();i++)
+			{
+				int count=0;
+				for(int j=0;j<dataList.size();j++)
+				{
+					
+					//System.out.println(dataList.get(j).getLayer());
+					if(dataList.get(j).getLayer().length()==i)
+					{
+						count++;
+						//System.out.println(dataList.get(j).getLayer());
+						dataSortList.add(dataList.get(j));
+					}
+				}
+				for(int k=preCount;k<preCount+count-1;k++)
+				{
+					for(int l=preCount;l<preCount+count-1;l++)
+					{
+						int preId = Integer.parseInt(dataSortList.get(l).id);
+						int postId = Integer.parseInt(dataSortList.get(l+1).id);
+						if(preId > postId)
+						{
+							TaskDataStructure temp=dataSortList.get(l);
+							dataSortList.set(l,dataSortList.get(l+1));
+							dataSortList.set(l+1,temp);
+							
+						}
+					}
+				}
+				preCount+=count;
+			}
+			//System.out.println(dataSortList.toString());
+			JSONWriter.sendJSONResponse(response, dataSortList);
 		} catch (IOException e) {
 			e.printStackTrace();
 		}
@@ -165,14 +203,16 @@ public class TaskAction extends Action {
 		try {
 			if (resultSet != null) {
 				while (resultSet.next()) {
+					int stateIndex = Integer.parseInt(resultSet.getString("t_condition"));
+					String[] state = {"Preparing","Working","Finish"};
 					task = new TaskDataStructure();
-					task.setName(resultSet.getString(""));
-					task.setProjectId(resultSet.getString(""));
-					task.setMemberId(resultSet.getString(""));
-					task.setDescription(resultSet.getString(""));
-					task.setStartDate(resultSet.getString(""));
-					task.setEndDate(resultSet.getString(""));
-					task.setState(resultSet.getString(""));
+					task.setName(resultSet.getString("t_name"));
+					task.setProjectId(resultSet.getString("p_id"));
+					task.setMemberId(resultSet.getString("m_id"));
+					task.setDescription(resultSet.getString("t_target"));
+					task.setStartDate(resultSet.getString("t_startdate"));
+					task.setEndDate(resultSet.getString("t_enddate"));
+					task.setState(state[stateIndex]);
 				}
 			} else // 假的(測試用) 如有真資料請將此部分刪除 直接return
 			{
@@ -278,14 +318,16 @@ public class TaskAction extends Action {
 			HttpSession session) {
 		boolean isSuccess = false;
 		//名稱是否有重複
+		System.out.println(form.layer);
 		boolean isChecked = TaskDBMgr.checkTaskName(form.getName(),
 				form.getProjectId());
 		Result result = new Result();
-		
+		MemberDataStructure data = (MemberDataStructure) session
+				.getAttribute(SessionContext.USERDATA);
 		if (isChecked) {
 			isSuccess = TaskDBMgr.addTask(form.getName(),
 					form.getDescription(), form.getStartDate(),
-					form.getEndDate(), form.getId(),
+					form.getEndDate(),data.id ,
 					form.getProjectId(), form.memberId,form.layer);
 			result.isSuccess = isSuccess;
 			if (result.isSuccess){
