@@ -358,10 +358,11 @@
 	var highchartsOptions = Highcharts.setOptions(Highcharts.theme);	
 		
 	var chart;
+	
 	$(document).ready(function() {
-		
+		var projectid = "<%=request.getParameter("projectId")%>";
 		$.getJSON('/ProjectAction.do', {
-			op : 10
+			op : 10,projectId: projectid
 		}, function(data) {
 			console.log(data);
 			
