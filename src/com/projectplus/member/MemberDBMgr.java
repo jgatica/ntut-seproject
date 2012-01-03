@@ -201,7 +201,7 @@ public class MemberDBMgr extends DBMgr{
 				
 				Statement stat = null; 
 			    stat = con.createStatement(); 
-			    resultSet = stat.executeQuery("SELECT * FROM member WHERE m_id not in (SELECT m_id FROM  g_m_relation where g_id='"+team_id+"') "+" where m_name like '%" + m_name + "%'"); 
+			    resultSet = stat.executeQuery("SELECT * FROM member WHERE m_id not in (SELECT m_id FROM  g_m_relation where g_id='"+team_id+"') "+" and m_name like '%" + m_name + "%'"); 
 			    return resultSet;
 	
 			    
