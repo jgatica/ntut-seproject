@@ -173,7 +173,7 @@ public class MemberDBMgr extends DBMgr{
 	 * @param m_name
 	 * @return
 	 */
-	static public ResultSet queryAllMember(String m_name) {
+	static public ResultSet queryNotInTeamMembers(String m_name, String team_id) {
 		if(m_name.length()==0)
 		{
 			ResultSet resultSet=null;
@@ -182,7 +182,7 @@ public class MemberDBMgr extends DBMgr{
 				
 				Statement stat = null; 
 			    stat = con.createStatement(); 
-			    resultSet = stat.executeQuery("SELECT * FROM member"); 
+			    resultSet = stat.executeQuery("SELECT * FROM member WHERE m_id not in (SELECT m_id FROM  g_m_relation where g_id='"+team_id+"')"); 
 			    return resultSet;
 	
 			    
@@ -201,7 +201,7 @@ public class MemberDBMgr extends DBMgr{
 				
 				Statement stat = null; 
 			    stat = con.createStatement(); 
-			    resultSet = stat.executeQuery("SELECT * FROM member where m_name like '%" + m_name + "%'"); 
+			    resultSet = stat.executeQuery("SELECT * FROM member WHERE m_id not in (SELECT m_id FROM  g_m_relation where g_id='"+team_id+"') "+" where m_name like '%" + m_name + "%'"); 
 			    return resultSet;
 	
 			    
