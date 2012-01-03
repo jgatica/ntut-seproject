@@ -260,22 +260,11 @@
 	 * 一開始讀取第零筆資料
 	 */
 	$(document).ready(function(){
-		var projectId=$("#projectId").val();
-		$.getJSON('/ProjectAction.do',  { op:11,projectId:projectId }, function(data) {
-			if(data!=null)
-			{
-				//console.log(data); 
-				var name = '<team>' + data.projectName + '</team>';
-				var pm = '<name>' + data.projectManager + '</name>';
-				$("#project_name").html(name);
-				$("#project_desc").text(data.projectTarget);
-				$("#project_startDate").text(data.startDate);
-				$("#project_endDate").text(data.endDate);
-				$("#project_duration").text(data.duration+" 天");
-				$("#project_manager").html(pm);
-			}
-		});
+		
 	}); 
+
+	  	
+
 </script>
 
 
@@ -300,7 +289,6 @@
         </div>
         -->
 <!-- InstanceBeginEditable name="Menu" -->
-<!-- end of templatemo_menu -->
 <!-- InstanceEndEditable -->
 <div id="templatemo_white">
 </div>
@@ -479,7 +467,7 @@
                     </a>
                     </div>
                     <div class="col_allw170 frontpage_box hoverdiv">
-					<a href="/project/newwbs.jsp?id=<%= request.getParameter("id")%>&tid=<%= request.getParameter("tid")%>">
+					<a href="/project/newwbs.jsp?id=<%= request.getParameter("id")%>">
                       <img src="/images/project_chart.png" alt="Image" width="24" height="24">
                       <h2>WBS</h2>
 					</a>
@@ -498,64 +486,12 @@
 				<div id="dropBox" class="toggler col_w700 lp_box float_l margin_20rl">		
 				<div class="subTopDiv" >
 				<!-- InstanceBeginEditable name="PageTitle" -->
-				<h2 class="uiHeaderTitle">專案資訊</h2>
+                <h2 class="uiHeaderTitle"><span id="teamNameArea"></span><img class="arrow_right" src="/images/arrow_right.png" />WBS</h2>
 				<!-- InstanceEndEditable -->
 				</div>
                 <!-- InstanceBeginEditable name="RightArea" -->
-					<div class="table-content">
-						<table summary="站內信箱" width="100%">
-							<!--<caption>Table designs</caption>-->
-							<thead>
-							<tr>
-								<th width="20%" scope="col">專案資訊</th>
-								<th width="80%" scope="col">內容</th>
-							</tr>
-							</thead>
-							<tfoot>
-							<tr>
-								<th scope="row"></th>
-								<td colspan="4"></td>
-							</tr>
-							</tfoot>
-							<tbody>
-								<tr>
-									<td>專案名稱</td>
-									<td id="project_name"><team>軟體工程</team></td>									
-								</tr>
-								<tr class="odd">									
-									<td>專案描述</td>
-									<td id="project_desc">軟體工程專案是台北科技大學研究所課程期末的專案</td>									
-								</tr>					
-								<tr>
-									<td>開始日期</td>
-									<td id="project_startDate">2011/12/10</td>									
-								</tr>
-								<tr class="odd">									
-									<td>結束日期</td>
-									<td id="project_endDate">2011/01/07</td>									
-								</tr>		
-								<tr>
-									<td>工期</td>
-									<td id="project_duration">3個月</td>									
-								</tr>
-								<tr class="odd">									
-									<td>專案負責人</td>
-									<td id="project_manager"><name>陳奕豪</name></td>									
-								</tr>			
-								<!--<tr>									
-									<td>專案成員</td>
-									<td id="project_members"><name>陳奕豪</name>
-										<name>陳至圓</name>
-										<name>楊先絜</name>
-										<name>郭奕成</name>
-										<name>黃臣逸</name></td>									
-								</tr>	-->																																				
-							</tbody>
-						</table>			
-
-
-				 </div>
- 					
+                <iframe width="539" height="600" src="/project/wbs.jsp?id=<%= request.getParameter("id")%>"></iframe>
+                
 				<!-- InstanceEndEditable -->
 				<div class="subBottomDiv" ></div>
                 </div>
