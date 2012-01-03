@@ -394,7 +394,7 @@
 				tooltip: {
 					formatter: function() {
 						return ''+
-							 this.y +' 單位';
+							 this.y +' 天';
 					}
 				},
 				plotOptions: {
@@ -419,7 +419,7 @@
 					enabled: false
 				},
 					series: [{
-					name: 'Year 1800',
+					name: '天數',
 					data: data.data
 				}]
 			});					
