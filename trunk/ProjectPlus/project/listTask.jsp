@@ -364,9 +364,7 @@
 				
 				if($("#"+id).parent().find("ul").length!=0 )
 				{
-					if(id=="file")
-						console.log($("#"+id).parent().find("ul"));
-					var branches = $("<li><span id=" + newId + " class='file'>"+ newId + "</span></li>").appendTo($("#"+id).parent().find("ul"));
+					var branches = $("<li><span id=" + newId + " class='file'>"+ newId + "</span></li>").appendTo($("#"+id).parent().find("ul").get(0));
 					$("#browser").treeview({
 						add: branches
 					});
