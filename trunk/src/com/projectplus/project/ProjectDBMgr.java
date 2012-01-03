@@ -152,17 +152,16 @@ public class ProjectDBMgr extends DBMgr {
 		if(!isInit)
 			return false;
 		try {
-			pst = con.prepareStatement("insert into `project`(`p_parent`,`p_name`,`p_desc`,`p_startdate`,`p_enddate`,`pm_id`,`add_id`,`mdy_time`,`mdy_id`,`g_id`) "
-					+ " value (?,?,?,?,?,?,?,?,?,?)");
-			pst.setString(1, parent);
-			pst.setString(2, name);
-			pst.setString(3, destination);
-			pst.setString(4, startDate);
-			pst.setString(5, endDate);
-			pst.setString(6, pm_id);
-			pst.setString(7, add_id);
-			pst.setString(8, formatter.format(new Date()));
-			pst.setString(9, add_id);
+			pst = con.prepareStatement("insert into `project`(`p_name`,`p_desc`,`p_startdate`,`p_enddate`,`pm_id`,`add_id`,`mdy_time`,`mdy_id`,`g_id`) "
+					+ " value (?,?,?,?,?,?,?,?,?)");
+			pst.setString(1, name);
+			pst.setString(2, destination);
+			pst.setString(3, startDate);
+			pst.setString(4, endDate);
+			pst.setString(5, pm_id);
+			pst.setString(6, add_id);
+			pst.setString(7, formatter.format(new Date()));
+			pst.setString(8, add_id);
 			pst.setString(9, team_id);
 			//System.out.println(pst);
 			pst.executeUpdate();
