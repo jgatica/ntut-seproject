@@ -12,8 +12,14 @@ public class TaskActionForm extends ActionForm{
 	public String state;
 	public String startDate;
 	public String endDate;
+	public String layer;
 	
-	
+	public String getLayer() {
+		return layer;
+	}
+	public void setLayer(String layer) {
+		this.layer = layer;
+	}
 	public String getId() {
 		return id;
 	}

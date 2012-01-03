@@ -114,7 +114,7 @@ public class MemberAction extends Action {
 				&& form.member_name.length() != 0;
 		ResultSet resultSet = null;
 		if (check)
-			resultSet = MemberDBMgr.queryAllMember(form.member_name);
+			resultSet = MemberDBMgr.queryNotInTeamMembers(form.member_name,form.teamId);
 		List<MemberDataStructure> dataList = new ArrayList<MemberDataStructure>();
 
 		try {
