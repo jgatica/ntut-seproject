@@ -347,8 +347,9 @@
 		{
 				var op=4;
 				$("#dialog_btn").button({disabled:true});
+				var teamId = $("#teamId").val()
 				//var data = $("label[value*="+ name +"]");
-				$.getJSON('/MemberAction.do', {op:op,member_name:name}, function(data){
+				$.getJSON('/MemberAction.do', {op:op,member_name:name,teamId:teamId}, function(data){
 					if(data!=null)
 					{
 						//console.log(data);
@@ -369,6 +370,7 @@
 								$("#project_managerId").attr("name",id);
 								$("#add_member_name").val(name);
 								$("#add_member_name").attr("name",id);
+								$("#memberURL").attr("src",$(this).children("img").attr("src"));
 								$("#div-float-members").html("");
 								$( "#div-float-members" ).hide();
 							});
@@ -659,7 +661,7 @@
 									</div>-->
                                 </td>
 								<td>
-									<img class="bigpic" src="/images/default.jpg" alt="Image" width="48" height="48">
+									<img id="memberURL" class="bigpic" src="/images/default.jpg" alt="Image" width="48" height="48">
 								</td>
 							</tr>																	
 						</form>	

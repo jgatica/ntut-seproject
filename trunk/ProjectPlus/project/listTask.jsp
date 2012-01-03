@@ -287,11 +287,16 @@
 		
 		
 		$("#browser").find("span").unbind('click').click(function(){
-			$("#task_name").html($(this).html());
+			$("#task_name").html($(this).text());
+			$("#branchsId").val($(this).attr("id"));
+			//console.log($(this).attr("id"));
 			$("#dialog2").dialog('open');	
 		});
 
-
+		$("#add").click(function() {
+			$("#dialog2").dialog('close');
+			$("#dialog").dialog('open');
+		});
 		/*var projectId = $("#projectId").val();
 		$.getJSON('/TaskAction.do', {op:7,projectId:projectId}, function(data){
 			if(data!=null)
@@ -349,15 +354,38 @@
 		});
 		
 		$( "#agree" ).click(function(){
-			//alert("1");
-			var op = 0;
-			$.getJSON('/ProjectAction.do', {op:op,projectName:name,projectTarget:dest,projectManagerId:pmid,startDate:start,endDate:end,teamId:teamId,duration:duration}, function(data){
-				if(data.isSuccess)
-					window.location = "/project/listProject.jsp?id="+teamId;		
+			var id = $("#branchsId").val();
+				var size = $("#"+id).parent().find("ul").find("li").length-$("#"+id).parent().children().find("ul").find("li").length;
+				var newId=id;
+				if(newId!="file")
+					newId+='.'+(size+1);
 				else
-					alert(data.message);
-			});
-			//alert("3");
+					newId+=(size+1);
+				
+				if($("#"+id).parent().find("ul").length!=0 )
+				{
+					if(id=="file")
+						console.log($("#"+id).parent().find("ul"));
+					var branches = $("<li><span id=" + newId + " class='file'>"+ newId + "</span></li>").appendTo($("#"+id).parent().find("ul"));
+					$("#browser").treeview({
+						add: branches
+					});
+				}
+				else
+				{
+					var branches = $("<ul><li><span id=" + newId + " class='file'>"+ newId + "</span></li></ul>").appendTo($("#"+id).parent());
+					$("#browser").treeview({
+						add: branches
+					});
+				}
+				
+				$("#browser").find("span").unbind('click').click(function(){
+					$("#task_name").html($(this).text());
+					$("#branchsId").val($(this).attr("id"));
+					$("#dialog2").dialog('open');	
+				});
+				$("#browser").treeview();
+				$("#dialog").dialog('close');
 		});	
 		
 		$("#cancel").click(function(){
@@ -667,30 +695,8 @@
 				
 				<div style="padding:20px;">
 					<ul id="browser" class="filetree">
-						<li><span class="folder"><team>軟體工程</team>
-						</span>
-							<ul>
-								<li><span class="file">子任務1</span></li>
-							</ul>
-						</li>
-						<li><span class="folder"><team>軟體工程</team></span>
-							<ul>
-								<li><span class="folder">Subfolder 2.1</span>
-									<ul id="folder21">
-										<li><span class="file">File 2.1.1</span></li>
-										<li><span class="file">File 2.1.2</span></li>
-									</ul>
-								</li>
-								<li><span class="file">File 2.2</span></li>
-							</ul>
-						</li>
-						<li class="closed"><span class="folder"><team>軟體工程</team></span>
-							<ul>
-								<li><span class="file">File 3.1</span></li>
-							</ul>
-						</li>
-						<li><span class="file"><team>軟體工程</team></span></li>
-					</ul>						
+						<li><span id="file" class="folder"><team>軟體工程</team></span></li>
+					</ul>					
 				</div>
 				
 				
@@ -780,9 +786,10 @@
 					}
 				</style>
 			    <div id="dialog2" title="任務" style="text-align:center;display:inline;">
+                	<input id="branchsId" type="hidden" />
 					<p>在<team id="task_name"></team>的操作</p>
 						<div>
-							<img class="task_img" width="35" src="/images/add_article.png" title="新增子任務"/>
+							<img id="add" class="task_img" width="35" src="/images/add_article.png" title="新增子任務"/>
 							<img class="task_img" width="35" src="/images/task_see.png" title="查看任務"/>
 							<img class="task_img" width="35" src="/images/task_delete.png" title="刪除任務"/>
 							<img class="task_img" width="35" src="/images/task_exit.png" title="關閉"/>
@@ -792,8 +799,7 @@
                 </div>
 
 
-				<div id="dialog" title="新增專案">
-					<p>在<team>軟體工程</team>新增一個專案</p>
+				<div id="dialog" title="新增工作">
 					<table width="100%">				
 					<form>
 						<tr>
@@ -805,10 +811,8 @@
 							<td width="75%"><input type="text" id="project_destination" class="text ui-widget-content ui-corner-all" /></td>
 						</tr>						
 						<tr>
-							<td width="25%"><label for="email">專案經理</label></td>
+							<td width="25%"><label for="email">作業員</label></td>
 							<td width="75%">
-							
-							
 							
 							<!--input type="text"  value="" class="text ui-widget-content ui-corner-all" /-->
 							
@@ -831,10 +835,9 @@
                         <tr>
 							<td width="25%"><label for="name">工期</label></td>
 							<td width="75%"><input type="text" id="project_duration" class="text ui-widget-content ui-corner-all" /></td>
-						</tr>								
+						</tr>					
 					</form>	
 					</table>
-					
 					<div class="divider"></div>
 					<div style="text-align:right;">
 						<button id="agree">確定</button>

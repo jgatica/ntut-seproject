@@ -260,7 +260,52 @@
 	 * 一開始讀取第零筆資料
 	 */
 	$(document).ready(function(){
-		
+		var teamId = $("#teamId").val();
+		$.getJSON('/TeamAction.do',  { op:8,id:teamId }, function(data) {
+			if(data!=null)
+			{
+				//alert();
+				//console.log(data); 
+				//$("#div-float-teams").html("");
+				$("#teamNameArea").text(data.name);
+				$("#teamNameArea1").text(data.name);
+				$("#teamNameArea2").text(data.name);
+				var size = data.members.length,index;
+				
+				for(index = 0; index < size; index++)
+				{
+					var content = '<div class="col_allw170 perple_box">' +
+								 '<img class="bigpic" src="' + data.members[index].imageURL + '" width="48" height="48">'+
+								 '<h2><a href="#">' + data.members[index].member_name + 
+								 '</a><button id="'+ data.members[index].id +'" class="delmember_btn">剔除成員</button>' + 
+								 '<button id="'+ data.members[index].id +'" class="addfriend_btn">加入朋友</button></h2>'+
+								 '<div class="divider"></div></div>';
+								 
+					$("#div-members").append(content);
+					
+					$(".delmember_btn").click(function(){
+						//alert("刪除成員 id:" + $(this).attr("id"));
+						var op = 6;
+						var id = $(this).attr("id");
+						var teamId = $("#teamId").val();
+						$.getJSON('/MemberAction.do', {op:op,id:id,teamId:teamId}, function(data){
+							if(data!=null)
+							{
+								if(data.isSuccess)
+									window.location = "/team/listMember.jsp?id=" + teamId;
+								else
+									alert(data.message);
+							}
+						});
+					});
+					$(".addfriend_btn").click(function(){
+						//alert("新增好友 id:" + $(this).attr("id"));
+					});
+					$(".delmember_btn").button();
+					$(".addfriend_btn").button();
+				}
+			}
+		});
 	}); 
 
 	  	
