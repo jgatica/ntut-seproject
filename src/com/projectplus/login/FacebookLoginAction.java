@@ -101,8 +101,8 @@ public class FacebookLoginAction extends Action {
 				MemberDataStructure data = new MemberDataStructure();// 真的
 				try {
 					
-					System.out.println(resultSet.getString("m_id"));
-					System.out.println(resultSet.getString("m_imageURL"));
+//					System.out.println(resultSet.getString("m_id"));
+//					System.out.println(resultSet.getString("m_imageURL"));
 					
 					data.setId(resultSet.getString("m_id"));
 					data.setImageURL(resultSet.getString("m_imageURL"));

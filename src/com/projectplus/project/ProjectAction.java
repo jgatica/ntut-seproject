@@ -21,6 +21,8 @@ import com.projectplus.charts.WbsSchemeCreator;
 import com.projectplus.context.Result;
 import com.projectplus.context.SessionContext;
 import com.projectplus.member.MemberDataStructure;
+import com.projectplus.task.TaskDBMgr;
+import com.projectplus.team.TeamDBMgr;
 import com.projectplus.util.JSONWriter;
 
 public class ProjectAction extends Action {
@@ -127,6 +129,12 @@ public class ProjectAction extends Action {
 			ProjectActionForm form, HttpServletRequest request,
 			HttpServletResponse response, HttpSession session) {
 
+		
+		String projectId = form.getProjectId();
+		ResultSet resultSet = TaskDBMgr.queryProjectTasks(projectId);
+		
+		
+		
 		GanttScheme ganttScheme = new GanttScheme();
 		ganttScheme.title = "甘特圖測試";
 		ganttScheme.subtitle = "任務總表";

@@ -8,7 +8,7 @@ import java.sql.DriverManager;
 import java.sql.PreparedStatement;
 import java.sql.SQLException;
 import java.util.Properties;
-import com.mysql.*;
+
 public class DBMgr {
 
 	private static Properties props;
@@ -20,7 +20,6 @@ public class DBMgr {
 	protected static String url = null; 
 	protected static String user = null;
 	protected static String password = null;
-	
 	/*
 	 * DB初始化連線設定 
 	 * */
