@@ -263,9 +263,11 @@
 		
 		funciton cal_COCOMOII()
 		{
-			//FP and Language------------------------------功能點值 與 程式語言類型
-			var FP;
-			var languageType;
+			//目前寫入的值是測試用的資料,之後請對應實際的按鈕或輸入框取得的數值!!!!
+			
+			//UFP and Language-----------------------------未調整功能點值 與 選擇的程式語言類型所對應的SLOC
+			var UFP;
+			var source__line_of_code_languageType = 128;   // C: 128 ,c++:29
 			// Software Scale Drivers--------------------為權重值
 			var pecedentednes;
 			var architecture_risk_Resolution;
@@ -275,7 +277,7 @@
 			
 			//Software Cost Drivers --------------------------------------為權重值
 			//Product======================
-			var required_Software_Reliability;
+			var required_Software_Reliability; 
 			var data_Base_Size;
 			var product_Complexity;
 			var developed_for_Reusability;
@@ -283,7 +285,7 @@
 			
 			//Personnel======================
 			var analyst_Capability;
-			var programmer Capability;	
+			var programmer_Capability;	
 			var personnel_Continuity;	
 			var application_Experience;	
 			var platform_Experience;
@@ -301,11 +303,18 @@
 			//-------------------------------------------------------------
 			
 			//Software Labor Rates--------------
-			var cost_per_Person-Month;
+			var cost_per_Person_Month = 10;
 			
 			//----------------------------------------------------------------
 			//1.計算B
-			var B = 1.01 + 0.01 *(pecedentednes + architecture_risk_Resolution + development_Flexibility +team_Cohesion + process_Maturity);		}
+			var B = 1.01 + 0.01 *(pecedentednes + architecture_risk_Resolution + development_Flexibility +team_Cohesion + process_Maturity);
+			//2.計算透過為調整功能點所轉換的程式語言行數 
+			var size = UFP * source__line_of_code_languageType; 
+			//3.計算人月
+			var effort_PM = 2.94 + Math.pow(UFP,B) +  (required_Software_Reliability * data_Base_Size * product_Complexity * developed_for_Reusability * documentation_Match_to_Lifecycle_Needs * analyst_Capability * programmer_Capability * personnel_Continuity * application_Experience * platform_Experience * language_and_Toolset_Experience  * time_Constraint * storage_Constraint * platform_Volatility * use_of_Software_Tools * multisite_Development * required_Development_Schedule)
+			//4.計算花費		
+			var cost = effort_PM * cost_per_Person_Month;
+		}
 	}); 
 
 	  	
