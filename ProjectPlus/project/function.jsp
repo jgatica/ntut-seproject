@@ -539,6 +539,7 @@
 
 
 		<input type="hidden" id="projectId" value="<%= request.getParameter("id")%>" />
+        <input type="hidden" id="teamId" value="<%= request.getParameter("tid")%>" />
         <div id="templatemo_main">
             
           <div class="col_w900 hr_divider">
@@ -548,25 +549,25 @@
 						<h2 class="uiHeaderTitle">專案資料</h2></div>	
 					
 					<div class="col_allw170 frontpage_box hoverdiv">
-					<a href="/project/detail.jsp?id=<%= request.getParameter("id")%>">
+					<a href="/project/detail.jsp?id=<%= request.getParameter("id")%>&tid=<%= request.getParameter("tid")%>">
 						<img src="/images/project_info.png" alt="Image" width="24" height="24">
 						<h2>專案資訊</h2>
 					</a> 
                     </div>            
 					<div class="col_allw170 frontpage_box hoverdiv">
-					<a href="/project/listMember.jsp?id=<%= request.getParameter("id")%>">
+					<a href="/project/listMember.jsp?id=<%= request.getParameter("id")%>&tid=<%= request.getParameter("tid")%>">
 						<img src="/images/task_group.png" alt="Image" width="24" height="24">
 						<h2>專案人員</h2>
 					</a> 
                     </div>   					       
                     <div class="col_allw170 frontpage_box hoverdiv">
-					<a href="/project/listTask.jsp?id=<%= request.getParameter("id")%>">
+					<a href="/project/listTask.jsp?id=<%= request.getParameter("id")%>&tid=<%= request.getParameter("tid")%>">
 						<img src="/images/project_task.png" alt="Image" width="24" height="24">
 						<h2>專案任務</h2>
                     </a>
                     </div>
                     <div class="col_allw170 frontpage_box hoverdiv">
-					<a href="/project/wbs.html">
+					<a href="/project/newwbs.jsp?id=<%= request.getParameter("id")%>&tid=<%= request.getParameter("tid")%>">
                       <img src="/images/project_chart.png" alt="Image" width="24" height="24">
                       <h2>WBS</h2>
 					</a>
@@ -574,7 +575,7 @@
 					
 					
                   <div class="frontpage_box col_allw170  hoverdiv">
-				  <a href="/team/listProject.jsp?id=<%= request.getParameter("id")%>">
+				  <a href="/team/listProject.jsp?id=<%= request.getParameter("id")%>&tid=<%= request.getParameter("tid")%>">
                       <img src="/images/profile_task.png" alt="Image" width="24" height="24">
                     <h2>專案估算系統</h2>
 					</a>

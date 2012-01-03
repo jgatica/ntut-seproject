@@ -282,11 +282,10 @@
 	 * 一開始讀取第零筆資料
 	 */
 	$(document).ready(function(){
-		
-		$("#browser").treeview();
-		
+		//$("#browser").treeview();
 		
 		$("#browser").find("span").unbind('click').click(function(){
+			selectId = $(this).attr("name");
 			$("#task_name").html($(this).text());
 			$("#branchsId").val($(this).attr("id"));
 			//console.log($(this).attr("id"));
@@ -297,11 +296,36 @@
 			$("#dialog2").dialog('close');
 			$("#dialog").dialog('open');
 		});
-		/*var projectId = $("#projectId").val();
+		
+		var projectId = $("#projectId").val();
+		var teamId = $("#teamId").val();
+		var newTaskId;
 		$.getJSON('/TaskAction.do', {op:7,projectId:projectId}, function(data){
 			if(data!=null)
 			{
-				console.log(data);
+				//console.log(data);
+				var size = data.length,index;
+				for(index = 0; index < size; index++)
+				{
+					//$( "#agree" ).click();	
+					//$("#task_name").html($(this).text());
+					$("#branchsId").val(data[index].layer);
+					$("#sub_task_name").val(data[index].name);
+					newTaskId = data[index].id;
+					add_node();
+					$("#sub_task_name").val("");
+					//alert();
+					//$( "#agree" ).click();
+				}
+				$("#browser").treeview();
+			}
+		});
+		
+		$.getJSON('/TeamAction.do', {op:8,id:teamId}, function(data){
+			if(data!=null)
+			{
+				//console.log(teamId);
+				//console.log(data);
 				var size = data.members.length,index;
 				for(index = 0; index < size; index++)
 				{
@@ -310,80 +334,79 @@
 					$("#div-members").append(content);
 				}
 			}
-		});*/
+		});
 		
-		var projectId = $("#projectId").val();
+		//var projectId = $("#projectId").val();
 		$.getJSON('/ProjectAction.do', {op:11,projectId:projectId}, function(data){
 			if(data!=null)
 			{
 				$("#projectNameArea").text(data.projectName);
+				$("#node").append('<team>' + data.projectName + '</team>');
 			}
 		});
 		
-		$.getJSON('/TaskAction.do', {op:7,projectId:projectId}, function(data) {		
-			if(data !=null){
-				//console.log(data);
-				//$("#project-list").html("");	
-				var size = data.length,index;
-				for(index = 0; index < size; index++)
-				{
-					var content ="";
-					if(index%2==0)
-					{
-						content = '<tr id="' + data[index].projectId + '" class="hoverdiv">' + '<td>' + parseInt(index) + '</td>' + '<td>' + 
-									 data[index].projectName + '</td>';
-					
-					}
-					else
-					{
-						content = '<tr id="' + data[index].projectId + '" class="odd hoverdiv">' + '<td>' + parseInt(index) + '</td>' + '<td>' + data[index].projectName + '</td>';
-					}
-					if(data[index].projectState!="finished")
-						content+='<td><img src="/images/state_doing.png" width="16" /></td></tr>';
-					else
-						content+='<td><img src="/images/state_ok.png" width="16" /></td></tr>';
-					$("#project-list").append(content);
-					
-					$("#"+data[index].projectId).click(function(){
-						//alert($(this).attr("id"));
-						window.location="/project/detail.jsp?id=" + $(this).attr("id");
-					});
-				}
-			}
-		
-		});
-		
-		$( "#agree" ).click(function(){
-			var id = $("#branchsId").val();
+		var newId;
+		var selectId;
+		function add_node()
+		{
+				var id = $("#branchsId").val();
 				var size = $("#"+id).parent().find("ul").find("li").length-$("#"+id).parent().children().find("ul").find("li").length;
-				var newId=id;
-				if(newId!="file")
-					newId+='.'+(size+1);
+				newId=id;
+				//console.log(newId);
+				if(newId!="node")
+					newId+=(size+1);
 				else
 					newId+=(size+1);
 				
 				if($("#"+id).parent().find("ul").length!=0 )
 				{
-					var branches = $("<li><span id=" + newId + " class='file'>"+ newId + "</span></li>").appendTo($("#"+id).parent().find("ul").get(0));
-					$("#browser").treeview({
+					/*console.log(0);
+					console.log($("#"+id).parent().find("ul").get(0));*/
+					var branches = $("<li><span id=" + newId + " name=" + newTaskId + " class='file'>"+ $("#sub_task_name").val() + "</span></li>").appendTo($("#"+id).parent().find("ul").get(0));
+					/*$("#"+id).parent().parent().treeview({
 						add: branches
-					});
+					});*/
 				}
 				else
 				{
-					var branches = $("<ul><li><span id=" + newId + " class='file'>"+ newId + "</span></li></ul>").appendTo($("#"+id).parent());
-					$("#browser").treeview({
+					/*console.log(1);
+					console.log(id);
+					console.log($("#sub_task_name").val());
+					console.log($("#"+id).parent());*/
+					var branches = $("<ul><li><span id=" + newId + " name=" + newTaskId + " class='file'>"+ $("#sub_task_name").val() + "</span></li></ul>").appendTo($("#"+id).parent());
+					/*$("#"+id).parent().parent().treeview({
 						add: branches
-					});
+					});*/
 				}
 				
 				$("#browser").find("span").unbind('click').click(function(){
+					selectId = $(this).attr("name");
 					$("#task_name").html($(this).text());
 					$("#branchsId").val($(this).attr("id"));
 					$("#dialog2").dialog('open');	
 				});
-				$("#browser").treeview();
-				$("#dialog").dialog('close');
+				//$("#browser").treeview()
+				//while($("#browser").nextAll().treeview())
+				//$("#browser").treeview();
+		}
+		
+		$( "#agree" ).click(function(){
+				add_node();
+				
+				var taskName = $("#sub_task_name").val();
+				var taskDesc = $("#task_desc").val();
+				var taskStartDate = $("#task_startDate").val();
+				var taskEndDate = $("#task_endDate").val();
+				var projectId = $("#projectId").val();
+				var memberId = $("#task_memberId").attr("name");
+				var layer = $("#branchsId").val();
+				//console.log(layer);
+				$.getJSON('/TaskAction.do',  { op:0,name:taskName,description:taskDesc,startDate:taskStartDate,endDate:taskEndDate,projectId:projectId,memberId:memberId,layer:layer }, function(data) {
+					if(data!=null)
+					{
+						window.location = window.location;
+					}
+				});				
 		});	
 		
 		$("#cancel").click(function(){
@@ -391,8 +414,8 @@
 		});
 		
 		//$('#date').datepicker();
-		$('#project_startDate').datepicker({dateFormat:"yy-mm-dd"});
-		$('#project_endDate').datepicker({dateFormat:"yy-mm-dd"});
+		$('#task_startDate').datepicker({dateFormat:"yy-mm-dd"});
+		$('#task_endDate').datepicker({dateFormat:"yy-mm-dd"});
 		
 		// dialog
 		$( "#dialog" ).dialog( {autoOpen: false, minWidth: 350, minHeight: 250, modal: true} );
@@ -401,15 +424,22 @@
 		});	
 		
 		$( "#dialog2" ).dialog( {autoOpen: false, modal: false} );
+		$( "#dialog3" ).dialog( {autoOpen: false, minWidth: 350, minHeight: 250, modal: true} );
 		
 		//hide searchform
 		$("#div-float-members").hide();
 		
-		$("#project_managerId").click(function(){
-			if($("#project_managerId").val()=="搜尋...")
-				$("#project_managerId").val('');
+		$("#task_memberId").click(function(){
+			if($("#task_memberId").val()=="搜尋...")
+				$("#task_memberId").val('');
 		});
-
+		var qyname;
+		function search_memberById(id)
+		{
+			qyname = $("label[id="+ id +"]").attr("value");
+			//console.log(name);
+		}
+			
 		function search_member(name)
 		{
 			var data = $("label[value*="+ name +"]");
@@ -428,15 +458,15 @@
 					$("#"+ data[index].id).click(function(){
 						var id = $(this).attr("id");
 						var name = $(this).attr("name");
-						$("#project_managerId").val(name);
-						$("#project_managerId").attr("name",id);
+						$("#task_memberId").val(name);
+						$("#task_memberId").attr("name",id);
 						$("#div-float-members").html("");
 						$( "#div-float-members" ).hide();
 					});
 				}
 		}
 
-		$("#project_managerId").bind('paste', function(e) {
+		$("#task_memberId").bind('paste', function(e) {
 				var el = $(this);
 				setTimeout(function() {
 					var name = $(el).val();
@@ -445,24 +475,46 @@
 				}, 100);
 		});
 
-		$("#project_managerId").keydown(function(){
+		$("#task_memberId").keydown(function(){
 			// 在這裡取得資料並且榜上去(仿造目前樣板)
-			if($("#project_managerId").val()!="搜尋..." && $("#project_managerId").val() !="")
+			if($("#task_memberId").val()!="搜尋..." && $("#task_memberId").val() !="")
 				$( "#div-float-members" ).show();
-				var name = $("#project_managerId").val();
+				var name = $("#task_memberId").val();
 				search_member(name);
 		});
 		
-		$("#project_managerId").blur(function(){
+		$("#task_memberId").blur(function(){
 			$( "#div-float-members" ).hide();
 		});
 		
-		$("#project_managerId").focus(function(){
-			if($("#project_managerId").val()!="搜尋..." && $("#project_managerId").val() !="")
+		$("#task_memberId").focus(function(){
+			if($("#task_memberId").val()!="搜尋..." && $("#task_memberId").val() !="")
 				$( "#div-float-members" ).show();
 		});
 		
 		$("#div-members").hide();
+		
+		$("#close").click(function(){
+			$("#dialog2").dialog('close');
+		});
+		
+		$("#query").click(function(){
+			//alert(selectId);
+			$("#dialog2").dialog('close');
+			$.getJSON('/TaskAction.do',  { op:4,id:selectId}, function(data) {
+					if(data!=null)
+					{
+						search_memberById(data.memberId);
+						$("#qytask_memberId").val(qyname);
+						$("#qytask_name").val(data.name);
+						$("#qytask_desc").val(data.description);
+						$("#qytask_startDate").val(data.startDate);
+						$("#qytask_endDate").val(data.endDate);
+						$("#qytask_state").val(data.state);
+					}
+				});
+			$("#dialog3").dialog('open');
+		});
 	}); 	
 
 </script>
@@ -639,6 +691,7 @@
 
 
 		<input type="hidden" id="projectId" value="<%= request.getParameter("id")%>" />
+        <input type="hidden" id="teamId" value="<%= request.getParameter("tid")%>" />
         <div id="templatemo_main">
             
           <div class="col_w900 hr_divider">
@@ -648,25 +701,25 @@
 						<h2 class="uiHeaderTitle">專案資料</h2></div>	
 					
 					<div class="col_allw170 frontpage_box hoverdiv">
-					<a href="/project/detail.jsp?id=<%= request.getParameter("id")%>">
+					<a href="/project/detail.jsp?id=<%= request.getParameter("id")%>&tid=<%= request.getParameter("tid")%>">
 						<img src="/images/project_info.png" alt="Image" width="24" height="24">
 						<h2>專案資訊</h2>
 					</a> 
                     </div>            
 					<div class="col_allw170 frontpage_box hoverdiv">
-					<a href="/project/listMember.jsp?id=<%= request.getParameter("id")%>">
+					<a href="/project/listMember.jsp?id=<%= request.getParameter("id")%>&tid=<%= request.getParameter("tid")%>">
 						<img src="/images/task_group.png" alt="Image" width="24" height="24">
 						<h2>專案人員</h2>
 					</a> 
                     </div>   					       
                     <div class="col_allw170 frontpage_box hoverdiv">
-					<a href="/project/listTask.jsp?id=<%= request.getParameter("id")%>">
+					<a href="/project/listTask.jsp?id=<%= request.getParameter("id")%>&tid=<%= request.getParameter("tid")%>">
 						<img src="/images/project_task.png" alt="Image" width="24" height="24">
 						<h2>專案任務</h2>
                     </a>
                     </div>
                     <div class="col_allw170 frontpage_box hoverdiv">
-					<a href="/project/wbs.html">
+					<a href="/project/newwbs.jsp?id=<%= request.getParameter("id")%>&tid=<%= request.getParameter("tid")%>">
                       <img src="/images/project_chart.png" alt="Image" width="24" height="24">
                       <h2>WBS</h2>
 					</a>
@@ -674,7 +727,7 @@
 					
 					
                   <div class="frontpage_box col_allw170  hoverdiv">
-				  <a href="/team/listProject.jsp?id=<%= request.getParameter("id")%>">
+				  <a href="/team/listProject.jsp?id=<%= request.getParameter("id")%>&tid=<%= request.getParameter("tid")%>">
                       <img src="/images/profile_task.png" alt="Image" width="24" height="24">
                     <h2>專案估算系統</h2>
 					</a>
@@ -693,17 +746,17 @@
 				
 				<div style="padding:20px;">
 					<ul id="browser" class="filetree">
-						<li><span id="file" class="folder"><team>軟體工程</team></span></li>
+						<li><span id="node" class="folder"></span></li>
 					</ul>					
 				</div>
 				
 				
 				
-				<div class="table-content">
+				<!--<div class="table-content">
 					
-					<table summary="專案列表" width="100%" style="max-height:300px; ">
+					<table summary="專案列表" width="100%" style="max-height:300px; ">-->
 						<!--<caption>Table designs</caption>-->
-						<thead>
+						<!--<thead>
 						<tr>
 							<th width="20%" scope="col">專案編號</th>
 							<th width="100%" scope="col">專案名稱</th>
@@ -720,7 +773,7 @@
 								<td>002</td>
 								<td><team>軟體工程</team>專案任務1</td>	
 								<td><img src="/images/state_ok.png" width="16" /></td>									
-							</tr>	
+							</tr>	-->
 							<!--				
 							<tr>
 								<td>003</td>
@@ -759,13 +812,13 @@
 							</tr>-->																																																																		
 						</tbody>
 					</table>						
-					<div class="divider"></div>
+					<!--<div class="divider"></div>
 					<div style="text-align:right;">
 						<button id="dialog_btn">新增</button>
 						<button id="more">更多...</button>
 					</div>
 
-				 </div>
+				 </div>-->
 				
 				<style>
 					.task_img{
@@ -788,9 +841,9 @@
 					<p>在<team id="task_name"></team>的操作</p>
 						<div>
 							<img id="add" class="task_img" width="35" src="/images/add_article.png" title="新增子任務"/>
-							<img class="task_img" width="35" src="/images/task_see.png" title="查看任務"/>
+							<img id="query" class="task_img" width="35" src="/images/task_see.png" title="查看任務"/>
 							<img class="task_img" width="35" src="/images/task_delete.png" title="刪除任務"/>
-							<img class="task_img" width="35" src="/images/task_exit.png" title="關閉"/>
+							<img id="close" class="task_img" width="35" src="/images/task_exit.png" title="關閉"/>
 						</div>					
                     <div id="div-members">
                     </div>
@@ -802,11 +855,11 @@
 					<form>
 						<tr>
 							<td width="25%"><label for="name">工作名稱</label></td>
-							<td width="75%"><input type="text"id="project_name" class="text ui-widget-content ui-corner-all" /></td>
+							<td width="75%"><input id="sub_task_name" type="text" class="text ui-widget-content ui-corner-all" /></td>
 						</tr>
 						<tr>
 							<td width="25%"><label for="name">工作內容</label></td>
-							<td width="75%"><input type="text" id="project_destination" class="text ui-widget-content ui-corner-all" /></td>
+							<td width="75%"><input type="text" id="task_desc" class="text ui-widget-content ui-corner-all" /></td>
 						</tr>						
 						<tr>
 							<td width="25%"><label for="email">作業員</label></td>
@@ -815,7 +868,7 @@
 							<!--input type="text"  value="" class="text ui-widget-content ui-corner-all" /-->
 							
 							<div id="searchform">
-								<input type="text" AUTOCOMPLETE=OFF langtag="top-search" value="搜尋..." name="" id="project_managerId"/>
+								<input type="text" AUTOCOMPLETE=OFF langtag="top-search" value="搜尋..." name="" id="task_memberId"/>
                                 <div id="div-float-members" style="overflow-y: scroll; max-height:85px ; width:135px;">
                                 </div>						
 							</div>     
@@ -824,16 +877,12 @@
 							</td>
 						</tr>
 							<td width="25%"><label for="project_startDate">開始時間</label></td>
-							<td width="75%"><input class="text ui-widget-content ui-corner-all" type="text" name="date" id="project_startDate" /></td>    
+							<td width="75%"><input class="text ui-widget-content ui-corner-all" type="text" name="date" id="task_startDate" /></td>    
 						</tr>
 						<tr>
 							<td width="25%"><label for="project_endDate">結束時間</label></td>
-							<td width="75%"><input class="text ui-widget-content ui-corner-all" type="text" name="date" id="project_endDate" /></td>
-						</tr>	
-                        <tr>
-							<td width="25%"><label for="name">工期</label></td>
-							<td width="75%"><input type="text" id="project_duration" class="text ui-widget-content ui-corner-all" /></td>
-						</tr>					
+							<td width="75%"><input class="text ui-widget-content ui-corner-all" type="text" name="date" id="task_endDate" /></td>
+						</tr>			
 					</form>	
 					</table>
 					<div class="divider"></div>
@@ -843,6 +892,52 @@
 					</div>
                     <div id="div-members">
                     </div>
+                     </div>
+                     
+                     <div id="dialog3" title="查詢工作">
+					<table width="100%">				
+					<form>
+						<tr>
+							<td width="25%"><label for="name">工作名稱</label></td>
+							<td width="75%"><input id="qytask_name" type="text" class="text ui-widget-content ui-corner-all" disabled="disabled"/></td>
+						</tr>
+						<tr>
+							<td width="25%"><label for="name">工作內容</label></td>
+							<td width="75%"><input type="text" id="qytask_desc" class="text ui-widget-content ui-corner-all"disabled="disabled" /></td>
+						</tr>						
+						<tr>
+							<td width="25%"><label for="email">作業員</label></td>
+							<td width="75%">
+							
+							<!--input type="text"  value="" class="text ui-widget-content ui-corner-all" /-->
+							
+							<div id="searchform">
+								<input type="text" AUTOCOMPLETE=OFF langtag="top-search" value="搜尋..." name="" id="qytask_memberId" disabled="disabled"/>
+							</div>     
+							
+							
+							</td>
+						</tr>
+							<td width="25%"><label for="project_startDate">開始時間</label></td>
+							<td width="75%"><input class="text ui-widget-content ui-corner-all" type="text" name="date" id="qytask_startDate" disabled="disabled"/></td>    
+						</tr>
+						<tr>
+							<td width="25%"><label for="project_endDate">結束時間</label></td>
+							<td width="75%"><input class="text ui-widget-content ui-corner-all" type="text" name="date" id="qytask_endDate" disabled="disabled"/></td>
+						</tr>
+                        <tr>
+							<td width="25%"><label for="project_endDate">目前狀態</label></td>
+							<td width="75%"><input class="text ui-widget-content ui-corner-all" type="text" name="date" id="qytask_state" disabled="disabled"/></td>
+						</tr>							
+					</form>	
+					</table>
+					<!--<div class="divider"></div>
+					<div style="text-align:right;">
+						<button id="agree">確定</button>
+						<button id="cancel">取消</button>
+					</div>
+                    <div id="div-members">
+                    </div>-->
                      </div>
 					<!-- InstanceEndEditable -->
 				<div class="subBottomDiv" ></div>
