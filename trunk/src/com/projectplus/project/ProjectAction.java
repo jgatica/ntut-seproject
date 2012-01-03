@@ -3,7 +3,10 @@ package com.projectplus.project;
 import java.io.IOException;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 
 import javax.servlet.http.HttpServletRequest;
@@ -131,7 +134,7 @@ public class ProjectAction extends Action {
 
 		// 前端會丟projectId過來  以這個id去撈資料給前端
 		String projectId = form.getProjectId();
-
+		System.out.println("aa="+projectId);   
 		if(projectId != null){
 			ResultSet resultSet = TaskDBMgr.queryProjectTasks(projectId);
 			
@@ -142,21 +145,51 @@ public class ProjectAction extends Action {
 			ganttScheme.title = "甘特圖測試";
 			ganttScheme.subtitle = "任務總表";
 	
-			ganttScheme.xCategories.add("任務1");
-			ganttScheme.xCategories.add("任務2");
-			ganttScheme.xCategories.add("任務3");
-			ganttScheme.xCategories.add("任務4");
-			ganttScheme.xCategories.add("任務5");
+			
+			if (resultSet != null) {
+				try {
+					while (resultSet.next()) {
+						ganttScheme.xCategories.add(resultSet.getString("t_name"));
+						SimpleDateFormat format = new java.text.SimpleDateFormat("yyyy-MM-dd");   
+						Date beginDate = null;
+						try {
+							beginDate = format.parse(resultSet.getString("t_startdate"));
+						} catch (ParseException e) {
+							// TODO Auto-generated catch block
+							e.printStackTrace();
+						}   
+						Date endDate = null;
+						try {
+							endDate = format.parse(resultSet.getString("t_enddate"));
+						} catch (ParseException e) {
+							// TODO Auto-generated catch block
+							e.printStackTrace();
+						}   
+						long day=(endDate.getTime()-beginDate.getTime())/(24*60*60*1000);   
+						//System.out.println("相隔的天数="+day);   
+						ganttScheme.data.add((int)day);
+					}
+				} catch (SQLException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				}
+			}
+			
+//			ganttScheme.xCategories.add("任務1");
+//			ganttScheme.xCategories.add("任務2");
+//			ganttScheme.xCategories.add("任務3");
+//			ganttScheme.xCategories.add("任務4");
+//			ganttScheme.xCategories.add("任務5");
 	
 			ganttScheme.xTitle = "";
 			// ganttScheme.xTitle = "任務";
 			ganttScheme.yTitle = "時間";
 	
-			ganttScheme.data.add(200);
-			ganttScheme.data.add(300);
-			ganttScheme.data.add(200);
-			ganttScheme.data.add(700);
-			ganttScheme.data.add(400);
+//			ganttScheme.data.add(200);
+//			ganttScheme.data.add(300);
+//			ganttScheme.data.add(200);
+//			ganttScheme.data.add(700);
+//			ganttScheme.data.add(400);
 	
 			try {
 				JSONWriter.sendJSONResponse(response, ganttScheme);
