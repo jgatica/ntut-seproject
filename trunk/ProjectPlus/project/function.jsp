@@ -594,6 +594,16 @@
 					.radioButton{
 						width: 40px;
 					}
+					span.titleLabel {
+						width: 100px;
+					}
+					li,td{
+						padding-left: 40px;	
+						padding-right: 40px;
+					}
+					div.divider10{
+						margin:0;
+					}
 				</style>
 				<div style="padding:0px 20px 0px 20px;">
 				<ul class="" style="padding:10px ;list-style-type:none; 
@@ -604,7 +614,8 @@
 												background-color:#D3E4E5;
 												">
 					<li>
-                    	<input type="hidden" id="weight" value="4" />
+                    	<h6>Number of User Input : </h6>						
+						<input type="hidden" id="weight" value="4" />
 						<input id="EI" name="count" type="text" style="width: 20px;" value="0"/>   *   
 							<span id="uiradio">
 								<input type="radio" id="radio1" name="radio" /><label class="radioButton" for="radio1">3</label>
@@ -612,9 +623,10 @@
 								<input type="radio" id="radio3" name="radio" /><label class="radioButton" for="radio3">6</label>
 							</span>
 							=  <input id="answer" name="answer" type="text" style="width: 30px; text-align:center;" value="0" disabled="disabled"/>
+							<div class="divider10"></div>
 					</li>
 					<li>
-                    	<input type="hidden" id="weight" value="5" />
+                    	<h6>Number of User Output : </h6><input type="hidden" id="weight" value="5" />
 						<input id="EO" name="count" type="text" style="width: 20px;" value="0"/>   *   
 							<span id="uiradio2">
 								<input type="radio" id="radio4" name="radio2" /><label class="radioButton" for="radio4">4</label>
@@ -622,9 +634,10 @@
 								<input type="radio" id="radio6" name="radio2" /><label class="radioButton" for="radio6">7</label>
 							</span>
 							=  <input id="answer" name="answer" type="text" style="width: 30px; text-align:center;" value="0" disabled="disabled"/>
+							<div class="divider10"></div>
 					</li>		
 					<li>
-                    	<input type="hidden" id="weight" value="4" />
+                    	<h6>Number of User Inquiries : </h6><input type="hidden" id="weight" value="4" />
 						<input id="EQ" name="count" type="text" style="width: 20px;" value="0"/>   *   
 							<span id="uiradio3">
 								<input type="radio" id="radio7" name="radio3" /><label class="radioButton" for="radio7">3</label>
@@ -632,9 +645,10 @@
 								<input type="radio" id="radio9" name="radio3" /><label class="radioButton" for="radio9">6</label>
 							</span>
 							=  <input id="answer" name="answer" type="text" style="width: 30px; text-align:center;" value="0" disabled="disabled"/>
+							<div class="divider10"></div>
 					</li>	
 					<li>
-                    	<input type="hidden" id="weight" value="10" />
+                    	<h6>Number of Files : </h6><input type="hidden" id="weight" value="10" />
 						<input id="ILF" name="count" type="text" style="width: 20px;" value="0"/>   *   
 							<span id="uiradio5">
 								<input type="radio" id="radio13" name="radio5" /><label class="radioButton" for="radio13">7</label>
@@ -642,9 +656,10 @@
 								<input type="radio" id="radio15" name="radio5" /><label class="radioButton" for="radio15">15</label>
 							</span>
 							=  <input id="answer" name="answer" type="text" style="width: 30px; text-align:center;" value="0" disabled="disabled"/>
+							<div class="divider10"></div>
 					</li>					
 					<li>
-                    	<input type="hidden" id="weight" value="7" />
+                    	<h6>Number of External Interfaces: </h6><input type="hidden" id="weight" value="7" />
 						<input id="EIF" name="count" type="text" style="width: 20px;" value="0"/>   *   
 							<span id="uiradio4">
 								<input type="radio" id="radio10" name="radio4" /><label class="radioButton" for="radio10">5</label>
@@ -652,6 +667,7 @@
 								<input type="radio" id="radio12" name="radio4" /><label class="radioButton" for="radio12">10</label>
 							</span>
 							=  <input id="answer" name="answer" type="text" style="width: 30px; text-align:center;" value="0" disabled="disabled"/>
+							<div class="divider10"></div>
 					</li>	
 					<li style="margin: 20px; text-align: right;">
 						<h3>Total : <input id="total_answer" type="text" style="width: 70px; height:50px; text-align:center; font-size:25pt;" value="0" disabled="disabled"/></h3>
