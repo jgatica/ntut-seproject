@@ -286,7 +286,7 @@ public class TaskAction extends Action {
 			isSuccess = TaskDBMgr.addTask(form.getName(),
 					form.getDescription(), form.getStartDate(),
 					form.getEndDate(), form.getId(),
-					form.getProjectId(), form.memberId);
+					form.getProjectId(), form.memberId,form.layer);
 			result.isSuccess = isSuccess;
 			if (result.isSuccess){
 				result.message = "加入工作成功";
