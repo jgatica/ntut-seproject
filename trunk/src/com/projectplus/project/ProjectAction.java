@@ -313,6 +313,7 @@ public class ProjectAction extends Action {
 					task.setStartDate(resultSet.getString("t_startdate"));
 					task.setEndDate(resultSet.getString("t_enddate"));
 					task.setLayer(resultSet.getString("t_parent"));
+					//System.out.println(resultSet.getString("t_target"));
 					dataList.add(task);
 				}
 			} else // 假的(測試用) 如有真資料請將此部分刪除 直接return
@@ -372,7 +373,7 @@ public class ProjectAction extends Action {
 				for (int j = 0; j < countList.get(i); j++) {
 					dataSortList.get(index).setLayer(
 							dataSortList.get(index).getLayer() + (j + 1));
-					System.out.println(dataSortList.get(index).getLayer());
+					//System.out.println(dataSortList.get(index).getLayer());
 					index++;
 				}
 			}
@@ -388,7 +389,8 @@ public class ProjectAction extends Action {
 					if (dataSortList.get(i).getLayer().length() == 5) {
 						// System.out.println(dataSortList.get(i).getName());
 						scheme = WbsSchemeCreator.createWbsScheme(parent,
-								dataSortList.get(i).name, "");
+								dataSortList.get(i).name, dataSortList.get(i).description);
+						//System.out.println(dataSortList.get(i).description);
 					} else {
 						String node = dataSortList.get(i).getLayer().substring(0,dataSortList.get(i).getLayer().length() - 1);
 						for (int j = 0; j < dataSortList.size(); j++) {
@@ -401,7 +403,8 @@ public class ProjectAction extends Action {
 								 */
 								parent = dataSortList.get(j).name;
 								scheme = WbsSchemeCreator.createWbsScheme(
-										parent, dataSortList.get(i).name, "");
+										parent, dataSortList.get(i).name, dataSortList.get(i).description);
+								//System.out.println(dataSortList.get(i).description);
 								break;
 							}
 						}
