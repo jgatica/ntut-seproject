@@ -1,7 +1,6 @@
 package com.projectplus.project;
 
 public class ProjectDataStructure {
-
 	public String teamId;
 	public String teamName;
 	public String projectId;

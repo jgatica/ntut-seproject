@@ -66,7 +66,7 @@ public class TeamAction extends Action {
 	private ActionForward queryTeamMembers(ActionMapping mapping,
 			TeamActionForm form, HttpServletRequest request,
 			HttpServletResponse response, HttpSession session) {
-		//System.out.println(form.id);
+		//System.out.println("teamId:"+form.id);
 		ResultSet resultSet = TeamDBMgr.queryTeamMembers(form.id);
 		ResultSet teamResultSet = TeamDBMgr.queryTeam(form.id);
 		TeamDataStructure team = new TeamDataStructure();

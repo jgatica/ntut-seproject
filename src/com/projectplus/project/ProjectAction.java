@@ -25,6 +25,7 @@ import com.projectplus.context.Result;
 import com.projectplus.context.SessionContext;
 import com.projectplus.member.MemberDataStructure;
 import com.projectplus.task.TaskDBMgr;
+import com.projectplus.task.TaskDataStructure;
 import com.projectplus.team.TeamDBMgr;
 import com.projectplus.util.JSONWriter;
 
@@ -42,6 +43,7 @@ public class ProjectAction extends Action {
 	public static final int QYMEMBERPROJECTS = 9;
 	public static final int GANTT = 10;
 	public static final int QYPROJECT = 11;
+	public static final int QYPROJECTMEMBER = 12;
 
 	public ActionForward execute(ActionMapping mapping, ActionForm actionForm,
 			HttpServletRequest request, HttpServletResponse response) {
@@ -71,13 +73,62 @@ public class ProjectAction extends Action {
 		case WBSTREE:
 			return queryWbsTree(mapping, form, request, response, session);
 		case QYMEMBERPROJECTS:
-			return queryMemberProjects(mapping, form, request, response, session);
+			return queryMemberProjects(mapping, form, request, response,
+					session);
 		case GANTT:
 			return queryGantt(mapping, form, request, response, session);
 		case QYPROJECT:
 			return queryProject(mapping, form, request, response, session);
+		case QYPROJECTMEMBER:
+			return queryProjectMembers(mapping, form, request, response,
+					session);
 		}
 
+		return null;
+	}
+
+	private ActionForward queryProjectMembers(ActionMapping mapping,
+			ProjectActionForm form, HttpServletRequest request,
+			HttpServletResponse response, HttpSession session) {
+		ResultSet resultSet = ProjectDBMgr.queryProjectMembers(form.projectId);
+		List<MemberDataStructure> dataList = new ArrayList<MemberDataStructure>();
+
+		try {
+			if (resultSet != null) {
+				while (resultSet.next()) {
+					MemberDataStructure data = new MemberDataStructure();// 真的
+					data.setId(resultSet.getString("m_id"));
+					data.setImageURL(resultSet.getString("m_imageURL"));
+					data.setMember_name(resultSet.getString("m_name"));
+					dataList.add(data);
+				}
+			} else // 假的(測試用) 如有真資料請將此部分刪除 直接return
+			{
+				/*
+				 * for (int i = 0; i < 10; i++) { ProjectDataStructure project =
+				 * new ProjectDataStructure(); project.setTeamId("1");
+				 * project.setTeamName("軟體工程");
+				 * project.setProjectId(Integer.toString(i));
+				 * project.setProjectName("專案");
+				 * project.setProjectTarget("完成所有需求");
+				 * project.setProjectManagerId("1");
+				 * project.setProjectManager("超級小可愛QQ");
+				 * project.setStartDate(""); project.setEndDate(""); if (i > 4)
+				 * project.setProjectState("finished"); else
+				 * project.setProjectState("init");
+				 * 
+				 * dataList.add(project); }
+				 */
+			}
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+
+		try {
+			JSONWriter.sendJSONResponse(response, dataList);
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
 		return null;
 	}
 
@@ -97,18 +148,16 @@ public class ProjectAction extends Action {
 				project.setProjectTarget(resultSet.getString("p_desc"));
 				project.setStartDate(resultSet.getString("p_startdate"));
 				project.setEndDate(resultSet.getString("p_enddate"));
-			} 
-			else
-			{
-//				project = new ProjectDataStructure();
-//				project.setProjectId(resultSet.getString(""));
-//				project.setProjectManagerId(resultSet.getString(""));
-//				project.setProjectManager(resultSet.getString(""));
-//				project.setProjectName(resultSet.getString(""));
-//				project.setProjectState(resultSet.getString(""));
-//				project.setProjectTarget(resultSet.getString(""));
-//				project.setStartDate(resultSet.getString(""));
-//				project.setEndDate(resultSet.getString(""));
+			} else {
+				// project = new ProjectDataStructure();
+				// project.setProjectId(resultSet.getString(""));
+				// project.setProjectManagerId(resultSet.getString(""));
+				// project.setProjectManager(resultSet.getString(""));
+				// project.setProjectName(resultSet.getString(""));
+				// project.setProjectState(resultSet.getString(""));
+				// project.setProjectTarget(resultSet.getString(""));
+				// project.setStartDate(resultSet.getString(""));
+				// project.setEndDate(resultSet.getString(""));
 			}
 		} catch (SQLException e) {
 			e.printStackTrace();
@@ -132,65 +181,69 @@ public class ProjectAction extends Action {
 			ProjectActionForm form, HttpServletRequest request,
 			HttpServletResponse response, HttpSession session) {
 
-		// 前端會丟projectId過來  以這個id去撈資料給前端
+		// 前端會丟projectId過來 以這個id去撈資料給前端
 		String projectId = form.getProjectId();
-		System.out.println("aa="+projectId);   
-		if(projectId != null){
+		System.out.println("aa=" + projectId);
+		if (projectId != null) {
 			ResultSet resultSet = TaskDBMgr.queryProjectTasks(projectId);
-			
-			// 以下面的格式組資料 
+
+			// 以下面的格式組資料
 			// resultSet.get()
-			
+
 			GanttScheme ganttScheme = new GanttScheme();
 			ganttScheme.title = "甘特圖測試";
 			ganttScheme.subtitle = "任務總表";
-	
-			
+
 			if (resultSet != null) {
 				try {
 					while (resultSet.next()) {
-						ganttScheme.xCategories.add(resultSet.getString("t_name"));
-						SimpleDateFormat format = new java.text.SimpleDateFormat("yyyy-MM-dd");   
+						ganttScheme.xCategories.add(resultSet
+								.getString("t_name"));
+						SimpleDateFormat format = new java.text.SimpleDateFormat(
+								"yyyy-MM-dd");
 						Date beginDate = null;
 						try {
-							beginDate = format.parse(resultSet.getString("t_startdate"));
+							beginDate = format.parse(resultSet
+									.getString("t_startdate"));
 						} catch (ParseException e) {
 							// TODO Auto-generated catch block
 							e.printStackTrace();
-						}   
+						}
 						Date endDate = null;
 						try {
-							endDate = format.parse(resultSet.getString("t_enddate"));
+							endDate = format.parse(resultSet
+									.getString("t_enddate"));
 						} catch (ParseException e) {
 							// TODO Auto-generated catch block
 							e.printStackTrace();
-						}   
-						long day=(endDate.getTime()-beginDate.getTime())/(24*60*60*1000);   
-						//System.out.println("相隔的天数="+day);   
-						ganttScheme.data.add((int)day);
+						}
+						long day = (endDate.getTime() - beginDate.getTime())
+								/ (24 * 60 * 60 * 1000);
+						// System.out.println("相隔的天数="+day);
+						ganttScheme.data.add((int) day);
 					}
 				} catch (SQLException e) {
 					// TODO Auto-generated catch block
 					e.printStackTrace();
 				}
 			}
-			
-//			ganttScheme.xCategories.add("任務1");
-//			ganttScheme.xCategories.add("任務2");
-//			ganttScheme.xCategories.add("任務3");
-//			ganttScheme.xCategories.add("任務4");
-//			ganttScheme.xCategories.add("任務5");
-	
+
+			// ganttScheme.xCategories.add("任務1");
+			// ganttScheme.xCategories.add("任務2");
+			// ganttScheme.xCategories.add("任務3");
+			// ganttScheme.xCategories.add("任務4");
+			// ganttScheme.xCategories.add("任務5");
+
 			ganttScheme.xTitle = "";
 			// ganttScheme.xTitle = "任務";
 			ganttScheme.yTitle = "天數";
-	
-//			ganttScheme.data.add(200);
-//			ganttScheme.data.add(300);
-//			ganttScheme.data.add(200);
-//			ganttScheme.data.add(700);
-//			ganttScheme.data.add(400);
-	
+
+			// ganttScheme.data.add(200);
+			// ganttScheme.data.add(300);
+			// ganttScheme.data.add(200);
+			// ganttScheme.data.add(700);
+			// ganttScheme.data.add(400);
+
 			try {
 				JSONWriter.sendJSONResponse(response, ganttScheme);
 			} catch (IOException e) {
@@ -244,69 +297,127 @@ public class ProjectAction extends Action {
 	private ActionForward queryWbsTree(ActionMapping mapping,
 			ProjectActionForm form, HttpServletRequest request,
 			HttpServletResponse response, HttpSession session) {
+		ResultSet resultSet = TaskDBMgr.queryProjectTasks(form.projectId);
+		ResultSet projectRresultSet = ProjectDBMgr.queryProject(form.projectId);
+		List<TaskDataStructure> dataList = new ArrayList<TaskDataStructure>();
 
-		// ResultSet resultSet = null;
-		ArrayList<WbsScheme> schemes = new ArrayList<WbsScheme>();
-		// Step:1 由DB撈出所有的Task
-		// resultSet = ProjectDBMgr.listTask("projectId:123456");
-
-		// if(resultSet != null){
-		// try {
-		// while(resultSet.next()){
-		// Step:2 使用WbsSchemeCreator.createWbsScheme 建構節點
-		WbsScheme scheme = WbsSchemeCreator.createWbsScheme("", "jQuery開發團",
-				"我是根結點");
-		WbsScheme scheme2 = WbsSchemeCreator.createWbsScheme("jQuery開發團",
-				"開發WBS系統", "根");
-		WbsScheme scheme3 = WbsSchemeCreator.createWbsScheme("jQuery開發團",
-				"開發登入系統", "二之二");
-		WbsScheme scheme4 = WbsSchemeCreator.createWbsScheme("jQuery開發團",
-				"開發估算系統", "三之三");
-		WbsScheme scheme5 = WbsSchemeCreator.createWbsScheme("開發WBS系統", "美化外觀",
-				"二之一");
-		WbsScheme scheme6 = WbsSchemeCreator.createWbsScheme("開發WBS系統",
-				"更改超連結功能", "二之一");
-		WbsScheme scheme7 = WbsSchemeCreator.createWbsScheme("開發登入系統", "資料庫實作",
-				"二之一");
-		WbsScheme scheme8 = WbsSchemeCreator.createWbsScheme("開發登入系統",
-				"fb登入模式實作", "二之一");
-		WbsScheme scheme9 = WbsSchemeCreator.createWbsScheme("開發估算系統",
-				"COCOMO開發", "二之一");
-		WbsScheme scheme10 = WbsSchemeCreator.createWbsScheme("開發估算系統",
-				"Function Point開發", "二之一");
-
-		/*
-		 * 根階層 : WbsTreeLevel.ROOT 第二階層 : WbsTreeLevel.ROOT + 1 第三階層 :
-		 * WbsTreeLevel.ROOT + 2 ... 以此類推
-		 */
-
-		// Step:3 將節點組成ArrayList
-		schemes.add(scheme);
-		schemes.add(scheme2);
-		schemes.add(scheme3);
-		schemes.add(scheme4);
-		schemes.add(scheme5);
-		schemes.add(scheme6);
-		schemes.add(scheme7);
-		schemes.add(scheme8);
-		schemes.add(scheme9);
-		schemes.add(scheme10);
-
-		// Step:4 轉換該ArrayList為WBS Tree JSON字串傳回給客戶
 		try {
-			JSONWriter.sendJSONResponse(response, schemes);
-		} catch (IOException e) {
+			if (resultSet != null) {
+				while (resultSet.next()) {
+					TaskDataStructure task = new TaskDataStructure();
+					task.setId(resultSet.getString("t_id"));
+					task.setName(resultSet.getString("t_name"));
+					task.setProjectId(resultSet.getString("p_id"));
+					task.setMemberId(resultSet.getString("m_id"));
+					task.setDescription(resultSet.getString("t_target"));
+					task.setStartDate(resultSet.getString("t_startdate"));
+					task.setEndDate(resultSet.getString("t_enddate"));
+					task.setLayer(resultSet.getString("t_parent"));
+					dataList.add(task);
+				}
+			} else // 假的(測試用) 如有真資料請將此部分刪除 直接return
+			{
+				for (int i = 0; i < 5; i++) {
+					TaskDataStructure task = new TaskDataStructure();
+					task.setId(Integer.toString(i));
+					task.setName("工作" + i);
+					task.setProjectName("軟體工程");
+					task.setProjectId(Integer.toString(i));
+					task.setMemberId("1");
+					task.setDescription("task" + i);
+					task.setStartDate("");
+					task.setEndDate("");
+					task.setState("init");
+					dataList.add(task);
+				}
+			}
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+
+		try {
+			// System.out.println("Start Sort...");
+			List<TaskDataStructure> dataSortList = new ArrayList<TaskDataStructure>();
+			// System.out.println("size is :" + dataList.size());
+			int preCount = 0;
+			List<Integer> countList = new ArrayList<Integer>();
+			for (int i = 4; dataList.size() != dataSortList.size(); i++) {
+				int count = 0;
+				for (int j = 0; j < dataList.size(); j++) {
+
+					// System.out.println(dataList.get(j).getLayer());
+					if (dataList.get(j).getLayer().length() == i) {
+						count++;
+						// System.out.println(dataList.get(j).getLayer());
+						dataSortList.add(dataList.get(j));
+					}
+				}
+				for (int k = preCount; k < preCount + count - 1; k++) {
+					for (int l = preCount; l < preCount + count - 1; l++) {
+						int preId = Integer.parseInt(dataSortList.get(l).id);
+						int postId = Integer
+								.parseInt(dataSortList.get(l + 1).id);
+						if (preId > postId) {
+							TaskDataStructure temp = dataSortList.get(l);
+							dataSortList.set(l, dataSortList.get(l + 1));
+							dataSortList.set(l + 1, temp);
+						}
+					}
+				}
+				countList.add(count);
+				preCount += count;
+			}
+			int index = 0;
+			for (int i = 0; i < countList.size(); i++) {
+				for (int j = 0; j < countList.get(i); j++) {
+					dataSortList.get(index).setLayer(
+							dataSortList.get(index).getLayer() + (j + 1));
+					System.out.println(dataSortList.get(index).getLayer());
+					index++;
+				}
+			}
+			ArrayList<WbsScheme> schemes = new ArrayList<WbsScheme>();
+			try {
+				projectRresultSet.next();
+				String projectName = projectRresultSet.getString("p_name");
+				String parent = projectName;
+				WbsScheme scheme = WbsSchemeCreator.createWbsScheme("",
+						projectName, "");
+				schemes.add(scheme);
+				for (int i = 0; i < dataSortList.size(); i++) {
+					if (dataSortList.get(i).getLayer().length() == 5) {
+						// System.out.println(dataSortList.get(i).getName());
+						scheme = WbsSchemeCreator.createWbsScheme(parent,
+								dataSortList.get(i).name, "");
+					} else {
+						String node = dataSortList.get(i).getLayer().substring(0,dataSortList.get(i).getLayer().length() - 1);
+						for (int j = 0; j < dataSortList.size(); j++) {
+							if (dataSortList.get(j).getLayer().equals(node)) {
+								/*
+								 * System.out.println(dataSortList.get(i).getLayer
+								 * ());
+								 * System.out.println(dataSortList.get(i).getName
+								 * ());
+								 */
+								parent = dataSortList.get(j).name;
+								scheme = WbsSchemeCreator.createWbsScheme(
+										parent, dataSortList.get(i).name, "");
+								break;
+							}
+						}
+					}
+					schemes.add(scheme);
+				}
+				// System.out.println(dataSortList.toString());
+				JSONWriter.sendJSONResponse(response, schemes);
+			} catch (IOException e) {
+				e.printStackTrace();
+			}
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
 		return null;
-
-		// }
-		// } catch (SQLException e) {
-		// e.printStackTrace();
-		// } catch (IOException e) {
-		// e.printStackTrace();
-		// }
-		// }
 	}
 
 	private ActionForward queryMember(ActionMapping mapping,
@@ -484,9 +595,11 @@ public class ProjectAction extends Action {
 						.checkProjectName(form.projectName, form.teamId);
 		boolean isSuccess = false;
 		if (!check)
-			isSuccess = ProjectDBMgr.addProject(form.projectName,
-					form.projectTarget, form.projectManagerId, form.startDate,
-					form.endDate, data.id, form.teamId,form.duration,"parent");
+			isSuccess = ProjectDBMgr
+					.addProject(form.projectName, form.projectTarget,
+							form.projectManagerId, form.startDate,
+							form.endDate, data.id, form.teamId, form.duration,
+							"parent");
 
 		Result result = new Result();
 		result.isSuccess = isSuccess && !check;
