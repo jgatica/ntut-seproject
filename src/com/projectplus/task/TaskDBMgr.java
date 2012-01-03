@@ -101,14 +101,14 @@ public class TaskDBMgr extends DBMgr {
 	// team's name(id) & project's name(id)
 	public static boolean addTask(String name, String destination,
 			String startDate, String endDate, String add_id, String project_id,
-			String asign_id) {
+			String asign_id,String parent) {
 		SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
 
 		// Long to String
 		// String sDate = sdf.format(startDate);
 		// String eDate = sdf.format(endDate);
 		if (name.length() == 0 || destination.length() == 0
-				|| startDate.length() == 0 || endDate.length() == 0)
+				|| startDate.length() == 0 || endDate.length() == 0 || parent.length() == 0 )
 			return false;
 		// 日期Format
 		SimpleDateFormat formatter = new SimpleDateFormat("yyyy-MM-dd");
@@ -117,7 +117,7 @@ public class TaskDBMgr extends DBMgr {
 			return false;
 		try {
 			pst = con
-					.prepareStatement("insert into `task`(`t_name`,`t_desc`,`t_startdate`,`t_enddate`,`add_id`,`mdy_time`,`mdy_id`,`m_id`,`g_id`) "
+					.prepareStatement("insert into `task`(`t_name`,`t_desc`,`t_startdate`,`t_enddate`,`add_id`,`mdy_time`,`mdy_id`,`m_id`,`g_id`,`t_parent`) "
 							+ " value (?,?,?,?,?,?,?,?,?)");
 			pst.setString(1, name);
 			pst.setString(2, destination);
@@ -128,6 +128,7 @@ public class TaskDBMgr extends DBMgr {
 			pst.setString(7, add_id);
 			pst.setString(8, project_id);
 			pst.setString(9, asign_id);
+			pst.setString(10, parent);
 			System.out.println(pst);
 			pst.executeUpdate();
 			
