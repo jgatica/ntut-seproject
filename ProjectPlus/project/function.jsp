@@ -266,28 +266,53 @@
 		$( "#uiradio4" ).buttonset();
 		$( "#uiradio5" ).buttonset();
 		
+		
+		function caculate_total()
+		{
+			var data = $("#answer");
+			var size = $("[id=answer]").length,index;
+			var total_answer = 0;
+			for(index=0;index<size;index++)
+			{
+				total_answer+=parseInt($("[id=answer]").get(index).value);
+			}
+			$("#total_answer").val(total_answer);
+		}
+		
 		$(":radio").click(function(){
-			//console.log($(this).parent().parent().children("input[name=count]").val());
-			//console.log($(this).parent().children("label[for=" + $(this).attr("id") +"]").text());
 			var count = parseInt($(this).parent().parent().children("input[name=count]").val());
 			var weight = parseInt($(this).parent().children("label[for=" + $(this).attr("id") +"]").text());
 			$(this).parent().parent().children("#answer").val(count*weight);
-			//console.log($(this).parent().parent().children("#answer").val());
-			//alert($(this).parent("#answer").val());
-			
-			//$(this).parent("#answer").val();
+			$(this).parent().parent().children("#weight").val(weight);
+			caculate_total();
+		});
+				
+		$("input[name=count]").keyup(function(){
+			//console.log($(this).val());
+			//console.log($(this).parent().children("#weight").val());
+			if($(this).val()!="")
+			{
+				var count = parseInt($(this).val());
+				var weight = parseInt($(this).parent().children("#weight").val());
+				$(this).parent().children("#answer").val(count*weight);
+			}
+			caculate_total();
+		});
+		
+		$("input[name=count]").focus(function(){
+			if($(this).val()=="0")
+				$(this).val("");
+		});
+		
+		$("input[name=count]").blur(function(){
+			if($(this).val()=="")
+				$(this).val("0");
 		});
 	}); 
 
 	function cal_function_point()
 	{
-		var data = $("input[checked^=checked]");
-		/*var size = data.length,index;
-		for(index = 0; index < size; index++)
-		{
-			console.log(data[index].id);
-			console.log($("label[for="+ data[index].id +"]").text());
-		}*/
+		var data = $("input[checked=checked]");
 		//-------------------------------------------------------will Cal Unadjusted Function Point
 		// Measurement Parameter Count 之後請與各個cot2對應!!!!
 		var EI = $("#EI").val(); //External Input File => number_of_user_inputs
@@ -327,7 +352,8 @@
 		}*/
 		//-------------------------------------------------------
 		//1.先計算未調整功能點UDP
-		var UDF = ( EI *  EI_WF) + ( EIF * EIF_WF) +  ( ILF * ILF_WF) + ( EO * EO_WF) + ( EQ *  EQ_WF) ; 
+		//var UDF = ( EI *  EI_WF) + ( EIF * EIF_WF) +  ( ILF * ILF_WF) + ( EO * EO_WF) + ( EQ *  EQ_WF) ; 
+		var UDF = parseInt($("#total_answer").val());
 		//console.log(UDF);
 		//2.再計算數值調整因子VAF 透過14個通用系統特性GSC’s
 		var VAF = 0.65 +  (  parseInt(f1) +   parseInt(f2) +   parseInt(f3) +   parseInt(f4) +   parseInt(f5) +   parseInt(f6) +   parseInt(f7) +   parseInt(f8) +   parseInt(f9) +  parseInt(f10) +  parseInt(f11)+  parseInt(f12) +parseInt(f13) +parseInt(f14)) /100;
@@ -540,7 +566,7 @@
                     </a>
                     </div>
                     <div class="col_allw170 frontpage_box hoverdiv">
-					<a href="/example.html">
+					<a href="/project/wbs.html">
                       <img src="/images/project_chart.png" alt="Image" width="24" height="24">
                       <h2>WBS</h2>
 					</a>
@@ -578,49 +604,54 @@
 												background-color:#D3E4E5;
 												">
 					<li>
+                    	<input type="hidden" id="weight" value="4" />
 						<input id="EI" name="count" type="text" style="width: 20px;" value="0"/>   *   
 							<span id="uiradio">
 								<input type="radio" id="radio1" name="radio" /><label class="radioButton" for="radio1">3</label>
 								<input type="radio" id="radio2" name="radio" checked="checked" /><label class="radioButton" for="radio2">4</label>
 								<input type="radio" id="radio3" name="radio" /><label class="radioButton" for="radio3">6</label>
 							</span>
-							=  <input id="answer" type="text" style="width: 30px; text-align:center;" value="0" disabled="disabled"/>
+							=  <input id="answer" name="answer" type="text" style="width: 30px; text-align:center;" value="0" disabled="disabled"/>
 					</li>
 					<li>
+                    	<input type="hidden" id="weight" value="5" />
 						<input id="EO" name="count" type="text" style="width: 20px;" value="0"/>   *   
 							<span id="uiradio2">
 								<input type="radio" id="radio4" name="radio2" /><label class="radioButton" for="radio4">4</label>
 								<input type="radio" id="radio5" name="radio2" checked="checked" /><label class="radioButton" for="radio5">5</label>
 								<input type="radio" id="radio6" name="radio2" /><label class="radioButton" for="radio6">7</label>
 							</span>
-							=  <input id="answer" type="text" style="width: 30px; text-align:center;" value="0" disabled="disabled"/>
+							=  <input id="answer" name="answer" type="text" style="width: 30px; text-align:center;" value="0" disabled="disabled"/>
 					</li>		
 					<li>
+                    	<input type="hidden" id="weight" value="4" />
 						<input id="EQ" name="count" type="text" style="width: 20px;" value="0"/>   *   
 							<span id="uiradio3">
 								<input type="radio" id="radio7" name="radio3" /><label class="radioButton" for="radio7">3</label>
 								<input type="radio" id="radio8" name="radio3" checked="checked" /><label class="radioButton" for="radio8">4</label>
 								<input type="radio" id="radio9" name="radio3" /><label class="radioButton" for="radio9">6</label>
 							</span>
-							=  <input id="answer" type="text" style="width: 30px; text-align:center;" value="0" disabled="disabled"/>
+							=  <input id="answer" name="answer" type="text" style="width: 30px; text-align:center;" value="0" disabled="disabled"/>
 					</li>	
 					<li>
+                    	<input type="hidden" id="weight" value="10" />
 						<input id="ILF" name="count" type="text" style="width: 20px;" value="0"/>   *   
 							<span id="uiradio5">
 								<input type="radio" id="radio13" name="radio5" /><label class="radioButton" for="radio13">7</label>
 								<input type="radio" id="radio14" name="radio5" checked="checked" /><label class="radioButton" for="radio14">10</label>
 								<input type="radio" id="radio15" name="radio5" /><label class="radioButton" for="radio15">15</label>
 							</span>
-							=  <input id="answer" type="text" style="width: 30px; text-align:center;" value="0" disabled="disabled"/>
+							=  <input id="answer" name="answer" type="text" style="width: 30px; text-align:center;" value="0" disabled="disabled"/>
 					</li>					
 					<li>
+                    	<input type="hidden" id="weight" value="7" />
 						<input id="EIF" name="count" type="text" style="width: 20px;" value="0"/>   *   
 							<span id="uiradio4">
 								<input type="radio" id="radio10" name="radio4" /><label class="radioButton" for="radio10">5</label>
 								<input type="radio" id="radio11" name="radio4" checked="checked" /><label class="radioButton" for="radio11">7</label>
 								<input type="radio" id="radio12" name="radio4" /><label class="radioButton" for="radio12">10</label>
 							</span>
-							=  <input id="answer" type="text" style="width: 30px; text-align:center;" value="0" disabled="disabled"/>
+							=  <input id="answer" name="answer" type="text" style="width: 30px; text-align:center;" value="0" disabled="disabled"/>
 					</li>	
 					<li style="margin: 20px; text-align: right;">
 						<h3>Total : <input id="total_answer" type="text" style="width: 70px; height:50px; text-align:center; font-size:25pt;" value="0" disabled="disabled"/></h3>

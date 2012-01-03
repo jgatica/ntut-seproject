@@ -77,7 +77,7 @@
 			var email = $('#email').val();
 			var password = $('#password').val();
 			$.getJSON('/MemberAction.do',  { op:op, member_email:email, password:password }, function(data) {
-			console.log(data);
+			//console.log(data);
 				if(data.result.message=="ok") {
 					window.location = "/index.jsp";
 				}
