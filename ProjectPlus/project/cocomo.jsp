@@ -256,50 +256,142 @@
 
 
 <script language="JavaScript" type="text/javascript">
+
+		function conver(str) {
+			if(str=="Very_Low"){
+				return 0;
+			}
+			else if(str=="Low"){
+				return 1;
+			}
+			else if(str=="Nominal"){
+				return 2;
+			}
+			else if(str=="High"){
+				return 3;
+			}
+			else if(str=="Very_High"){
+				return 4;
+			}
+			else if(str=="Extra_High"){
+				return 5;
+			}
+		}
+
 	/*
 	 * 一開始讀取第零筆資料
 	 */
 	$(document).ready(function(){
 		
-		funciton cal_COCOMOII()
+		$("table").attr('style','border:none;');
+		
+		// 取得該取得的資料直
+		// Soft Cost Drivers
+		var precedentedness = $("#precedentedness").val();
+		var flexibility = $("#flexibility").val();
+		var architecture = $("#architecture").val();
+		var cohesion = $("#cohesion").val();
+		var maturity = $("#maturity").val();
+		
+		// Product
+		var reliability = $("#reliability").val();
+		var database = $("#database").val();
+		var complexity = $("#complexity").val();
+		var reusability = $("#reusability").val();
+		var docu = $("#docu").val(); // documentation match to lifecycle needs
+		var resl = $("#resl").val(); // Architecture / Risk Resolution
+		var team = $("#team").val(); // Team Cohesion
+		
+		// Personnel
+		var acap = $("#acap").val(); // Analyst Capablility
+		var pcap = $("#pcap").val(); // Programmer Capability
+		var pcon = $("#pcon").val(); // Personnel Continuity
+		var apex = $("#apex").val(); // Application Experience
+		var pexp = $("#pexp").val(); // Platform Experience
+		var ltex = $("#ltex").val(); // Language and Toolset Experience
+		var pmat = $("#pmat").val(); // Process Maturity
+		
+		
+		// Platform
+		var time = $("#time").val(); // Time Constraint
+		var stor = $("#stor").val(); // Storage Constraint
+		var pvol = $("#pvol").val(); // Platform Volatility
+		
+		// Project		
+		var tool = $("#tool").val(); // Use of Software Tools
+		var site = $("#site").val(); // Multisite Development
+		var sced = $("#sced").val(); // Required Development Schedule
+	
+	
+		// 各項權重
+	
+		// Scale Factors
+		var Precedentedness = [4.05, 3.24, 2.43, 1.62, 0.81, 0.00];
+		var DevelopmentFlexibilit = [6.07, 4.86, 3.64, 2.43, 1.21, 0.00];
+		var ArchitectureRiskResolution = [4.22, 3.38, 2.53, 1.69, 0.84, 0.00];
+		var TeamCohesion =  [4.94, 3.95, 2.97, 1.98, 0.99, 0.00];
+		var ProcessMaturity = [4.54, 3.64, 2.73, 1.82, 0.91, 0.00];
+		
+		// Cost Drivers
+		var RELY = [0.75, 0.88, 1.00, 1.15, 1.39, 0.0];
+		var DATA = [0.0, 0.93, 1.00, 1.09, 1.19, 0.0];
+		var CPLX = [0.75, 0.88, 1.00, 1.15, 1.30, 1.66];
+		var RUSE = [0.0, 0.91, 1.00, 1.14, 1.29, 1.49];
+		var DOCU = [0.89, 0.95, 1.00, 1.06, 1.13, 0];
+		var TIME = [0, 0, 1.00, 1.11, 1.31, 1.67];
+		var STOR = [0, 0, 1.00, 1.11, 1.06, 1.57];
+		var PVOL = [0, 0.87, 1.00, 1.15, 1.30, 0];
+		var ACAP = [1.50, 1.22, 1.00, 0.83, 0.67, 0];
+		var PCAP = [1.37, 1.16, 1.00, 0.87, 0.74, 0];
+		var PCON = [1.24, 1.10, 1.00, 0.92, 0.84, 0];
+		var AEXP = [1.22, 1.10, 1.00, 0.89, 0.81, 0];
+		var PEXP = [1.25, 1.12, 1.00, 0.88, 0.81, 0];
+		var LTEX = [1.22, 1.10, 1.00, 0.91, 0.84, 0];
+		var TOOL = [1.24, 1.12, 1.00, 0.86, 0.72, 0];
+		var SITE = [1.25, 1.10, 1.00, 0.92, 0.84, 0.78];
+		var SCED = [1.29, 1.10, 1.00, 1.00, 1.00, 0];
+		
+		//alert(Precedentedness[conver($("#precedentedness").val())]);
+		
+		(function cal_COCOMOII()
 		{
 			//目前寫入的值是測試用的資料,之後請對應實際的按鈕或輸入框取得的數值!!!!
 			
 			//UFP and Language-----------------------------未調整功能點值 與 選擇的程式語言類型所對應的SLOC
-			var UFP;
+			var UFP = $("#UFP").val();
 			var source__line_of_code_languageType = 128;   // C: 128 ,c++:29
 			// Software Scale Drivers--------------------為權重值
-			var pecedentednes;
-			var architecture_risk_Resolution;
-			var development_Flexibility;
-			var team_Cohesion;
-			var process_Maturity;
+			var pecedentednes = Precedentedness[conver(precedentedness)] ;
+			var architecture_risk_Resolution = ArchitectureRiskResolution[conver(architecture)];
+			var development_Flexibility = DevelopmentFlexibilit[conver(flexibility)];
+			var team_Cohesion = TeamCohesion[conver(cohesion)];
+			var process_Maturity = ProcessMaturity[conver(maturity)];
 			
 			//Software Cost Drivers --------------------------------------為權重值
 			//Product======================
-			var required_Software_Reliability; 
-			var data_Base_Size;
-			var product_Complexity;
-			var developed_for_Reusability;
-			var documentation_Match_to_Lifecycle_Needs;
+			var required_Software_Reliability = RELY[conver(reliability)];
+			var data_Base_Size = DATA[conver(database)];
+			var product_Complexity = CPLX[conver(complexity)];
+			var developed_for_Reusability = RUSE[conver(reusability)];
+			var documentation_Match_to_Lifecycle_Needs = DOCU[conver(docu)];
 			
 			//Personnel======================
-			var analyst_Capability;
-			var programmer_Capability;	
-			var personnel_Continuity;	
-			var application_Experience;	
-			var platform_Experience;
-			var language_and_Toolset_Experience;
+			var analyst_Capability = ACAP[conver(acap)];
+			var programmer_Capability = PCAP[conver(pcap)];
+			var personnel_Continuity = PCON[conver(pcon)];
+			var application_Experience = AEXP[conver(apex)];
+			var platform_Experience = PEXP[conver(pexp)];
+			var language_and_Toolset_Experience = LTEX[conver(ltex)];
 			
 			//Platform======================
-			var time_Constraint;
-			var storage_Constraint;	
-			var platform_Volatility;	
+			var time_Constraint = TIME[conver(time)];
+			var storage_Constraint = STOR[conver(stor)];
+			var platform_Volatility = PVOL[conver(pvol)];
 			
 			//Project======================
-			var use_of_Software_Tools;	
-			var multisite_Development;
-			var required_Development_Schedule;
+			var use_of_Software_Tools = TOOL[conver(tool)];	
+			var multisite_Development = SITE[conver(site)];
+			var required_Development_Schedule = SCED[conver(sced)];
 			//-------------------------------------------------------------
 			
 			//Software Labor Rates--------------
@@ -308,13 +400,24 @@
 			//----------------------------------------------------------------
 			//1.計算B
 			var B = 1.01 + 0.01 *(pecedentednes + architecture_risk_Resolution + development_Flexibility +team_Cohesion + process_Maturity);
+			
+			alert("the B is " + B);
+			
 			//2.計算透過為調整功能點所轉換的程式語言行數 
 			var size = UFP * source__line_of_code_languageType; 
+			
+			alert('the size is ' + size);
+			
 			//3.計算人月
 			var effort_PM = 2.94 + Math.pow(UFP,B) +  (required_Software_Reliability * data_Base_Size * product_Complexity * developed_for_Reusability * documentation_Match_to_Lifecycle_Needs * analyst_Capability * programmer_Capability * personnel_Continuity * application_Experience * platform_Experience * language_and_Toolset_Experience  * time_Constraint * storage_Constraint * platform_Volatility * use_of_Software_Tools * multisite_Development * required_Development_Schedule)
+			
+			alert('the effort_PM is ' + effort_PM);
+			
 			//4.計算花費		
 			var cost = effort_PM * cost_per_Person_Month;
-		}
+			
+			alert('the cost is ' + cost);
+		})();
 	}); 
 
 	  	
@@ -565,7 +668,7 @@ border=" 1"="" cellpadding="1" cellspacing="0"><tbody><tr><td style="width: 101p
 
   <tbody><tr><td align="right">Unadjusted Function Points</td>
 
-  <td> <input type="text" name="function_points" size="8" maxlength="8" value="">  </td>
+  <td> <input id="UFP" type="text" name="function_points" size="8" maxlength="8" value="10">  </td>
 
   <td align="right">Language</td>
 
@@ -584,7 +687,7 @@ border=" 1"="" cellpadding="1" cellspacing="0"><tbody><tr><td style="width: 101p
 
 <div class="divider10"></div>
 
-<h3> Software Scale Drivers  </h3>
+<h3>&nbsp;</h3>
 
 
 <div style="padding:20px;border-radius: 10px;-moz-border-radius: 10px;-webkit-border-radius: 10px;border-color:transparent;background-color:#D3E4E5;">
@@ -592,11 +695,18 @@ border=" 1"="" cellpadding="1" cellspacing="0"><tbody><tr><td style="width: 101p
 
 <td>
 
-  <table border="0"><tbody><tr>
+  <table border="0"><tbody>
+
+<tr>
+
+  <td>
+  <h4>Software Scale Drivers</h4></td>
+  </tr>
+<tr>
 
   <td align="left">Precedentedness</td>
 
-  <td><select name="prec">
+  <td><select id="precedentedness" name="prec">
 
   <option value="Very_Low">Very Low</option><option value="Low">Low</option><option value="Nominal" selected="">Nominal</option><option value="High">High</option><option value="Very_High">Very High</option><option value="Extra_High">Extra High</option></select></td>
 
@@ -604,22 +714,44 @@ border=" 1"="" cellpadding="1" cellspacing="0"><tbody><tr><td style="width: 101p
 
   <td align="left">Development Flexibility</td>
 
-  <td><select name="flex">
+  <td><select id="flexibility" name="flex">
 
   <option value="Very_Low">Very Low</option><option value="Low">Low</option><option value="Nominal" selected="">Nominal</option><option value="High">High</option><option value="Very_High">Very High</option><option value="Extra_High">Extra High</option></select></td>
 
   </tr>
-
+  
+  
 <tr>
 
-  <td><br>
-  <b>Software Cost Drivers</b></td>
+    <td align="left">Architecture / Risk Resolution</td>
+
+  <td><select id="architecture" name="resl">
+
+  <option value="Very_Low">Very Low</option><option value="Low">Low</option><option value="Nominal" selected="">Nominal</option><option value="High">High</option><option value="Very_High">Very High</option><option value="Extra_High">Extra High</option></select></td>  </tr>
+  
+    
+  
+  <tr>
+<tr><td align="left">Team Cohesion</td>
+
+   <td><select id="cohesion" name="team">
+
+  <option value="Very_Low">Very Low</option><option value="Low">Low</option><option value="Nominal" selected="">Nominal</option><option value="High">High</option><option value="Very_High">Very High</option><option value="Extra_High">Extra High</option></select></td>
 
   </tr>
+  
+<tr>
 
-  <tr>
+    <td align="left">Process Maturity</td>
 
-  <td><b>Product</b></td>
+   <td><select id="maturity" name="pmat">
+
+  <option value="Very_Low">Very Low</option><option value="Low">Low</option><option value="Nominal" selected="">Nominal</option><option value="High">High</option><option value="Very_High">Very High</option><option value="Extra_High">Extra High</option></select></td>  </tr>  
+
+
+
+  <td><h4>Software Cost Drivers</h4>
+  				<h4>Product</h4></td>
 
   </tr>
 
@@ -629,7 +761,7 @@ border=" 1"="" cellpadding="1" cellspacing="0"><tbody><tr><td style="width: 101p
 
 <td>
 
-<select name="rely">
+<select id="reliability" name="rely">
 
   <option value="Very_Low">Very Low</option><option value="Low">Low</option><option value="Nominal" selected="">Nominal</option><option value="High">High</option><option value="Very_High">Very High</option></select>
 
@@ -643,7 +775,7 @@ border=" 1"="" cellpadding="1" cellspacing="0"><tbody><tr><td style="width: 101p
 
 <td>
 
-<select name="data">
+<select id="database" name="data">
 
   <option value="Low">Low</option><option value="Nominal" selected="">Nominal</option><option value="High">High</option><option value="Very_High">Very High</option></select>
 
@@ -657,7 +789,7 @@ border=" 1"="" cellpadding="1" cellspacing="0"><tbody><tr><td style="width: 101p
 
 <td>
 
-<select name="cplx">
+<select id="complexity" name="cplx">
 
   <option value="Very_Low">Very Low</option><option value="Low">Low</option><option value="Nominal" selected="">Nominal</option><option value="High">High</option><option value="Very_High">Very High</option><option value="Extra_High">Extra High</option></select>
 
@@ -671,7 +803,7 @@ border=" 1"="" cellpadding="1" cellspacing="0"><tbody><tr><td style="width: 101p
 
 <td>
 
-<select name="ruse">
+<select id="reusability" name="ruse">
 
   <option value="Low">Low</option><option value="Nominal" selected="">Nominal</option><option value="High">High</option><option value="Very_High">Very High</option><option value="Extra_High">Extra High</option></select>
 
@@ -683,7 +815,7 @@ border=" 1"="" cellpadding="1" cellspacing="0"><tbody><tr><td style="width: 101p
 
 <td>
 
-<select name="docu">
+<select id="docu" name="docu">
 
   <option value="Very_Low">Very Low</option><option value="Low">Low</option><option value="Nominal" selected="">Nominal</option><option value="High">High</option><option value="Very_High">Very High</option></select>
 
@@ -693,273 +825,136 @@ border=" 1"="" cellpadding="1" cellspacing="0"><tbody><tr><td style="width: 101p
 
 <tr>
 
-  <td>&nbsp;</td>
-
-  </tr>
-
-  <tr>
-
-  <td>&nbsp;</td>
-
-  </tr>
-
-
-
-     </tbody></table>
-
-</td>
-
-<td>
-
-  <table border="0"><tbody><tr>
-
     <td align="left">Architecture / Risk Resolution</td>
 
-  <td><select name="resl">
+  <td><select id="resl" name="resl">
 
   <option value="Very_Low">Very Low</option><option value="Low">Low</option><option value="Nominal" selected="">Nominal</option><option value="High">High</option><option value="Very_High">Very High</option><option value="Extra_High">Extra High</option></select></td>  </tr>
 
     <tr><td align="left">Team Cohesion</td>
 
-   <td><select name="team">
+   <td><select id="team" name="team">
 
   <option value="Very_Low">Very Low</option><option value="Low">Low</option><option value="Nominal" selected="">Nominal</option><option value="High">High</option><option value="Very_High">Very High</option><option value="Extra_High">Extra High</option></select></td>
 
   </tr>
 
-<tr>
 
-  <td><b>&nbsp;</b></td>
-
-  </tr>
-
-<tr>
-
-</tr><tr>
-
-  <td><br><b>Personnel</b></td>
-
-  </tr>
-
-<tr>
-
-<td align="left">Analyst Capability</td>
-
-<td>
-
-<select name="acap">
-
-  <option value="Very_Low">Very Low</option><option value="Low">Low</option><option value="Nominal" selected="">Nominal</option><option value="High">High</option><option value="Very_High">Very High</option></select>
-
-</td>
-
-</tr>
-
-<tr>
-
-<td align="left">Programmer Capability</td>
-
-<td>
-
-<select name="pcap">
-
-  <option value="Very_Low">Very Low</option><option value="Low">Low</option><option value="Nominal" selected="">Nominal</option><option value="High">High</option><option value="Very_High">Very High</option></select>
-
-</td>
-
-</tr>
-
-<tr>
-
-<td align="left">Personnel Continuity</td>
-
-<td>
-
-<select name="pcon">
-
-  <option value="Very_Low">Very Low</option><option value="Low">Low</option><option value="Nominal" selected="">Nominal</option><option value="High">High</option><option value="Very_High">Very High</option></select>
-
-</td>
-
-</tr>
-
-<tr>
-
-<td align="left">Application Experience</td>
-
-<td>
-
-<select name="apex">
-
-  <option value="Very_Low">Very Low</option><option value="Low">Low</option><option value="Nominal" selected="">Nominal</option><option value="High">High</option><option value="Very_High">Very High</option></select>
-
-</td>
-
-</tr>
-
-<tr>
-
-<td align="left">Platform Experience</td>
-
-<td>
-
-<select name="pexp">
-
-  <option value="Very_Low">Very Low</option><option value="Low">Low</option><option value="Nominal" selected="">Nominal</option><option value="High">High</option><option value="Very_High">Very High</option></select>
-
-</td>
-
-</tr>
-
-<tr>
-
-<td align="left">Language and Toolset Experience</td>
-
-<td>
-
-<select name="ltex">
-
-  <option value="Very_Low">Very Low</option><option value="Low">Low</option><option value="Nominal" selected="">Nominal</option><option value="High">High</option><option value="Very_High">Very High</option></select>
-
-</td>
-
-</tr>
-
-  <tr>
-
-    <td>&nbsp;</td>
-
-  </tr>
-
-
-
-    </tbody></table>
+    </table>
 
 </td>
 
 <td>
-
-  <table border="0"><tbody><tr>
-
-    <td align="left">Process Maturity</td>
-
-   <td><select name="pmat">
-
-  <option value="Very_Low">Very Low</option><option value="Low">Low</option><option value="Nominal" selected="">Nominal</option><option value="High">High</option><option value="Very_High">Very High</option><option value="Extra_High">Extra High</option></select></td>  </tr>
-
-  <tr>
-
-    <td>&nbsp;</td>
-
-  </tr>
-
-  <tr>
-
-  </tr><tr>
-
-  <td><b>&nbsp;</b></td>
-
-  </tr>
-
-<tr>
-
-</tr><tr>
-
-    <td><br><b>Platform</b></td>
-
-  </tr>
-
-<tr>
-
-<td align="left">Time Constraint</td>
-
-<td>
-
-<select name="time">
-
-  <option value="Nominal" selected="">Nominal</option><option value="High">High</option><option value="Very_High">Very High</option><option value="Extra_High">Extra High</option></select>
-
+		
+		<table border="0"><tbody>
+				
+				
+		<tr>
+				
+		</tr><tr>
+				
+				<td><br><h4>Personnel</h4></td>
+				
+				</tr>
+				
+		<tr>
+				
+		<td align="left">Analyst Capability</td>
+				
+		<td>
+				
+		<select id="acap" name="acap">
+				
+				<option value="Very_Low">Very Low</option><option value="Low">Low</option><option value="Nominal" selected="">Nominal</option><option value="High">High</option><option value="Very_High">Very High</option></select>
+				
+		</td>
+				
+		</tr>
+				
+		<tr>
+				
+		<td align="left">Programmer Capability</td>
+				
+		<td>
+				
+		<select id="pcap" name="pcap">
+				
+				<option value="Very_Low">Very Low</option><option value="Low">Low</option><option value="Nominal" selected="">Nominal</option><option value="High">High</option><option value="Very_High">Very High</option></select>
+				
+		</td>
+				
+		</tr>
+				
+		<tr>
+				
+		<td align="left">Personnel Continuity</td>
+				
+		<td>
+				
+		<select id="pcon" name="pcon">
+				
+				<option value="Very_Low">Very Low</option><option value="Low">Low</option><option value="Nominal" selected="">Nominal</option><option value="High">High</option><option value="Very_High">Very High</option></select>
+				
+		</td>
+				
+		</tr>
+				
+		<tr>
+				
+		<td align="left">Application Experience</td>
+				
+		<td>
+				
+		<select id="apex" name="apex">
+				
+				<option value="Very_Low">Very Low</option><option value="Low">Low</option><option value="Nominal" selected="">Nominal</option><option value="High">High</option><option value="Very_High">Very High</option></select>
+				
+		</td>
+				
+		</tr>
+				
+		<tr>
+				
+		<td align="left">Platform Experience</td>
+				
+		<td>
+				
+		<select id="pexp" name="pexp">
+				
+				<option value="Very_Low">Very Low</option><option value="Low">Low</option><option value="Nominal" selected="">Nominal</option><option value="High">High</option><option value="Very_High">Very High</option></select>
+				
+		</td>
+				
+		</tr>
+				
+		<tr>
+				
+		<td align="left">Language and Toolset Experience</td>
+				
+		<td>
+				
+		<select id="ltex" name="ltex">
+				
+				<option value="Very_Low">Very Low</option><option value="Low">Low</option><option value="Nominal" selected="">Nominal</option><option value="High">High</option><option value="Very_High">Very High</option></select>
+				
+		</td>
+				
+		</tr>
+		<tr>
+				
+				<td align="left">Process Maturity</td>
+				
+				<td><select id="pmat" name="pmat">
+						
+						<option value="Very_Low">Very Low</option><option value="Low">Low</option><option value="Nominal" selected="">Nominal</option><option value="High">High</option><option value="Very_High">Very High</option><option value="Extra_High">Extra High</option></select></td>  </tr>
+				
+				
+				
+				</tbody></table>
+		
 </td>
 
 </tr>
-
-
-
-<tr>
-
-<td align="left">Storage Constraint</td>
-
-<td>
-
-<select name="stor">
-
-  <option value="Nominal" selected="">Nominal</option><option value="High">High</option><option value="Very_High">Very High</option><option value="Extra_High">Extra High</option></select>
-
-</td>
-
-</tr>
-
-
-
-<tr>
-
-<td align="left">Platform Volatility</td>
-
-<td>
-
-<select name="pvol">
-
-  <option value="Low">Low</option><option value="Nominal" selected="">Nominal</option><option value="High">High</option><option value="Very_High">Very High</option></select>
-
-</td>
-
-</tr>
-
-   <tr>
-
-    <td><br><b>Project</b></td>
-
-  </tr>
-
-<tr>
-
-<td align="left">Use of Software Tools</td>
-
-<td>
-
-<select name="tool">
-
-  <option value="Very_Low">Very Low</option><option value="Low">Low</option><option value="Nominal" selected="">Nominal</option><option value="High">High</option><option value="Very_High">Very High</option></select>
-
-</td>
-
-</tr>
-
-<tr>
-
-<td align="left">Multisite Development</td>
-
-<td>
-
-<select name="site">
-
-  <option value="Very_Low">Very Low</option><option value="Low">Low</option><option value="Nominal" selected="">Nominal</option><option value="High">High</option><option value="Very_High">Very High</option><option value="Extra_High">Extra High</option></select></td>
-
-</tr>
-
-<tr><td align="left">Required Development Schedule</td>
-
-<td>
-
-<select name="sced">
-
-  <option value="Very_Low">Very Low</option><option value="Low">Low</option><option value="Nominal" selected="">Nominal</option><option value="High">High</option><option value="Very_High">Very High</option></select></td>
-
-</tr>
-
-      </tbody></table>
-
-</td></tr>
 
 </tbody></table>
 </td>
@@ -968,129 +963,88 @@ border=" 1"="" cellpadding="1" cellspacing="0"><tbody><tr><td style="width: 101p
 <tr>
 <td>
 
-  <table border="0"><tbody><tr>
-
-    <td align="left">Process Maturity</td>
-
-   <td><select name="pmat">
-
-  <option value="Very_Low">Very Low</option><option value="Low">Low</option><option value="Nominal" selected="">Nominal</option><option value="High">High</option><option value="Very_High">Very High</option><option value="Extra_High">Extra High</option></select></td>  </tr>
-
-  <tr>
-
-    <td>&nbsp;</td>
-<td>&nbsp;</td>
-  </tr>
-
-  <tr>
-
-  </tr><tr>
-
-  <td><b>&nbsp;</b></td>
-<td><b>&nbsp;</b></td>
-  </tr>
-
-<tr>
-
-</tr><tr>
-
-    <td><br><b>Platform</b></td>
-<td><b>&nbsp;</b></td>
-  </tr>
-
-<tr>
-
-<td align="left">Time Constraint</td>
-
-<td>
-
-<select name="time">
-
-  <option value="Nominal" selected="">Nominal</option><option value="High">High</option><option value="Very_High">Very High</option><option value="Extra_High">Extra High</option></select>
-
-</td>
-
-</tr>
-
-
-
-<tr>
-
-<td align="left">Storage Constraint</td>
-
-<td>
-
-<select name="stor">
-
-  <option value="Nominal" selected="">Nominal</option><option value="High">High</option><option value="Very_High">Very High</option><option value="Extra_High">Extra High</option></select>
-
-</td>
-
-</tr>
-
-
-
-<tr>
-
-<td align="left">Platform Volatility</td>
-
-<td>
-
-<select name="pvol">
-
-  <option value="Low">Low</option><option value="Nominal" selected="">Nominal</option><option value="High">High</option><option value="Very_High">Very High</option></select>
-
-</td>
-
-</tr>
-
-   <tr>
-
-    <td><br><b>Project</b></td>
-	<td><b>&nbsp;</b></td>
-  </tr>
-
-<tr>
-
-<td align="left">Use of Software Tools</td>
-
-<td>
-
-<select name="tool">
-
-  <option value="Very_Low">Very Low</option><option value="Low">Low</option><option value="Nominal" selected="">Nominal</option><option value="High">High</option><option value="Very_High">Very High</option></select>
-
-</td>
-
-</tr>
-
-<tr>
-
-<td align="left">Multisite Development</td>
-
-<td>
-
-<select name="site">
-
-  <option value="Very_Low">Very Low</option><option value="Low">Low</option><option value="Nominal" selected="">Nominal</option><option value="High">High</option><option value="Very_High">Very High</option><option value="Extra_High">Extra High</option></select></td>
-
-</tr>
-
-<tr><td align="left">Required Development Schedule</td>
-
-<td>
-
-<select name="sced">
-
-  <option value="Very_Low">Very Low</option><option value="Low">Low</option><option value="Nominal" selected="">Nominal</option><option value="High">High</option><option value="Very_High">Very High</option></select></td>
-
-</tr>
-
-      </tbody></table>
-
+  
 </td>
 </tr>
-</tbody></table></div><br />
+</tbody></table>
+<table border="0">
+		<tbody>
+				<tr valign="top">
+						<td><table border="0">
+								<tbody>
+										<tr></tr>
+										<tr>
+												<td><br />
+														<h4>Platform</h4></td>
+										</tr>
+										<tr>
+												<td align="left">Time Constraint</td>
+												<td><select id="time" name="time">
+														<option value="Nominal" selected="selected">Nominal</option>
+														<option value="High">High</option>
+														<option value="Very_High">Very High</option>
+														<option value="Extra_High">Extra High</option>
+												</select></td>
+										</tr>
+										<tr>
+												<td align="left">Storage Constraint</td>
+												<td><select id="stor" name="stor">
+														<option value="Nominal" selected="selected">Nominal</option>
+														<option value="High">High</option>
+														<option value="Very_High">Very High</option>
+														<option value="Extra_High">Extra High</option>
+												</select></td>
+										</tr>
+										<tr>
+												<td align="left">Platform Volatility</td>
+												<td><select id="pvol" name="pvol">
+														<option value="Low">Low</option>
+														<option value="Nominal" selected="selected">Nominal</option>
+														<option value="High">High</option>
+														<option value="Very_High">Very High</option>
+												</select></td>
+										</tr>
+										<tr>
+												<td><br />
+														<h4>Project</h4></td>
+										</tr>
+										<tr>
+												<td align="left">Use of Software Tools</td>
+												<td><select id="tool" name="tool">
+														<option value="Very_Low">Very Low</option>
+														<option value="Low">Low</option>
+														<option value="Nominal" selected="selected">Nominal</option>
+														<option value="High">High</option>
+														<option value="Very_High">Very High</option>
+												</select></td>
+										</tr>
+										<tr>
+												<td align="left">Multisite Development</td>
+												<td><select id="site" name="site">
+														<option value="Very_Low">Very Low</option>
+														<option value="Low">Low</option>
+														<option value="Nominal" selected="selected">Nominal</option>
+														<option value="High">High</option>
+														<option value="Very_High">Very High</option>
+														<option value="Extra_High">Extra High</option>
+												</select></td>
+										</tr>
+										<tr>
+												<td align="left">Required Development Schedule</td>
+												<td><select id="sced" name="sced">
+														<option value="Very_Low">Very Low</option>
+														<option value="Low">Low</option>
+														<option value="Nominal" selected="selected">Nominal</option>
+														<option value="High">High</option>
+														<option value="Very_High">Very High</option>
+												</select></td>
+										</tr>
+								</tbody>
+						</table></td>
+				</tr>
+		</tbody>
+</table>
+</div><br />
 
 <div class="divider10"></div>
 
