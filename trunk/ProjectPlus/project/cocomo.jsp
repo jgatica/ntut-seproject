@@ -284,6 +284,7 @@
 	$(document).ready(function(){
 		
 		$("table").attr('style','border:none;');
+		$( "#dialog" ).dialog( {autoOpen: false, minWidth: 350, minHeight: 150, modal: true} );
 		
 		// 取得該取得的資料直
 		// Soft Cost Drivers
@@ -353,7 +354,7 @@
 		
 		//alert(Precedentedness[conver($("#precedentedness").val())]);
 		
-		(function cal_COCOMOII()
+		function cal_COCOMOII()
 		{
 			//目前寫入的值是測試用的資料,之後請對應實際的按鈕或輸入框取得的數值!!!!
 			
@@ -395,28 +396,34 @@
 			//-------------------------------------------------------------
 			
 			//Software Labor Rates--------------
-			var cost_per_Person_Month = 10;
+			var cost_per_Person_Month = +$("#PM").val();
 			//----------------------------------------------------------------
 			//1.計算B
 			var B = 1.01 + 0.01 *(pecedentednes + architecture_risk_Resolution + development_Flexibility +team_Cohesion + process_Maturity);
-			
-			alert("the B is " + B);
+			$("#result_B").val(B);
 			
 			//2.計算透過為調整功能點所轉換的程式語言行數 
 			var size = UFP * source__line_of_code_languageType; 
-			
-			alert('the size is ' + size);
+			$("#result_size").val(size);
 			
 			//3.計算人月
 			var effort_PM = 2.94 + Math.pow(UFP,B) +  (required_Software_Reliability * data_Base_Size * product_Complexity * developed_for_Reusability * documentation_Match_to_Lifecycle_Needs * analyst_Capability * programmer_Capability * personnel_Continuity * application_Experience * platform_Experience * language_and_Toolset_Experience  * time_Constraint * storage_Constraint * platform_Volatility * use_of_Software_Tools * multisite_Development * required_Development_Schedule)
-			
-			alert('the effort_PM is ' + effort_PM);
+			$("#result_effort").val(effort_PM);
 			
 			//4.計算花費		
 			var cost = effort_PM * cost_per_Person_Month;
-			
-			alert('the cost is ' + cost);
-		})();
+			$("#result_cose").val(cost);
+		}
+		
+		// 計算按鈕
+		$("#caculate").click(function(){
+			cal_COCOMOII();
+			$("#dialog").dialog('open');
+		});
+		
+		$('#cancel').click(function(){
+			$("#dialog").dialog('close');		
+		});		
 	}); 
 
 	  	
@@ -648,7 +655,7 @@
 				
 				<div style="padding:20px;">
 				
-<form name="f1" method="post">
+
 <h3>Software Size - Sizing Method 
 		<select name="size_type" onchange="f1.submit()">
 				
@@ -1049,13 +1056,50 @@ border=" 1"="" cellpadding="1" cellspacing="0"><tbody><tr><td style="width: 101p
 
 <div style="padding:20px;border:#000000; border-radius: 10px;-moz-border-radius: 10px;-webkit-border-radius: 10px; border-color:transparent;background-color:#D3E4E5;">
 	<h3>Software Labor Rates</h3><br>
-	Cost per Person-Month (Dollars)  <input type="text" name="software_labor_cost_per_PM" size="8" maxlength="8" align="right" value=""> <button>進行估算</button>
+	Cost per Person-Month (Dollars)  <input id="PM" type="text" name="software_labor_cost_per_PM" size="8" maxlength="8" align="right" value=""> <button id="caculate" >進行估算</button>
 </div>
 
-</form>
 				
 </div>				
-				
+			
+			
+			
+				<div id="dialog" title="估算結果">
+					<p>你所<team>估算</team>的結果</p>
+						<table summary="站內信箱" width="100%">
+
+							<thead>
+							<tr>
+								<th scope="col">項目</th>
+								<th scope="col">結果</th>
+							</tr>
+							</thead>
+							<tbody>
+                            	<tr class="odd">
+									<td>B</td>
+									<td><input id="result_B" type="text" disabled="disabled"/></td>									
+								</tr>
+                                <tr>									
+									<td>大小</td>
+									<td><input id="result_size" type="text" disabled="disabled"/></td>									
+								</tr>	
+                                <tr class="odd">									
+									<td>人月</td>
+									<td><input id="result_effort" type="text" disabled="disabled"/></td>									
+								</tr>		
+								<tr>
+									<td>花費</td>
+									<td><input id="result_cose" type="text" disabled="disabled"/></td>									
+								</tr>																																						
+							</tbody>
+						</table>			
+
+								
+					<div class="divider"></div>
+					<div style="text-align:right;">
+						<button id="cancel">關閉</button>
+					</div>
+				</div>						
 				
 				<!-- InstanceEndEditable -->
 				<div class="subBottomDiv" ></div>
