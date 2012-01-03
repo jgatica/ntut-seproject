@@ -656,15 +656,8 @@
 				<div style="padding:20px;">
 				
 
-<h3>Software Size - Sizing Method 
-		<select name="size_type" onchange="f1.submit()">
-				
-				<!--option value="SLOC" selected="">Source Lines of Code</option-->
-				
-				<option value="Function Points">Function Points</option>
-				
-		</select>
-
+<h3>Cocomo II - 
+		
 <br>
 </h3>
 <div style="padding:20px;border-radius: 10px;-moz-border-radius: 10px;-webkit-border-radius: 10px;border-color:transparent;background-color:#D3E4E5;">
