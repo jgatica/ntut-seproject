@@ -385,11 +385,30 @@ public class ProjectAction extends Action {
 				WbsScheme scheme = WbsSchemeCreator.createWbsScheme("",
 						projectName, "");
 				schemes.add(scheme);
+				long total_days=0;
 				for (int i = 0; i < dataSortList.size(); i++) {
+					SimpleDateFormat format = new java.text.SimpleDateFormat(
+							"yyyy-MM-dd");
+					Date beginDate = null;
+					try {
+						beginDate = format.parse(dataSortList.get(i).startDate);
+					} catch (ParseException e) {
+						// TODO Auto-generated catch block
+						e.printStackTrace();
+					}
+					Date endDate = null;
+					try {
+						endDate = format.parse(dataSortList.get(i).endDate);
+					} catch (ParseException e) {
+						e.printStackTrace();
+					}
+					long day = (endDate.getTime() - beginDate.getTime())
+							/ (24 * 60 * 60 * 1000);
+					total_days+=day;
 					if (dataSortList.get(i).getLayer().length() == 5) {
 						// System.out.println(dataSortList.get(i).getName());
 						scheme = WbsSchemeCreator.createWbsScheme(parent,
-								dataSortList.get(i).name, dataSortList.get(i).description);
+								dataSortList.get(i).name, Long.toString(day)+ " 天");
 						//System.out.println(dataSortList.get(i).description);
 					} else {
 						String node = dataSortList.get(i).getLayer().substring(0,dataSortList.get(i).getLayer().length() - 1);
@@ -403,7 +422,7 @@ public class ProjectAction extends Action {
 								 */
 								parent = dataSortList.get(j).name;
 								scheme = WbsSchemeCreator.createWbsScheme(
-										parent, dataSortList.get(i).name, dataSortList.get(i).description);
+										parent, dataSortList.get(i).name, Long.toString(day)+ " 天");
 								//System.out.println(dataSortList.get(i).description);
 								break;
 							}
@@ -412,6 +431,7 @@ public class ProjectAction extends Action {
 					schemes.add(scheme);
 				}
 				// System.out.println(dataSortList.toString());
+				schemes.get(0).descript=Long.toString(total_days)+ " 天";
 				JSONWriter.sendJSONResponse(response, schemes);
 			} catch (IOException e) {
 				e.printStackTrace();
