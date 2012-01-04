@@ -28,6 +28,7 @@ public class MemberAction extends Action {
 	public static final int QYMEMBERBYCMP = 4;
 	public static final int ADDTEAMMEMBER = 5;
 	public static final int DELTEAMMEMBER = 6;
+	public static final int UPDINFO = 7;
 
 	public ActionForward execute(ActionMapping mapping, ActionForm actionForm,
 			HttpServletRequest request, HttpServletResponse response) {
@@ -61,10 +62,27 @@ public class MemberAction extends Action {
 			// 刪成團隊成員
 		case DELTEAMMEMBER:
 			return delTeamMember(mapping, form, request, response, session);
+		case UPDINFO:
+			return updateMemberInfo(mapping, form, request, response, session);
 		default:
 			break;
 		}
 
+		return null;
+	}
+
+	private ActionForward updateMemberInfo(ActionMapping mapping, MemberActionForm form,
+			HttpServletRequest request, HttpServletResponse response, HttpSession session) {
+		
+		String email = form.getMember_email();
+		String phone = form.getMember_phone();
+		String mobile = form.getMember_mobile();
+		String address = form.getMember_address();
+		
+		
+		
+		
+		
 		return null;
 	}
 
