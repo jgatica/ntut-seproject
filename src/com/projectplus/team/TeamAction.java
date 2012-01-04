@@ -74,7 +74,7 @@ public class TeamAction extends Action {
 
 		try {
 			if (resultSet != null) {
-				System.out.println("0");
+				//System.out.println("0");
 				while (resultSet.next()) {
 					MemberDataStructure member = new MemberDataStructure();
 					member.setId(resultSet.getString("m_id"));
