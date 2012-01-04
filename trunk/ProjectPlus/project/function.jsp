@@ -573,19 +573,20 @@
 					</a>
                     </div>     
 					
-					 <div class="frontpage_box col_allw170  hoverdiv">
+					
+                  <div class="frontpage_box col_allw170  hoverdiv">
 				  <a href="/project/gantt.jsp?id=<%= request.getParameter("id")%>&tid=<%= request.getParameter("tid")%>">
                       <img src="/images/profile_task.png" alt="Image" width="24" height="24">
                     <h2>甘特圖</h2>
 					</a>
                   </div>    
-                 <div class="frontpage_box col_allw170  hoverdiv">
+                   <div class="frontpage_box col_allw170  hoverdiv">
 				  <a href="/project/function.jsp?id=<%= request.getParameter("id")%>&tid=<%= request.getParameter("tid")%>">
                       <img src="/images/profile_task.png" alt="Image" width="24" height="24">
                     <h2>Function Point</h2>
 					</a>
-                  </div>    
-                   <div class="frontpage_box col_allw170  hoverdiv">
+                  </div>   
+                  <div class="frontpage_box col_allw170  hoverdiv">
 				  <a href="/project/cocomo.jsp?id=<%= request.getParameter("id")%>&tid=<%= request.getParameter("tid")%>">
                       <img src="/images/profile_task.png" alt="Image" width="24" height="24">
                     <h2>COCOMO</h2>
@@ -782,7 +783,7 @@
 				<div class="subBottomDiv" ></div>
                 </div>
                 
-				<div class="col_p20 lp_box float_r">
+				<div id="switch" class="col_p20 lp_box float_r">
 					<div class="subTopDiv" >
 						<h2 class="uiHeaderTitle">贊助</h2>
 					</div>	
