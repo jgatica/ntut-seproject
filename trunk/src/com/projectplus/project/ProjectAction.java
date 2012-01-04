@@ -204,7 +204,7 @@ public class ProjectAction extends Action {
 
 		// 前端會丟projectId過來 以這個id去撈資料給前端
 		String projectId = form.getProjectId();
-		System.out.println("aa=" + projectId);
+		//System.out.println("aa=" + projectId);
 		if (projectId != null) {
 			ResultSet resultSet = TaskDBMgr.queryProjectTasks(projectId);
 

@@ -205,7 +205,7 @@ public class TaskAction extends Action {
 	private ActionForward queryTask(ActionMapping mapping, TaskActionForm form,
 			HttpServletRequest request, HttpServletResponse response,
 			HttpSession session) {
-		System.out.println(form.id);
+		//System.out.println(form.id);
 		ResultSet resultSet = TaskDBMgr.queryTask(form.id);
 		TaskDataStructure task = null;
 		
@@ -332,7 +332,7 @@ public class TaskAction extends Action {
 			HttpSession session) {
 		boolean isSuccess = false;
 		//名稱是否有重複
-		System.out.println(form.layer);
+		//System.out.println(form.layer);
 		boolean isChecked = TaskDBMgr.checkTaskName(form.getName(),
 				form.getProjectId());
 		Result result = new Result();
