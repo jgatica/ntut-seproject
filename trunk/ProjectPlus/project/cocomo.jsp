@@ -403,11 +403,11 @@
 			$("#result_B").val(B);
 			
 			//2.計算透過為調整功能點所轉換的程式語言行數 
-			var size = UFP * source__line_of_code_languageType; 
+			var size = UFP * source__line_of_code_languageType / 1000.0;; 
 			$("#result_size").val(size);
 			
 			//3.計算人月
-			var effort_PM = 2.94 + Math.pow(UFP,B) +  (required_Software_Reliability * data_Base_Size * product_Complexity * developed_for_Reusability * documentation_Match_to_Lifecycle_Needs * analyst_Capability * programmer_Capability * personnel_Continuity * application_Experience * platform_Experience * language_and_Toolset_Experience  * time_Constraint * storage_Constraint * platform_Volatility * use_of_Software_Tools * multisite_Development * required_Development_Schedule)
+			var effort_PM = 2.94 + Math.pow(size,B) +  (required_Software_Reliability * data_Base_Size * product_Complexity * developed_for_Reusability * documentation_Match_to_Lifecycle_Needs * analyst_Capability * programmer_Capability * personnel_Continuity * application_Experience * platform_Experience * language_and_Toolset_Experience  * time_Constraint * storage_Constraint * platform_Volatility * use_of_Software_Tools * multisite_Development * required_Development_Schedule)
 			$("#result_effort").val(effort_PM);
 			
 			//4.計算花費		
