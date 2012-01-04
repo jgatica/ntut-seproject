@@ -151,20 +151,27 @@ public class TaskAction extends Action {
 			HttpServletResponse response, HttpSession session) {
 		MemberDataStructure data = (MemberDataStructure) session
 				.getAttribute(SessionContext.USERDATA);
-		ResultSet resultSet = TaskDBMgr.queryMemberTasks(data.member_email);
+		ResultSet resultSet = TaskDBMgr.queryMemberTasks(data.id);
 
 		List<TaskDataStructure> dataList = new ArrayList<TaskDataStructure>();
 		try {
 			if (resultSet != null) {
 				while (resultSet.next()) {
+					ResultSet prs = ProjectDBMgr.queryProject(resultSet.getString("p_id"));
+					prs.next();
+					String p_name=prs.getString("p_name");
+					int stateIndex = Integer.parseInt(resultSet.getString("t_condition"));
+					String[] state = {"Preparing","Working","Finish"};
 					TaskDataStructure task = new TaskDataStructure();
-					task.setName(resultSet.getString(""));
-					task.setProjectId(resultSet.getString(""));
-					task.setMemberId(resultSet.getString(""));
-					task.setDescription(resultSet.getString(""));
-					task.setStartDate(resultSet.getString(""));
-					task.setEndDate(resultSet.getString(""));
-					task.setState(resultSet.getString(""));
+					task.setId(resultSet.getString("t_id"));
+					task.setName(resultSet.getString("t_name"));
+					task.setProjectId(resultSet.getString("p_id"));
+					task.setProjectName(p_name);
+					task.setMemberId(resultSet.getString("m_id"));
+					task.setDescription(resultSet.getString("t_target"));
+					task.setStartDate(resultSet.getString("t_startdate"));
+					task.setEndDate(resultSet.getString("t_enddate"));
+					task.setState(state[stateIndex]);
 					dataList.add(task);
 				}
 			} else // 假的(測試用) 如有真資料請將此部分刪除 直接return
@@ -198,16 +205,23 @@ public class TaskAction extends Action {
 	private ActionForward queryTask(ActionMapping mapping, TaskActionForm form,
 			HttpServletRequest request, HttpServletResponse response,
 			HttpSession session) {
+		System.out.println(form.id);
 		ResultSet resultSet = TaskDBMgr.queryTask(form.id);
 		TaskDataStructure task = null;
+		
 		try {
 			if (resultSet != null) {
 				while (resultSet.next()) {
+					ResultSet prs = ProjectDBMgr.queryProject(resultSet.getString("p_id"));
+					prs.next();
+					String p_name=prs.getString("p_name");
 					int stateIndex = Integer.parseInt(resultSet.getString("t_condition"));
 					String[] state = {"Preparing","Working","Finish"};
 					task = new TaskDataStructure();
+					task.setId(resultSet.getString("t_id"));
 					task.setName(resultSet.getString("t_name"));
 					task.setProjectId(resultSet.getString("p_id"));
+					task.setProjectName(p_name);
 					task.setMemberId(resultSet.getString("m_id"));
 					task.setDescription(resultSet.getString("t_target"));
 					task.setStartDate(resultSet.getString("t_startdate"));
