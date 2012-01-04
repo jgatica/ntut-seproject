@@ -480,6 +480,12 @@
                     <h2>專案估算系統</h2>
 					</a>
                   </div>    
+                   <div class="frontpage_box col_allw170  hoverdiv">
+				  <a href="/team/listProject.jsp?id=<%= request.getParameter("id")%>&tid=<%= request.getParameter("tid")%>">
+                      <img src="/images/profile_task.png" alt="Image" width="24" height="24">
+                    <h2>專案估算系統</h2>
+					</a>
+                  </div>   
 				                             
                 <div class="subBottomDiv" ></div>     
             	</div>      
