@@ -273,18 +273,19 @@
 					
 				for(index = 0; index < size; index++)
 				{
+					//console.log(data);
 					var content ="";
 					if(index%2==0)
 					{
 						content = '<tr class="odd">' + '<td>' + parseInt(index) + '</td>' +
-									 '<td><team>' + data[index].projectName + '</team>' + data[index].name + '</td>' +
-									 '<td><button id="'+data[index].projectId + '" class="dialog_btn">查看任務</button></td></tr>' ;
+									 '<td><team>' + data[index].projectName + '</team> 的' + data[index].name + '</td>' +
+									 '<td><button id="'+data[index].id + '" class="dialog_btn">查看任務</button></td></tr>' ;
 					}
 					else
 					{
 						content = '<tr>' + '<td>' + parseInt(index) + '</td>' +
-									 '<td><team>' + data[index].projectName + '</team>' + data[index].name + '</td>' +
-									 '<td><button id="'+data[index].projectId + '" class="dialog_btn">查看任務</button></td></tr>' ;
+									 '<td><team>' + data[index].projectName + '</team> 的' + data[index].name + '</td>' +
+									 '<td><button id="'+data[index].id + '" class="dialog_btn">查看任務</button></td></tr>' ;
 					}
 					
 					$("#taskArea").append(content);
@@ -292,12 +293,13 @@
 						var op = 4;
 						var id = $(this).attr("id");
 						$.getJSON('/TaskAction.do',  { op:op,id:id }, function(data) {
+							//console.log(data);
 							$("#taskName").text(data.name);
 							$("#taskProject").text(data.projectName);
 							$("#taskDescript").text(data.description);
 							$("#taskStartDate").text(data.startDate);
 							$("#taskEndDate").text(data.endDate);
-							$("#taskStatus").text(data.status);
+							$("#taskStatus").text(data.state);
 						});
 						//$( ".dialog_btn" ).button();
 						$(".task_dialog_btn").blur();
