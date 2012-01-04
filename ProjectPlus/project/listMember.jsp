@@ -695,9 +695,9 @@
 				
 				<div id="div-members">
 					<div class="divider"></div>
-					<!--<div class="col_allw170 perple_box">					
-						<img class="bigpic" src="/images/jquery-icon.gif"  width="50" height="50"/>
-						<h2><team id="teamNameArea1">jQuery研討社</team><button id="dialog_btn" disabled="disabled">新增成員</button></h2>
+					<div class="col_allw170 perple_box">					
+						<!--<img class="bigpic" src="/images/jquery-icon.gif"  width="50" height="50"/>-->
+						<!--<h2><team id="teamNameArea1">jQuery研討社</team><button id="dialog_btn" disabled="disabled">新增成員</button></h2>-->
                         				
 						<!--<div id="searchform">
 								<input type="text" AUTOCOMPLETE=OFF langtag="top-search" value="搜尋..." name="" id="project_managerId"/>
