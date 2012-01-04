@@ -404,7 +404,10 @@
 				$.getJSON('/TaskAction.do',  { op:0,name:taskName,description:taskDesc,startDate:taskStartDate,endDate:taskEndDate,projectId:projectId,memberId:memberId,layer:layer }, function(data) {
 					if(data!=null)
 					{
-						window.location = window.location;
+						if(data.isSuccess==true)
+							window.location = window.location;
+						else
+							alert(data.message);
 					}
 				});				
 		});	
