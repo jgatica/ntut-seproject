@@ -278,13 +278,13 @@
 					if(index%2==0)
 					{
 						content = '<tr class="odd">' + '<td>' + parseInt(index) + '</td>' +
-									 '<td><team>' + data[index].projectName + '</team> 的' + data[index].name + '</td>' +
+									 '<td><team>' + data[index].projectName + '</team> 的 <team>' + data[index].name + '</team></td>' +
 									 '<td><button id="'+data[index].id + '" class="dialog_btn">查看任務</button></td></tr>' ;
 					}
 					else
 					{
 						content = '<tr>' + '<td>' + parseInt(index) + '</td>' +
-									 '<td><team>' + data[index].projectName + '</team> 的' + data[index].name + '</td>' +
+									 '<td><team>' + data[index].projectName + '</team> 的 <team>' + data[index].name + '</team></td>' +
 									 '<td><button id="'+data[index].id + '" class="dialog_btn">查看任務</button></td></tr>' ;
 					}
 					
