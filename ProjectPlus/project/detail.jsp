@@ -485,7 +485,12 @@
 					</a>
                     </div>     
 					
-					
+					 <div class="frontpage_box col_allw170  hoverdiv">
+				  <a href="/project/gantt.jsp?projectId=<%= request.getParameter("id")%>&tid=<%= request.getParameter("tid")%>">
+                      <img src="/images/profile_task.png" alt="Image" width="24" height="24">
+                    <h2>甘特圖</h2>
+					</a>
+                  </div>    
                   <div class="frontpage_box col_allw170  hoverdiv">
 				  <a href="/project/function.jsp?id=<%= request.getParameter("id")%>&tid=<%= request.getParameter("tid")%>">
                       <img src="/images/profile_task.png" alt="Image" width="24" height="24">
