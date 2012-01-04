@@ -318,7 +318,7 @@
 			if(data!=null)
 			{
 				//alert();
-				//console.log(data); 
+				console.log(data); 
 				//$("#div-float-teams").html("");
 				/*$("#teamNameArea").text(data.name);
 				$("#teamNameArea1").text(data.name);
@@ -329,10 +329,10 @@
 				{
 					var content = '<div class="col_allw170 perple_box">' +
 								  '<div class="col_allw170 perple_box">' +
-								 '<img class="bigpic" src="' + data.members[index].imageURL + '" width="48" height="48">'+
-								 '<h2><a href="#">' + data.members[index].member_name + 
-								 '</a><button id="'+ data.members[index].id +'" class="delmember_btn">剔除成員</button>' + 
-								 '<button id="'+ data.members[index].id +'" class="addfriend_btn">加入朋友</button></h2>'+
+								 '<img class="bigpic" src="' + data[index].imageURL + '" width="48" height="48">'+
+								 '<h2><a href="#">' + data[index].member_name + 
+								 '</a><button id="'+ data[index].id +'" class="delmember_btn">剔除成員</button>' + 
+								 '<button id="'+ data[index].id +'" class="addfriend_btn">加入朋友</button></h2>'+
 								 '<div class="divider"></div></div>';
 								 
 					$("#div-members").append(content);
@@ -695,16 +695,16 @@
 				
 				<div id="div-members">
 					<div class="divider"></div>
-					<div class="col_allw170 perple_box">					
+					<!--<div class="col_allw170 perple_box">					
 						<img class="bigpic" src="/images/jquery-icon.gif"  width="50" height="50"/>
 						<h2><team id="teamNameArea1">jQuery研討社</team><button id="dialog_btn" disabled="disabled">新增成員</button></h2>
                         				
-						<div id="searchform">
+						<!--<div id="searchform">
 								<input type="text" AUTOCOMPLETE=OFF langtag="top-search" value="搜尋..." name="" id="project_managerId"/>
 							<div id="div-float-members">											    
 							</div>						
-						</div>   	
-					<div class="divider"></div>
+						</div> 
+					<div class="divider"></div> -->	 
                     </div> 	
                 </div>
                 <div id="member_dialog" title="新增成員">
