@@ -148,6 +148,27 @@ public class ProjectAction extends Action {
 				project.setProjectTarget(resultSet.getString("p_desc"));
 				project.setStartDate(resultSet.getString("p_startdate"));
 				project.setEndDate(resultSet.getString("p_enddate"));
+				SimpleDateFormat format = new java.text.SimpleDateFormat(
+						"yyyy-MM-dd");
+				Date beginDate = null;
+				try {
+					beginDate = format.parse(resultSet
+							.getString("p_startdate"));
+				} catch (ParseException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				}
+				Date endDate = null;
+				try {
+					endDate = format.parse(resultSet
+							.getString("p_enddate"));
+				} catch (ParseException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				}
+				long day = (endDate.getTime() - beginDate.getTime())
+						/ (24 * 60 * 60 * 1000);
+				project.setDuration((int) day);
 			} else {
 				// project = new ProjectDataStructure();
 				// project.setProjectId(resultSet.getString(""));
