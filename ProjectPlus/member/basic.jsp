@@ -258,12 +258,12 @@
 <script language="JavaScript" type="text/javascript">
 	$(document).ready(function(){
 		$.getJSON('/MemberAction.do',  { op:3 }, function(data) {
-			//console.log(data);
+			tconsole.log(data);
 			$("#imageURL").attr("src",data.imageURL);
 			$("#name").text(data.member_name);
 			$("#nameArea").text(data.member_name);
 			$("#nickName").text(data.member_nickname);
-			$("#gender").text(data.member_Gender);
+			$("#gender").text(data.member_gender);
 			//$("#email").text(data.member_email);
 			//$("#phone").text(data.member_phone);
 			//$("#mobile").text(data.member_mobile);

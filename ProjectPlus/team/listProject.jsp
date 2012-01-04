@@ -325,10 +325,9 @@
 			var start = $("#project_startDate").val();
 			var end = $("#project_endDate").val();
 			var teamId = $("#teamId").val();
-			var duration = $("#project_duration").val();
-			$.getJSON('/ProjectAction.do', {op:op,projectName:name,projectTarget:dest,projectManagerId:pmid,startDate:start,endDate:end,teamId:teamId,duration:duration}, function(data){
+			$.getJSON('/ProjectAction.do', {op:op,projectName:name,projectTarget:dest,projectManagerId:pmid,startDate:start,endDate:end,teamId:teamId}, function(data){
 				if(data.isSuccess)
-					window.location = "/project/listProject.jsp?id="+teamId;		
+					window.location = "/team/listProject.jsp?id="+teamId;		
 				else
 					alert(data.message);
 			});
@@ -649,52 +648,7 @@
 							<th width="16" scope="col"></th>
 						</tr>
 						</thead>
-						<tbody id="project-list">
-							<!--<tr>
-								<td>001</td>
-								<td><team>軟體工程</team>專案任務1</td>
-								<td><img src="/images/state_ok.png" width="16" title="完成"/></td>									
-							</tr>
-							<tr class="odd">									
-								<td>002</td>
-								<td><team>軟體工程</team>專案任務1</td>	
-								<td><img src="/images/state_ok.png" width="16" /></td>									
-							</tr>					
-							<tr>
-								<td>003</td>
-								<td><team>軟體工程</team>專案任務1</td>		
-								<td><img src="/images/state_delay.png" width="16" /></td>							
-							</tr>
-							<tr class="odd">									
-								<td>004</td>
-								<td><team>軟體工程</team>專案任務1</td>	
-								<td><img src="/images/state_doing.png" width="16" /></td>								
-							</tr>		
-							<tr>
-								<td>005</td>
-								<td><team>軟體工程</team>專案任務1</td>		
-								<td><img src="/images/state_doing.png" width="16" /></td>							
-							</tr>
-							<tr class="odd">									
-								<td>006</td>
-								<td><team>軟體工程</team>專案任務1</td>		
-								<td><img src="/images/state_doing.png" width="16" /></td>				
-							</tr>	
-							<tr>
-								<td>005</td>
-								<td><team>軟體工程</team>專案任務1</td>
-								<td><img src="/images/state_doing.png" width="16" /></td>									
-							</tr>
-							<tr class="odd">									
-								<td>006</td>
-								<td><team>軟體工程</team>專案任務1</td>
-								<td><img src="/images/state_doing.png" width="16" /></td>						
-							</tr>
-							<tr>
-								<td>005</td>
-								<td><team>軟體工程</team>專案任務1</td>	
-								<td><img src="/images/state_doing.png" width="16" /></td>								
-							</tr>-->																																																																		
+						<tbody id="project-list">																																																														
 						</tbody>
 					</table>						
 					<div class="divider"></div>
@@ -744,11 +698,7 @@
 						<tr>
 							<td width="25%"><label for="project_endDate">結束時間</label></td>
 							<td width="75%"><input class="text ui-widget-content ui-corner-all" type="text" name="date" id="project_endDate" /></td>
-						</tr>	
-                        <tr>
-							<td width="25%"><label for="name">工期</label></td>
-							<td width="75%"><input type="text" id="project_duration" class="text ui-widget-content ui-corner-all" /></td>
-						</tr>								
+						</tr>							
 					</form>	
 					</table>
 					
